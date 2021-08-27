@@ -1,112 +1,300 @@
 
 {
+    "id":"6122ae159fef449eb84734b7",  
+    "corse":{
     "name":"פיתוח מ",
-    "CourseInformation":[
-        {
-            "nameSubject": "html",
-            "topics": 
-            [
-                {
-                    "subject": "רקע",
-                    "isDone":false
-                },
-                {
-                    "subject": "מבנה של html",
-                    "isDone":false 
-                },
-                {
-                    "subject": "תגיות",
-                    "isDone":false
-                },
-                {
-                    "subject":"חלוקה נכונה ",
-                    "isDone":false
-                }
-            ],
-            
-            "summery":"HTML- Hyper Text Markup Language היא שפה שמאפשרת הצגת מידע ברשת האינטרנט מה שאנחנו רואים כאשר אנו צופים בדף אינטרנט זה תרגום של דף (html) על ידי הדפדפן שלנו.   ",
-
-            "link":[{"tasks":"https://drive.google.com/drive/folders/1in5rW54YLDeHC3-Cfprj_d6IqERQ5zHP" ,"Presentations":"https://drive.google.com/drive/folders/1n3egnu1vI5vweCm0HzMQc6MuYS1Js1Ug" ,"StudyAid":""}],
-            "isDone":false
-          },
+      "CourseInformation":[
           {
-            "nameSubject": "css",
-            "topics": 
-            [
-                {
-                    "subject": "מה זה CSS?",
-                    "isDone":false 
-                },
-                {
-                    "subject": "מיקום",
-                    "isDone":false 
-                },
-                {
-                    "subject": "סלקטורים",
-                    "isDone":false 
-                },
-                {
-                    "subject": "הערות",
-                    "isDone":false 
-                },
-                {
-                    "subject": "שרשור עיצוב",
-                    "isDone":false 
-                },
-                {
-                    "subject": "מאפיינים",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Positioning and Layout",
-                    "isDone":false 
-                },
-                {
-                    "subject": "CSS3",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Gradients & Backgrounds",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Transitions & Transforms",
-                    "isDone":false 
-                },
-                {
-                    "subject": "סלקטורים",
-                    "isDone":false 
-                },
-                {
-                    "subject": "CSS Filters",
-                    "isDone":false 
-                }
-            ],
+              "nameSubject": "html",
+              "topics": 
+              [
+                  {
+                      "subject": "רקע",
+                      "isDone":false
+                  },
+                  {
+                      "subject": "מבנה של html",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "תגיות",
+                      "isDone":false
+                  },
+                  {
+                      "subject":"חלוקה נכונה ",
+                      "isDone":false
+                  }
+              ],
+              
+              "summery":"HTML- Hyper Text Markup Language היא שפה שמאפשרת הצגת מידע ברשת האינטרנט מה שאנחנו רואים כאשר אנו צופים בדף אינטרנט זה תרגום של דף (html) על ידי הדפדפן שלנו.   ",
+  
+              "links":[{"tasks":"https://drive.google.com/drive/folders/1in5rW54YLDeHC3-Cfprj_d6IqERQ5zHP" ,"Presentations":"https://drive.google.com/drive/folders/1n3egnu1vI5vweCm0HzMQc6MuYS1Js1Ug" ,"StudyAid":""}],
+              "isDone":false
+            },
+            {
+              "nameSubject": "css",
+              "topics": 
+              [
+                  {
+                      "subject": "מה זה CSS?",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "מיקום",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "סלקטורים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "הערות",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "שרשור עיצוב",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "מאפיינים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Positioning and Layout",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "CSS3",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Gradients & Backgrounds",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Transitions & Transforms",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "סלקטורים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "CSS Filters",
+                      "isDone":false 
+                  }
+              ],
+              
+              "summery":"מדורגים עיצוב גיליונות . Cascading Style Sheets - CSS  היא שפת עיצוב שמגדירה את תבנית העיצוב של מסמכיHTML .CSS מטפלת בגופנים, צבעים, גבולות, שורות, גובה, רוחב, תמונות רקע, מיקום מתקדם ודברים רבים נוספים ",
+  
+              "links":[{"tasks":"https://drive.google.com/drive/folders/1in5rW54YLDeHC3-Cfprj_d6IqERQ5zHP" ,"Presentations":"https://drive.google.com/drive/folders/1ScBS1FSBZNG6u2cQp4P9Hyoohs83qz6Q" ,"StudyAid":""}],
+              "isDone":false
+            },
+  
+            {
+              "nameSubject": "javascript vanilla ",
+              "topics": 
+              [
+                  {
+                      "subject": "מה זה JavaScript?",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "משתנים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "אופרטורים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "תנאים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "לולאות",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "פונקציות",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "מערכים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "אובייקטים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "גאוו'ה סקריפט וה-DOM",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "צמתים בעץ",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Timers",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "אנימציות ב CSS ו JavaScript",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": " וולידציות טפסים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "ES6",
+                      "isDone":false 
+                  }
+              ],
+              
+              "summery":",(JS) JavaScript שפת סקריפט מבוססת אובייקטים.  כלומר, היא מחולקת לאובייקטים וכל אובייקט הוא מכלול של פונקציות (מתודות) ותכונות שפת JavaScript  מאפשרת למפתחים להטביע קטעי סקריפט ('תוכניות קטנות') בתוך מסמכי  HTML ובכך להפוך את הדפים לדינמיים יותר.JavaScript הייתה מיועדת לצד הלקוח, אמנם כיום ניתן לראות שימוש נרחב יותר גם בצד שרת",
+  
+              "links":[{"tasks":"https://drive.google.com/drive/folders/1n0-1KSLAqyZNnGlFsUqN-aFjIsp9CMjd" ,"Presentations":"https://drive.google.com/drive/folders/1n0-1KSLAqyZNnGlFsUqN-aFjIsp9CMjd" ,"StudyAid":""}],
+              "isDone":false
+            },
+            {
+              "nameSubject": "javascript ES6 ",
+              "topics": 
+              [
+                  {
+                      "subject": "This keyword",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "אובייקט ה Array",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Switch-case",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "var & let & const",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Loops",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Objects",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Classes ",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Modules",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Map",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Callbacks",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "אסינכרוני",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Promises",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Async – await",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "JSON",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Ajax",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Web API",
+                      "isDone":false 
+                  }
+              ],
+              
+              "summery":"נתחיל בהתחלה. ES6 היא הגירסא הבאה של JavaScript",
+  
+              "links":[{"tasks":"https://drive.google.com/drive/folders/1kV6r7IYvAX-ydpVDPBOkD7rDzJQOY4q7" ,"Presentations":"https://drive.google.com/drive/folders/1FubPSFlVF0ZwwPPqZJHyrn6qzO6SYtJ7" ,"StudyAid":""}],
+              "isDone":false
+            },
+           {
+              "nameSubject": "typescript",
+              "topics": 
+              [
+                  {
+                      "subject": "מה זה typescript?",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "סוגי משתנים",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "פונקציות",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "מחלקות",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Modules",
+                      "isDone":false 
+                  }
+              ],
+              
+              "summery":" typescript היא סוג של javascript  שמאפשר להשתמש בתכנות מונחה עצמים כבר היום ב-javascript  בדומה לשפות כדוגמת, C, Java ו- . PHP בין התכונות שהיא מוסיפה,, static typing  תמיכה במחלקות ותמיכה במודולים ובדקורטורים.typescript  הוא סופר-סט(superset)  של javascript  כלומר, הקוד מבוסס על, javascript וחייב לעבור קומפילציה (תרגום) ל-javascript  כדי שהדפדפנים יבינו אותו מפני שדפדפנים מבינים  javascript בלבד.",
+  
+              "links":[{"tasks":"https://drive.google.com/drive/folders/1L_c6RNdhxdncAaOHuOezCc4ASW_G6YhT" ,"Presentations":"https://drive.google.com/drive/folders/1QF-h49rInPB0MEv--IBtVmPPWQw17qKh" ,"StudyAid":""}],
+              "isDone":false
+            },
             
-            "summery":"מדורגים עיצוב גיליונות . Cascading Style Sheets - CSS  היא שפת עיצוב שמגדירה את תבנית העיצוב של מסמכיHTML .CSS מטפלת בגופנים, צבעים, גבולות, שורות, גובה, רוחב, תמונות רקע, מיקום מתקדם ודברים רבים נוספים ",
-
-            "link":[{"tasks":"https://drive.google.com/drive/folders/1in5rW54YLDeHC3-Cfprj_d6IqERQ5zHP" ,"Presentations":"https://drive.google.com/drive/folders/1ScBS1FSBZNG6u2cQp4P9Hyoohs83qz6Q" ,"StudyAid":""}],
-            "isDone":false
-          },
-
-          {
-            "nameSubject": "javascript vanilla ",
+            {
+            "nameSubject": ".Net framework ",
             "topics": 
             [
                 {
-                    "subject": "מה זה JavaScript?",
+                    "subject": "C#",
                     "isDone":false 
                 },
                 {
-                    "subject": "משתנים",
+                    "subject": "הכרת סביבת הפיתוח",
                     "isDone":false 
                 },
                 {
-                    "subject": "אופרטורים",
+                    "subject": "הכרת השפה",
                     "isDone":false 
                 },
                 {
-                    "subject": "תנאים",
+                    "subject": "משתנים וטיפוסים בסיסיים",
+                    "isDone":false 
+                },
+                {
+                    "subject": "פעולות מתמטיות",
+                    "isDone":false 
+                },
+                {
+                    "subject": "אופרטורים בוליאניים",
+                    "isDone":false 
+                },
+                {
+                    "subject": "תנאי if",
                     "isDone":false 
                 },
                 {
@@ -114,110 +302,43 @@
                     "isDone":false 
                 },
                 {
-                    "subject": "פונקציות",
+                    "subject": "משפט switch",
                     "isDone":false 
                 },
                 {
-                    "subject": "מערכים",
+                    "subject": "class",
                     "isDone":false 
                 },
                 {
-                    "subject": "אובייקטים",
+                  "subject": "פונקציות",
+                  "isDone":false 
+                },
+                {
+                    "subject": "opp-תכנות מונחה עצמים",
                     "isDone":false 
                 },
                 {
-                    "subject": "גאוו'ה סקריפט וה-DOM",
+                    "subject": "Interfaces",
                     "isDone":false 
                 },
                 {
-                    "subject": "צמתים בעץ",
+                    "subject": "הורשה",
                     "isDone":false 
                 },
                 {
-                    "subject": "Timers",
+                  "subject": "Polymorphism",
+                  "isDone":false 
+                },
+                {
+                  "subject": "Inheritance",
+                  "isDone":false 
+                },
+                {
+                    "subject": ".ASP framework",
                     "isDone":false 
                 },
                 {
-                    "subject": "אנימציות ב CSS ו JavaScript",
-                    "isDone":false 
-                },
-                {
-                    "subject": " וולידציות טפסים",
-                    "isDone":false 
-                },
-                {
-                    "subject": "ES6",
-                    "isDone":false 
-                }
-            ],
-            
-            "summery":",(JS) JavaScript שפת סקריפט מבוססת אובייקטים.  כלומר, היא מחולקת לאובייקטים וכל אובייקט הוא מכלול של פונקציות (מתודות) ותכונות שפת JavaScript  מאפשרת למפתחים להטביע קטעי סקריפט ('תוכניות קטנות') בתוך מסמכי  HTML ובכך להפוך את הדפים לדינמיים יותר.JavaScript הייתה מיועדת לצד הלקוח, אמנם כיום ניתן לראות שימוש נרחב יותר גם בצד שרת",
-
-            "link":[{"tasks":"https://drive.google.com/drive/folders/1n0-1KSLAqyZNnGlFsUqN-aFjIsp9CMjd" ,"Presentations":"https://drive.google.com/drive/folders/1n0-1KSLAqyZNnGlFsUqN-aFjIsp9CMjd" ,"StudyAid":""}],
-            "isDone":false
-          },
-          {
-            "nameSubject": "javascript ES6 ",
-            "topics": 
-            [
-                {
-                    "subject": "This keyword",
-                    "isDone":false 
-                },
-                {
-                    "subject": "אובייקט ה Array",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Switch-case",
-                    "isDone":false 
-                },
-                {
-                    "subject": "var & let & const",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Loops",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Objects",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Classes ",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Modules",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Map",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Callbacks",
-                    "isDone":false 
-                },
-                {
-                    "subject": "אסינכרוני",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Promises",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Async – await",
-                    "isDone":false 
-                },
-                {
-                    "subject": "JSON",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Ajax",
+                    "subject": "MVC",
                     "isDone":false 
                 },
                 {
@@ -226,311 +347,186 @@
                 }
             ],
             
-            "summery":"נתחיל בהתחלה. ES6 היא הגירסא הבאה של JavaScript",
-
-            "link":[{"tasks":"https://drive.google.com/drive/folders/1kV6r7IYvAX-ydpVDPBOkD7rDzJQOY4q7" ,"Presentations":"https://drive.google.com/drive/folders/1FubPSFlVF0ZwwPPqZJHyrn6qzO6SYtJ7" ,"StudyAid":""}],
-            "isDone":false
-          },
-         {
-            "nameSubject": "typescript",
-            "topics": 
-            [
-                {
-                    "subject": "מה זה typescript?",
-                    "isDone":false 
-                },
-                {
-                    "subject": "סוגי משתנים",
-                    "isDone":false 
-                },
-                {
-                    "subject": "פונקציות",
-                    "isDone":false 
-                },
-                {
-                    "subject": "מחלקות",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Modules",
-                    "isDone":false 
-                }
-            ],
-            
-            "summery":" typescript היא סוג של javascript  שמאפשר להשתמש בתכנות מונחה עצמים כבר היום ב-javascript  בדומה לשפות כדוגמת, C, Java ו- . PHP בין התכונות שהיא מוסיפה,, static typing  תמיכה במחלקות ותמיכה במודולים ובדקורטורים.typescript  הוא סופר-סט(superset)  של javascript  כלומר, הקוד מבוסס על, javascript וחייב לעבור קומפילציה (תרגום) ל-javascript  כדי שהדפדפנים יבינו אותו מפני שדפדפנים מבינים  javascript בלבד.",
-
-            "link":[{"tasks":"https://drive.google.com/drive/folders/1L_c6RNdhxdncAaOHuOezCc4ASW_G6YhT" ,"Presentations":"https://drive.google.com/drive/folders/1QF-h49rInPB0MEv--IBtVmPPWQw17qKh" ,"StudyAid":""}],
-            "isDone":false
-          },
-          
-          {
-          "nameSubject": ".Net framework ",
-          "topics": 
-          [
-              {
-                  "subject": "C#",
-                  "isDone":false 
-              },
-              {
-                  "subject": "הכרת סביבת הפיתוח",
-                  "isDone":false 
-              },
-              {
-                  "subject": "הכרת השפה",
-                  "isDone":false 
-              },
-              {
-                  "subject": "משתנים וטיפוסים בסיסיים",
-                  "isDone":false 
-              },
-              {
-                  "subject": "פעולות מתמטיות",
-                  "isDone":false 
-              },
-              {
-                  "subject": "אופרטורים בוליאניים",
-                  "isDone":false 
-              },
-              {
-                  "subject": "תנאי if",
-                  "isDone":false 
-              },
-              {
-                  "subject": "לולאות",
-                  "isDone":false 
-              },
-              {
-                  "subject": "משפט switch",
-                  "isDone":false 
-              },
-              {
-                  "subject": "class",
-                  "isDone":false 
-              },
-              {
-                "subject": "פונקציות",
-                "isDone":false 
-              },
-              {
-                  "subject": "opp-תכנות מונחה עצמים",
-                  "isDone":false 
-              },
-              {
-                  "subject": "Interfaces",
-                  "isDone":false 
-              },
-              {
-                  "subject": "הורשה",
-                  "isDone":false 
-              },
-              {
-                "subject": "Polymorphism",
-                "isDone":false 
-              },
-              {
-                "subject": "Inheritance",
-                "isDone":false 
-              },
-              {
-                  "subject": ".ASP framework",
-                  "isDone":false 
-              },
-              {
-                  "subject": "MVC",
-                  "isDone":false 
-              },
-              {
-                  "subject": "Web API",
-                  "isDone":false 
-              }
-          ],
-          
-          "summery":"NET Framework. היא שכבת תוכנה של מיקרוסופט שבאמצעותה מקודדות ומורצות תוכנות אחרות. שכבה זו מספקת לתוכנות שרצות מעליה סט כלים ושירותים כגון: ניהול זיכרון, שליטה בהתקני קלט/פלט, הצפנת הודעות וכולי, כך שהמתכנתים אינם צריכים לכתוב ספריות עזר המספקות שירותים אלה, אלא רק את הלוגיקה העיקרית של התוכנה.",
-
-          "link":[{"tasks":"https://drive.google.com/drive/folders/1nQZ-mOTVrrdJoZRYMgwgvBF8N6vl9u3N" ,"Presentations":"https://drive.google.com/drive/folders/1WM-WXNsYdOHwWUV39QO404WapusX5Xn_" ,"StudyAid":""}],
-          "isDone":false
-        },
-        {
-            "nameSubject": "React",
-            "topics": 
-            [
-                {
-                    "subject": "Import/Export & default",
-                    "isDone":false 
-                },
-                {
-                    "subject": "JSX",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Function component",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Props",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Create React App",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Class component",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Routing",
-                    "isDone":false 
-                },
-                {
-                    "subject": "State",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Events",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Life cycle",
-                    "isDone":false 
-                },
-                {
-                    "subject": "אסינכרוני",
-                    "isDone":false 
-                }
-
-            ],
-            
-            "summery":"פותחה לראשונה על ידי חברת פייסבוק ועדיין התומכת הראשית שלה.ספרייה מבוססת ג'אווהסקריפט המיועדת לצד הלקוח(front-end)ריאקט מאפשרת פיתוח לפלטפורמות שונות כמו דפדפן, מובייל ודקסטופ. עם זאת, ריאקט מפותחת ברישיון קוד פתוח וקוד המקור שלה נוכח בגיטהאב וניתן לעיון חופשי.  בריאקט ישנן קומפוננטות רבות מוכנות לשימוש, מה שמאפשר ליצור בקלות אפליקציות מורכבות באמצעות הקומפוננטות שמפתחים אחרים פיתחו ומאפשר פיתוח נוח, מהיר ופשוט.",
-
-            "link":[{"tasks":"https://drive.google.com/drive/folders/1K7p4xKz2KjbBmZMGdoWjVQWAUDhLM8z-" ,"Presentations":"https://drive.google.com/drive/folders/1zY23LHnxfuXTby9xxEzS4tJxQOUT5nu2" ,"StudyAid":"https://drive.google.com/drive/folders/11rn-glco_-RyXr2yJIT9128tG9Cmj4Tu"}],
-            "isDone":false
-          },
-          
-          {
-          "nameSubject": "React-hooks",
-          "topics": 
-          [
-              {
-                  "subject": "Function vs Class",
-                  "isDone":false 
-              },
-              {
-                  "subject": "React Hooks",
-                  "isDone":false 
-              },
-              {
-                  "subject": "useEffect",
-                  "isDone":false 
-              },
-              {
-                  "subject": "useState",
-                  "isDone":false 
-              },
-              {
-                  "subject": "React.fregmant",
-                  "isDone":false 
-              },
-              {
-                  "subject": "Nameless function",
-                  "isDone":false 
-              },
-              {
-                  "subject": "Styled components",
-                  "isDone":false 
-              },
-              {
-                  "subject": "לולאות",
-                  "isDone":false 
-              },
-              {
-                  "subject": "Material",
-                  "isDone":false 
-              }
-          ],
-          
-          "summery":"בעבר היה ניתן להבדיל בין שימוש בקומפננטות מחלקה לקומפננטות פונקציה על ידי   עיקרון מאוד  פשוט, life cycle האם יש צורך בניהול ה  של הקומפננטה.",
-
-          "link":[{"tasks":"https://drive.google.com/drive/folders/1K7p4xKz2KjbBmZMGdoWjVQWAUDhLM8z-" ,"Presentations":"https://drive.google.com/drive/folders/1zY23LHnxfuXTby9xxEzS4tJxQOUT5nu2" ,"StudyAid":"https://drive.google.com/drive/folders/11rn-glco_-RyXr2yJIT9128tG9Cmj4Tu"}],
-          "isDone":false
-        },
-        {
-            "nameSubject": "node-js",
-            "topics": 
-            [
-                {
-                    "subject": "Introduction",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Clients & Server",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Requests & Responses",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Npm",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Express Apps",
-                    "isDone":false 
-                },
-                {
-                    "subject": "View Engines",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Middleware",
-                    "isDone":false 
-                },
-                {
-                    "subject": "moongoDB",
-                    "isDone":false 
-                },
-                {
-                    "subject": "CURD",
-                    "isDone":false 
-                },
-                {
-                    "subject": "Express Router",
-                    "isDone":false 
-                }
-            ],
-            
-            "summery":"Node.js היא סביבת ריצה לשפת JavaScript שנכתבה ב-C++ ומבוססת על מנוע V8. היא תוכננה לכתיבת אפליקציות רשת סקילאביליות כגון שרתי HTTP. Node.js מאפשרת לקוד JavaScript לרוץ ללא צורך בדפדפן, מה שמאפשר לה לשמש כשפת צד שרת. הגרסה הראשונה של התוכנה פותחה בשנת 2009",
+            "summery":"NET Framework. היא שכבת תוכנה של מיקרוסופט שבאמצעותה מקודדות ומורצות תוכנות אחרות. שכבה זו מספקת לתוכנות שרצות מעליה סט כלים ושירותים כגון: ניהול זיכרון, שליטה בהתקני קלט/פלט, הצפנת הודעות וכולי, כך שהמתכנתים אינם צריכים לכתוב ספריות עזר המספקות שירותים אלה, אלא רק את הלוגיקה העיקרית של התוכנה.",
   
-            "link":[{"tasks":"" ,"Presentations":"" ,"StudyAid":""}],
+            "links":[{"tasks":"https://drive.google.com/drive/folders/1nQZ-mOTVrrdJoZRYMgwgvBF8N6vl9u3N" ,"Presentations":"https://drive.google.com/drive/folders/1WM-WXNsYdOHwWUV39QO404WapusX5Xn_" ,"StudyAid":""}],
             "isDone":false
           },
           {
-            "nameSubject": "MERN",
+              "nameSubject": "React",
+              "topics": 
+              [
+                  {
+                      "subject": "Import/Export & default",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "JSX",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Function component",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Props",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Create React App",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Class component",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Routing",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "State",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Events",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Life cycle",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "אסינכרוני",
+                      "isDone":false 
+                  }
+  
+              ],
+              
+              "summery":"פותחה לראשונה על ידי חברת פייסבוק ועדיין התומכת הראשית שלה.ספרייה מבוססת ג'אווהסקריפט המיועדת לצד הלקוח(front-end)ריאקט מאפשרת פיתוח לפלטפורמות שונות כמו דפדפן, מובייל ודקסטופ. עם זאת, ריאקט מפותחת ברישיון קוד פתוח וקוד המקור שלה נוכח בגיטהאב וניתן לעיון חופשי.  בריאקט ישנן קומפוננטות רבות מוכנות לשימוש, מה שמאפשר ליצור בקלות אפליקציות מורכבות באמצעות הקומפוננטות שמפתחים אחרים פיתחו ומאפשר פיתוח נוח, מהיר ופשוט.",
+  
+              "links":[{"tasks":"https://drive.google.com/drive/folders/1K7p4xKz2KjbBmZMGdoWjVQWAUDhLM8z-" ,"Presentations":"https://drive.google.com/drive/folders/1zY23LHnxfuXTby9xxEzS4tJxQOUT5nu2" ,"StudyAid":"https://drive.google.com/drive/folders/11rn-glco_-RyXr2yJIT9128tG9Cmj4Tu"}],
+              "isDone":false
+            },
+            
+            {
+            "nameSubject": "React-hooks",
             "topics": 
             [
-               
                 {
-                    "subject": "Full-stack-web",
+                    "subject": "Function vs Class",
+                    "isDone":false 
+                },
+                {
+                    "subject": "React Hooks",
+                    "isDone":false 
+                },
+                {
+                    "subject": "useEffect",
+                    "isDone":false 
+                },
+                {
+                    "subject": "useState",
+                    "isDone":false 
+                },
+                {
+                    "subject": "React.fregmant",
+                    "isDone":false 
+                },
+                {
+                    "subject": "Nameless function",
+                    "isDone":false 
+                },
+                {
+                    "subject": "Styled components",
+                    "isDone":false 
+                },
+                {
+                    "subject": "לולאות",
+                    "isDone":false 
+                },
+                {
+                    "subject": "Material",
                     "isDone":false 
                 }
             ],
             
-            "summery":"MEAN הוא מקבץ תוכנות חינמי ובעל קוד פתוח שכתוב בשפת התכנות JavaScript, ונועד לבניית אתרי אינטרנט דינאמיים ויישומי רשת. MEAN הוא שילוב של Angular.js, Express.js, MongoDB, ‏ Node.js",
+            "summery":"בעבר היה ניתן להבדיל בין שימוש בקומפננטות מחלקה לקומפננטות פונקציה על ידי   עיקרון מאוד  פשוט, life cycle האם יש צורך בניהול ה  של הקומפננטה.",
   
-            "link":[{"tasks":"" ,"Presentations":"" ,"StudyAid":""}],
+            "links":[{"tasks":"https://drive.google.com/drive/folders/1K7p4xKz2KjbBmZMGdoWjVQWAUDhLM8z-" ,"Presentations":"https://drive.google.com/drive/folders/1zY23LHnxfuXTby9xxEzS4tJxQOUT5nu2" ,"StudyAid":"https://drive.google.com/drive/folders/11rn-glco_-RyXr2yJIT9128tG9Cmj4Tu"}],
             "isDone":false
-          }
-    ]
-}
-
-
-
-
-
-
-
-
-
-
-
+          },
+          {
+              "nameSubject": "node-js",
+              "topics": 
+              [
+                  {
+                      "subject": "Introduction",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Clients & Server",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Requests & Responses",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Npm",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Express Apps",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "View Engines",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Middleware",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "moongoDB",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "CURD",
+                      "isDone":false 
+                  },
+                  {
+                      "subject": "Express Router",
+                      "isDone":false 
+                  }
+              ],
+              
+              "summery":"Node.js היא סביבת ריצה לשפת JavaScript שנכתבה ב-C++ ומבוססת על מנוע V8. היא תוכננה לכתיבת אפליקציות רשת סקילאביליות כגון שרתי HTTP. Node.js מאפשרת לקוד JavaScript לרוץ ללא צורך בדפדפן, מה שמאפשר לה לשמש כשפת צד שרת. הגרסה הראשונה של התוכנה פותחה בשנת 2009",
+    
+              "links":[{"tasks":"" ,"Presentations":"" ,"StudyAid":""}],
+              "isDone":false
+            },
+            {
+              "nameSubject": "MERN",
+              "topics": 
+              [
+                 
+                  {
+                      "subject": "Full-stack-web",
+                      "isDone":false 
+                  }
+              ],
+              
+              "summery":"MEAN הוא מקבץ תוכנות חינמי ובעל קוד פתוח שכתוב בשפת התכנות JavaScript, ונועד לבניית אתרי אינטרנט דינאמיים ויישומי רשת. MEAN הוא שילוב של Angular.js, Express.js, MongoDB, ‏ Node.js",
+    
+              "links":[{"tasks":"" ,"Presentations":"" ,"StudyAid":""}],
+              "isDone":false
+            }
+      ]
+      
+   }
+    
+  }
+  
+  

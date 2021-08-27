@@ -1,14 +1,22 @@
-const CourseModel = require('../models/courseModel')
+const CourseModel = require("../models/courseModel");
+const StaffModel = require("../models/staffModel");
 
 const addNewCourse = async (req, res) => {
-  try {
-    await CourseModel.insertMany(req.body, (err, result) => {
-      if (err) throw err; 
-      res.status(200).json({ massage: "create course success!", data: result })
+  const staff = await StaffModel.findById(req.body.id);
+  const newCourse = new CourseModel({
+    corse:req.body.corse,
+    coursesCreator: staff._id,
+  });
 
-    });
-  } catch (err) {
-    res.status(500).json({ massage:  "createing  course field", error: err });
+  try {
+    await newCourse.save();
+    staff.courses.push(newCourse);
+    await staff.save();
+    res
+      .status(201)
+      .json({ message: "create new course success", data: newCourse });
+  } catch (error) {
+    res.status(409).json({ message: "create new course filed", error: error });
   }
 };
 const getAllCourses = async (req, res) => {

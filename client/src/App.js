@@ -8,7 +8,6 @@ import MainRouting from './Routing/MainRouting';
 import backgroundImage from './images/tech-background.jpeg'
 import './App.css';
 
-
 function App() {
 
 

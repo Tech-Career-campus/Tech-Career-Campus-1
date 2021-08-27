@@ -28,7 +28,7 @@ const getEventById = async (req, res) => {
   }
 };
 
-const PostnewEvent = async (req, res) => {
+const postNewEvent = async (req, res) => {
   try {
     await eventModel.insertMany(req.body, (error, result) => {
       if (error) throw error;
@@ -75,7 +75,7 @@ const updateEventPost = async (req, res) => {
 module.exports = {
   getAllEventPost,
   getEventById,
-  PostnewEvent,
+  postNewEvent,
   deleteEventPost,
   updateEventPost,
 };

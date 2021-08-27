@@ -3,6 +3,7 @@
   width: 100vw;
   height: 64px;
   display: flex;
+  flex-direction:row-reverse;
   justify-content: space-around;
   padding: 0px 40px;
 }
