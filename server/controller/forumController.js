@@ -21,6 +21,7 @@ const messagesByStaff = async (req, res) => {
   }
 };
 
+
 const messagesByStudent = async (req, res) => {
   const student = await StudentModel.findById(req.body.id);
   if(!student){
@@ -36,7 +37,6 @@ const messagesByStudent = async (req, res) => {
     await student.save();
     res.status(201).json({ message: "create new message success", data: newMessages});
   } catch (error) {
-    console.log(error.message);
     res.status(500).json({ message: "create new message filed", error: error });
   }
 };
