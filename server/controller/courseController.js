@@ -4,7 +4,7 @@ const StaffModel = require("../models/staffModel");
 const addNewCourse = async (req, res) => {
   const staff = await StaffModel.findById(req.body.id);
   const newCourse = new CourseModel({
-    corse:req.body.corse,
+    corse: req.body.corse,
     coursesCreator: staff._id,
   });
 
@@ -22,28 +22,31 @@ const addNewCourse = async (req, res) => {
 const getAllCourses = async (req, res) => {
   try {
     await CourseModel.find({}, (err, result) => {
-      if (err) throw err; 
-      res.status(200).json({ massage: "get course success!", data: result })
-
+      if (err) throw err;
+      res.status(200).json({ massage: "get course success!", data: result });
     });
   } catch (err) {
-    res.status(500).json({ massage:  "get course field", error: err });
+    res.status(500).json({ massage: "get course field", error: err });
   }
 };
 const getCourseByName = async (req, res) => {
   try {
-    await CourseModel.find(req.body.name, (err, result) => {
-      if (err) throw err; 
-      res.status(200).json({ massage: "get course by name success!", data: result })
-
+    await CourseModel.find({ name: req.body.name }, (err, result) => {
+      if (err) throw err;
+      console.log(result);
+      res
+        .status(200)
+        .json({ message: "get course by name success!", data: result });
     });
   } catch (err) {
-    res.status(500).json({ massage:  "get course by name field", error: err });
+    res
+      .status(500)
+      .json({ message: "get course by name field", error: err.message });
   }
 };
 
 module.exports = {
-     addNewCourse ,
-     getAllCourses,
-     getCourseByName,
+  addNewCourse,
+  getAllCourses,
+  getCourseByName,
 };

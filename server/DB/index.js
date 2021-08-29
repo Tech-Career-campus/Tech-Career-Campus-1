@@ -6,7 +6,8 @@ const chalk = require('chalk')
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex:true
 }
 mongoose
     .connect(dbConnection, options)

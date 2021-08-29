@@ -17,10 +17,8 @@ const mainRout = (req,res)=>{
         app.use("/staff", routeStaff);
         app.use("/forum", routeForum);
         app.use("/event", routeEvent);
-        app.use("/class" ,routeSchedule)
-
+        app.use("/class" ,routeSchedule);
 
 };
-
 
 module.exports = mainRout;

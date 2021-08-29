@@ -20,7 +20,7 @@ const getEventById = async (req, res) => {
         if (error) throw error;
         res
           .status(200)
-          .json({ massage: "get event by id succses", data: result });
+          .json({ massage: "get event by id success", data: result });
       }
     );
   } catch (error) {

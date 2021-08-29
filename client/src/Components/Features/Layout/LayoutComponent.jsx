@@ -13,7 +13,7 @@ const logout = () => {
 }
     return (
       <div>
-        <button onClick={() => logout()}>logout</button>
+        <button className='btn' onClick={() => logout()}>logout</button>
         <Header />
         {user.isConnected ? children : <Login errors={user.errors} />}
         <Footer />

@@ -1,0 +1,53 @@
+.media {
+    height: 0;
+    padding-top: 30%;
+    background-color: rgb(255, 72, 0);
+    background-blend-mode: darken;
+    border-radius: 15px;
+  }
+  .border {
+    border: solid;
+  }
+  .fullHeightCard {
+    height: 100%;
+  }
+  .card {
+      margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+    height: 100%;
+    position: relative;
+  }
+  .overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+  }
+  .overlay > p {
+    font-size: 12px;
+    font-style: oblique;
+  }
+  .overlay2 {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+  }
+  .grid {
+    display: flex;
+  }
+
+  .title {
+    padding: 0 16px;
+  }
+  .cardActions {
+    padding: 0 16px 8px 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .post-btn {
+
+  }
