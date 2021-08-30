@@ -1,16 +1,20 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import jwt_decode from "jwt-decode";
 import './post.css'
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../../Redux/actions/postsActions";
 
 const ForumPostComponent = ({ post, setCurrentId }) => {
-  const user = {};
-    
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
   return (
         <div className="card">
-          <div className="media" image={post.selectedFile} title={post.title} />
+          <div className="media"  title={post.title} />
           <div className="overlay">
-            <h6>{post.name}</h6>
+            <h6>{post.firstName}</h6>
             <p>{post.createdAt}</p>
           </div>
           {user?._id === post?.creator && (
@@ -19,7 +23,7 @@ const ForumPostComponent = ({ post, setCurrentId }) => {
                 className="btn post-btn"
                 style={{ color: "white" }}
                 size="small"
-                onClick={() => setCurrentId(post._id)}
+                onClick={() => setCurrentId(post.id)}
               >
                 <MoreHorizIcon fontSize="medium" />
               </button>
@@ -38,9 +42,7 @@ const ForumPostComponent = ({ post, setCurrentId }) => {
               <button
                 size="small"
                 className="btn post-btn"
-                onClick={() =>
-                  console.log(`delete post with post id ${post._id}`)
-                }
+                onClick={() =>dispatch(deletePost(post._id))}
               >
                 <DeleteIcon fontSize="small" />
                 Delete

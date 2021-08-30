@@ -3,6 +3,16 @@ const Schema = mongoose.Schema;
 
 const forumSchema = new Schema(
   {
+
+    firstName:{
+      type:String
+    },
+    email:{
+      type:String
+    },
+    title:{
+      type:String
+    },
     message: {
       type: String,
       required:true
@@ -16,9 +26,9 @@ const forumSchema = new Schema(
     authorByStudent: { type: Schema.Types.ObjectId, ref: "student" },
     authorByStaff: { type: Schema.Types.ObjectId, ref: "staff" },
   },
-  { timestamps: true },
-
+  { timestamps: true }
 );
 
 const Forum = mongoose.model("forum", forumSchema);
 module.exports = Forum;
+ 
