@@ -1,64 +1,96 @@
 .footerDiv {
     /* border: 1px solid black; */
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    position: absolute;
+    background-color: rgb(71, 71, 71);
+    color: white;
     width: 100vw;
-    bottom: 0;
+    height: 280px;
     
 }
-.footerDiv .contactUsClass {
-    /* border: 1px solid black; */
+
+.footer{
+    background-color: rgb(90, 90, 90);
+    width: 100vw;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 250px;
-    height: 100px;
 }
-.footerDiv .contactUsClass h4{
-    /* border: 1px solid black; */
+.footer .copyright-text p a{
+    color: white;
     display: flex;
-    justify-content: flex-end;
-    width: 230px;
-    height: 30px;
+    justify-content: center;
+    align-items: center;
+    
+}
+.container{
+   /* border: 1px solid black;*/ 
+    width: 1400px;
+    height: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerDiv .contactUsClass  {
+    /* border: 1px solid black;*/ 
+    width: 240px;
+    height: 150px;
 }
 
 .footerDiv .contactUsClass  ul li{
     display: flex;
-    justify-content: flex-end;
+    justify-content: start;
     align-items: center;
     /* border: 1px solid black; */
-    width: 230px;
-    height: 20px;
+    width: 260px;
+    height: 30px;
+    font-size: 18px;
 }
+.footerDiv .about{ 
+    /*border: 1px solid black;*/ 
+    width: 320px;
+    height: 120px;
+    
+}
+.footerDiv .about ol li{
+    width: 300px;
+    height: 35px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 18px;  
+    
+}
+.footerDiv .aboutUsClass {
+   /* border: 1px solid black;*/ 
+    
+}
+
 .footerDiv .aboutUsClass ul {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    /* flex-direction: row; */
-    /* border: 1px solid black; */
-    width: 350px;
-    height: 100px;
-    /* right: 60px; */
-    /* bottom: 2%; */
+     /* border: 1px solid black;*/ 
+    width: 300px;
+    height: 30px;
+    
+    
 }
 .footerDiv .aboutUsClass ul li {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* flex-direction: row; */
-     display: inline-block; 
-    /* width: 60px;
-    height: 60px;  */
-    
+    margin-top: 10px;
 }
 .footerDiv .aboutUsClass ul li a{
-    color: #070707;
+    color:white;
     text-align: center;
-    padding: 12px 26px;
-    font-size: 25px;
+    padding: 12px 18px;
+    font-size: 18px;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.5s;
@@ -68,12 +100,53 @@
     color: #f7f4f4;
     
 }
+.title1 {
+    display: flex;
+    justify-content: start; 
+    width: 130px;
+    height: 40px;
+    
+  
+}
+.title2{
+    display: flex;
+    justify-content: start; 
+   
+    width: 130px;
+    height: 40px;
+    
+}
+.quick-link{
+   
+/* border: 1px solid black;*/ 
+width: 150px;
+height: 150px;
+
+}
+.quick-link .quick-links li {
+display: flex;
+align-items: flex-start;
+flex-direction: column;
+font-size: 18px;
+color: white; 
+/* border: 1px solid black; */
+}
+
+
+
 @media only screen and (max-width: 768px){
+    .container{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
     .footerDiv{
         display: flex;
         justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        align-items: center;    
     }
+
     .footerDiv .contactUsClass{
         display: none;
         
@@ -87,6 +160,6 @@
     }
     .footerDiv .aboutUsClass ul li a{
         padding:10px 30px ;
-        font-size: 20px;
+        font-size: 18px;
     }
 }
