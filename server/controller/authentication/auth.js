@@ -9,6 +9,7 @@ const authUser = (req, res, next) => {
 
 const authRole = (Role) => {
     return (req, res, next) => { 
+      
     try {
       if (req.body.role !== Role) {
         throw error;

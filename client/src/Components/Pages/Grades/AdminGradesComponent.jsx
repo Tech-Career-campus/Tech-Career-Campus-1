@@ -1,40 +1,33 @@
 import { useEffect, useState } from "react";
-import EditGradeComponent from "../../Features/EditGrade/EditGradeComponent";
-import './admin.css'
+import { useDispatch, useSelector } from "react-redux";
+import { getStudents } from "../../../Redux/actions/studentsActions";
+import { getStudent } from "../../../Redux/actions/studentActions";
+import EditGradesComponent from "../../Features/Grade/EditGradeComponent";
+import "./admin.css";
 const AdminGradesComponent = () => {
+  const dispatch = useDispatch();
+  const students = useSelector((state) => state.students);
   
-  const [students, setStudents] = useState();
+  useEffect(() => dispatch(getStudents()), [dispatch]);
 
-  useEffect(() => {
-    fetch("http://localhost:8080/api/student")
-      .then((response) => response.json())
-      .then((response) => setStudents(response.data));
-  }, []);
-
-  const [studentInfo, setStudentInfo] = useState({
-    isOpen: false,
-    student: {},
-  });
+  const [openTests, setOpenTests] = useState(false);
 
   return (
-    <div className='admin-grade-contaniner'>
+    <div className="admin-grade-contaniner">
       <div>
         <h1>ציוני סטודנטים</h1>
-        <div className='wrap'>
-        <div className='search'>
-        <input className='search-term' type="text" />
-        <button className='search-button'>
-        <i className="fa fa-search"></i>
-        </button>
+        <div className="wrap">
+          <div className="search">
+            <input className="search-term" type="text" />
+            <button className="search-button">
+              <i className="fa fa-search"></i>
+            </button>
+          </div>
         </div>
       </div>
-      </div>
       <div style={{ position: "relative" }}>
-        {studentInfo.isOpen ? (
-          <EditGradeComponent
-            student={studentInfo.student}
-            handleFnc={() => setStudentInfo(false)}
-          />
+        {openTests ? (
+          <EditGradesComponent handleFnc={() => setOpenTests(false)} />
         ) : (
           ""
         )}
@@ -51,13 +44,14 @@ const AdminGradesComponent = () => {
           <tbody>
             {students?.map((student, index) => (
               <tr key={index}>
-                <td>{student.firstName}</td>
-                <td>{student.lastName}</td>
-                <td>{student.courseName}</td>
+                <td>{student?.firstName}</td>
+                <td>{student?.lastName}</td>
+                <td>{student?.courseName}</td>
                 <td
-                  onClick={() =>
-                    setStudentInfo({ isOpen: true, student})
-                  }
+                  onClick={() => {
+                    setOpenTests(true);
+                    dispatch(getStudent(student));
+                  }}
                 >
                   <i className="fas fa-user-edit"></i>
                 </td>

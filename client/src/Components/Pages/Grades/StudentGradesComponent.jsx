@@ -2,12 +2,19 @@ import { useEffect, useState } from "react";
 
 const StudentGradesComponent = () => {
   const [student, setStudent] = useState();
-  // Should be user object in state management
+    const token = localStorage.getItem("jwtToken");
+    const defaultHeaders = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/student")
+    fetch("http://localhost:8080/api/student", {
+      headers: defaultHeaders,
+    })
       .then((response) => response.json())
-      .then((response) => setStudent(response.data[4]));
+      .then((response) => setStudent(response.data[4]))
+      .catch((err) => console.log(err));
   }, []);
 
   return (

@@ -1,24 +1,12 @@
-import { EDIT_GRADE, SET_USER } from './types';
+import { SET_USER } from './types';
 import jwt_decode from "jwt-decode";
 
-
-export const editGrade = (updateTest) => async dispatch => {
-    await fetch(`http://localhost:8080/api/student/updateTest/${updateTest.studentId}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            id: updateTest.studen,
-            name: "HTML",
-            grade: 70
-        }),
-        headers: { 'Content-Type': "application/json" }
-    }).then(res => res.json())
-        .then(res => dispatch({
-            type: EDIT_GRADE,
-            payload: res.data
-        }))
-}
-
 export const getUser = (loginInfo) => async dispatch => {
+    const token = localStorage.getItem("jwtToken");
+    const defaultHeaders = {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+    };
     try {
         await fetch("http://localhost:8080/api/login", {
             method: 'POST',
@@ -27,7 +15,7 @@ export const getUser = (loginInfo) => async dispatch => {
                 email: loginInfo.email,
                 password: loginInfo.password,
             }),
-            headers: { "Content-Type": "application/json" },
+            headers: defaultHeaders
         })
 
             .then((res) => {
@@ -35,6 +23,7 @@ export const getUser = (loginInfo) => async dispatch => {
                return res.json()
             })
             .then((res) => localStorage.setItem("jwtToken", res.result))
+            .catch(error=> {throw error})
         if (localStorage.jwtToken) {
             const token = localStorage.getItem("jwtToken")
             const decoded = jwt_decode(token);
@@ -46,8 +35,8 @@ export const getUser = (loginInfo) => async dispatch => {
         }
     }
     catch (error) {
-        console.log(error)
-        error.then(error => dispatch({
+console.log(error)   
+     error.then(error => dispatch({
             type: SET_USER,
             payload: { isConnected: false, ...error }
         })

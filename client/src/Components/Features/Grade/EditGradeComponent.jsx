@@ -1,34 +1,35 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { editGrade } from "../../../Redux/actions/userActions";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { editGrade, deleteTest } from "../../../Redux/actions/studentActions";
 import "./EditGradeComponent.css";
-
-const EditGradeComponent = ({ student, handleFnc }) => {
-  const [editTest, setEditTest] = useState({ isEdit: false, testId: "" });
-  const [updateTest, setUpdateTest] = useState({
-    studentId: student._id,
-    gradeId: editTest.testId,
-    name: "",
-    grade: null,
-  });
+import AddGrade from "./AddGrade";
+const EditGradeComponent = ({ handleFnc }) => {
+  const student = useSelector((state) => state.student);
   const dispatch = useDispatch();
   
-  const HandleChange = (e) =>{
-    setUpdateTest(
-      {
-        ...updateTest,
-        [e.target.name]: e.target.value
-      }
-    )
-  }
-  console.log(updateTest);
-  console.log(editTest);
+  const [editTest, setEditTest] = useState({ isEdit: false, testId: "" });
+  
+  const [updateTest, setUpdateTest] = useState({
+    studentId: student._id,
+  });
+  const [testDelete, setTestDelete] = useState({
+    studentId: student._id,
+  });
+  useEffect(() => dispatch(deleteTest(testDelete)), [testDelete.testId]);
+
+  const HandleChange = (e) => {
+    setUpdateTest({
+      ...updateTest,
+      [e.target.name]: e.target.value,
+      gradeId: editTest.testId,
+    });
+  };
   return (
     <div className="student-info">
       <h3>
-        {student.firstName} {student.lastName}
+        {student?.firstName} {student?.lastName}
       </h3>
-      {student.tests.map((test, index) => {
+      {student?.tests.map((test, index) => {
         return (
           <div key={index}>
             <h4>{test.name}</h4>
@@ -42,9 +43,10 @@ const EditGradeComponent = ({ student, handleFnc }) => {
                 />
                 <i
                   onClick={() => {
-                    dispatch(editGrade("612004466a18a679004e2f03"));
+                    dispatch(editGrade(updateTest));
                     setEditTest({
                       isEdit: false,
+                      testId: test._id,
                     });
                   }}
                   className="fas fa-check-square"
@@ -56,23 +58,24 @@ const EditGradeComponent = ({ student, handleFnc }) => {
                 <i
                   onClick={() => {
                     setEditTest({ isEdit: true, testId: test._id });
-                    setUpdateTest({ ...updateTest, name: test.name });
                   }}
                   className="far fa-edit"
+                ></i>
+                <i
+                  onClick={() => {
+                    setTestDelete({ ...testDelete, testId: test._id })
+                  }}
+                  className="far fa-trash-alt"
                 ></i>
               </p>
             )}
           </div>
         );
       })}
-      <form className="grade-form">
-        <label>Test name</label>
-        <input type={"text"} placeholder={"Test name"} />
-        <label>Grade</label>
-        <input type={"number"} placeholder={"Grade"} />
-        <button className="btn"  onClick={(e) => e.preventDefault()}>Add test</button>
-      </form>
-      <button className="btn " onClick={() => handleFnc()}>סגור</button>
+      <AddGrade studentId={student._id} />
+      <button className="btn " onClick={() => handleFnc()}>
+        סגור
+      </button>
     </div>
   );
 };

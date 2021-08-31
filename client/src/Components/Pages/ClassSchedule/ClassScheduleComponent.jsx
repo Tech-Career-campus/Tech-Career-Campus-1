@@ -1,4 +1,4 @@
-import react, { useState, useEffect} from "react";
+import { useState, useEffect} from "react";
 import { fetchDailySchedule } from "../../../FetchFunctions/FetchFunctions";
 import {WorkWeek,Month,Agenda,Inject,ScheduleComponent,Day,Week,ViewsDirective,ViewDirective} from "@syncfusion/ej2-react-schedule";
 import { loadCldr} from "@syncfusion/ej2-base";
