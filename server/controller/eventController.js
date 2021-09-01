@@ -45,7 +45,7 @@ const postNewEvent = async (req, res) => {
 const deleteEventPost = async (req, res) => {
   try {
     await eventModel.findOneAndDelete(
-      { _id: ObjectId(req.body.id) },
+      { _id: ObjectId(req.params.id) },
       (error, result) => {
         if (error) throw error;
         res

@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import { fetchSyllabus } from '../../../FetchFunctions/FetchFunctions'
-
+import { useSelector, useDispatch } from 'react-redux';
+import { getSyllabus } from '../../../Redux/actions/SyllabusAction';
+import fetcher from '../../../utils/fetcher';
 
 const SyllabusComponent = () => {
-  const [syllabusData, setSyllabusData] = useState()
-
+  const syllabus = useSelector(state => state.syllabus.state);
+  const dispatch = useDispatch();
   useEffect(() => {
 
-    fetchSyllabus()
+    fetcher('/api/course')
       .then(data => {
-        setSyllabusData(data?.data[0].corse);
+        dispatch(getSyllabus(data.data[1]));
       })
 
   }, [])
 
   return (
     <>
-      <h1>סילבוס</h1>
+    הי
       <VerticalTimeline>
-        <h1>{syllabusData?.name}</h1>
-        {syllabusData?.CourseInformation.map((courseItem => {
+        <h1>{syllabus?.name}</h1>
+        {syllabus?.CourseInformation.map((courseItem => {
           return (
             <VerticalTimelineElement
-            key={courseItem.nameSubject}
+              key={courseItem.nameSubject}
               className="vertical-timeline-element--work"
-              contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-              contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+              contentStyle={{ background: 'rgba(255, 99, 38, 0.9)', color: '#fff' }}
+              contentArrowStyle={{ borderRight: '7px solid  rgba(255, 99, 38, 0.9)' }}
               date="2011 - present"
-              iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+              iconStyle={{ background: 'rgba(255, 99, 38, 0.9)', color: 'rgba(255, 99, 38, 0.9)' }}
             >
+      
               <h2 className="vertical-timeline-element-title">{courseItem.nameSubject}</h2>
               <h4 className="vertical-timeline-element-subtitle">
                 <ul>
@@ -42,6 +44,19 @@ const SyllabusComponent = () => {
               <p>
                 {courseItem.summery}
               </p>
+              <ul><h3>Links:</h3>
+                {
+                  courseItem.links.map((link) => {
+                    return (
+                      <>
+                        <li> <a href={link.tasks}>Google Drive</a> </li>
+                        <li> <a href={link.Presentations}>Presentation</a> </li>
+                      </>
+                    )
+                  })
+                }
+              </ul>
+
             </VerticalTimelineElement>)
         }))}
 
