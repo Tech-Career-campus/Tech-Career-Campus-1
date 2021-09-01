@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
+
 const Footer = () => {
     return (
         <div className="footerDiv">
@@ -40,23 +41,24 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="quick-link">
-                    {/* <div className="title2">
-                        <h4>Quick Link</h4>
-                    </div> */}
+                    <div className="title2">
+                        <h4>לינקים</h4>
+                    </div>
                     <ul className="quick-links">
                         <li>
-                            <Link to={"/news"}>חדשות</Link>
+                            <Link to={"/news"}>חדשות </Link>
                         </li>
                         <li>
-                            <Link to={"/events"}>אירועים</Link>
+                            <Link to={"/events"}>אירועים </Link>
                         </li>
                         <li>
-                            <Link to={"/forum"}>פורום</Link>
+                            <Link to={"/forum"}>פורום </Link>
                         </li>
                         <li>
-                            <Link to={"/my-course"}>הקורס שלי</Link>
+                            <Link to={"/my-course"}> הקורס שלי</Link>
                         </li>
                         <li>
+                        
                             <Link to={"/class-schedule"}>לו"ז כיתות</Link>
                         </li>
                     </ul>
@@ -66,15 +68,16 @@ const Footer = () => {
                         <h4>צור קשר</h4>
                     </div>
                     <ul>
-                        <li> 08-3738000 </li>
-                        <li> info@tech-career.org </li>
-                        <li> בת שבע 3, מתחם טלרד, לוד </li>
+                        <li><i class="fas fa-map-marker-alt"></i> בת שבע 3, מתחם טלרד, לוד </li>
+                        <li><i class="fas fa-phone"></i> 08-3738000 </li>
+                        <li><i class="far fa-envelope"></i> info@tech-career.org </li>
                     </ul>
                 </div>
             </div>
+            <div className="Line"></div>
             <div className="footer">
                 <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
-         <a href="#"> ma nigga</a>
+         <a href="#"> David</a>
                 </p>
             </div>
         </div>
