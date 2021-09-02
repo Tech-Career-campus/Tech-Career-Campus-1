@@ -24,7 +24,6 @@ const Events = () => {
         eventName: "",
         massage: "",
     });
-
     const optionPOST = {
         method: 'POST',
         body: JSON.stringify(newEvent),

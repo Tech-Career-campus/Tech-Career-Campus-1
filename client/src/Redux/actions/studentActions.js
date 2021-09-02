@@ -27,7 +27,6 @@ export const editGrade = (updateTest) => async dispatch => {
             type: EDIT_GRADE,
             payload: res.data
         }))
-        .then(res => console.log(res))
         .catch(error => console.log(error))
 }
 

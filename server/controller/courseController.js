@@ -49,4 +49,5 @@ module.exports = {
   addNewCourse,
   getAllCourses,
   getCourseByName,
+  updateCorse
 };
