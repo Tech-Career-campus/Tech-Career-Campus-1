@@ -6,5 +6,6 @@ const {authRole} = require('../controller/authentication/auth');
 router.post('/',authRole("Staff"), courseController.addNewCourse);
 router.get('/',authRole("Staff"), courseController.getAllCourses);
 router.post('/getCourseByName', courseController.getCourseByName);
+// router.put('/', courseController.updateCorse);
 
 module.exports = router;
