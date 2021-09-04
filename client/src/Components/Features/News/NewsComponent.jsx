@@ -8,11 +8,12 @@ const News = () => {
   const newsApi = process.env.REACT_APP_NEWS_API;
   const newsApiKey = process.env.REACT_APP_NEWS_API_KEY;
 
-  useEffect(() => {
-    fetcher(`${newsApi}${newsApiKey}`).then((response) =>
-      setNewsData(response?.articles)
-    );
-  }, [newsData, newsApi, newsApiKey]);
+  // useEffect(() => {
+  //   fetch(`${newsApi}${newsApiKey}`)
+  //     .then((response) => console.log(response))
+  //     .then((response) => setNewsData(response?.articles))
+  //     .catch(err=> console.log(err))
+  // }, [newsApi, newsApiKey]);
 
 
   return (

@@ -3,6 +3,7 @@ function updateOptions(options) {
   if (localStorage.jwtToken) {
     update.headers = {
       ...update.headers,
+      "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.jwtToken}`,
     };
   }
@@ -22,4 +23,4 @@ const fetcher = async (url, options) => {
   }
 
 }
-export default fetcher
+export default fetcher;

@@ -1,7 +1,6 @@
 import React from 'react'
 import CourseSchedule from '../Components/Pages/CourseSchedule/CourseScheduleComponent';
 
-import DailySchedule from '../Components/Pages/DailySchedule/DailyScheduleComponent';
 import StudentGradesComponent from '../Components/Pages/Grades/StudentGradesComponent'
 import AdminGradesComponent from '../Components/Pages/Grades/AdminGradesComponent'
 import Syllabus from '../Components/Pages/Syllabus/SyllabusComponent'

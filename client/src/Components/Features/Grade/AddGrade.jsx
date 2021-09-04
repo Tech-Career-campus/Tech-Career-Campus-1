@@ -30,6 +30,7 @@ const AddGrade = ({ studentId }) => {
       />
       <label>Grade</label>
       <input
+      type={"number"}
         value={newTest.grade}
         placeholder={"Grade"}
         name={"grade"}

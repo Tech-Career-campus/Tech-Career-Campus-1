@@ -42,12 +42,12 @@ const Events = () => {
         headers: defaultHeaders,
     }
 
-    useEffect(async () => {
-        await getDat();
+    useEffect( () => {
+        getDat();
     }, [])
 
-    const getDat = () => {
-        fetch("http://localhost:8080/api/event", { headers: defaultHeaders })
+    const getDat = async () => {
+       await fetch("http://localhost:8080/api/event", { headers: defaultHeaders })
             .then((res) => res.json())
             .then((response) => setEvents(response.data))
             .catch(err => { console.error("GET ALL FAIL") });
@@ -61,7 +61,7 @@ const Events = () => {
     }
 
     const updateEvent = async (_id) => {
-        await fetch(`http://localhost:8080/api/event/${_id}`, optionPUT)
+       await fetch(`http://localhost:8080/api/event/${_id}`, optionPUT)
             .then((res) => res.json())
             .then((res) => { setEventUpdate(res.data); })
             .catch((err) => { console.log(err); })
@@ -104,7 +104,7 @@ const Events = () => {
             <br></br>
             <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder="הקלד כאן" onChange={(e) => { hendleChange(e) }}></textarea>
             {
-                events.map((event, index) => {
+                events?.map((event, index) => {
                     return (
                         <span key={event._id}>
                             שם הארוע :{event.eventName}

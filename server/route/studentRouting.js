@@ -6,7 +6,7 @@ const studentController = require("../controller/studentController")
 const {authRole} = require('../controller/authentication/auth');
 
 
-router.post('/', studentController.addNewStudent);
+
 router.get('/', studentController.getStudent);
 router.get('/gradesById', studentController.getStudentGradeById);
 router.post('/addTestById', authRole("Staff"), studentController.addStudentTestById);
