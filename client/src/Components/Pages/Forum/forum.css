@@ -1,6 +1,7 @@
 .forum-container{
+    min-height: 80vh;
     margin: 10px 50px;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
 }

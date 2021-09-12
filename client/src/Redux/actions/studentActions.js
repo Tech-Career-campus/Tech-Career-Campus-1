@@ -1,5 +1,5 @@
 import fetcher from '../../utils/fetcher';
-import { EDIT_GRADE, ADD_TEST, DELETE_TEST, GET_STUDENT } from './types'
+import {  EDIT_GRADE, ADD_TEST, DELETE_TEST, GET_STUDENT } from './types'
 
 export const getStudent = (student) => dispatch => {
     return dispatch({
@@ -10,7 +10,7 @@ export const getStudent = (student) => dispatch => {
 
 export const editGrade = (updateTest) => async dispatch => {
 
-    await fetcher(`http://localhost:8080/api/student/updateTest/${updateTest.studentId}`, {
+    await fetcher(`/api/student/updateTest/${updateTest.studentId}`, {
         method: 'PUT',
         body: JSON.stringify({
             id: updateTest.gradeId,
@@ -26,7 +26,7 @@ export const editGrade = (updateTest) => async dispatch => {
 }
 
 export const addTest = (newTest) => async dispatch => {
-    await fetcher(`http://localhost:8080/api/student/addTestById`, {
+    await fetcher(`/api/student/addTestById`, {
         method: 'POST',
         body: JSON.stringify({
             id: newTest.studentId,
@@ -43,7 +43,7 @@ export const addTest = (newTest) => async dispatch => {
 
 export const deleteTest = (testDelete) => async dispatch => {
 
-    await fetcher(`http://localhost:8080/api/student/deleteTest/${testDelete.studentId}`, {
+    await fetcher(`/api/student/deleteTest/${testDelete.studentId}`, {
         method: 'DELETE',
         body: JSON.stringify({
             id: testDelete.testId,
@@ -55,3 +55,4 @@ export const deleteTest = (testDelete) => async dispatch => {
         }))
         .catch(error => console.log(error))
 }
+

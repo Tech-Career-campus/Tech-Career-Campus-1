@@ -49,7 +49,7 @@ const ForumFormComponent = ({ currentId, setCurrentId }) => {
   };
   return (
     <div id="form-div">
-      <form onSubmit={handleSubmit} className="form" id="form1">
+      <form onSubmit={handleSubmit} className="forum-form" id="form1">
         <p className="name">
           <input
             name="title"
@@ -63,22 +63,8 @@ const ForumFormComponent = ({ currentId, setCurrentId }) => {
             }
           />
         </p>
-
-        {/* <p className="email">
-          <input
-            name="email"
-            type="text"
-            className="validate[required,custom[email]] feedback-input"
-            id="email"
-            placeholder="אימייל..."
-            onChange={(e) =>
-              setPostData({ ...postData, email: e.target.value })
-            }
-          />
-        </p> */}
-
         <p className="text">
-          <textarea
+          <input
             name="message"
             className="validate[required,length[6,300]] feedback-input"
             id="comment"
@@ -87,11 +73,11 @@ const ForumFormComponent = ({ currentId, setCurrentId }) => {
             onChange={(e) =>
               setPostData({ ...postData, message: e.target.value })
             }
-          ></textarea>
+          ></input>
         </p>
 
         <div className="submit">
-          <button type="submit" value="SEND" id="button-blue">
+          <button type="submit" value="SEND" id="button-forum-submit">
             {currentId ? "ערוך" : "שלח"}
           </button>
           <div className="ease"></div>

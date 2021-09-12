@@ -1,5 +1,7 @@
 .posts{
+    list-style-type: none;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
 }

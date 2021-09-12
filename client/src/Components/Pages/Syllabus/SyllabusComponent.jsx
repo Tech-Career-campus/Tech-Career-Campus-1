@@ -7,6 +7,7 @@ import "react-vertical-timeline-component/style.min.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getSyllabus } from "../../../Redux/actions/SyllabusAction";
 import fetcher from "../../../utils/fetcher";
+import './syllabus.css'
 
 const SyllabusComponent = () => {
   const syllabus = useSelector((state) => state.syllabus.state);
@@ -43,14 +44,14 @@ const SyllabusComponent = () => {
                 {courseItem.nameSubject}
               </h2>
               <h4 className="vertical-timeline-element-subtitle">
-                <ul>
+                <ul className='vertical-timeline-ul'>
                   {courseItem.topics.map((topic, index) => {
                     return <li key={index}>{topic.subject}</li>;
                   })}
                 </ul>
               </h4>
               <p>{courseItem.summery}</p>
-              <ul>
+              <ul className='vertical-timeline-ul'>
                 <h3>Links:</h3>
                 {courseItem.links.map((link) => {
                   return (

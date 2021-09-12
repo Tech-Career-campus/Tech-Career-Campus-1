@@ -1,4 +1,5 @@
 import { useState, useEffect} from "react";
+import "./Class.css";
 import { fetchDailySchedule } from "../../../FetchFunctions/FetchFunctions";
 import {WorkWeek,Month,Agenda,Inject,ScheduleComponent,Day,Week,ViewsDirective,ViewDirective} from "@syncfusion/ej2-react-schedule";
 import { loadCldr} from "@syncfusion/ej2-base";
@@ -14,7 +15,6 @@ const ClassScheduleComponent = () => {
   useEffect(() => {
     fetchDailySchedule().then((response) => setMyData(response));
   }, []);
-  console.log(myData);
 
   loadCldr(
     require("cldr-data/main/he/ca-gregorian.json"),
@@ -24,6 +24,7 @@ const ClassScheduleComponent = () => {
  
 
   return (
+    <div className="BodyClass">
     <div id="schedule">
       <ScheduleComponent
         locale="he"
@@ -40,6 +41,7 @@ const ClassScheduleComponent = () => {
     </ViewsDirective>
         <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
       </ScheduleComponent>
+    </div>
     </div>
   );
 };

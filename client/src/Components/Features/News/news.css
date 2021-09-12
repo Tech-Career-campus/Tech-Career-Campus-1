@@ -1,9 +1,16 @@
+.BodyNew{
+    background-color: rgb(252, 223, 210);
+    border: 1px solid black;
+    width: 800px;
+    height: 550px;
+    
+}
 .news-ticker-div{
-    width: 90vw;
-    height: 90vh;
+    width: 300px;
+    height: 300px;
     margin: auto;
 }
 .news-ticker-div>img{
-    height: 20vh;
-    width: 40vw;
+    height: 500px;
+    width: 500px;
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PageHeader from "../../Features/PageHeader/PageHeaderComponent";
 
 const StudentGradesComponent = () => {
   const [student, setStudent] = useState();
@@ -19,10 +20,10 @@ const StudentGradesComponent = () => {
 
   return (
     <>
-      <h2>הציונים שלי</h2>
-      {student?.tests.map((test, index) => {
+      <PageHeader title={"הציונים שלי"} />
+      {student?.tests.map((test) => {
         return (
-          <div key={index}>
+          <div key={test._id}>
             <h3>{test.name}</h3>
             <p>{test.grade}</p>
           </div>
