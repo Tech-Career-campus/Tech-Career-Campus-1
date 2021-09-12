@@ -1,6 +1,6 @@
 
 import './App.css';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './Redux/store'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Layout from './Components/Features/Layout/LayoutComponent';

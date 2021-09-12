@@ -6,7 +6,6 @@ import "./Navbar.css";
 
 //Ticker moving news
 export default function Navbar() {
-  const user = useSelector(state => state.user)
   return (
     <>
       <div className="navbar">

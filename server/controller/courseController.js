@@ -91,7 +91,6 @@ const deleteSubSubject = async (req, res) => {
   }
 
 };
-
 const addSubSubject = async (req, res) => {
   try {
     const query = {
@@ -142,7 +141,7 @@ const addSubSubject = async (req, res) => {
     console.log(err);
     res.status(500).json({ message: "update course field", error: err });
   }
-}
+};
 const updateSubSubject = async (req, res) => {
   try {
     const array = await req.body.array

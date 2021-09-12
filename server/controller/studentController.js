@@ -101,14 +101,13 @@ const updateStudent = async (req, res) => {
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields")
     }
-    const StudentField = {}
-    StudentField[field] = req.body.newValue
+    const { studentUpdate } = req.body;
     await StudentModel.findOneAndUpdate(
       { _id: req.body._id },
-      { $set: StudentField },
+      { $set: studentUpdate },
+      { new: true },
       (err, result) => {
         if (err) throw err;
-
         if (result !== null) {
           res
             .status(200)
@@ -122,7 +121,6 @@ const updateStudent = async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: "update student  faild", error: err.message });
   }
 
@@ -132,7 +130,6 @@ const deleteStudent = async (req, res) => {
     { _id: req.body._id },
     (err, result) => {
       if (err) throw err;
-
       if (result !== null) {
         res
           .status(200)

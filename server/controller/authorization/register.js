@@ -62,7 +62,7 @@ const register = async (req, res) => {
     await StudentModel.findOne({ email: req.body.email }, (err, student) => {
       if (err) throw err;
       if (student) {
-        return res.status(400).json({ massage: "email already exists" });
+        return res.status(400).json({ errors: { email: "email already exists"} });
       }
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {

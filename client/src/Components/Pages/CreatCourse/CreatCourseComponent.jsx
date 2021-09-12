@@ -1,4 +1,14 @@
+import PageHeader from "../../Features/PageHeader/PageHeaderComponent";
+
 const CreatCourse = () => {
-  return <h1>יצירת קורס</h1>;
+return (
+  <div>
+    <PageHeader title={"יצירת קורס"} />
+    <form>
+      <label>שם הקורס</label>
+      <input type={"text"} />
+    </form>
+  </div>
+);
 };
 export default CreatCourse;

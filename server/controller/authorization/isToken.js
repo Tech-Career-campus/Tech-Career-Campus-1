@@ -2,8 +2,10 @@ const jwt = require("jsonwebtoken");
 
 const isToken = (req, res, next) => {
   const header = req.header("Authorization");
-  const [bearer, token] = header.split(" ");
-     
+
+  if(header !== undefined){
+     const [bearer, token] = header.split(" ");
+
   if (bearer === "Bearer" && typeof token !== "undefined") {
     try {
       let payload = jwt.verify(token, process.env.SECRET_KEY);
@@ -14,11 +16,15 @@ const isToken = (req, res, next) => {
         next();
       }
     } catch (error) {
-      res.status(401).json({ massage: "invalid or expired token", error });
+      res.status(401).json({ massage: "invalid or expired token", error:error });
     }
   }else{
-    res.status(500).json({ massage: "token is undefined", error });
-  }
+    res.status(500).json({ massage: "token is undefined"});
+  };
+
+  }else{
+    res.status(500).json({ massage: "headers is undefined, please make sure you send headers."});
+  };
 };
 
 module.exports = isToken

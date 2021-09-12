@@ -104,7 +104,7 @@ const Events = () => {
             <br></br>
             <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder="הקלד כאן" onChange={(e) => { hendleChange(e) }}></textarea>
             {
-                events?.map((event, index) => {
+                events?.map((event) => {
                     return (
                         <span key={event._id}>
                             שם הארוע :{event.eventName}

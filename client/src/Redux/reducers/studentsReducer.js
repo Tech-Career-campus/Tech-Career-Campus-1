@@ -1,16 +1,18 @@
-import { ADD_TEST, DELETE_TEST, EDIT_GRADE, GET_STUDENTS} from '../actions/types'
-function studentsReducer(students = [], action) {
+import { CREATE_STUDENT, CREATE_STUDENT_ERRORS, DELETE_STUDENT, GET_STUDENTS, UPDATE_STUDENT} from '../actions/types'
+function studentsReducer(state = {students : [], errors:{}}, action) {
     switch (action.type) {
         case GET_STUDENTS:
-            return action.payload
-        case EDIT_GRADE:
-            return students.map(student => student._id === action.payload._id ? {...student, tests:action.payload.tests} : student)
-        case ADD_TEST:
-            return students.map(student => student._id === action.payload._id ? { ...student, tests: action.payload.tests } : student)
-        case DELETE_TEST:
-            return students.map(student => student._id === action.payload._id ? { ...student, tests: action.payload.tests } : student)
+            return { errors:{}, students:action.payload}
+        case CREATE_STUDENT:
+            return { errors: null, students: [...state.students, action.payload] };
+        case DELETE_STUDENT:
+            return { errors: {}, students: state.students.filter(student => student._id !== action.payload._id) };
+            case UPDATE_STUDENT:
+            return { errors: {}, students: state.students.map(student => student._id === action.payload._id ? action.payload : student)};
+        case CREATE_STUDENT_ERRORS:
+            return { ...state, errors: action.payload}
         default:
-    return students;
+            return state;
 }
 }
 
