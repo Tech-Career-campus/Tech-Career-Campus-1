@@ -1,25 +1,19 @@
 import React, { useState } from "react";
 import { getUser } from "../../../Redux/actions/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./Login.css";
+import handleChange from "../../../utils/handleChange";
 
-const Login = ({ errors }) => {
+const Login = () => {
+  const { errors } = useSelector((state) => state.user);
+  const x = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
     role: "",
   });
-
-  const dispatch = useDispatch();
-
-  const handleChange = (e) => {
-    setLoginInfo({
-      ...loginInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <div className="login">
       <div className="login-root">
@@ -128,24 +122,24 @@ const Login = ({ errors }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Tech Carrier
+                  טק קריירה
                 </a>
               </h1>
             </div>
             <div className="formbg-outer">
               <div className="formbg">
                 <div className="formbg-inner padding-horizontal--48">
-                  <span className="padding-bottom--15">
-                    Sign in to your account
-                  </span>
+                  <span className="padding-bottom--15">התחבר לחשבונך</span>
                   <form id="stripe-login">
                     <div className="field padding-bottom--24">
-                      <label htmlFor="email">Email</label>
+                      <label htmlFor="email">אימייל</label>
                       <input
                         type="email"
                         name="email"
                         value={loginInfo.email}
-                        onChange={(e) => handleChange(e)}
+                        onChange={(e) =>
+                          handleChange(e, loginInfo, setLoginInfo)
+                        }
                         required
                       />
                       <p className="errors">{errors?.email}</p>
@@ -154,7 +148,9 @@ const Login = ({ errors }) => {
                       <input
                         type="password"
                         name="password"
-                        onChange={(e) => handleChange(e)}
+                        onChange={(e) =>
+                          handleChange(e, loginInfo, setLoginInfo)
+                        }
                         value={loginInfo.password}
                         autoComplete="off"
                         required
@@ -162,24 +158,28 @@ const Login = ({ errors }) => {
                       <p className="errors">{errors?.password}</p>
                     </div>
                     <div>
-                      <p>Login as</p>
+                      <p>התחבר כ</p>
                       <label>
                         <input
                           type="radio"
-                          onChange={(e) => handleChange(e)}
+                          onChange={(e) =>
+                            handleChange(e, loginInfo, setLoginInfo)
+                          }
                           name="role"
                           value="Student"
                         />
-                        Student
+                        סטודנט
                       </label>
                       <label>
                         <input
                           type="radio"
-                          onChange={(e) => handleChange(e)}
+                          onChange={(e) =>
+                            handleChange(e, loginInfo, setLoginInfo)
+                          }
                           name="role"
                           value="Staff"
                         />
-                        Staff
+                        צוות
                       </label>
                     </div>
                     <div className="field padding-bottom--24">

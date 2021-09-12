@@ -1,38 +1,37 @@
-import { SET_USER } from './types';
+import { SET_USER, SET_USER_ERRORS } from './types';
 import jwt_decode from "jwt-decode";
 
 export const getUser = (loginInfo) => async dispatch => {
     try {
         if (!localStorage.jwtToken) {
-            await fetch("http://localhost:8080/api/login", {
+            await fetch("/api/login", {
                 method: 'POST',
                 body: JSON.stringify({
                     role: loginInfo.role,
                     email: loginInfo.email,
                     password: loginInfo.password,
-                }),
-                headers: { "Content-Type": "application/json"}
+                }), headers: { "Content-Type": "application/json" }
+
             })
-                .then((res) => {
-                    if (!res.ok) throw res.json()
-                    return res.json()
+                .then(response => response.json())
+                .then((response) => {
+                    if (!response.result) throw response
+                    return response
                 })
                 .then((res) => localStorage.setItem("jwtToken", res.result))
-                .catch(err=>{throw err})
+                .catch(err => { throw err })
         }
         const token = localStorage.getItem("jwtToken")
         const decoded = jwt_decode(token);
         return dispatch({
             type: SET_USER,
-            payload: { ...decoded, isConnected: true }
+            payload: decoded
         })
     }
     catch (error) {
-        console.log(error)
-        error.then(error => dispatch({
-            type: SET_USER,
-            payload: { isConnected: false, ...error }
+        dispatch({
+            type: SET_USER_ERRORS,
+            payload: error.errors
         })
-        )
     }
 }

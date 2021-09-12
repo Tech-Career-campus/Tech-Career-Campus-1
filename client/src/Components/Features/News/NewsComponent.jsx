@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import fetcher from "../../../utils/fetcher";
 import Ticker from "react-ticker";
 
 const News = () => {
@@ -9,10 +8,11 @@ const News = () => {
   const newsApiKey = process.env.REACT_APP_NEWS_API_KEY;
 
   useEffect(() => {
-    fetcher(`${newsApi}${newsApiKey}`).then((response) =>
-      setNewsData(response?.articles)
-    );
-  }, [newsData, newsApi, newsApiKey]);
+    fetch(`${newsApi}${newsApiKey}`)
+    .then(response=> response.json())
+      .then((response) => setNewsData(response?.articles))
+      .catch(err=> console.log(err))
+  }, [newsApi, newsApiKey]);
 
 
   return (

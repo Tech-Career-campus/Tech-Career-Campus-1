@@ -88,10 +88,10 @@ const Footer = () => {
                 לוד
               </li>
               <li>
-                <i className="fas fa-phone"></i> 08-3738000{" "}
+                <i className="fas fa-phone"></i> 08-3738000
               </li>
               <li>
-                <i className="far fa-envelope"></i> info@tech-career.org{" "}
+                <i className="far fa-envelope"></i> info@tech-career.org
               </li>
             </ul>
           </div>
