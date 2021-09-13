@@ -9,13 +9,17 @@ import Tab from 'react-bootstrap/Tab'
 import { useDispatch, useSelector } from 'react-redux';
 import Students from '../Components/Pages/Sudents/StudentsComponent';
 import CreatCourse from '../Components/Pages/CreatCourse/CreatCourseComponent';
+import StaffComponents from '../Components/Pages/Staff/StaffComponents';
 import { getCourses } from '../Redux/actions/coursesActions';
 
 
 const MyCourseRouting = () => {
     const dispatch = useDispatch()
-    useEffect(() => dispatch(getCourses()), [])
     const {user} = useSelector(state => state.user);
+    useEffect(() => {
+        if (user.role === "staff") dispatch(getCourses())
+    }, [])
+    console.log(user)
     // const courses = useSelector(state => state.courses);
     return (
         <>
@@ -24,7 +28,6 @@ const MyCourseRouting = () => {
                 transition={false}
                 id="noanim-tab-example"
                 className="mb-3"
-
             >
                 {/* nice to have
 
@@ -57,6 +60,15 @@ const MyCourseRouting = () => {
                         <CreatCourse />
                     </Tab> : ""
                 }
+
+{
+                    user.role === "Staff" ? <Tab eventKey="staff" title="סגל" >
+                        <StaffComponents />
+                    </Tab> : ""
+                }
+
+
+
             </Tabs>
             {/* {
                 courses.map(course => <button>{course.name}</button>)

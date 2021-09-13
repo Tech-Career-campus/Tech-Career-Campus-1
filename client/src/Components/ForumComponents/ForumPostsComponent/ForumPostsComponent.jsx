@@ -6,17 +6,17 @@ import "./posts.css";
 
 const ForumPostsComponent = ({setCurrentId}) => {
   const posts = useSelector((state) => state.posts);
-
   return !posts.length ? (
-    <CircularProgress />
+     <CircularProgress />
+   
   ) : (
-    <div className="posts">
+    <ul className="posts">
       {posts.map((post) => (
-        <div key={post._id}>
-          <ForumPostComponent post={post} setCurrentId={setCurrentId} />
-        </div>
+        <li key={post._id}>
+           <ForumPostComponent post={post} setCurrentId={setCurrentId} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

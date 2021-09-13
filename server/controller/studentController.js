@@ -4,7 +4,7 @@ const StudentModel = require("../models/studentModel");
 
 const getStudent = async (req, res) => {
   try {
-    await StudentModel.find({}, (err, result) => {
+    await StudentModel.findById(req.params.id, (err, result) => {
       if (err) console.log(err);
       res.status(200).json({ massage: "get Student success!", data: result });
     });
@@ -12,10 +12,20 @@ const getStudent = async (req, res) => {
     res.status(500).json({ massage: "get Student field", error: err });
   }
 };
+const getStudents = async (req, res) => {
+  try {
+    await StudentModel.find({}, (err, result) => {
+      if (err) console.log(err);
+      res.status(200).json({ massage: "get Students success!", data: result });
+    });
+  } catch (err) {
+    res.status(500).json({ massage: "get Students field", error: err });
+  }
+};
 
 const getStudentGradeById = async (req, res) => {
   try {
-    StudentModel.findById(req.body.id, (error, result) => {
+    StudentModel.findById(req.params.id, (error, result) => {
       if (error) throw error;
       res
         .status(200)
@@ -145,6 +155,7 @@ const deleteStudent = async (req, res) => {
 }
 module.exports = {
   getStudent,
+  getStudents,
   getStudentGradeById,
   addStudentTestById,
   updateStudentTestById,

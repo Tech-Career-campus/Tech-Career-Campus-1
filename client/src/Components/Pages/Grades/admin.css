@@ -1,6 +1,8 @@
 .admin-grade-contaniner{
-    width: 80vw;
+    width: 100vw;
+    height: 100vh;
     margin: auto;
+    
 }
 
 .search {
@@ -11,7 +13,7 @@
 
 .search-term {
   width: 100%;
-  border: 3px solid rgb(255, 99, 38);
+  border: 3px solid #17294A;
   border-left: none;
   padding: 5px;
   height: 36px;
@@ -21,14 +23,14 @@
 }
 
 .search-term:focus {
-  color: rgb(255, 99, 38);
+  color: #7CA8C5;
 }
 
 .search-button {
   width: 40px;
   height: 36px;
-  border: 1px solid rgb(255, 99, 38);
-  background: rgb(255, 99, 38);
+  border: 1px solid #17294A;
+  background: #17294A;
   text-align: center;
   color: #fff;
   border-radius: 5px 0   0 5px;
@@ -43,7 +45,11 @@
 }
 
 .table {
-  width: 80vw;
+  
+
+  border: 1px solid black;
+  width: 70vw;
+  height: 50vh;
   margin-bottom: 20px;
   border: none !important;
   border-spacing: 0 !important;
@@ -51,22 +57,23 @@
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  background: rgba(255, 99, 38, 0.9);
+  background: rgba(255, 255, 255, 0.9);
+  
 }
 .table th,
 .table td {
-  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px rgb(216, 196, 188), inset 0 1px rgb(105, 97, 94);
 }
 .table th {
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   padding: 1em;
-  color: rgba(0, 0, 0, 0.45);
+  color: #17294A;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-  font-size: 1.5em;
+  font-size: 1.7em;
 }
 .table td {
-  color: #f7f7f7;
+  color: #141414;
   padding: 0.7em 1em 0.7em 1.15em;
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
   font-size: 1.4em;

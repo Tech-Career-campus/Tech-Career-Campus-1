@@ -1,0 +1,50 @@
+
+.Body{
+    display: flex;
+    justify-content: center;
+    padding-top: 60px;
+    border-radius: 0px 0px 10px 10px;
+    width: 350px;
+    height: 90vh;
+    background-color: #17294A;
+    position: absolute;
+    margin-right: 130px;
+}
+
+.Updete #sendBtn{
+    width: 60px;
+    height: 30px;
+}
+
+
+textarea ,#eventName{
+    border-radius: 4px;
+    width: 200px;
+    height: 30px;
+    
+}
+textarea ,#massage{
+    border-radius: 4px;
+    width: 200px;
+    height: 70px;
+}
+.EventsNews{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: rgb(250, 250, 250);
+    width: 200px;
+    height: 120px;
+}
+.EventsNews input{
+    
+    font-size: 15px;
+    width: 50px;
+    height: 30px;
+    
+
+}
