@@ -36,18 +36,18 @@ const getAllCourses = async (req, res) => {
     res.status(500).json({ massage: "get course field", error: err });
   }
 };
-const getCourseByName = async (req, res) => {
+const getCourseById = async (req, res) => {
   try {
-    await CourseModel.find({ name: req.body.name }, (err, result) => {
+    await CourseModel.findById(req.body.id, (err, result) => {
       if (err) throw err;
       res
         .status(200)
-        .json({ message: "get course by name success!", data: result });
+        .json({ message: "get course by id success!", data: result });
     });
   } catch (err) {
     res
       .status(500)
-      .json({ message: "get course by name field", error: err.message });
+      .json({ message: "get course by id field", error: err.message });
   }
 };
 const deleteSubSubject = async (req, res) => {
@@ -60,10 +60,10 @@ const deleteSubSubject = async (req, res) => {
         },
       },
     };
-    const array = await req.body.array
-    const ArrayPath = `CourseInformation.$[].${array}`
+    const array = await req.body.array;
+    const ArrayPath = `CourseInformation.$[].${array}`;
     const ArrayObject = {};
-    ArrayObject[ArrayPath] = { _id: req.body.ElementId }
+    ArrayObject[ArrayPath] = { _id: req.body.ElementId };
     await CourseModel.findOneAndUpdate(
       query,
       { $pull: ArrayObject },
@@ -89,7 +89,6 @@ const deleteSubSubject = async (req, res) => {
     console.log(err);
     res.status(500).json({ message: "update course field", error: err });
   }
-
 };
 const addSubSubject = async (req, res) => {
   try {
@@ -101,20 +100,28 @@ const addSubSubject = async (req, res) => {
         },
       },
     };
-    const array = await req.body.array
-    const ArrayPath = `CourseInformation.$[].${array}`
+    const array = await req.body.array;
+    const ArrayPath = `CourseInformation.$[].${array}`;
     const ArrayObject = {};
     if (array === "topics") {
-      ArrayObject[ArrayPath] = { isDone: req.body.isDone, subject: req.body.subject }
-
-    }
-    else if (array === "links") {
-      ArrayObject[ArrayPath] = { tasks: req.body.tasks, Presentations: req.body.Presentations, StudyAid: req.body.StudyAid }
-    }
-    else {
-      const arrayError = new Error("you need to choose which array links or topics")
-      res.status(301).json({ message: "update course faild", error: arrayError.message })
-      throw arrayError
+      ArrayObject[ArrayPath] = {
+        isDone: req.body.isDone,
+        subject: req.body.subject,
+      };
+    } else if (array === "links") {
+      ArrayObject[ArrayPath] = {
+        tasks: req.body.tasks,
+        Presentations: req.body.Presentations,
+        StudyAid: req.body.StudyAid,
+      };
+    } else {
+      const arrayError = new Error(
+        "you need to choose which array links or topics"
+      );
+      res
+        .status(301)
+        .json({ message: "update course faild", error: arrayError.message });
+      throw arrayError;
     }
     await CourseModel.findOneAndUpdate(
       query,
@@ -144,11 +151,11 @@ const addSubSubject = async (req, res) => {
 };
 const updateSubSubject = async (req, res) => {
   try {
-    const array = await req.body.array
-    const arrayField = await req.body.arrayField
-    const ArrayPath = `CourseInformation.$.${array}.$[objcet].${arrayField}`
+    const array = await req.body.array;
+    const arrayField = await req.body.arrayField;
+    const ArrayPath = `CourseInformation.$.${array}.$[objcet].${arrayField}`;
     const ArrayObject = {};
-    ArrayObject[ArrayPath] = req.body.newValue
+    ArrayObject[ArrayPath] = req.body.newValue;
     const query = {
       _id: req.body._id,
       CourseInformation: {
@@ -162,7 +169,7 @@ const updateSubSubject = async (req, res) => {
       { $set: ArrayObject },
       {
         arrayFilters: [{ "objcet._id": { _id: req.body.array_id } }],
-        upsert: true
+        upsert: true,
       },
       (err, result) => {
         if (err) throw err;
@@ -183,23 +190,22 @@ const updateSubSubject = async (req, res) => {
     console.log(err);
     res.status(500).json({ message: "update course field", error: err });
   }
-
 };
 const updateSubject = async (req, res) => {
   try {
-    const field = await req.body.field
+    const field = await req.body.field;
     if (field === "topics" || field === "links") {
-      throw new Error("you cant update arrays only static fields")
+      throw new Error("you cant update arrays only static fields");
     }
-    const SubjectPath = `CourseInformation.$[objcet].${field}`
-    const SubjectField = {}
-    SubjectField[SubjectPath] = req.body.newValue
+    const SubjectPath = `CourseInformation.$[objcet].${field}`;
+    const SubjectField = {};
+    SubjectField[SubjectPath] = req.body.newValue;
     await CourseModel.findOneAndUpdate(
       { _id: req.body._id },
       { $set: SubjectField },
       {
         arrayFilters: [{ "objcet._id": { _id: req.body.Subject_id } }],
-        upsert: true
+        upsert: true,
       },
       (err, result) => {
         if (err) throw err;
@@ -207,28 +213,35 @@ const updateSubject = async (req, res) => {
         if (result !== null) {
           res
             .status(200)
-            .json({ message: "update corse subject was success!", data: result });
+            .json({
+              message: "update corse subject was success!",
+              data: result,
+            });
         } else {
           const errorNull = new Error("result is null");
           res
             .status(500)
-            .json({ message: "update course subject field", error: errorNull.message });
+            .json({
+              message: "update course subject field",
+              error: errorNull.message,
+            });
         }
       }
     );
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "update course subject field", error: err.message });
+    res
+      .status(500)
+      .json({ message: "update course subject field", error: err.message });
   }
-
 };
 
 module.exports = {
   addNewCourse,
   getAllCourses,
-  getCourseByName,
+  getCourseById,
   deleteSubSubject,
   addSubSubject,
   updateSubSubject,
-  updateSubject
+  updateSubject,
 };
