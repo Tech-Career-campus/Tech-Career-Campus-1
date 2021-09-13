@@ -1,15 +1,19 @@
-.navbar {
-/* border: 1px solid black; */
+.navbar-main {
+
+ /* border: 1px solid black;  */
+ background-color: white;
   width: 100vw;
-  height: 64px;
+  height: 65px;
   display: flex;
-  flex-direction:row-reverse;
   justify-content: space-around;
-  padding: 0px 40px;
+  align-items: center;
+  
+  
+  
 }
 .navbar-links {
   
-  /* border: 1px solid black; */
+   /* border: 1px solid black;  */
   width: 800px;
   list-style-type: none;
   display: flex;
@@ -20,9 +24,9 @@
 
 
 .navbar-links li a{
-  text-shadow: 1px 1px 10px white;
+  text-shadow: 1px 1px 10px #162A4A;
     text-decoration: none;
-    color: white;
+    color: #162A4A;
     font-family: serif;
     font-weight: 400;
     font-size: 18px;

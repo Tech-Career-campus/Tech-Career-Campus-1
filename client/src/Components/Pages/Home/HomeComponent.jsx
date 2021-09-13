@@ -6,10 +6,12 @@ import News from '../../Features/News/NewsComponent';
 const Home = () => {
     return (
         <>
-        <div className="BodyHome">
+        <div className="events"> 
             <Events/>
+           </div>
+            <div className="news">
             <News/>
-        </div>
+         </div> 
         </>
     )
 }

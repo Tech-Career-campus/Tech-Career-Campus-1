@@ -1,14 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import techLogo from "../../../images/tech-logo.jpeg";
 import "./Navbar.css";
 
+  const logout = () => {
+    localStorage.removeItem("jwtToken");
+    window.location.href = "./";
+  };
 //Ticker moving news
 export default function Navbar() {
   return (
     <>
-      <div className="navbar">
+      <div className="navbar-main">
+        <div className="navbar-logo">
+          <img src={techLogo} alt="" />
+        </div>
         <ul className="navbar-links">
           <li>
             <Link to={"/"}>דף בית</Link>
@@ -23,9 +29,13 @@ export default function Navbar() {
             <Link to={"/class-schedule"}>לו"ז כיתות</Link>
           </li>
         </ul>
+        
         <div className="navbar-logo">
           <img src={techLogo} alt="" />
         </div>
+        <button className="btn" onClick={() => logout()}>
+          התנתק
+        </button>
       </div>
     </>
   );
