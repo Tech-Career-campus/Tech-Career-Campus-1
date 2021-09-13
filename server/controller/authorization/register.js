@@ -1,5 +1,6 @@
 const StaffModel = require("../../models/staffModel");
 const StudentModel = require("../../models/studentModel");
+const CourseModel = require("../../models/courseModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
 const courseModel =require('../../models/courseModel')
@@ -9,6 +10,7 @@ const register = async (req, res) => {
     if (!isValid) {
       return res.status(401).json(errors);
     }
+
     await StaffModel.findOne({ email: req.body.email }, (err, staff) => {
       if (err) throw err;
       if (staff) {
@@ -82,8 +84,8 @@ const register = async (req, res) => {
               });
           }
 
-          const { firstName, lastName, age, email, courseName, phone } =
-            req.body;
+          const { firstName, lastName, age, email, courseName, phone } = req.body;
+          const course = await CourseModel.findById(req.body.idCourse)
           const newStudent = new StudentModel({
             firstName: firstName,
             lastName: lastName,
