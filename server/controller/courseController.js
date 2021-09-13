@@ -223,6 +223,24 @@ const updateSubject = async (req, res) => {
 
 };
 
+
+const getStudentsByCourse = async (req, res) => {
+  try {
+      await CourseModel.findById(req.body.id)
+          .populate('students')
+          .then(course => {
+              res.status(201).json({ massage: 'The student is ', data: course.students.map((student) => student ) })
+          })
+          .catch(err => {
+              res.status(500).json({ massage: 'error with population', data: err });
+          })
+
+  }
+  catch (err) {
+      res.status(500).json({ massage: "wrong", error: err })
+  }
+}
+
 module.exports = {
   addNewCourse,
   getAllCourses,
@@ -230,5 +248,6 @@ module.exports = {
   deleteSubSubject,
   addSubSubject,
   updateSubSubject,
-  updateSubject
+  updateSubject,
+  getStudentsByCourse
 };

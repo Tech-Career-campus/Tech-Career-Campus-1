@@ -10,6 +10,6 @@ router.delete('/deleteSubSubject', authRole("Staff"), courseController.deleteSub
 router.post('/addSubSubject', authRole("Staff"), courseController.addSubSubject);
 router.put('/updateSubSubject', authRole("Staff"), courseController.updateSubSubject);
 router.put('/updateSubject', authRole("Staff"), courseController.updateSubject);
-
+router.get('/students',authRole("Staff"),courseController.getStudentsByCourse)
 
 module.exports = router;

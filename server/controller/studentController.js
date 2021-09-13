@@ -153,6 +153,22 @@ const deleteStudent = async (req, res) => {
     }
   );
 }
+const getSyllabusByCourse = async (req, res) => {
+  try {
+      await StudentModel.findById(req.body.id)
+          .populate('courseId')
+          .then(student => {
+              res.status(201).json({ massage: 'The student is ', data: student.courseId})
+          })
+          .catch(err => {
+              res.status(500).json({ massage: 'error with population', data: err });
+          })
+
+  }
+  catch (err) {
+      res.status(500).json({ massage: "wrong", error: err })
+  }
+}
 module.exports = {
   getStudent,
   getStudents,
@@ -162,4 +178,5 @@ module.exports = {
   deleteStudentTestById,
   updateStudent,
   deleteStudent,
+  getSyllabusByCourse
 };
