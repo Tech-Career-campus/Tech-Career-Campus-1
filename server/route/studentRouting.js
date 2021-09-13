@@ -15,5 +15,6 @@ router.put('/updateTest/:_id', authRole("Staff"), studentController.updateStuden
 router.put('/updateStudent', authRole("Staff"), studentController.updateStudent);
 router.delete('/deleteTest/:_id', authRole("Staff"), studentController.deleteStudentTestById);
 router.delete('/deleteStudent', authRole("Staff"), studentController.deleteStudent);
+router.get('/syllabus',studentController.getSyllabusByCourse)
 
 module.exports = router;
