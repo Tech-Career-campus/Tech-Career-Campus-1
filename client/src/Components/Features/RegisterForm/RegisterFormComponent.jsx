@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStudent } from "../../../Redux/actions/studentsActions";
 import handleChange from "../../../utils/handleChange";
+import './registerForm.css'
 let generator = require("generate-password");
 
 let password = generator.generate({
@@ -22,6 +23,7 @@ const RegisterForm = ({ SetIsRegister }) => {
     <>
       {errors ? (
         <form
+        className='register-form-form'
           onSubmit={(e) => {
             e.preventDefault();
           }}

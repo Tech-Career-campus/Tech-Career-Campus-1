@@ -5,6 +5,7 @@ import "./EditGradeComponent.css";
 import AddGrade from "./AddGrade";
 const EditGradeComponent = ({ handleFnc }) => {
   const student = useSelector((state) => state.student);
+
   const dispatch = useDispatch();
   
   const [editTest, setEditTest] = useState({ isEdit: false, testId: "" });

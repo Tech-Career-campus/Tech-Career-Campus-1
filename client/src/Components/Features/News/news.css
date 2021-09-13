@@ -1,9 +1,19 @@
+.BodyNew{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 20px -6px #000000;
+    width: 95vw;
+    height: 500px;
+    margin: 50px;
+      
+}
+
 .news-ticker-div{
-    width: 90vw;
-    height: 90vh;
+    width: 300px;
+    height: 300px;
     margin: auto;
 }
 .news-ticker-div>img{
-    height: 20vh;
-    width: 40vw;
+    height: 500px;
+    width: 500px;
 }

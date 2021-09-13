@@ -1,4 +1,4 @@
-import { ADD_TEST, EDIT_GRADE, DELETE_TEST, GET_STUDENT } from '../actions/types';
+import { ADD_TEST, EDIT_GRADE, DELETE_TEST, GET_STUDENT, GET_STUDENT_TEST } from '../actions/types';
 
 function studentsReducer(student = {}, action) {
     switch (action.type) {
@@ -13,6 +13,10 @@ function studentsReducer(student = {}, action) {
                 ...student, tests: action.payload
             }
         case DELETE_TEST:
+            return {
+                ...student, tests: action.payload
+            }
+            case  GET_STUDENT_TEST: 
             return {
                 ...student, tests: action.payload
             }

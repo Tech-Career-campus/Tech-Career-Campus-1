@@ -7,6 +7,7 @@ export const EDIT_GRADE = "EDIT_GRADE";
 export const GET_STUDENT = "GET_STUDENT";
 export const ADD_TEST = "ADD_TEST";
 export const DELETE_TEST = "DELETE_TEST";
+export const GET_STUDENT_TEST = "GET_STUDENT_TEST";
 
 // students
 export const GET_STUDENTS = "GET_STUDENTS";
@@ -26,6 +27,11 @@ export const FETCH_ALL = "FETCH_ALL";
 
 export const GET_SYLLABUS="GET_SYLLABUS"
 
+//Staff
+
+export const GET_STAFF_LIST="GET_STAFF_LIST"
+export const ADD_STAFF="ADD_STAFF"
+export const DELETE_STAFF="DELETE_STAFF"
 // Course
 
 export const GET_COURSES = "GET_COURSES"

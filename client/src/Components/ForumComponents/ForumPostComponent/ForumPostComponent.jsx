@@ -21,7 +21,7 @@ const ForumPostComponent = ({ post, setCurrentId }) => {
         <div className="overlay2">
           <button
             className="post-btn"
-            style={{ color: "white" }}
+            style={{ color: "black" }}
             size="small"
             onClick={() => setCurrentId(post._id)}
           >

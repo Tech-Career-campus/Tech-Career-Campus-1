@@ -42,5 +42,3 @@ app.listen(PORT, () => {
     )} ${chalk.blue(PORT)}`
     );
 });
-
-

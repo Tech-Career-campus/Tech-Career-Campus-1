@@ -12,16 +12,10 @@ const Layout = ({ children }) => {
   useEffect(() => {
    if (token) dispatch(getUser());
   }, []);
-  const logout = () => {
-    localStorage.removeItem("jwtToken");
-    window.location.href = "./";
-  };
+
 
   return (
     <div>
-      <button className="btn" onClick={() => logout()}>
-        התנתק
-      </button>
       <Header />
       {token ? children : <Login errors={user.errors} />}
       <Footer />
