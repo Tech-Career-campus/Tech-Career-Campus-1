@@ -45,28 +45,12 @@ const updateStaffById = async (req, res) => {
   }
 }
 
-const getStudentsByStaff = async (req, res) => {
-  try {
-      await StaffModel.findById(req.body.id)
-          .populate('students')
-          .then(staff => {
-              res.status(201).json({ massage: 'The student is ', data: staff.students.map((student) => student ) })
-          })
-          .catch(err => {
-              res.status(500).json({ massage: 'error with population', data: err });
-          })
 
-  }
-  catch (err) {
-      res.status(500).json({ massage: "wrong", error: err })
-  }
-}
 
 
 module.exports = {
   getAllStaff,
   getStaffById,
   deleteStaffById,
-  updateStaffById,
-  getStudentsByStaff
+  updateStaffById
 };

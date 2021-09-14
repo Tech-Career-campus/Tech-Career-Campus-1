@@ -1,4 +1,6 @@
 const eventModel = require("../models/eventModel");
+const staffModel = require("../models/staffModel");
+const { ObjectId } = require("mongodb");
 
 const getAllEventPost = async (req, res) => {
   try {
@@ -25,13 +27,19 @@ const getEventById = async (req, res) => {
 };
 
 const postNewEvent = async (req, res) => {
+  const staff = await staffModel.findById(req.params.id);
+  const { eventName, massage } = req.body;
+  const newevent = new eventModel({
+    eventName: eventName,
+    massage: massage,
+  });
   try {
-    await eventModel.insertMany(req.body, (error, result) => {
-      if (error) throw error;
-      res.status(200).json({
-        massage: "post added successfully, success",
-        data: result,
-      });
+    await newevent.save();
+    staff.events.push(newevent);
+    await staff.save();
+    res.status(200).json({
+      massage: "post added successfully, success",
+      data: result,
     });
   } catch (err) {
     res.status(500).json({ massage: "post added field ", error: err });
