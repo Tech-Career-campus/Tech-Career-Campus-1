@@ -15,7 +15,7 @@ const getAllEventPost = async (req, res) => {
 
 const getEventById = async (req, res) => {
   try {
-    await eventModel.findById(req.body.id, (error, result) => {
+    await eventModel.findById(req.params.id, (error, result) => {
       if (error) throw error;
       res
         .status(200)
