@@ -1,4 +1,5 @@
 const eventModel = require("../models/eventModel");
+const staffModel = require("../models/staffModel");
 const { ObjectId } = require("mongodb");
 
 const getAllEventPost = async (req, res) => {
@@ -14,28 +15,31 @@ const getAllEventPost = async (req, res) => {
 
 const getEventById = async (req, res) => {
   try {
-    await eventModel.findById(
-      { _id: ObjectId(req.body.id) },
-      (error, result) => {
-        if (error) throw error;
-        res
-          .status(200)
-          .json({ massage: "get event by id success", data: result });
-      }
-    );
+    await eventModel.findById(req.params.id, (error, result) => {
+      if (error) throw error;
+      res
+        .status(200)
+        .json({ massage: "get event by id success", data: result });
+    });
   } catch (error) {
     res.status(500).json({ massage: "get event by id field  ", error: error });
   }
 };
 
 const postNewEvent = async (req, res) => {
+  const staff = await staffModel.findById(req.params.id);
+  const { eventName, massage } = req.body;
+  const newevent = new eventModel({
+    eventName: eventName,
+    massage: massage,
+  });
   try {
-    await eventModel.insertMany(req.body, (error, result) => {
-      if (error) throw error;
-      res.status(200).json({
-        massage: "post added successfully, success",
-        data: result,
-      });
+    await newevent.save();
+    staff.events.push(newevent);
+    await staff.save();
+    res.status(200).json({
+      massage: "post added successfully, success",
+      data: result,
     });
   } catch (err) {
     res.status(500).json({ massage: "post added field ", error: err });
@@ -44,15 +48,10 @@ const postNewEvent = async (req, res) => {
 
 const deleteEventPost = async (req, res) => {
   try {
-    await eventModel.findOneAndDelete(
-      { _id: ObjectId(req.params.id) },
-      (error, result) => {
-        if (error) throw error;
-        res
-          .status(200)
-          .json({ massage: "deleted event success", data: result });
-      }
-    );
+    await eventModel.findByIdAndDelete(req.params.id, (error, result) => {
+      if (error) throw error;
+      res.status(200).json({ massage: "deleted event success", data: result });
+    });
   } catch (error) {
     res.status(500).json({ massage: "deleted event field", error: error });
   }
@@ -60,8 +59,7 @@ const deleteEventPost = async (req, res) => {
 
 const updateEventPost = async (req, res) => {
   try {
-    await eventModel.findByIdAndUpdate(
-      { _id: ObjectId(req.params.id) },
+    await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
       (error, result) => {
         if (error) throw error;
