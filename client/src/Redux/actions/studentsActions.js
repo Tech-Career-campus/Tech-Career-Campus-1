@@ -10,7 +10,7 @@ export const getStudents = () => async dispatch => {
 }
 export const createStudent = (newStudent) => async dispatch => {
     try {
-        await fetcher("/api/register", {
+        await fetcher("http://localhost:8080/api/register", {
             method: 'POST',
             body: JSON.stringify(newStudent),
         })

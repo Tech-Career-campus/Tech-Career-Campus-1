@@ -16,7 +16,7 @@ const RegisterForm = ({ SetIsRegister }) => {
   const [newStudent, setNewStudent] = useState({
     registeredAs: "Student",
     id: user.id,
-    courseName: "פיתוח מ",
+    courseId: "6131cf7231323fbda852fc2f",
     password: password,
   });
   return (
