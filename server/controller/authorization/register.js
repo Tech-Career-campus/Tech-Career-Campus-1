@@ -89,7 +89,7 @@ const register = async (req, res) => {
             password: req.body.password,
             age: age,
             courseName: courseName,
-            createBy: staff._id,
+            // createBy: staff._id,
             courseId: course._id
           });
           try {
