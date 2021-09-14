@@ -62,12 +62,13 @@ const register = async (req, res) => {
         return res.status(400).json({ errors: { email: "email already exists" } });
       }
       //Password Encryption Before That it enters to the database
-      const course = CourseModel.findById(req.body.courseId);
       bcrypt.genSalt(12, (err, salt) => {
         if (err) throw err;
         bcrypt.hash(req.body.password, salt, async (err, hash) => {
           if (err) throw err;
           req.body.password = hash;
+
+          const course = await CourseModel.findById(req.body.courseId)
           if (!course) {
             res
               .status(400)
@@ -89,7 +90,6 @@ const register = async (req, res) => {
             courseName: courseName,
             courseId: course._id
           });
-
           try {
             if (req.file) {
               newStudent.profileImg = req.file.path;
@@ -104,7 +104,6 @@ const register = async (req, res) => {
                 message: "create new student success",
                 data: newStudent,
               });
-              
           } catch (error) {
             res.status(400).json({
               success: false,
