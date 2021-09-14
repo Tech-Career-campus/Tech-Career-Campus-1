@@ -1,7 +1,7 @@
 import fetcher from '../../utils/fetcher';
 import { CREATE_STUDENT, CREATE_STUDENT_ERRORS, DELETE_STUDENT, GET_STUDENTS, UPDATE_STUDENT } from './types'
-export const getStudents = () => async dispatch => {
-    await fetcher("/api/student")
+export const getStudents = (courseId) => async dispatch => {
+    await fetcher(`http://localhost:8080/api/course/students/${courseId}`)
         .then((response) => dispatch({
             type: GET_STUDENTS,
             payload: response.data,
@@ -10,7 +10,7 @@ export const getStudents = () => async dispatch => {
 }
 export const createStudent = (newStudent) => async dispatch => {
     try {
-        await fetcher("/api/register", {
+        await fetcher("http://localhost:8080/api/register", {
             method: 'POST',
             body: JSON.stringify(newStudent),
         })
@@ -31,7 +31,8 @@ export const createStudent = (newStudent) => async dispatch => {
 
 
 export const deleteStudent = (studentId) => async dispatch => {
-    await fetcher("/api/student/deleteStudent", {
+    debugger
+    await fetcher("http://localhost:8080/api/student/deleteStudent", {
         method: 'DELETE',
         body: JSON.stringify({ _id: studentId })
     }).then(response => dispatch({

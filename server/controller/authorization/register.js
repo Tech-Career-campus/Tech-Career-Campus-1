@@ -59,7 +59,7 @@ const register = async (req, res) => {
     await StudentModel.findOne({ email: req.body.email }, (err, student) => {
       if (err) throw err;
       if (student) {
-        return res.status(400).json({ errors: { email: "email already exists"} });
+        return res.status(400).json({ errors: { email: "email already exists" } });
       }
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
@@ -68,7 +68,7 @@ const register = async (req, res) => {
           if (err) throw err;
           req.body.password = hash;
 
-          const course = await courseModel.findById(req.body.id);
+          const course = await CourseModel.findById(req.body.courseId)
           if (!course) {
             res
               .status(400)
@@ -80,7 +80,6 @@ const register = async (req, res) => {
           }
 
           const { firstName, lastName, age, email, courseName, phone } = req.body;
-          const course = await CourseModel.findById(req.body.idCourse)
           const newStudent = new StudentModel({
             firstName: firstName,
             lastName: lastName,
