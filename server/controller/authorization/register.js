@@ -3,7 +3,6 @@ const StudentModel = require("../../models/studentModel");
 const CourseModel = require("../../models/courseModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
-const courseModel =require('../../models/courseModel')
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -34,21 +33,17 @@ const register = async (req, res) => {
           });
           try {
             await newStaff.save();
-            res
-              .status(201)
-              .json({
-                success: true,
-                message: "create new staff success",
-                data: newStaff,
-              });
+            res.status(201).json({
+              success: true,
+              message: "create new staff success",
+              data: newStaff,
+            });
           } catch (error) {
-            res
-              .status(401)
-              .json({
-                success: false,
-                message: "create new staff filed",
-                error: error,
-              });
+            res.status(401).json({
+              success: false,
+              message: "create new staff filed",
+              error: error,
+            });
           }
         });
       });
@@ -97,6 +92,9 @@ const register = async (req, res) => {
             courseId: course._id,
           });
           try {
+            if (req.file) {
+              newStudent.profileImg = req.file.path;
+            }
             await newStudent.save();
             course.students.push(newStudent);
             await course.save();
@@ -108,13 +106,11 @@ const register = async (req, res) => {
                 data: newStudent,
               });
           } catch (error) {
-            res
-              .status(400)
-              .json({
-                success: false,
-                message: "create new student filed",
-                error: error,
-              });
+            res.status(400).json({
+              success: false,
+              message: "create new student filed",
+              error: error,
+            });
           }
         });
       });

@@ -6,8 +6,10 @@ const register = require('../controller/authorization/register');
 const isToken = require('../controller/authorization/isToken')
 const {authRole} = require('../controller/authentication/auth');
 
+// const upload = require('../middleware/upload');
+
 router.post('/login', login);
-router.post('/register', isToken, authRole("Staff"), register);
-router.get('/logout', logout);
+router.post('/register',isToken,authRole("Staff"), register);
+router.get('/logout',logout);
 
 module.exports = router;

@@ -48,15 +48,10 @@ const postNewEvent = async (req, res) => {
 
 const deleteEventPost = async (req, res) => {
   try {
-    await eventModel.findOneAndDelete(
-      { _id: ObjectId(req.params.id) },
-      (error, result) => {
-        if (error) throw error;
-        res
-          .status(200)
-          .json({ massage: "deleted event success", data: result });
-      }
-    );
+    await eventModel.findByIdAndDelete(req.params.id, (error, result) => {
+      if (error) throw error;
+      res.status(200).json({ massage: "deleted event success", data: result });
+    });
   } catch (error) {
     res.status(500).json({ massage: "deleted event field", error: error });
   }
@@ -64,8 +59,7 @@ const deleteEventPost = async (req, res) => {
 
 const updateEventPost = async (req, res) => {
   try {
-    await eventModel.findByIdAndUpdate(
-      { _id: ObjectId(req.params.id) },
+    await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
       (error, result) => {
         if (error) throw error;
