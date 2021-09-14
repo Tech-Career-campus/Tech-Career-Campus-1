@@ -68,7 +68,7 @@ const register = async (req, res) => {
           if (err) throw err;
           req.body.password = hash;
 
-          const course = await courseModel.findById(req.body.id);
+          // const course = await courseModel.findById(req.body.id);
           if (!course) {
             res
               .status(400)
