@@ -11,29 +11,27 @@ import Students from '../Components/Pages/Sudents/StudentsComponent';
 import CreatCourse from '../Components/Pages/CreatCourse/CreatCourseComponent';
 import StaffComponents from '../Components/Pages/Staff/StaffComponents';
 import { getCourses } from '../Redux/actions/coursesActions';
-
+import ChooseCourse from '../Components/Features/ChooseCourse/ChooseCourseComponent'
 
 const MyCourseRouting = () => {
-    const dispatch = useDispatch()
-    const {user} = useSelector(state => state.user);
-    useEffect(() => {
-        if (user.role === "staff") dispatch(getCourses())
-    }, [])
-    console.log(user)
-    // const courses = useSelector(state => state.courses);
+    const { user } = useSelector(state => state.user);
+   
+
     return (
         <>
+            <ChooseCourse/>
             <Tabs
                 defaultActiveKey="home"
                 transition={false}
                 id="noanim-tab-example"
                 className="mb-3"
             >
-                {/* nice to have
+                    {/* nice to have
 
                 <Tab eventKey="daily-schedule" title="לוז יומי">
                     <DailySchedule />
                 </Tab> */}
+
                 <Tab eventKey="course-schedule" title="לוז קורס"  >
                     <CourseSchedule />
                 </Tab>
@@ -61,7 +59,7 @@ const MyCourseRouting = () => {
                     </Tab> : ""
                 }
 
-{
+                {
                     user.role === "Staff" ? <Tab eventKey="staff" title="סגל" >
                         <StaffComponents />
                     </Tab> : ""
@@ -70,9 +68,6 @@ const MyCourseRouting = () => {
 
 
             </Tabs>
-            {/* {
-                courses.map(course => <button>{course.name}</button>)
-            } */}
         </>
     )
 }

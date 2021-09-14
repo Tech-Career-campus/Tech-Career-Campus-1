@@ -90,7 +90,7 @@ const register = async (req, res) => {
             age: age,
             courseName: courseName,
             createBy: staff._id,
-            courseId: course._id
+            // courseId: course._id
           });
           try {
             if (req.file) {
