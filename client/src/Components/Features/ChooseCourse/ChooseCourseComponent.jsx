@@ -7,18 +7,19 @@ const ChooseCourse = () => {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses);
    const { user } = useSelector((state) => state.user);
+   console.log(courses)
    useEffect(() => {
-     console.log(courses);
      if (user.role === "Staff") dispatch(getCourses());
-   }, []);
+   }, [dispatch]);
    
   return (
     <div>
       {courses.map((course) => (
-        <button >{course.name}</button>
+        <button onClick={() => dispatch(getCourse(course._id))}>
+          {course.name}
+        </button>
       ))}
     </div>
   );
 };
-// onClick={dispatch(getCourse(course.id))}
 export default ChooseCourse;
