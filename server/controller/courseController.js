@@ -36,18 +36,18 @@ const getAllCourses = async (req, res) => {
     res.status(500).json({ massage: "get course field", error: err });
   }
 };
-const getCourseByName = async (req, res) => {
+getCourseById = async (req, res) => {
   try {
-    await CourseModel.find({ name: req.body.name }, (err, result) => {
+    await CourseModel.findById( req.body.id , (err, result) => {
       if (err) throw err;
       res
         .status(200)
-        .json({ message: "get course by name success!", data: result });
+        .json({ message: "get course by id success!", data: result });
     });
   } catch (err) {
     res
       .status(500)
-      .json({ message: "get course by name field", error: err.message });
+      .json({ message: "get course by id field", error: err.message });
   }
 };
 const deleteSubSubject = async (req, res) => {
@@ -244,7 +244,7 @@ const getStudentsByCourse = async (req, res) => {
 module.exports = {
   addNewCourse,
   getAllCourses,
-  getCourseByName,
+  getCourseById,
   deleteSubSubject,
   addSubSubject,
   updateSubSubject,
