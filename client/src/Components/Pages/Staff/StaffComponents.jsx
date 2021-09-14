@@ -22,7 +22,7 @@ const StaffComponents = () => {
 
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
-    const staff = useSelector((state) => state.staff);
+    const staff = useSelector((state) => state.staff.staff);
 
     const deletestaffHandler = (_id) => {
         dispatch(deleteStaff(_id))
@@ -60,7 +60,10 @@ const StaffComponents = () => {
 
                             <TableRow key={staffItem._id} >
                                 <TableCell>
-                                    <DeleteIcon onClick={() => deletestaffHandler(staffItem._id)} />
+                                    <Button>
+                                        <DeleteIcon onClick={() => deletestaffHandler(staffItem._id)} />
+
+                                    </Button>
                                 </TableCell>
                                 <TableCell component="th" scope="row">
                                     {staffItem._id}

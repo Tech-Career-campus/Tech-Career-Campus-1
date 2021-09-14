@@ -15,7 +15,7 @@ import { getCourses } from '../Redux/actions/coursesActions';
 
 const MyCourseRouting = () => {
     const dispatch = useDispatch()
-    const {user} = useSelector(state => state.user);
+    const { user } = useSelector(state => state.user);
     useEffect(() => {
         if (user.role === "staff") dispatch(getCourses())
     }, [])
@@ -61,7 +61,7 @@ const MyCourseRouting = () => {
                     </Tab> : ""
                 }
 
-{
+                {
                     user.role === "Staff" ? <Tab eventKey="staff" title="סגל" >
                         <StaffComponents />
                     </Tab> : ""
