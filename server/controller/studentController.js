@@ -158,7 +158,7 @@ const getSyllabusByCourse = async (req, res) => {
       await StudentModel.findById(req.body.id)
           .populate('courseId')
           .then(student => {
-              res.status(201).json({ massage: 'The student is ', data: student.courseId})
+              res.status(201).json({ massage: 'The student is ', data: student})
           })
           .catch(err => {
               res.status(500).json({ massage: 'error with population', data: err });
@@ -179,4 +179,4 @@ module.exports = {
   updateStudent,
   deleteStudent,
   getSyllabusByCourse
-};
+}

@@ -3,8 +3,6 @@ const StudentModel = require("../../models/studentModel");
 const CourseModel = require("../../models/courseModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
-const path = require('path');
-
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -70,13 +68,15 @@ const register = async (req, res) => {
           if (err) throw err;
           req.body.password = hash;
 
-          const staff = await StaffModel.findById(req.body.id);
-          if (!staff) {
-            res.status(400).json({
-              success: false,
-              message: "find staff filed",
-              error: error,
-            });
+          const course = await courseModel.findById(req.body.id);
+          if (!course) {
+            res
+              .status(400)
+              .json({
+                success: false,
+                message: "find course filed",
+                error: "this is an error",
+              });
           }
 
           const { firstName, lastName, age, email, courseName, phone } = req.body;
@@ -89,7 +89,6 @@ const register = async (req, res) => {
             password: req.body.password,
             age: age,
             courseName: courseName,
-            // createBy: staff._id,
             courseId: course._id
           });
           try {
@@ -97,9 +96,7 @@ const register = async (req, res) => {
               newStudent.profileImg = req.file.path;
             }
             await newStudent.save();
-            staff.students.push(newStudent);
             course.students.push(newStudent);
-            await staff.save();
             await course.save();
             res
               .status(201)
