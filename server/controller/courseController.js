@@ -36,9 +36,10 @@ const getAllCourses = async (req, res) => {
     res.status(500).json({ massage: "get course field", error: err });
   }
 };
-getCourseById = async (req, res) => {
+
+const getCourseById = async (req, res) => {
   try {
-    await CourseModel.findById( req.body.id , (err, result) => {
+    await CourseModel.findById( req.params.id , (err, result) => {
       if (err) throw err;
       res
         .status(200)
@@ -226,7 +227,7 @@ const updateSubject = async (req, res) => {
 
 const getStudentsByCourse = async (req, res) => {
   try {
-      await CourseModel.findById(req.body.id)
+    await CourseModel.findById(req.params.id)
           .populate('students')
           .then(course => {
               res.status(201).json({ massage: 'The student is ', data: course.students.map((student) => student ) })
