@@ -9,7 +9,7 @@ const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
-      return res.status(401).json(errors);
+      return res.status(401).json({errors:errors});
     }
 
     await StaffModel.findOne({ email: req.body.email }, (err, staff) => {
