@@ -8,6 +8,6 @@ const {authRole} = require('../controller/authentication/auth');
 
 router.post('/login', login);
 router.post('/register', isToken, authRole("Staff"), register);
-router.get('/logout', logout);
+router.delete('/logout', logout);
 
 module.exports = router;

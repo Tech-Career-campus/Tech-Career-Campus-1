@@ -1,5 +1,6 @@
 const CourseModel = require("../models/courseModel");
 const StaffModel = require("../models/staffModel");
+const { collection } = require('../models/courseModel');
 
 const addNewCourse = async (req, res) => {
   const staff = await StaffModel.findById(req.body.id);
@@ -222,6 +223,30 @@ const updateSubject = async (req, res) => {
   }
 
 };
+const searchCorseAutocomplete =  async(req,res)=>{
+  try {
+      let result = await collection.aggregate([
+         
+              {
+                '$search': {
+                  'index': 'default',
+                  'text': {
+                    'query': `${req.query.term}`,
+                    'path': {
+                      'wildcard': '*'
+                    }
+                  }
+                }
+              }
+            
+      ]).toArray();
+      res.send(result)
+  } catch (error) {
+      res.status(500).json({error:error.message})
+  }
+};
+
+
 
 module.exports = {
   addNewCourse,
@@ -230,5 +255,6 @@ module.exports = {
   deleteSubSubject,
   addSubSubject,
   updateSubSubject,
-  updateSubject
+  updateSubject,
+  searchCorseAutocomplete,
 };

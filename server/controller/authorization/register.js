@@ -2,6 +2,7 @@ const StaffModel = require("../../models/staffModel");
 const StudentModel = require("../../models/studentModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
+const {SendEmails} = require("../../utils/SendEmails")
 
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
@@ -15,6 +16,7 @@ const register = async (req, res) => {
         return res.status(401).json({ massage: "email already exists" });
       }
       
+      SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         bcrypt.hash(req.body.password, salt, async (err, hash) => {
