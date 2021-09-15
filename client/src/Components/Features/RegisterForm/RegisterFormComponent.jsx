@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStudent } from "../../../Redux/actions/studentsActions";
 import handleChange from "../../../utils/handleChange";
-import './registerForm.css'
+import "./registerForm.css";
 let generator = require("generate-password");
 
 let password = generator.generate({
@@ -13,17 +13,28 @@ const RegisterForm = ({ SetIsRegister }) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { errors } = useSelector((state) => state.students);
+  const course = useSelector((state) => state.course);
+
   const [newStudent, setNewStudent] = useState({
     registeredAs: "Student",
     id: user.id,
-    courseName: "פיתוח מ",
+    courseId: course._id,
+    courseName: course.name,
     password: password,
   });
+
+  const [isSend, setIsSend] = useState(false);
+
+  useEffect(() => {
+    if (!errors) {
+      setIsSend(true);
+    }
+  }, [dispatch]);
   return (
     <>
-      {errors ? (
+      {!isSend ? (
         <form
-        className='register-form-form'
+          className="register-form-form"
           onSubmit={(e) => {
             e.preventDefault();
           }}
@@ -84,7 +95,10 @@ const RegisterForm = ({ SetIsRegister }) => {
             {newStudent.firstName} {newStudent.lastName} נרשם במערכת
           </h3>
           <p> נשלח מייל עם פרטי התחברות לכתובת {newStudent.email}</p>
-          <button onClick={() => SetIsRegister()}>סגור</button>
+          <button onClick={() => {
+            SetIsRegister();
+            setIsSend(false)
+          }}>סגור</button>
         </div>
       )}
     </>

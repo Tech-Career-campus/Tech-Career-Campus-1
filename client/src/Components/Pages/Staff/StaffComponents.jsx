@@ -72,8 +72,8 @@ const StaffComponents = () => {
                                 <TableCell align="right">{staffItem.lastName}</TableCell>
                                 <TableCell align="right">{staffItem.email}</TableCell>
                                 <TableCell align="right">{staffItem.phone}</TableCell>
-                                <TableCell align="right">{staffItem.courses.length}</TableCell>
-                                <TableCell align="right">{staffItem.students.length}</TableCell>
+                                <TableCell align="right">{staffItem?.courses?.length}</TableCell>
+                                <TableCell align="right">{staffItem?.students?.length}</TableCell>
                             </TableRow>
                         ))}
 

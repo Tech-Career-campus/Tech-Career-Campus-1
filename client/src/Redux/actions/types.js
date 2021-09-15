@@ -35,4 +35,10 @@ export const DELETE_STAFF="DELETE_STAFF"
 export const STAFF_ERRORS="STAFF_ERRORS"
 // Course
 
+// Courses
 export const GET_COURSES = "GET_COURSES"
+
+//Course
+export const GET_COURSE = " GET_COURSE"
+
+
