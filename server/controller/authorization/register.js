@@ -3,6 +3,8 @@ const StudentModel = require("../../models/studentModel");
 const CourseModel = require("../../models/courseModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
+const {SendEmails} = require("../../utils/SendEmails")
+
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -15,7 +17,8 @@ const register = async (req, res) => {
       if (staff) {
         return res.status(401).json({ massage: "email already exists" });
       }
-
+      
+      SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         bcrypt.hash(req.body.password, salt, async (err, hash) => {
@@ -61,6 +64,7 @@ const register = async (req, res) => {
       if (student) {
         return res.status(400).json({ errors: { email: "email already exists" } });
       }
+      
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         if (err) throw err;
