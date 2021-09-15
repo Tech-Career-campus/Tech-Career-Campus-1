@@ -4,7 +4,9 @@ import studentReducer from "./studentReducer";
 import userReducer from "./userReducer";
 import SyllabusReducer from "./SyllabusReducer";
 import postsReducer from './posts'
+import staffRedcuer from "./staffRedcuer";
 import coursesReducer from "./coursesReducer";
+import courseReducer from "./courseReducer";
 
 
 export default combineReducers({
@@ -13,5 +15,7 @@ export default combineReducers({
     students: studentsReducer,
     student: studentReducer,
     posts: postsReducer,
-    courses: coursesReducer
+    staff:staffRedcuer,
+    courses: coursesReducer,
+    course: courseReducer
 })

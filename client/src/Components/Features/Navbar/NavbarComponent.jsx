@@ -30,9 +30,7 @@ export default function Navbar() {
           </li>
         </ul>
         
-        <div className="navbar-logo">
-          <img src={techLogo} alt="" />
-        </div>
+        
         <button className="btn" onClick={() => logout()}>
           התנתק
         </button>

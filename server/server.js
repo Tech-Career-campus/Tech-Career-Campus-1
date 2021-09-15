@@ -48,5 +48,5 @@ app.listen(PORT, () => {
     `${chalk.green("tech_career")} ${chalk.yellow(
       "live and up on port"
     )} ${chalk.blue(PORT)}`
-  );
+    );
 });

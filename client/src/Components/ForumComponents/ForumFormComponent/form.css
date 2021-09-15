@@ -32,8 +32,8 @@
 .feedback-input:focus {
   background: #fff;
   box-shadow: 0;
-  border: 3px solid #ffab3d;
-  color: #ffab3d;
+  border: 3px solid #17294A;
+  color: #17294A;
   outline: none;
   padding: 13px 13px 13px 54px;
 }
@@ -84,7 +84,7 @@ input:focus {
   width: 100%;
   border: #fbfbfb solid 4px;
   cursor: pointer;
-  background-color: #ffab3d;
+  background-color: #17294A;
   color: white;
   font-size: 24px;
   padding: 7px;
@@ -95,11 +95,11 @@ input:focus {
 
 #button-forum-submit:hover {
   background-color: rgba(0, 0, 0, 0);
-  color: #ffab3d;
+  color: #17294A;
 }
 
 .submit:hover {
-  color: #ffab3d;
+  color: #17294A;
 }
 
 /* .ease {

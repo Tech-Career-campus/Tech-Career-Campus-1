@@ -12,6 +12,7 @@ const Home = () => {
             <div className="news">
             <News/>
          </div> 
+         <div className="line-2"></div>
         </>
     )
 }

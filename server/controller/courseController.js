@@ -37,18 +37,19 @@ const getAllCourses = async (req, res) => {
     res.status(500).json({ massage: "get course field", error: err });
   }
 };
-const getCourseByName = async (req, res) => {
+
+const getCourseById = async (req, res) => {
   try {
-    await CourseModel.find({ name: req.body.name }, (err, result) => {
+    await CourseModel.findById( req.params.id , (err, result) => {
       if (err) throw err;
       res
         .status(200)
-        .json({ message: "get course by name success!", data: result });
+        .json({ message: "get course by id success!", data: result });
     });
   } catch (err) {
     res
       .status(500)
-      .json({ message: "get course by name field", error: err.message });
+      .json({ message: "get course by id field", error: err.message });
   }
 };
 const deleteSubSubject = async (req, res) => {
@@ -248,13 +249,32 @@ const searchCorseAutocomplete =  async(req,res)=>{
 
 
 
+
+const getStudentsByCourse = async (req, res) => {
+  try {
+    await CourseModel.findById(req.params.id)
+          .populate('students')
+          .then(course => {
+              res.status(201).json({ massage: 'The student is ', data: course.students.map((student) => student ) })
+          })
+          .catch(err => {
+              res.status(500).json({ massage: 'error with population', data: err });
+          })
+
+  }
+  catch (err) {
+      res.status(500).json({ massage: "wrong", error: err })
+  }
+}
+
 module.exports = {
   addNewCourse,
   getAllCourses,
-  getCourseByName,
+  getCourseById,
   deleteSubSubject,
   addSubSubject,
   updateSubSubject,
   updateSubject,
   searchCorseAutocomplete,
+  getStudentsByCourse
 };

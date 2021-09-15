@@ -9,18 +9,25 @@ const Students = () => {
 const {students} = useSelector((state) => state.students);
   const [isRegister, SetIsRegister] = useState(false);
   return (
-    <div >
+    <div>
       <PageHeader title={"סטודנטים"} />
-      <button className='btn' onClick={() => SetIsRegister(isRegister ? false : true)}>
+      <button
+        className="btn"
+        onClick={() => SetIsRegister(isRegister ? false : true)}
+      >
         הוספת סטודנט
       </button>
-      <div className='students-card-container'>
-      {isRegister ? <RegisterForm SetIsRegister={() => SetIsRegister(false)} /> : ""}
-      <div className='student-card-container'>
-      {students.map((student, index) => (
-        <StudentCard key={index} student={student} />
-      ))}
-      </div>
+      <div className="students-card-container">
+        {isRegister ? (
+          <RegisterForm SetIsRegister={() => SetIsRegister(false)} isRegister />
+        ) : (
+          ""
+        )}
+        <div className="student-card-container">
+          {students.map((student, index) => (
+            <StudentCard key={index} student={student} />
+          ))}
+        </div>
       </div>
     </div>
   );
