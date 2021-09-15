@@ -3,8 +3,9 @@ const router = express.Router();
 const courseController = require("../controller/courseController");
 const {authRole} = require('../controller/authentication/auth');
 
-router.post('/',authRole("Staff"), courseController.addNewCourse);
+
 router.get('/',authRole("Staff"), courseController.getAllCourses);
+router.get('/search',authRole("Staff"), courseController.searchCorseAutocomplete);
 router.get('/getCourseById/:id', courseController.getCourseById);
 router.delete('/deleteSubSubject', authRole("Staff"), courseController.deleteSubSubject);
 router.post('/addSubSubject', authRole("Staff"), courseController.addSubSubject);

@@ -32,6 +32,8 @@ export const GET_SYLLABUS="GET_SYLLABUS"
 export const GET_STAFF_LIST="GET_STAFF_LIST"
 export const ADD_STAFF="ADD_STAFF"
 export const DELETE_STAFF="DELETE_STAFF"
+export const STAFF_ERRORS="STAFF_ERRORS"
+// Course
 
 // Courses
 export const GET_COURSES = "GET_COURSES"
