@@ -52,9 +52,5 @@
       "last 1 safari version"
     ]
   },
-<<<<<<< HEAD
-  "proxy": "http://localhost:8080"
-=======
   "proxy": "http://localhost:8080/"
->>>>>>> 15b7212e2a4ef313ddecf1a93badd9928b59b3bf
 }
