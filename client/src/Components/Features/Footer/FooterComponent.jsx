@@ -62,10 +62,7 @@ const Footer = () => {
           </div>
           <ul className="quick-links">
             <li>
-              <Link to={"/news"}>חדשות </Link>
-            </li>
-            <li>
-              <Link to={"/events"}>אירועים </Link>
+              <Link to={"/news"}>דף הבית </Link>
             </li>
             <li>
               <Link to={"/forum"}>פורום </Link>

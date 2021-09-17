@@ -99,33 +99,44 @@ const Events = () => {
 
     return (
         <div className="Body">
-            <div>
+            <div >
+                <div className="send-new-event">
                 <textarea name="eventName" id="eventName" cols="100" rows="0.5" value={newEvent.eventName} placeholder="שם האירוע" onChange={(e) => { hendleChange(e) }}></textarea>
                 <br></br>
                 <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder="הקלד כאן" onChange={(e) => { hendleChange(e) }}></textarea>
                 <br></br>
+                <div className="button-send">
                 <input type="button" id="sendBtn" value="שלח" onClick={sendEvent} />
+                </div>
+                </div>
                 {
 
                     events?.map((event, index) => {
                         return (
                             <div className="EventsNews">
                                 <span key={event._id}>
+                                    <div className="titel-event">
                                     שם הארוע :{event.eventName}
                                     <br></br>
+                                    
                             הודעה :{event.massage}
+                                    
+                                    </div>
                                     <br></br>
+                                   
                                     <Popup trigger={<input type="button" id="updateBtn" value="עדכן" />} position="right center">
                                         <div>
                                             <textarea cols="100" rows="0.5" name="eventName" id="some" value={eventUpdate.eventName} onChange={(e) => { hendleChange1(e) }}></textarea>
                                             <br></br>
                                             <textarea cols="100" rows="0.5" name="massage" value={eventUpdate.massage} onChange={(e) => { hendleChange1(e) }}></textarea>
                                             <br></br>
+                                            
                                             <input type="button" id="confirmUpdates" value="אישור עדכונים" onClick={() => { updateEvent(event._id) }} />
                                         </div>
+                                        
                                     </Popup>
                                     <input type="button" id="deleteBtn" value="מחק" onClick={() => { deleteEvent(event._id) }} />
-                                    <hr></hr>
+                                    
                                 </span>
                             </div>
                         )
