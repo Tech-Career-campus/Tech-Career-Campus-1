@@ -25,58 +25,58 @@ const RegisterForm = ({ SetIsRegister }) => {
 
   const [isSend, setIsSend] = useState(false);
   useEffect(() => {
-    debugger
-    if (!errors) SetIsRegister();
-  }, [isSend]);
-
+    if (!errors) {
+      setIsSend(true);
+    }
+  }, []);
   return (
     <>
-      {!isSend ? (
-        <form
-          className="register-form-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <label>שם פרטי</label>
-          <input
-            name="firstName"
-            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-            type={"text"}
-          />
-          <p> {errors?.firstName ? errors.firstName : ""} </p>
+      <form
+        className="register-form-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <label>שם פרטי</label>
+        <input
+          name="firstName"
+          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+          type={"text"}
+        />
+        <p> {errors?.firstName ? errors.firstName : ""} </p>
 
-          <label>שם משפחה</label>
-          <input
-            name="lastName"
-            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-            type={"text"}
-          />
-          <p> {errors?.lastName ? errors.lastName : ""} </p>
+        <label>שם משפחה</label>
+        <input
+          name="lastName"
+          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+          type={"text"}
+        />
+        <p> {errors?.lastName ? errors.lastName : ""} </p>
 
-          <label>אימייל</label>
-          <input
-            name="email"
-            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-            type={"email"}
-          />
-          <p> {errors?.email ? errors.email : ""} </p>
-          <label>מס טלפון</label>
-          <input
-            name="phone"
-            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-            type={"text"}
-          />
-          <p> {errors?.phone ? errors.phone : ""} </p>
+        <label>אימייל</label>
+        <input
+          name="email"
+          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+          type={"email"}
+        />
+        <p> {errors?.email ? errors.email : ""} </p>
+        <label>מס טלפון</label>
+        <input
+          name="phone"
+          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+          type={"text"}
+        />
+        <p> {errors?.phone ? errors.phone : ""} </p>
 
-          <label>גיל</label>
-          <input
-            name="age"
-            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-            type={"number"}
-          />
-          <p> {errors?.age ? errors.age : ""} </p>
+        <label>גיל</label>
+        <input
+          name="age"
+          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+          type={"number"}
+        />
+        <p> {errors?.age ? errors.age : ""} </p>
 
+<<<<<<< HEAD
           <label>סיסמא</label>
           <input
             name="password"
@@ -109,7 +109,34 @@ const RegisterForm = ({ SetIsRegister }) => {
           </button>
         </div>
       )}
+=======
+        <label>סיסמא</label>
+        <input
+          name="password"
+          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+          type={"text"}
+          value={newStudent.password}
+        />
+        <button onClick={() => dispatch(createStudent(newStudent))}>
+          הוסף
+        </button>
+      </form>
+>>>>>>> a392d7be080a9d8626a91e4d9ffe0e43fd315ab0
     </>
   );
 };
 export default RegisterForm;
+
+  //  <div>
+  //    <h3>
+  //      {newStudent.firstName} {newStudent.lastName} נרשם במערכת
+  //    </h3>
+  //    <p> נשלח מייל עם פרטי התחברות לכתובת {newStudent.email}</p>
+  //    <button
+  //      onClick={() => {
+  //        SetIsRegister();
+  //      }}
+  //    >
+  //      סגור
+  //    </button>
+  //  </div>;

@@ -1,13 +1,11 @@
 import { GET_SYLLABUS } from '../actions/types'
 
-function SyllabusReducer(state = {}, action) {
+function SyllabusReducer(syllabus = {}, action) {
     switch (action.type) {
         case GET_SYLLABUS:
-            return {
-                ...state, state:action.payload
-            }
+            return action.payload
         default:
-            return state;
+            return syllabus;
     }
 }
 

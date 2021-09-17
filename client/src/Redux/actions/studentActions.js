@@ -1,5 +1,5 @@
 import fetcher from '../../utils/fetcher';
-import {  EDIT_GRADE, ADD_TEST, DELETE_TEST, GET_STUDENT, GET_STUDENT_TEST } from './types'
+import { EDIT_GRADE, ADD_TEST, DELETE_TEST, GET_STUDENT, GET_STUDENT_TEST } from './types'
 
 export const getStudent = (student) => dispatch => {
     return dispatch({
@@ -11,11 +11,11 @@ export const getStudent = (student) => dispatch => {
 
 export const getStudentTest = (id) => async dispatch => {
     await fetcher(`/api/student/gradesById/${id}`)
-    .then(response=> dispatch({
-        type: GET_STUDENT_TEST,
-        payload: response.data
-    }))
-    .catch(error=> console.log(error))
+        .then(response => dispatch({
+            type: GET_STUDENT_TEST,
+            payload: response.data
+        }))
+        .catch(error => console.log(error))
 }
 
 

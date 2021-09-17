@@ -1,6 +1,4 @@
-import { useState, useEffect} from "react";
 import "./Class.css";
-import { fetchDailySchedule } from "../../../FetchFunctions/FetchFunctions";
 import {WorkWeek,Month,Agenda,Inject,ScheduleComponent,Day,Week,ViewsDirective,ViewDirective} from "@syncfusion/ej2-react-schedule";
 import { loadCldr} from "@syncfusion/ej2-base";
 
@@ -10,11 +8,11 @@ import { loadCldr} from "@syncfusion/ej2-base";
 //  טבלה עם מספר הכיתות ושם הכיתות ,תפוסה\זמינה ,ושעות בהן היא תפוסה
 //
 const ClassScheduleComponent = () => {
-  const [myData, setMyData] = useState();
+  // const [myData, setMyData] = useState();
 
-  useEffect(() => {
-    fetchDailySchedule().then((response) => setMyData(response));
-  }, []);
+  // useEffect(() => {
+  //   fetchDailySchedule().then((response) => setMyData(response));
+  // }, []);
 
   loadCldr(
     require("cldr-data/main/he/ca-gregorian.json"),

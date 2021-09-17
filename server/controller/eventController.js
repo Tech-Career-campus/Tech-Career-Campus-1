@@ -39,7 +39,7 @@ const postNewEvent = async (req, res) => {
     await staff.save();
     res.status(200).json({
       massage: "post added successfully, success",
-      data: result,
+      data: newevent,
     });
   } catch (err) {
     res.status(500).json({ massage: "post added field ", error: err });
