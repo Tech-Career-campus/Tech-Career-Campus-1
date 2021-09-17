@@ -4,12 +4,14 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import jwt_decode from "jwt-decode";
 import "./post.css";
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../Redux/actions/postsActions";
+import { deletePost } from "../../../../../Redux/actions/postsActions";
 
 const ForumPostComponent = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("jwtToken");
   const user = jwt_decode(token);
+  console.log(user);
+  console.log(post);
   return (
     <div className="card">
       <div className="media" title={post.title} />
@@ -17,7 +19,7 @@ const ForumPostComponent = ({ post, setCurrentId }) => {
         <h6>{post.firstName}</h6>
         <p>{post.createdAt}</p>
       </div>
-      {user?._id === post?.creator && (
+      {user?.email === post?.email && (
         <div className="overlay2">
           <button
             className="post-btn"
@@ -34,7 +36,7 @@ const ForumPostComponent = ({ post, setCurrentId }) => {
         <p>{post.message}</p>
       </div>
       <div className="cardActions">
-        {user?._id === post?.creator && (
+        {user?.email === post?.email && (
           <button
             size="small"
             className="btn post-btn"

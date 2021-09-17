@@ -7,7 +7,7 @@ import "./Navbar.css";
     localStorage.removeItem("jwtToken");
     window.location.href = "./";
   };
-//Ticker moving news
+
 export default function Navbar() {
   return (
     <>
