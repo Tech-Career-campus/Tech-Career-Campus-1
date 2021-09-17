@@ -7,9 +7,13 @@ import "./admin.css";
 import PageHeader from "../../Features/PageHeader/PageHeaderComponent";
 const AdminGradesComponent = () => {
   const dispatch = useDispatch();
-const { students } = useSelector((state) => state.students);
+  const { students } = useSelector((state) => state.students);
+  const course = useSelector((state) => state.course);
   const [openTests, setOpenTests] = useState(false);
-  useEffect(() => dispatch(getStudents()), [dispatch, openTests]);
+  useEffect(
+    () => dispatch(getStudents(course._id)),
+    [dispatch, openTests, course]
+  );
 
   return (
     <div className="admin-grade-contaniner">
@@ -19,7 +23,6 @@ const { students } = useSelector((state) => state.students);
           <div className="search">
             <input className="search-term" type="text" />
             <button className="search-button">
-              
               <i className="fa fa-search"></i>
             </button>
           </div>
