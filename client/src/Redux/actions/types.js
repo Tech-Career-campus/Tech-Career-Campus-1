@@ -32,11 +32,19 @@ export const GET_SYLLABUS="GET_SYLLABUS"
 export const GET_STAFF_LIST="GET_STAFF_LIST"
 export const ADD_STAFF="ADD_STAFF"
 export const DELETE_STAFF="DELETE_STAFF"
+export const STAFF_ERRORS="STAFF_ERRORS"
+// Course
 
 // Courses
 export const GET_COURSES = "GET_COURSES"
 
 //Course
 export const GET_COURSE = " GET_COURSE"
+
+//Events
+export const CREATE_EVENT = "CREATE_EVENT"
+export const UPDATE_EVENT = "UPDATE_EVENT"
+export const DELETE_EVENT = "DELETE_EVENT"
+export const GET_EVENTS = "GET_EVENTS"
 
 

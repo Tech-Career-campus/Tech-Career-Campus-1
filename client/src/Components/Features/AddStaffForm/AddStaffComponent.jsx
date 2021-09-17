@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,11 +11,12 @@ import { addStuff } from '../../../Redux/actions/staffAction';
 
 
 const AddStaffComponent = ({ open, handleClose }) => {
-    const [staffUser, setstaffUser] = useState({ registeredAs: "Staff" })
+    const [staffUser, setStaffUser] = useState({ registeredAs: "Staff" })
     const dispatch = useDispatch();
+    const { errors } = useSelector((state) => state.staff);
 
     const createStaff = (e) => {
-        setstaffUser({
+        setStaffUser({
             ...staffUser,
             [e.target.name]: e.target.value
         })
@@ -23,7 +24,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
     const addStaff = () => {
 
         dispatch(addStuff(staffUser));
-        setstaffUser({ registeredAs: "Staff" });
+        setStaffUser({ registeredAs: "Staff" });
     }
 
 
@@ -45,8 +46,9 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         fullWidth
                         onChange={(e) => createStaff(e)}
                         value={staffUser.firstName}
-                        
+
                     />
+                    <strong className="errors">{errors?.firstName}</strong>
                     <TextField
                         name="lastName"
                         margin="dense"
@@ -58,6 +60,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.lastName}
 
                     />
+                    <strong className="errors">{errors?.lastName}</strong>
                     <TextField
                         name="email"
                         margin="dense"
@@ -69,6 +72,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.email}
 
                     />
+                    <strong className="errors">{errors?.email}</strong>
                     <TextField
                         name="password"
                         margin="dense"
@@ -80,6 +84,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.password}
 
                     />
+                    <strong className="errors">{errors?.password}</strong>
                     <TextField
                         name="phone"
                         margin="dense"
@@ -91,6 +96,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.phone}
 
                     />
+                    <strong className="errors">{errors?.phone}</strong>
                     <TextField
                         name="age"
                         margin="dense"
@@ -102,7 +108,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.age}
 
                     />
-
+                    <strong className="errors">{errors?.age}</strong>
                 </DialogContent>
                 <DialogActions>
                     <Button color="primary" onClick={(e) => addStaff(e)}>

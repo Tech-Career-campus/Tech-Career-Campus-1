@@ -9,7 +9,7 @@ const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
-      return res.status(401).json(errors);
+      return res.status(401).json({errors:errors});
     }
 
     await StaffModel.findOne({ email: req.body.email }, (err, staff) => {
@@ -64,7 +64,7 @@ const register = async (req, res) => {
       if (student) {
         return res.status(400).json({ errors: { email: "email already exists" } });
       }
-      
+      SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         if (err) throw err;
