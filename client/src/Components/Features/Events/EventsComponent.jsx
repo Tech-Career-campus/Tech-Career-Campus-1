@@ -4,6 +4,7 @@ import "./Events.css";
 import { useState } from 'react';
 import { getEvents, createEvent, updateEvent, deleteEvent } from '../../../Redux/actions/eventsActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { FaPlus } from 'react-icons/fa';
 
 const Events = () => {
     const dispatch = useDispatch();
@@ -47,24 +48,42 @@ const Events = () => {
 
     return (
         <div className="Body">
-            <h1> ארועים בטק קריירה </h1>
+            <div className="titel-event">
+                <div className="updete">
+            <h1> ארועים  בטק קריירה </h1>
+            </div>
+            <div className="bth-add">
+                <button onClick={() => { setForm(isForm ? false : true) }}> <FaPlus/> </button>
+                </div>
+            </div>
             <div>
-                <button onClick={() => { setForm(isForm ? false : true) }}> הוספת ארוע </button>
+                
                 {
+                    <div className="form-event">
                     isForm ?
                         <form onSubmit={(e) => { e.preventDefault() }}>
-                            <input type="text" name="eventName" value={newEvent.eventName} placeholder="שם האירוע" onChange={(e) => { hendleChange(e) }} />
+                            <input type="text" name="eventName" id="eventName" value={newEvent.eventName} placeholder="שם האירוע" onChange={(e) => { hendleChange(e) }} />
+                            <br></br>
                             <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder="הקלד כאן" onChange={(e) => { hendleChange(e) }}></textarea>
+                            <br/>
+                            <div className="bth-send-event">
                             <button type="submit" onClick={() => { dispatch(createEvent(newEvent)) }} > שלח </button>
+                        </div>
                         </form> : ""
+                        </div>
                 }
                 {
                     events?.map((event) => {
                         return (
-                            <div key={event._id} className="EventsNews">
-                                <div>
+                            <div className="EventsNews">
+                            <div key={event._id} >
+                                
+                                    <div className="inputs-massage">
                                     שם הארוע :{event.eventName}
+                                    <br></br>
                                     הודעה :{event.massage}
+                                    </div>
+                                    <div className="bth-e">
                                     <button onClick={() => { setUpdate(isUpdate ? false : true); setEventUpdate({ ...eventUpdate, eventId: event._id }) }}> עדכן </button>
                                     {
                                         isUpdate && event._id === eventUpdate.eventId ?
@@ -73,10 +92,11 @@ const Events = () => {
 
                                                 <textarea cols="100" rows="0.5" name="massage" value={eventUpdate.massage} onChange={(e) => { hendleChange1(e) }}></textarea>
                                                 <input type="button" id="confirmUpdates" value="אישור עדכונים" onClick={() => { dispatch(updateEvent(eventUpdate)); setUpdate(false )}} />
+                                            
                                             </div> : ""
                                     }
                                     <input type="button" id="deleteBtn" value="מחק" onClick={()=>dispatch(deleteEvent(event._id))} />
-                                    <hr></hr>
+                                   </div> 
                                 </div>
                             </div>
                         )
