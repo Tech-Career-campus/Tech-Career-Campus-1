@@ -33,7 +33,8 @@ const MyCourseRouting = () => {
 
                         {
                             user.role === "Staff" ?
-                                <select id="mySelect" onChange={(e) => dispatch(getCourse(e.target.value))}>
+                                <select onChange={(e) => dispatch(getCourse(e.target.value))}>
+                                    
                                     {
                                         courses.map(course => <option key={course._id} value={course._id}>{course.name}</option>
                                         )
