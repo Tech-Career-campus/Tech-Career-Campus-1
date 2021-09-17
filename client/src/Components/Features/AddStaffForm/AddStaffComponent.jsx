@@ -11,12 +11,12 @@ import { addStuff } from '../../../Redux/actions/staffAction';
 
 
 const AddStaffComponent = ({ open, handleClose }) => {
-    const [staffUser, setstaffUser] = useState({ registeredAs: "Staff" })
+    const [staffUser, setStaffUser] = useState({ registeredAs: "Staff" })
     const dispatch = useDispatch();
     const { errors } = useSelector((state) => state.staff);
 
     const createStaff = (e) => {
-        setstaffUser({
+        setStaffUser({
             ...staffUser,
             [e.target.name]: e.target.value
         })
@@ -24,7 +24,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
     const addStaff = () => {
 
         dispatch(addStuff(staffUser));
-        setstaffUser({ registeredAs: "Staff" });
+        setStaffUser({ registeredAs: "Staff" });
     }
 
 
