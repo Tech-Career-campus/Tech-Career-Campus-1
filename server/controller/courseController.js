@@ -40,7 +40,7 @@ const getAllCourses = async (req, res) => {
 
 const getCourseById = async (req, res) => {
   try {
-    await CourseModel.findById( req.params.id , (err, result) => {
+    await CourseModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       res
         .status(200)
@@ -74,7 +74,6 @@ const deleteSubSubject = async (req, res) => {
       },
       (err, result) => {
         if (err) throw err;
-
         if (result !== null) {
           res
             .status(200)
@@ -224,26 +223,26 @@ const updateSubject = async (req, res) => {
   }
 
 };
-const searchCorseAutocomplete =  async(req,res)=>{
+const searchCorseAutocomplete = async (req, res) => {
   try {
-      let result = await collection.aggregate([
-         
-              {
-                '$search': {
-                  'index': 'default',
-                  'text': {
-                    'query': `${req.query.term}`,
-                    'path': {
-                      'wildcard': '*'
-                    }
-                  }
-                }
-              }
-            
-      ]).toArray();
-      res.send(result)
+    let result = await collection.aggregate([
+
+      {
+        '$search': {
+          'index': 'default',
+          'text': {
+            'query': `${req.query.term}`,
+            'path': {
+              'wildcard': '*'
+            }
+          }
+        }
+      }
+
+    ]).toArray();
+    res.send(result)
   } catch (error) {
-      res.status(500).json({error:error.message})
+    res.status(500).json({ error: error.message })
   }
 };
 
@@ -253,17 +252,17 @@ const searchCorseAutocomplete =  async(req,res)=>{
 const getStudentsByCourse = async (req, res) => {
   try {
     await CourseModel.findById(req.params.id)
-          .populate('students')
-          .then(course => {
-              res.status(201).json({ massage: 'The student is ', data: course.students.map((student) => student ) })
-          })
-          .catch(err => {
-              res.status(500).json({ massage: 'error with population', data: err });
-          })
+      .populate('students')
+      .then(course => {
+        res.status(201).json({ massage: 'The student is ', data: course.students.map((student) => student) })
+      })
+      .catch(err => {
+        res.status(500).json({ massage: 'error with population', data: err });
+      })
 
   }
   catch (err) {
-      res.status(500).json({ massage: "wrong", error: err })
+    res.status(500).json({ massage: "wrong", error: err })
   }
 }
 

@@ -1,6 +1,8 @@
 import PageHeader from "../../Features/PageHeader/PageHeaderComponent";
 
 const CreatCourse = () => {
+
+  // useEffect()
 return (
   <div>
     <PageHeader title={"יצירת קורס"} />

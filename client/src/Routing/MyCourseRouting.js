@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import CourseSchedule from '../Components/Pages/CourseSchedule/CourseScheduleComponent';
-
 import StudentGradesComponent from '../Components/Pages/Grades/StudentGradesComponent'
 import AdminGradesComponent from '../Components/Pages/Grades/AdminGradesComponent'
 import Syllabus from '../Components/Pages/Syllabus/SyllabusComponent'
@@ -19,9 +18,6 @@ const MyCourseRouting = () => {
     const courses = useSelector((state) => state.courses);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log(course)
-    }, [course])
 
     return (
         <>

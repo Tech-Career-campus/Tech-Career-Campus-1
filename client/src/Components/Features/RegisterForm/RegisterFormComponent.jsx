@@ -24,12 +24,11 @@ const RegisterForm = ({ SetIsRegister }) => {
   });
 
   const [isSend, setIsSend] = useState(false);
-
   useEffect(() => {
-    if (!errors) {
-      setIsSend(true);
-    }
-  }, [dispatch]);
+    debugger
+    if (!errors) SetIsRegister();
+  }, [isSend]);
+
   return (
     <>
       {!isSend ? (
@@ -85,7 +84,12 @@ const RegisterForm = ({ SetIsRegister }) => {
             type={"text"}
             value={newStudent.password}
           />
-          <button onClick={() => dispatch(createStudent(newStudent))}>
+          <button
+            onClick={() => {
+              dispatch(createStudent(newStudent));
+              setIsSend(true)
+            }}
+          >
             הוסף
           </button>
         </form>
@@ -95,10 +99,14 @@ const RegisterForm = ({ SetIsRegister }) => {
             {newStudent.firstName} {newStudent.lastName} נרשם במערכת
           </h3>
           <p> נשלח מייל עם פרטי התחברות לכתובת {newStudent.email}</p>
-          <button onClick={() => {
-            SetIsRegister();
-            setIsSend(false)
-          }}>סגור</button>
+          <button
+            onClick={() => {
+              SetIsRegister();
+              debugger;
+            }}
+          >
+            סגור
+          </button>
         </div>
       )}
     </>
