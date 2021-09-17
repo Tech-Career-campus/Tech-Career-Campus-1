@@ -78,6 +78,7 @@ const login = async (req, res) => {
         firstName: student.firstName,
         lastName: student.lastName,
         role: student.role,
+        courseId: student.courseId
       };
 
       const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1d" });

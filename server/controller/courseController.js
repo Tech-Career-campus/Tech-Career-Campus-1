@@ -226,8 +226,7 @@ const updateSubject = async (req, res) => {
 };
 const searchCorseAutocomplete =  async(req,res)=>{
   try {
-      let result = await collection.aggregate([
-         
+      let result = await collection.aggregate([     
               {
                 '$search': {
                   'index': 'default',
