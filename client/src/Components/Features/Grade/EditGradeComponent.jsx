@@ -16,7 +16,7 @@ const EditGradeComponent = ({ handleFnc }) => {
   const [testDelete, setTestDelete] = useState({
     studentId: student._id,
   });
-  useEffect(() => dispatch(deleteTest(testDelete)), [testDelete.testId]);
+  useEffect(() => dispatch(deleteTest(testDelete)), [testDelete, dispatch]);
 
   const HandleChange = (e) => {
     setUpdateTest({
