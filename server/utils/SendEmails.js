@@ -12,6 +12,7 @@ const SendEmails = (req, res) => {
         <li>password: ${password}</li>
       </ul>
       <h3>Message</h3>
+      <h3> אינך יכול לשלוח מייל בחזרה למשתמש זה</h3>
     `;
 
   const transporter = nodemailer.createTransport({
@@ -23,14 +24,14 @@ const SendEmails = (req, res) => {
   });
 
   const options = {
-    from: '"Tech_Career" Tech_Career@outlook.com', // sender address
-    to: `${email}`, // list of receivers
-    subject: "Tech_Career Request", // Subject line
-    text: "Hello world?", // plain text body
-    html: output, // html body
+    from: '"Tech_Career" Tech_Career@outlook.com', 
+    to: `${email}`, 
+    subject: "Tech_Career Request", 
+    text: "Hello world?", 
+    html: output, 
   };
 
-  // send mail with defined transport object
+
   try {
     transporter.sendMail(options, (error, info) => {
       if (error) {
