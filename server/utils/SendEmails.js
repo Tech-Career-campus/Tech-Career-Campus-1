@@ -4,14 +4,13 @@ const nodemailer = require("nodemailer");
 const SendEmails = (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   const output = `
-      <p>You have a new contact request</p>
-      <h3>Contact Details</h3>
+      <h3> ברוכה הבאה לטק קריירה ${firstName} ${lastName} </h3>
+      <h4>להלן פרטי התתחברות לאתר הלימודים של טק קריירה </h4>
       <ul>  
-        <li>Name: ${firstName} ${lastName}</li>
         <li>Email: ${email}</li>
         <li>password: ${password}</li>
       </ul>
-      <h3>Message</h3>
+      <h3>!שים לב </h3>
       <h3> אינך יכול לשלוח מייל בחזרה למשתמש זה</h3>
     `;
 
@@ -27,7 +26,7 @@ const SendEmails = (req, res) => {
     from: '"Tech_Career" Tech_Career@outlook.com', 
     to: `${email}`, 
     subject: "Tech_Career Request", 
-    text: "Hello world?", 
+    text: "שלום רב", 
     html: output, 
   };
 
