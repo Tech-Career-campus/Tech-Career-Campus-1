@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./news.css";
-import fetcher from "../../../utils/fetcher";
 import Ticker from "react-ticker";
 
 const News = () => {
