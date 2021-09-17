@@ -1,4 +1,4 @@
-import { GET_STAFF_LIST, ADD_STAFF, DELETE_STAFF } from "./types";
+import { GET_STAFF_LIST, ADD_STAFF, DELETE_STAFF,STAFF_ERRORS } from "./types";
 import fetcher from "../../utils/fetcher";
 
 export const getStaff = () => async dispatch => {
@@ -15,7 +15,7 @@ export const getStaff = () => async dispatch => {
 export const addStuff = (staff) => async dispatch => {
 
     try {
-        await fetcher('/api/register', {
+        await fetcher('http://localhost:8080/api/register', {
             method: 'POST',
             body: JSON.stringify({
                 registeredAs: staff.registeredAs,
@@ -27,6 +27,10 @@ export const addStuff = (staff) => async dispatch => {
                 age: staff.age
             }),
         })
+            .then((response) => {
+                if (!response.data) throw response
+                return response
+            })
             .then((response) => dispatch({
                 type: ADD_STAFF,
                 payload: response.data,
@@ -35,7 +39,7 @@ export const addStuff = (staff) => async dispatch => {
             .catch(error => { throw error })
     }
     catch (error) {
-        console.log(error);
+        dispatch({type:STAFF_ERRORS, payload:error.errors || error})
     }
 
 }
