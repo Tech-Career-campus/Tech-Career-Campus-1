@@ -7,7 +7,6 @@ import handleChange from "../../../utils/handleChange";
 
 const Login = () => {
   const { errors } = useSelector((state) => state.user);
-  const x = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({
     email: "",

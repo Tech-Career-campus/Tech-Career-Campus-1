@@ -1,14 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import techLogo from "../../../images/tech-logo.jpeg";
 import "./Navbar.css";
 
-  const logout = () => {
-    localStorage.removeItem("jwtToken");
-    window.location.href = "./";
-  };
+const logout = () => {
+  localStorage.removeItem("jwtToken");
+  window.location.href = "./";
+};
 //Ticker moving news
-export default function Navbar() {
+const Navbar = () => {
+  const { user } = useSelector((state) => state.user);
+  console.log(user);
   return (
     <>
       <div className="navbar-main">
@@ -29,12 +32,15 @@ export default function Navbar() {
             <Link to={"/class-schedule"}>לו"ז כיתות</Link>
           </li>
         </ul>
-        
-        
+        <p>
+          היי, {user.firstName} {user.lastName}
+        </p>
         <button className="btn" onClick={() => logout()}>
           התנתק
         </button>
       </div>
     </>
   );
-}
+};
+
+export default Navbar;

@@ -20,8 +20,9 @@ const MyCourseRouting = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(course)
-    }, [course])
+        if (user.role === "Student") dispatch(getCourse(user.courseId))
+    }, [user, dispatch]
+    )
 
     return (
         <>
@@ -30,13 +31,15 @@ const MyCourseRouting = () => {
                     <>
                         <h2>{course.name}</h2>
 
-                        <select id="mySelect" onChange={(e)=> dispatch(getCourse(e.target.value))}>
-                            {
-                                courses.map(course => <option key={course._id} value={course._id}>{course.name}</option>
-                                )
-                            }
+                        {
+                            user.role === "Staff" ?
+                                <select id="mySelect" onChange={(e) => dispatch(getCourse(e.target.value))}>
+                                    {
+                                        courses.map(course => <option key={course._id} value={course._id}>{course.name}</option>
+                                        )
+                                    }
 
-                        </select>
+                                </select> : ""}
                         <Tabs
                             defaultActiveKey="home"
                             transition={false}
