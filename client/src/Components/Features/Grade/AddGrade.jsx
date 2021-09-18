@@ -10,7 +10,7 @@ const AddGrade = ({ studentId }) => {
     name: "",
     studentId,
   });
-  
+
   const dispatch = useDispatch();
 
   return (

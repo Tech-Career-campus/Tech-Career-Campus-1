@@ -1,88 +1,36 @@
 import React, { useEffect } from 'react';
 import "./Events.css";
 import { useState } from 'react';
-import Popup from 'reactjs-popup';
+import { getEvents, createEvent, updateEvent, deleteEvent } from '../../../Redux/actions/eventsActions';
+import { useDispatch, useSelector } from 'react-redux';
+import StudentsEventComponent from '../Events/StudentsEventComponent';
 
 const Events = () => {
-    const token = localStorage.getItem("jwtToken");
-    const defaultHeaders = {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
-    }
+    const dispatch = useDispatch();
+    const events = useSelector(state => state.events);
+    const { user } = useSelector(state => state.user)
 
-    const [events, setEvents] = useState([]);
+    const [isForm, setForm] = useState(false)
+    const [isUpdate, setUpdate] = useState(false)
     const [newEvent, setNewEvent] = useState({
         eventName: "",
         massage: ""
     });
 
     const [eventUpdate, setEventUpdate] = useState({
+        eventId: "",
         eventName: "",
         massage: "",
     });
-
-    const [eventUpdates, setEventUpdates] = useState({
-        eventName: "",
-        massage: "",
-    });
-    const optionPOST = {
-        method: 'POST',
-        body: JSON.stringify(newEvent),
-        headers: defaultHeaders,
-    }
-
-    const optionPUT = {
-        method: 'PUT',
-        body: JSON.stringify(eventUpdate),
-        headers: defaultHeaders,
-    }
-
-    const optionDELETE = {
-        method: 'DELETE',
-        body: JSON.stringify(),
-        headers: defaultHeaders,
-    }
 
     useEffect(() => {
-        getDat();
+        dispatch(getEvents());
     }, [])
-
-    const getDat = async () => {
-        await fetch("http://localhost:8080/api/event", { headers: defaultHeaders })
-            .then((res) => res.json())
-            .then((response) => setEvents(response.data))
-            .catch(err => { console.error("GET ALL FAIL") });
-    }
-
-    const sendEvent = async () => {
-        await fetch("http://localhost:8080/api/event", optionPOST)
-            .then((res) => res.json())
-            .then((res) => { setEvents([...events, ...res.data]); })
-            .catch(err => { console.error("GET ALL NOT SAND"); });
-    }
-
-    const updateEvent = async (_id) => {
-        await fetch(`http://localhost:8080/api/event/${_id}`, optionPUT)
-            .then((res) => res.json())
-            .then((res) => { setEventUpdate(res.data); })
-            .catch((err) => { console.log(err); })
-        getDat();
-    }
-
-    const deleteEvent = async (_id) => {
-        if (window.confirm('are you sure?')) {
-            await fetch(`http://localhost:8080/api/event/${_id}`, optionDELETE)
-                .then((res) => res.json())
-                .then((res) => (res.data))
-                .catch((err) => { console.log(err); })
-            getDat();
-        }
-    }
 
     const hendleChange = (e) => {
         setNewEvent(
             {
-                ...newEvent,
+                ...newEvent, userId: user.id,
                 [e.target.name]: e.target.value
             }
         )
@@ -99,39 +47,46 @@ const Events = () => {
 
     return (
         <div className="Body">
-            <div>
-                <textarea name="eventName" id="eventName" cols="100" rows="0.5" value={newEvent.eventName} placeholder="שם האירוע" onChange={(e) => { hendleChange(e) }}></textarea>
-                <br></br>
-                <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder="הקלד כאן" onChange={(e) => { hendleChange(e) }}></textarea>
-                <br></br>
-                <input type="button" id="sendBtn" value="שלח" onClick={sendEvent} />
-                {
-
-                    events?.map((event, index) => {
-                        return (
-                            <div className="EventsNews">
-                                <span key={event._id}>
-                                    שם הארוע :{event.eventName}
-                                    <br></br>
-                            הודעה :{event.massage}
-                                    <br></br>
-                                    <Popup trigger={<input type="button" id="updateBtn" value="עדכן" />} position="right center">
+            <h1> ארועים בטק קריירה </h1>
+            {
+                user.role === "Staff" ?
+                    <div>
+                        <button onClick={() => { setForm(isForm ? false : true) }}> הוספת ארוע </button>
+                        {
+                            isForm ?
+                                <form onSubmit={(e) => { e.preventDefault() }}>
+                                    <input type="text" name="eventName" value={newEvent.eventName} placeholder="שם האירוע" onChange={(e) => { hendleChange(e) }} />
+                                    <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder="הקלד כאן" onChange={(e) => { hendleChange(e) }}></textarea>
+                                    <button type="submit" onClick={() => { dispatch(createEvent(newEvent)) }} > שלח </button>
+                                </form> : ""
+                        }
+                        {
+                            events?.map((event) => {
+                                return (
+                                    <div key={event._id} className="EventsNews">
                                         <div>
-                                            <textarea cols="100" rows="0.5" name="eventName" id="some" value={eventUpdate.eventName} onChange={(e) => { hendleChange1(e) }}></textarea>
-                                            <br></br>
-                                            <textarea cols="100" rows="0.5" name="massage" value={eventUpdate.massage} onChange={(e) => { hendleChange1(e) }}></textarea>
-                                            <br></br>
-                                            <input type="button" id="confirmUpdates" value="אישור עדכונים" onClick={() => { updateEvent(event._id) }} />
+                                            שם הארוע :{event.eventName}
+                                            הודעה :{event.massage}
+                                            <button onClick={() => { setUpdate(isUpdate ? false : true); setEventUpdate({ ...eventUpdate, eventId: event._id }) }}> עדכן </button>
+                                            {
+                                                isUpdate && event._id === eventUpdate.eventId ?
+                                                    <div>
+                                                        <input type="text" name="eventName" value={eventUpdate.eventName} onChange={(e) => { hendleChange1(e) }} />
+
+                                                        <textarea cols="100" rows="0.5" name="massage" value={eventUpdate.massage} onChange={(e) => { hendleChange1(e) }}></textarea>
+                                                        <input type="button" id="confirmUpdates" value="אישור עדכונים" onClick={() => { dispatch(updateEvent(eventUpdate)); setUpdate(false) }} />
+                                                    </div> : ""
+                                            }
+                                            <input type="button" id="deleteBtn" value="מחק" onClick={() => dispatch(deleteEvent(event._id))} />
+                                            <hr></hr>
                                         </div>
-                                    </Popup>
-                                    <input type="button" id="deleteBtn" value="מחק" onClick={() => { deleteEvent(event._id) }} />
-                                    <hr></hr>
-                                </span>
-                            </div>
-                        )
-                    })
-                }
-            </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    : <StudentsEventComponent />
+            }
         </div>
     )
 }

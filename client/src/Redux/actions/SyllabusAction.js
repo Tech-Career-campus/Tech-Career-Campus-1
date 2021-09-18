@@ -1,14 +1,11 @@
 import { GET_SYLLABUS } from "./types";
-import fetcher from "../../utils/fetcher";
 
 
-export const getSyllabus = () => async dispatch => {
+export const getSyllabus = (course) => async dispatch => {
 
-    await fetcher("http://localhost:8080/api/course")
-        .then((response) => dispatch({
-            type: GET_SYLLABUS,
-            payload: response.data,
-        }))
-        .catch((err) => console.log(err));
+    return dispatch({
+        type: GET_SYLLABUS,
+        payload: course,
+    })
 }
 

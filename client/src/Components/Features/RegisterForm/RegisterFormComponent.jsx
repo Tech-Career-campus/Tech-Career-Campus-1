@@ -31,7 +31,7 @@ const RegisterForm = ({ SetIsRegister }) => {
     if (!errors) {
       setIsSend(true);
     }
-  }, [dispatch]);
+  }, []);
   return (
     <>
       {!isSend ? (
@@ -107,3 +107,17 @@ const RegisterForm = ({ SetIsRegister }) => {
   );
 };
 export default RegisterForm;
+
+  //  <div>
+  //    <h3>
+  //      {newStudent.firstName} {newStudent.lastName} נרשם במערכת
+  //    </h3>
+  //    <p> נשלח מייל עם פרטי התחברות לכתובת {newStudent.email}</p>
+  //    <button
+  //      onClick={() => {
+  //        SetIsRegister();
+  //      }}
+  //    >
+  //      סגור
+  //    </button>
+  //  </div>;
