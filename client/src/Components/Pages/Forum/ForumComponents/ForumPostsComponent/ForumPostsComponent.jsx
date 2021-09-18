@@ -4,16 +4,16 @@ import ForumPostComponent from "../ForumPostComponent/ForumPostComponent";
 import { useSelector } from "react-redux";
 import "./posts.css";
 
-const ForumPostsComponent = ({setCurrentId}) => {
-  const posts = useSelector((state) => state.posts);
-  return !posts.length ? (
-     <CircularProgress />
-   
+const ForumPostsComponent = ({ setCurrentId }) => {
+  const { posts, isLoading } = useSelector((state) => state.posts);
+  if(!posts.length && !isLoading) return "No Posts";
+  return isLoading ? (
+    <CircularProgress />
   ) : (
     <ul className="posts">
       {posts.map((post) => (
         <li key={post._id}>
-           <ForumPostComponent post={post} setCurrentId={setCurrentId} />
+          <ForumPostComponent post={post} setCurrentId={setCurrentId} />
         </li>
       ))}
     </ul>

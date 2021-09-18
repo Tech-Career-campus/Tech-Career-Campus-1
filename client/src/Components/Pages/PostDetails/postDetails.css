@@ -1,0 +1,23 @@
+.post-details-media {
+  border-radius: "20px";
+  object-fit: "cover";
+  width: "100%";
+  max-height: "600px";
+}
+.post-details-card {
+  display: "flex";
+  width: "100%";
+}
+.post-details-section {
+  border-radius: "20px";
+  margin: "10px";
+  flex: 1;
+}
+.post-details-loadingPaper {
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+  padding: "20px";
+  border-radius: "15px";
+  height: "39vh";
+}
