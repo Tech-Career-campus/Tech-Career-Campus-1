@@ -50,19 +50,20 @@ const Events = () => {
         <div className="Body">
             <div className="titel-event">
                 <div className="updete">
-            <h1> ארועים  בטק קריירה </h1>
+            <p> ארועים  בטק קריירה </p>
             </div>
             <div className="bth-add">
                 <button onClick={() => { setForm(isForm ? false : true) }}> <FaPlus/> </button>
                 </div>
             </div>
-            <div>
+            <div className="body-updete">
                 
                 {
                     <div className="form-event">
-                    isForm ?
+                   
                         <form onSubmit={(e) => { e.preventDefault() }}>
                             <input type="text" name="eventName" id="eventName" value={newEvent.eventName} placeholder="שם האירוע" onChange={(e) => { hendleChange(e) }} />
+                            <br></br>
                             <br></br>
                             <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder="הקלד כאן" onChange={(e) => { hendleChange(e) }}></textarea>
                             <br/>
@@ -75,6 +76,7 @@ const Events = () => {
                 {
                     events?.map((event) => {
                         return (
+                            
                             <div className="EventsNews">
                             <div key={event._id} >
                                 
