@@ -30,7 +30,7 @@ const StaffComponents = () => {
     useEffect(() => dispatch(getStaff()), [dispatch]);
 
     return (
-        <div>
+        <div className="body-staff">
             {
                 open ? <AddStaffComponent open={open} handleClose={() => setOpen(!open)} /> : ""
             }
