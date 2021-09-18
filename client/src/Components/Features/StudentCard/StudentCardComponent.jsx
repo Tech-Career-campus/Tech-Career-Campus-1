@@ -5,6 +5,7 @@ import {
   updateStudent,
 } from "../../../Redux/actions/studentsActions";
 import handleChange from "../../../utils/handleChange";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 import "./studentCard.css";
 const StudentCard = ({ student }) => {
   const dispatch = useDispatch();
@@ -30,18 +31,18 @@ const StudentCard = ({ student }) => {
       {!isEdit ? (
         <div className="student-card-body">
           <h3>
-            שם: {student.firstName} {student.lastName}
+            {hebrewVariables.fullName}: {student.firstName} {student.lastName}
           </h3>
-          <p>קורס: {student.courseName}</p>
-          <p>אימייל: {student.email}</p>
-          <p>מס טלפון: {student.phone}</p>
-          <p>גיל: {student.age}</p>
+          <p>{hebrewVariables.course}: {student.courseName}</p>
+          <p>{hebrewVariables.email}: {student.email}</p>
+          <p>{hebrewVariables.phone}: {student.phone}</p>
+          <p>{hebrewVariables.age}: {student.age}</p>
           <div className='student-card-body-btn'>
             <button
               className="btn"
               onClick={() => dispatch(deleteStudent(student._id))}
             >
-              מחיקה
+              {hebrewVariables.delete}
             </button>
             <button
               className="btn"
@@ -50,42 +51,42 @@ const StudentCard = ({ student }) => {
                 setStudentUpdate({ ...studentUpdate, _id: student._id });
               }}
             >
-              עריכה
+              {hebrewVariables.edit}
             </button>
           </div>
         </div>
       ) : (
         <div className="student-card-body">
           <form className='student-card-body-form'>
-            <label>שם פרטי</label>
+            <label>{hebrewVariables.firstName}</label>
             <input
               name="firstName"
               onChange={(e) => handleChange(e, studentUpdate, setStudentUpdate)}
               type={"text"}
               value={studentUpdate.firstName}
             />
-            <label>שם משפחה</label>
+            <label>{hebrewVariables.lastName}</label>
             <input
               name="lastName"
               onChange={(e) => handleChange(e, studentUpdate, setStudentUpdate)}
               type={"text"}
               value={studentUpdate.lastName}
             />
-            <label>אימייל</label>
+            <label>{hebrewVariables.email}</label>
             <input
               name="email"
               onChange={(e) => handleChange(e, studentUpdate, setStudentUpdate)}
               type={"email"}
               value={studentUpdate.email}
             />
-            <label>מס טלפון</label>
+            <label>{hebrewVariables.phone}</label>
             <input
               name="phone"
               onChange={(e) => handleChange(e, studentUpdate, setStudentUpdate)}
               type={"text"}
               value={studentUpdate.phone}
             />
-            <label>גיל</label>
+            <label>{hebrewVariables.age}</label>
             <input
               name="age"
               onChange={(e) => handleChange(e, studentUpdate, setStudentUpdate)}
@@ -99,7 +100,7 @@ const StudentCard = ({ student }) => {
                 dispatch(updateStudent(studentUpdate));
               }}
             >
-              אישור
+              {hebrewVariables.ok}
             </button>
           </form>
         </div>

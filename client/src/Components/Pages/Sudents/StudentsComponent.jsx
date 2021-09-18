@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import PageHeader from "../../Features/PageHeader/PageHeaderComponent";
 import RegisterForm from "../../Features/RegisterForm/RegisterFormComponent";
 import StudentCard from "../../Features/StudentCard/StudentCardComponent";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 import './student.css'
 
 const Students = () => {
@@ -15,7 +16,7 @@ const {students} = useSelector((state) => state.students);
         className="btn"
         onClick={() => SetIsRegister(isRegister ? false : true)}
       >
-        הוספת סטודנט
+        {hebrewVariables.addStudent}
       </button>
       <div className="students-card-container">
         {isRegister ? (

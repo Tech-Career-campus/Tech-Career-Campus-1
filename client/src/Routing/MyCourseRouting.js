@@ -12,6 +12,7 @@ import CreatCourse from '../Components/Pages/CreatCourse/CreatCourseComponent';
 import StaffComponents from '../Components/Pages/Staff/StaffComponents';
 import ChooseCourse from '../Components/Features/ChooseCourse/ChooseCourseComponent'
 import { getCourse } from '../Redux/actions/courseActions';
+import { hebrewVariables } from '../utils/hebrewVariables';
 
 const MyCourseRouting = () => {
     const { user } = useSelector(state => state.user);
@@ -49,35 +50,35 @@ const MyCourseRouting = () => {
                     <DailySchedule />
                 </Tab> */}
 
-                            <Tab eventKey="course-schedule" title="לוז קורס"  >
+                            <Tab eventKey="course-schedule" title={hebrewVariables.classSchedual}  >
                                 <CourseSchedule />
                             </Tab>
-                            <Tab eventKey="syllabus" title="סילבוס" >
+                            <Tab eventKey="syllabus" title={hebrewVariables.syllabus}>
                                 <Syllabus />
                             </Tab>
                             {
                                 user.role === "Staff" ?
-                                    <Tab eventKey="Student-grades" title="ציוני סטודנטים" >
+                                    <Tab eventKey="Student-grades" title={hebrewVariables.studentsGrades} >
                                         <AdminGradesComponent />
                                     </Tab>
                                     :
-                                    <Tab eventKey="grades" title="הציונים שלי" >
+                                    <Tab eventKey="grades" title={hebrewVariables.myGrades} >
                                         <StudentGradesComponent />
                                     </Tab>
                             }
                             {
-                                user.role === "Staff" ? <Tab eventKey="Students" title="סטודנטים" >
+                                user.role === "Staff" ? <Tab eventKey="Students" title={hebrewVariables.students} >
                                     <Students />
                                 </Tab> : ""
                             }
                             {
-                                user.role === "Staff" ? <Tab eventKey="Creat-course" title="יצירת קורס" >
+                                user.role === "Staff" ? <Tab eventKey="Creat-course" title={hebrewVariables.createCourse} >
                                     <CreatCourse />
                                 </Tab> : ""
                             }
 
                             {
-                                user.role === "Staff" ? <Tab eventKey="staff" title="סגל" >
+                                user.role === "Staff" ? <Tab eventKey="staff" title={hebrewVariables.staff} >
                                     <StaffComponents />
                                 </Tab> : ""
                             }

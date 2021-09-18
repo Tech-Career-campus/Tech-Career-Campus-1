@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { addStuff } from '../../../Redux/actions/staffAction';
+import { hebrewVariables } from '../../../utils/hebrewVariables';
 
 
 const AddStaffComponent = ({ open, handleClose }) => {
@@ -31,17 +32,17 @@ const AddStaffComponent = ({ open, handleClose }) => {
     return (
         <div>
             <Dialog aria-labelledby="form-dialog-title" open={open}  >
-                <DialogTitle id="form-dialog-title">יצירת משתמש חדש</DialogTitle>
+                <DialogTitle id="form-dialog-title">{hebrewVariables.createStaff}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        אנא מלא את הפרטים בבקשה
+                        {hebrewVariables.fillDetails}
                     </DialogContentText>
                     <TextField
                         name="firstName"
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="First Name"
+                        label={hebrewVariables.firstName}
                         type="text"
                         fullWidth
                         onChange={(e) => createStaff(e)}
@@ -53,7 +54,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         name="lastName"
                         margin="dense"
                         id="name"
-                        label="Last Name"
+                        label={hebrewVariables.lastName}
                         type="text"
                         fullWidth
                         onChange={(e) => createStaff(e)}
@@ -65,7 +66,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         name="email"
                         margin="dense"
                         id="name"
-                        label="Email Address"
+                        label={hebrewVariables.email}
                         type="email"
                         fullWidth
                         onChange={(e) => createStaff(e)}
@@ -77,7 +78,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         name="password"
                         margin="dense"
                         id="name"
-                        label="Password"
+                        label={hebrewVariables.password}
                         type="password"
                         fullWidth
                         onChange={(e) => createStaff(e)}
@@ -89,7 +90,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         name="phone"
                         margin="dense"
                         id="name"
-                        label="Phone Number"
+                        label={hebrewVariables.phone}
                         type="phone"
                         fullWidth
                         onChange={(e) => createStaff(e)}
@@ -101,7 +102,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         name="age"
                         margin="dense"
                         id="name"
-                        label="Age"
+                        label={hebrewVariables.age}
                         type="number"
                         fullWidth
                         onChange={(e) => createStaff(e)}
@@ -112,10 +113,10 @@ const AddStaffComponent = ({ open, handleClose }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button color="primary" onClick={(e) => addStaff(e)}>
-                        צור משתמש
+                        {hebrewVariables.createStuffBtn}
                     </Button>
                     <Button onClick={() => handleClose()}>
-                        סגור
+                        {hebrewVariables.closeBtn}
                     </Button>
                 </DialogActions>
             </Dialog>
