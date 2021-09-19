@@ -13,8 +13,11 @@ import { hebrewVariables } from '../../../utils/hebrewVariables';
 
 const AddStaffComponent = ({ open, handleClose }) => {
     const [staffUser, setStaffUser] = useState({ registeredAs: "Staff" })
+    const [isRegister, setIsRegister] = useState(false);
+
     const dispatch = useDispatch();
     const { errors } = useSelector((state) => state.staff);
+    const staff = useSelector((state) => state.staff.staff);
 
     const createStaff = (e) => {
         setStaffUser({
@@ -22,11 +25,26 @@ const AddStaffComponent = ({ open, handleClose }) => {
             [e.target.name]: e.target.value
         })
     }
+    
+    const handleRegisterWindow = () => {
+
+        setIsRegister(!isRegister)
+
+    }
+
     const addStaff = () => {
 
         dispatch(addStuff(staffUser));
-        setStaffUser({ registeredAs: "Staff" });
+        if (checkErrors()) {
+
+            handleRegisterWindow()
+        }
     }
+
+    const checkErrors = () => {
+        return (Object.keys(errors).length === 0);
+    }
+
 
 
     return (
@@ -36,6 +54,19 @@ const AddStaffComponent = ({ open, handleClose }) => {
                 <DialogContent>
                     <DialogContentText>
                         {hebrewVariables.fillDetails}
+
+                        {
+                            isRegister ? <div aria-labelledby="form-dialog-title" style={{border:"1px solid"}}   >
+                                <h5 id="form-dialog-title">משתמש נרשם</h5>
+                                <h1>{`${staff[staff.length - 1]?.firstName} ${staff[staff.length - 1]?.lastName} ${hebrewVariables.registerd}`}</h1>
+                                <Button color="primary" onClick={() => handleRegisterWindow()}>
+                                    סגור
+                                </Button>
+                            </div> : ""
+                        }
+
+
+
                     </DialogContentText>
                     <TextField
                         name="firstName"
@@ -49,7 +80,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.firstName}
 
                     />
-                    <strong className="errors">{errors?.firstName}</strong>
+                    <strong className="errors">{errors?.firstName ? errors.firstName : ""}</strong>
                     <TextField
                         name="lastName"
                         margin="dense"
@@ -61,7 +92,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.lastName}
 
                     />
-                    <strong className="errors">{errors?.lastName}</strong>
+                    <strong className="errors">{errors?.lastName ? errors.lastName : ""}</strong>
                     <TextField
                         name="email"
                         margin="dense"
@@ -73,7 +104,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.email}
 
                     />
-                    <strong className="errors">{errors?.email}</strong>
+                    <strong className="errors">{errors?.email ? errors.email : ""}</strong>
                     <TextField
                         name="password"
                         margin="dense"
@@ -85,7 +116,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.password}
 
                     />
-                    <strong className="errors">{errors?.password}</strong>
+                    <strong className="errors">{errors?.password ? errors.password : ""}</strong>
                     <TextField
                         name="phone"
                         margin="dense"
@@ -97,7 +128,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.phone}
 
                     />
-                    <strong className="errors">{errors?.phone}</strong>
+                    <strong className="errors">{errors?.phone ? errors.phone : ""}</strong>
                     <TextField
                         name="age"
                         margin="dense"
@@ -109,7 +140,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.age}
 
                     />
-                    <strong className="errors">{errors?.age}</strong>
+                    <strong className="errors">{errors?.age ? errors.age : ""}</strong>
                 </DialogContent>
                 <DialogActions>
                     <Button color="primary" onClick={(e) => addStaff(e)}>
