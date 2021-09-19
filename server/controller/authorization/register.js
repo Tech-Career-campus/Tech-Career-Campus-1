@@ -67,7 +67,6 @@ const register = async (req, res) => {
       if (student) {
         return res.status(400).json({ errors: { email: "email already exists" } });
       }
-
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         if (err) throw err;

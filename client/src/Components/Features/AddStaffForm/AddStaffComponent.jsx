@@ -8,114 +8,146 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { addStuff } from '../../../Redux/actions/staffAction';
+import { hebrewVariables } from '../../../utils/hebrewVariables';
 
 
 const AddStaffComponent = ({ open, handleClose }) => {
-    const [staffUser, setstaffUser] = useState({ registeredAs: "Staff" })
+    const [staffUser, setStaffUser] = useState({ registeredAs: "Staff" })
+    const [isRegister, setIsRegister] = useState(false);
+
     const dispatch = useDispatch();
     const { errors } = useSelector((state) => state.staff);
+    const staff = useSelector((state) => state.staff.staff);
 
     const createStaff = (e) => {
-        setstaffUser({
+        setStaffUser({
             ...staffUser,
             [e.target.name]: e.target.value
         })
     }
+    
+    const handleRegisterWindow = () => {
+
+        setIsRegister(!isRegister)
+
+    }
+
     const addStaff = () => {
 
         dispatch(addStuff(staffUser));
-        setstaffUser({ registeredAs: "Staff" });
+        if (checkErrors()) {
+
+            handleRegisterWindow()
+        }
     }
+
+    const checkErrors = () => {
+        return (Object.keys(errors).length === 0);
+    }
+
 
 
     return (
         <div>
             <Dialog aria-labelledby="form-dialog-title" open={open}  >
-                <DialogTitle id="form-dialog-title">יצירת משתמש חדש</DialogTitle>
+                <DialogTitle id="form-dialog-title">{hebrewVariables.createStaff}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        אנא מלא את הפרטים בבקשה
+                        {hebrewVariables.fillDetails}
+
+                        {
+                            isRegister ? <div aria-labelledby="form-dialog-title" style={{border:"1px solid"}}   >
+                                <h5 id="form-dialog-title">משתמש נרשם</h5>
+                                <h1>{`${staff[staff.length - 1]?.firstName} ${staff[staff.length - 1]?.lastName} ${hebrewVariables.registerd}`}</h1>
+                                <Button color="primary" onClick={() => handleRegisterWindow()}>
+                                    סגור
+                                </Button>
+                            </div> : ""
+                        }
+
+
+
                     </DialogContentText>
                     <TextField
                         name="firstName"
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="First Name"
+                        label={hebrewVariables.firstName}
                         type="text"
                         fullWidth
                         onChange={(e) => createStaff(e)}
                         value={staffUser.firstName}
 
                     />
-                    <strong className="errors">{errors?.firstName}</strong>
+                    <strong className="errors">{errors?.firstName ? errors.firstName : ""}</strong>
                     <TextField
                         name="lastName"
                         margin="dense"
                         id="name"
-                        label="Last Name"
+                        label={hebrewVariables.lastName}
                         type="text"
                         fullWidth
                         onChange={(e) => createStaff(e)}
                         value={staffUser.lastName}
 
                     />
-                    <strong className="errors">{errors?.lastName}</strong>
+                    <strong className="errors">{errors?.lastName ? errors.lastName : ""}</strong>
                     <TextField
                         name="email"
                         margin="dense"
                         id="name"
-                        label="Email Address"
+                        label={hebrewVariables.email}
                         type="email"
                         fullWidth
                         onChange={(e) => createStaff(e)}
                         value={staffUser.email}
 
                     />
-                    <strong className="errors">{errors?.email}</strong>
+                    <strong className="errors">{errors?.email ? errors.email : ""}</strong>
                     <TextField
                         name="password"
                         margin="dense"
                         id="name"
-                        label="Password"
+                        label={hebrewVariables.password}
                         type="password"
                         fullWidth
                         onChange={(e) => createStaff(e)}
                         value={staffUser.password}
 
                     />
-                    <strong className="errors">{errors?.password}</strong>
+                    <strong className="errors">{errors?.password ? errors.password : ""}</strong>
                     <TextField
                         name="phone"
                         margin="dense"
                         id="name"
-                        label="Phone Number"
+                        label={hebrewVariables.phone}
                         type="phone"
                         fullWidth
                         onChange={(e) => createStaff(e)}
                         value={staffUser.phone}
 
                     />
-                    <strong className="errors">{errors?.phone}</strong>
+                    <strong className="errors">{errors?.phone ? errors.phone : ""}</strong>
                     <TextField
                         name="age"
                         margin="dense"
                         id="name"
-                        label="Age"
+                        label={hebrewVariables.age}
                         type="number"
                         fullWidth
                         onChange={(e) => createStaff(e)}
                         value={staffUser.age}
 
                     />
-                    <strong className="errors">{errors?.age}</strong>
+                    <strong className="errors">{errors?.age ? errors.age : ""}</strong>
                 </DialogContent>
                 <DialogActions>
                     <Button color="primary" onClick={(e) => addStaff(e)}>
-                        צור משתמש
+                        {hebrewVariables.createStuffBtn}
                     </Button>
                     <Button onClick={() => handleClose()}>
-                        סגור
+                        {hebrewVariables.closeBtn}
                     </Button>
                 </DialogActions>
             </Dialog>

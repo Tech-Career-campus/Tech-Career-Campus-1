@@ -1,14 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import techLogo from "../../../images/tech-logo.jpeg";
 import "./Navbar.css";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 
-  const logout = () => {
-    localStorage.removeItem("jwtToken");
-    window.location.href = "./";
-  };
+const logout = () => {
+  localStorage.removeItem("jwtToken");
+  window.location.href = "./";
+};
 //Ticker moving news
-export default function Navbar() {
+const Navbar = () => {
+  const { user } = useSelector((state) => state.user);
+  console.log(user);
   return (
     <>
       <div className="navbar-main">
@@ -17,24 +21,31 @@ export default function Navbar() {
         </div>
         <ul className="navbar-links">
           <li>
-            <Link to={"/"}>דף בית</Link>
+            <Link to={"/"}>{hebrewVariables.homePage}</Link>
           </li>
           <li>
-            <Link to={"/forum"}>פורום</Link>
+            <Link to={"/forum"}>{hebrewVariables.forum}</Link>
           </li>
           <li>
-            <Link to={"/my-course"}>הקורס שלי</Link>
+            <Link to={"/my-course"}>{hebrewVariables.myCourse}</Link>
           </li>
           <li>
-            <Link to={"/class-schedule"}>לו"ז כיתות</Link>
+            <Link to={"/class-schedule"}>{hebrewVariables.classSchedual}</Link>
           </li>
         </ul>
-        
-        
+        <div className="log-user">
+          <div className="user">
+        <p >
+          היי, {user.firstName} {user.lastName}
+        </p>
+        </div>
         <button className="btn" onClick={() => logout()}>
-          התנתק
+          {hebrewVariables.logout}
         </button>
+        </div>
       </div>
     </>
   );
-}
+};
+
+export default Navbar;

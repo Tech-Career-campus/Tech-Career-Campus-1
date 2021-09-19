@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTest } from "../../../Redux/actions/studentActions";
 import handleChange from "../../../utils/handleChange";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 
 const AddGrade = ({ studentId }) => {
   const [newTest, setNewTest] = useState({
@@ -9,25 +10,25 @@ const AddGrade = ({ studentId }) => {
     name: "",
     studentId,
   });
-  
+
   const dispatch = useDispatch();
 
   return (
     <form className="grade-form" onSubmit={(e) => e.preventDefault()}>
-      <label>Test name</label>
+      <label>{hebrewVariables.testName}</label>
       <input
         type={"text"}
-        placeholder={"Test name"}
+        placeholder={hebrewVariables.testName}
         value={newTest.name}
         name={"name"}
         onChange={(e) => handleChange(e, newTest, setNewTest)}
         required
       />
-      <label>Grade</label>
+      <label>{hebrewVariables.grade}</label>
       <input
         type={"number"}
         value={newTest.grade}
-        placeholder={"Grade"}
+        placeholder={hebrewVariables.grade}
         name={"grade"}
         onChange={(e) => handleChange(e, newTest, setNewTest)}
         required
@@ -38,7 +39,7 @@ const AddGrade = ({ studentId }) => {
           dispatch(addTest(newTest));
         }}
       >
-        Add test
+        {hebrewVariables.addTest}
       </button>
     </form>
   );

@@ -7,9 +7,10 @@ const addNewCourse = async (req, res) => {
   if (!staff) {
     res.status(401).json({ message: "staff not fond" });
   } else {
-    const { name, CourseInformation } = req.body;
+    const { name, CourseInformation,courseType } = req.body;
     const newCourse = new CourseModel({
       name: name,
+      courseType: courseType,
       CourseInformation: CourseInformation,
       createBy: staff._id,
     });
@@ -37,7 +38,6 @@ const getAllCourses = async (req, res) => {
     res.status(500).json({ massage: "get course field", error: err });
   }
 };
-
 const getCourseById = async (req, res) => {
   try {
     await CourseModel.findById( req.params.id , (err, result) => {
@@ -226,8 +226,7 @@ const updateSubject = async (req, res) => {
 };
 const searchCorseAutocomplete =  async(req,res)=>{
   try {
-      let result = await collection.aggregate([
-         
+      let result = await collection.aggregate([     
               {
                 '$search': {
                   'index': 'default',

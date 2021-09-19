@@ -1,8 +1,9 @@
 
 {
-    "id":"6122ae159fef449eb84734b7",  
+    "id":"6143a7738a25c402580cf20d",  
    
     "name":"פיתוח מ",
+    "courseType":"פיתוח",
       "CourseInformation":[
           {
               "nameSubject": "html",
