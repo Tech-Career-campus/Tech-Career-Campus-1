@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 import "./post.css";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../../Redux/actions/postsActions";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 
 const ForumPostComponent = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const ForumPostComponent = ({ post, setCurrentId }) => {
             onClick={() => dispatch(deletePost(post._id))}
           >
             <DeleteIcon fontSize="small" />
-            Delete
+            {hebrewVariables.delete}
           </button>
         )}
       </div>

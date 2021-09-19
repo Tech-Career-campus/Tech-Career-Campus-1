@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import techLogo from "../../../images/tech-logo.jpeg";
 import "./Navbar.css";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 
 const logout = () => {
   localStorage.removeItem("jwtToken");
@@ -20,23 +21,23 @@ const Navbar = () => {
         </div>
         <ul className="navbar-links">
           <li>
-            <Link to={"/"}>דף בית</Link>
+            <Link to={"/"}>{hebrewVariables.homePage}</Link>
           </li>
           <li>
-            <Link to={"/forum"}>פורום</Link>
+            <Link to={"/forum"}>{hebrewVariables.forum}</Link>
           </li>
           <li>
-            <Link to={"/my-course"}>הקורס שלי</Link>
+            <Link to={"/my-course"}>{hebrewVariables.myCourse}</Link>
           </li>
           <li>
-            <Link to={"/class-schedule"}>לו"ז כיתות</Link>
+            <Link to={"/class-schedule"}>{hebrewVariables.classSchedual}</Link>
           </li>
         </ul>
         <p>
           היי, {user.firstName} {user.lastName}
         </p>
         <button className="btn" onClick={() => logout()}>
-          התנתק
+          {hebrewVariables.logout}
         </button>
       </div>
     </>
