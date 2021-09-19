@@ -1,16 +1,16 @@
 const ForumModel = require("../models/forumModel");
 const StaffModel = require("../models/staffModel");
 const StudentModel = require("../models/studentModel");
-const mongoose = require('mongoose')
+
 const messagesByStaff = async (req, res) => {
-  // const staff = await StaffModel.findById(req.body.id);
-  // console.log( await staff);
+  const staff = await StaffModel.findById(req.body._id);
+  console.log(staff);
   const newMessages = new ForumModel({
     firstName: req.body.post.firstName,
     email: req.body.post.email,
     title: req.body.post.title,
     message: req.body.post.message,
-    authorByStaff: mongoose.Types.ObjectId(req.body.id),
+    authorByStaff:staff._id ,
   });
   try {
     await newMessages.save();

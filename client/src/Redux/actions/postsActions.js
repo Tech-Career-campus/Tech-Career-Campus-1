@@ -53,11 +53,11 @@ export const createPostStaff = (post,history) => async (dispatch) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        history.push(`/forum/${res.post._id}`)
         dispatch({
           type: CREATE,
           payload: res.data,
         });
+        history.push(`/forum/${res.data._id}`)
       });
   } catch (error) {
     console.log(error);
@@ -80,11 +80,11 @@ export const createPostStudent = (post,history) => async (dispatch) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        history.push(`/forum/${res.data._id}`)
         dispatch({
           type: CREATE,
           payload: res.data,
         });
+        history.push(`/forum/${res.data._id}`)
       });
   } catch (error) {
     console.log(error);
