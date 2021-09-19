@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStudent } from "../../../Redux/actions/studentsActions";
 import handleChange from "../../../utils/handleChange";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 import "./registerForm.css";
+
 let generator = require("generate-password");
 
 let password = generator.generate({
@@ -31,61 +33,76 @@ const RegisterForm = ({ SetIsRegister }) => {
   }, []);
   return (
     <>
-      <form
-        className="register-form-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <label>שם פרטי</label>
-        <input
-          name="firstName"
-          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-          type={"text"}
-        />
-        <p> {errors?.firstName ? errors.firstName : ""} </p>
+      {!isSend ? (
+        <form
+          className="register-form-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <label>{hebrewVariables.firstName}</label>
+          <input
+            name="firstName"
+            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+            type={"text"}
+          />
+          <p> {errors?.firstName ? errors.firstName : ""} </p>
 
-        <label>שם משפחה</label>
-        <input
-          name="lastName"
-          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-          type={"text"}
-        />
-        <p> {errors?.lastName ? errors.lastName : ""} </p>
+          <label>{hebrewVariables.lastName}</label>
+          <input
+            name="lastName"
+            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+            type={"text"}
+          />
+          <p> {errors?.lastName ? errors.lastName : ""} </p>
 
-        <label>אימייל</label>
-        <input
-          name="email"
-          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-          type={"email"}
-        />
-        <p> {errors?.email ? errors.email : ""} </p>
-        <label>מס טלפון</label>
-        <input
-          name="phone"
-          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-          type={"text"}
-        />
-        <p> {errors?.phone ? errors.phone : ""} </p>
+          <label>{hebrewVariables.email}</label>
+          <input
+            name="email"
+            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+            type={"email"}
+          />
+          <p> {errors?.email ? errors.email : ""} </p>
+          <label>{hebrewVariables.phone}</label>
+          <input
+            name="phone"
+            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+            type={"text"}
+          />
+          <p> {errors?.phone ? errors.phone : ""} </p>
 
-        <label>גיל</label>
-        <input
-          name="age"
-          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-          type={"number"}
-        />
-        <p> {errors?.age ? errors.age : ""} </p>
-        <label>סיסמא</label>
-        <input
-          name="password"
-          onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-          type={"text"}
-          value={newStudent.password}
-        />
-        <button onClick={() => dispatch(createStudent(newStudent))}>
-          הוסף
-        </button>
-      </form>
+
+          <label>{hebrewVariables.age}</label>
+          <input
+            name="age"
+            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+            type={"number"}
+          />
+          <p> {errors?.age ? errors.age : ""} </p>
+
+          <label>{hebrewVariables.password}</label>
+          <input
+            name="password"
+            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
+            type={"text"}
+            value={newStudent.password}
+          />
+          <button onClick={() => dispatch(createStudent(newStudent))}>
+            {hebrewVariables.add}
+          </button>
+        </form>
+      ) : (
+        <div>
+          <h3>
+            {newStudent.firstName} {newStudent.lastName}{hebrewVariables.registerd}
+          </h3>
+          <p> {hebrewVariables.emailSent} {newStudent.email}</p>
+          <button onClick={() => {
+            SetIsRegister();
+            setIsSend(false)
+          }}>{hebrewVariables.closeBtn}</button>
+        </div>
+      )}
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import PageHeader from "../../Features/PageHeader/PageHeaderComponent";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 import SelectCourseSubjects from "../../Features/SelectCourseSubjects/SelectCourseSubjectsComponent";
 import CreateNewSubject from "../../Features/CreateNewSubject/CreateNewSubjectComponent";
 import { createCourse } from "../../../Redux/actions/coursesActions";

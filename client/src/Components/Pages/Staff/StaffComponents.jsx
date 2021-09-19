@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import AddStaffComponent from '../../Features/AddStaffForm/AddStaffComponent';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { deleteStaff } from '../../../Redux/actions/staffAction';
+import { hebrewVariables } from '../../../utils/hebrewVariables';
 
 
 
@@ -40,19 +41,19 @@ const StaffComponents = () => {
                         <TableRow>
                             <TableCell>
                                 <Button variant="contained" onClick={() => setOpen(!open)}>
-                                    הוסף איש צוות
+                                    {hebrewVariables.addStuff}
                                 </Button>
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell></TableCell>
                             <TableCell>ID</TableCell>
-                            <TableCell align="right">First Name</TableCell>
-                            <TableCell align="right">Last Name</TableCell>
-                            <TableCell align="right">Email</TableCell>
-                            <TableCell align="right">Phone</TableCell>
-                            <TableCell align="right">Courses</TableCell>
-                            <TableCell align="right">Students</TableCell>
+                            <TableCell align="right">{hebrewVariables.firstName}</TableCell>
+                            <TableCell align="right">{hebrewVariables.lastName}</TableCell>
+                            <TableCell align="right">{hebrewVariables.email}</TableCell>
+                            <TableCell align="right">{hebrewVariables.phone}</TableCell>
+                            <TableCell align="right">{hebrewVariables.courses}</TableCell>
+                            <TableCell align="right">{hebrewVariables.students}</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
