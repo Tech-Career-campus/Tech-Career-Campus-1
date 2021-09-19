@@ -32,12 +32,16 @@ const Navbar = () => {
             <Link to={"/class-schedule"}>לו"ז כיתות</Link>
           </li>
         </ul>
-        <p>
+        <div className="log-user">
+          <div className="user">
+        <p >
           היי, {user.firstName} {user.lastName}
         </p>
+        </div>
         <button className="btn" onClick={() => logout()}>
           התנתק
         </button>
+        </div>
       </div>
     </>
   );
