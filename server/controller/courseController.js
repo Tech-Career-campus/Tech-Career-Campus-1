@@ -1,5 +1,6 @@
 const CourseModel = require("../models/courseModel");
 const StaffModel = require("../models/staffModel");
+const { collection } = require('../models/courseModel');
 
 const addNewCourse = async (req, res) => {
   const staff = await StaffModel.findById(req.body.id);
@@ -36,9 +37,10 @@ const getAllCourses = async (req, res) => {
     res.status(500).json({ massage: "get course field", error: err });
   }
 };
-getCourseById = async (req, res) => {
+
+const getCourseById = async (req, res) => {
   try {
-    await CourseModel.findById( req.body.id , (err, result) => {
+    await CourseModel.findById( req.params.id , (err, result) => {
       if (err) throw err;
       res
         .status(200)
@@ -81,7 +83,7 @@ const deleteSubSubject = async (req, res) => {
           const errorNull = new Error("result is null");
           res
             .status(500)
-            .json({ message: "Delete course faild", error: errorNull.message });
+            .json({ message: "Delete course failed", error: errorNull.message });
         }
       }
     );
@@ -113,7 +115,7 @@ const addSubSubject = async (req, res) => {
     }
     else {
       const arrayError = new Error("you need to choose which array links or topics")
-      res.status(301).json({ message: "update course faild", error: arrayError.message })
+      res.status(301).json({ message: "update course failed", error: arrayError.message })
       throw arrayError
     }
     await CourseModel.findOneAndUpdate(
@@ -146,7 +148,7 @@ const updateSubSubject = async (req, res) => {
   try {
     const array = await req.body.array
     const arrayField = await req.body.arrayField
-    const ArrayPath = `CourseInformation.$.${array}.$[objcet].${arrayField}`
+    const ArrayPath = `CourseInformation.$.${array}.$[object].${arrayField}`
     const ArrayObject = {};
     ArrayObject[ArrayPath] = req.body.newValue
     const query = {
@@ -161,7 +163,7 @@ const updateSubSubject = async (req, res) => {
       query,
       { $set: ArrayObject },
       {
-        arrayFilters: [{ "objcet._id": { _id: req.body.array_id } }],
+        arrayFilters: [{ "object._id": { _id: req.body.array_id } }],
         upsert: true
       },
       (err, result) => {
@@ -191,14 +193,14 @@ const updateSubject = async (req, res) => {
     if (field === "topics" || field === "links") {
       throw new Error("you cant update arrays only static fields")
     }
-    const SubjectPath = `CourseInformation.$[objcet].${field}`
+    const SubjectPath = `CourseInformation.$[object].${field}`
     const SubjectField = {}
     SubjectField[SubjectPath] = req.body.newValue
     await CourseModel.findOneAndUpdate(
       { _id: req.body._id },
       { $set: SubjectField },
       {
-        arrayFilters: [{ "objcet._id": { _id: req.body.Subject_id } }],
+        arrayFilters: [{ "object._id": { _id: req.body.Subject_id } }],
         upsert: true
       },
       (err, result) => {
@@ -222,11 +224,35 @@ const updateSubject = async (req, res) => {
   }
 
 };
+const searchCorseAutocomplete =  async(req,res)=>{
+  try {
+      let result = await collection.aggregate([
+         
+              {
+                '$search': {
+                  'index': 'default',
+                  'text': {
+                    'query': `${req.query.term}`,
+                    'path': {
+                      'wildcard': '*'
+                    }
+                  }
+                }
+              }
+            
+      ]).toArray();
+      res.send(result)
+  } catch (error) {
+      res.status(500).json({error:error.message})
+  }
+};
+
+
 
 
 const getStudentsByCourse = async (req, res) => {
   try {
-      await CourseModel.findById(req.body.id)
+    await CourseModel.findById(req.params.id)
           .populate('students')
           .then(course => {
               res.status(201).json({ massage: 'The student is ', data: course.students.map((student) => student ) })
@@ -249,5 +275,6 @@ module.exports = {
   addSubSubject,
   updateSubSubject,
   updateSubject,
+  searchCorseAutocomplete,
   getStudentsByCourse
 };
