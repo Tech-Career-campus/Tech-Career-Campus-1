@@ -34,8 +34,7 @@ const MyCourseRouting = () => {
                         {
                             user.role === "Staff" ?
                                 <select onChange={(e) => dispatch(getCourse(e.target.value))}>
-                                    
-                                    {
+                                    <option></option>                                    {
                                         courses.map(course => <option key={course._id} value={course._id}>{course.name}</option>
                                         )
                                     }

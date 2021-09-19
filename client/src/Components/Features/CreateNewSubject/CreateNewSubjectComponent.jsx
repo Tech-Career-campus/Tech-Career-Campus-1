@@ -44,7 +44,7 @@ const CreateNewSubject = ({
       >
         הוסף תת נושא
       </button>
-      <label>שם הנושא {newSubject.subject} </label>
+      <label>שם הנושא {newSubject.nameSubject  } </label>
       <label>תתי נושאים</label>
       {newSubject.topics.map((topic) => (
         <label>{topic.subject}</label>

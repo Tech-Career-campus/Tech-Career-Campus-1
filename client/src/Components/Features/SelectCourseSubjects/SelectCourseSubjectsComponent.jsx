@@ -6,7 +6,7 @@ const SelectCourseSubjects = ({
   courseInformation,
   setCourseInformation,
 }) => {
-  const [courseOptions, setCourseOptions] = useState();
+  const [courseOptions, setCourseOptions] = useState([]);
   const [subjectOpen, setSubjectOpen] = useState();
   const [topics, setTopics] = useState([]);
   const [subject, setSubject] = useState({});
@@ -14,7 +14,7 @@ const SelectCourseSubjects = ({
 
   useEffect(() => {
     fetcher(`http://localhost:8080/api/course/search?term=${corseType}`).then(
-      (response) => setCourseOptions(response[0]?.CourseInformation)
+      (response) =>setCourseOptions( response ? response[0]?.CourseInformation : []) 
     );
   }, [corseType]);
 
