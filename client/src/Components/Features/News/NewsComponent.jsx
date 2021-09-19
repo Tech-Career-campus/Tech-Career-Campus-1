@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./news.css";
 import Ticker from "react-ticker";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const News = () => {
   const [newsData, setNewsData] = useState([]);
@@ -13,20 +14,24 @@ const News = () => {
       .then(response => response.json())
       .then((response) => setNewsData(response?.articles))
       .catch(err => console.log(err))
-  }, [newsApi, newsApiKey]);
+  }, [newsApi,newsApiKey]);
 
+  console.log(newsData);
 
-  return (
-    <div className="BodyNew">    
+  return!newsData.length ? (
+    <CircularProgress />
+  
+ ) : (
+    <div className="BodyNew">
       <div className="news-ticker-div">
         <Ticker mode="smooth" direction="toRight">
           {({ index }) => (
-            <>
-              <h1>{newsData[index]?.source?.name}</h1>
-              <h1>{newsData[index]?.description}</h1>
-              <h1>{newsData[index]?.title}</h1>
-              <img src={newsData[index]?.urlToImage} alt="" />
-            </>
+            <div className="card-news">
+              <h1>{newsData[index].source.name}</h1>
+              <h1>{newsData[index].description}</h1>
+              <h1>{newsData[index].title}</h1>
+              <img src={newsData[index].urlToImage} alt="" />
+            </div>
           )}
         </Ticker>
 

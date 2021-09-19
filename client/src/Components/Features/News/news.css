@@ -12,12 +12,18 @@
 }
 
 .news-ticker-div{
-    border: 1px solid black;
-    width: 600px;
-    height: 350px;
-    
+    width: 50vw;
+    height: 450px;
+    margin: auto;
 }
 .news-ticker-div>img{
     height: 350px;
     width: 500px;
+}
+
+.card-news{
+    background-color: #f2f2f2;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 400px;
+    height: 500px;
 }
