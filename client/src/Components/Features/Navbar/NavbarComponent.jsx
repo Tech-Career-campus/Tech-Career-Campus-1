@@ -33,12 +33,16 @@ const Navbar = () => {
             <Link to={"/class-schedule"}>{hebrewVariables.classSchedual}</Link>
           </li>
         </ul>
-        <p>
+        <div className="log-user">
+          <div className="user">
+        <p >
           היי, {user.firstName} {user.lastName}
         </p>
+        </div>
         <button className="btn" onClick={() => logout()}>
           {hebrewVariables.logout}
         </button>
+        </div>
       </div>
     </>
   );
