@@ -36,7 +36,8 @@ const News = () => {
         </Ticker>
 
       </div>
-    </div>
+</div>
+    
 
   );
 };

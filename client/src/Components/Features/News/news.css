@@ -1,11 +1,14 @@
 .BodyNew{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 3px 3px 20px -6px #000000;
+    box-shadow: 3px 3px 20px -6px rgb(23,41,74);
     width: 95vw;
     height: 500px;
     margin: 50px;
-      
+    padding: 0px 130px;
 }
 
 .news-ticker-div{
@@ -14,7 +17,7 @@
     margin: auto;
 }
 .news-ticker-div>img{
-    height: 500px;
+    height: 350px;
     width: 500px;
 }
 
