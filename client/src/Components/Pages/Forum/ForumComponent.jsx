@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getPosts } from "../../../Redux/actions/postsActions";
-import ForumFormComponent from "../../ForumComponents/ForumFormComponent/ForumFormComponent";
-import ForumPostsComponent from "../../ForumComponents/ForumPostsComponent/ForumPostsComponent";
+import ForumFormComponent from "./ForumComponents/ForumFormComponent/ForumFormComponent";
+import ForumPostsComponent from "./ForumComponents/ForumPostsComponent/ForumPostsComponent";
 import "./forum.css";
 const Forum = () => {
   const [currentId, setCurrentId] = useState(null);

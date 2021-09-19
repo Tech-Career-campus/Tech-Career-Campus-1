@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost, updatePost } from "../../../Redux/actions/postsActions";
+import { createPost, updatePost } from "../../../../../Redux/actions/postsActions";
 import jwt_decode from "jwt-decode";
 import "./form.css";
 const ForumFormComponent = ({ currentId, setCurrentId }) => {
