@@ -4,7 +4,9 @@ const StudentModel = require("../models/studentModel");
 
 
 const messagesByStaff = async (req, res) => {
+  console.log(req.body);
   const staff = await StaffModel.findById(req.body._id);
+  console.log(staff);
   const newMessages =  new ForumModel({
     firstName:req.body.post.firstName,
     email:req.body.post.email,
