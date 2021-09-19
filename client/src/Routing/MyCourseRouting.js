@@ -15,7 +15,7 @@ import { getCourse } from '../Redux/actions/courseActions';
 const MyCourseRouting = () => {
     const { user } = useSelector(state => state.user);
     const course = useSelector((state) => state.course);
-    const courses = useSelector((state) => state.courses);
+    const {courses} = useSelector((state) => state.courses);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const MyCourseRouting = () => {
             {
                 !course._id ? <ChooseCourse /> :
                     <>
-                        <h2>{course.name}</h2>
+                        <h2>{course?.name}</h2>
 
                         {
                             user.role === "Staff" ?

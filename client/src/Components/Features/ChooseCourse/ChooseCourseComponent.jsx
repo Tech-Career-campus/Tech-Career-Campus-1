@@ -5,7 +5,7 @@ import { getCourses } from "../../../Redux/actions/coursesActions";
 
 const ChooseCourse = () => {
   const dispatch = useDispatch();
-  const courses = useSelector((state) => state.courses);
+  const {courses} = useSelector((state) => state.courses);
    const { user } = useSelector((state) => state.user);
    console.log(courses)
    useEffect(() => {

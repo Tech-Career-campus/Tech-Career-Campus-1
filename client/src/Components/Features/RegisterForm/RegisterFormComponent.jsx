@@ -75,41 +75,6 @@ const RegisterForm = ({ SetIsRegister }) => {
           type={"number"}
         />
         <p> {errors?.age ? errors.age : ""} </p>
-
-<<<<<<< HEAD
-          <label>סיסמא</label>
-          <input
-            name="password"
-            onChange={(e) => handleChange(e, newStudent, setNewStudent)}
-            type={"text"}
-            value={newStudent.password}
-          />
-          <button
-            onClick={() => {
-              dispatch(createStudent(newStudent));
-              setIsSend(true)
-            }}
-          >
-            הוסף
-          </button>
-        </form>
-      ) : (
-        <div>
-          <h3>
-            {newStudent.firstName} {newStudent.lastName} נרשם במערכת
-          </h3>
-          <p> נשלח מייל עם פרטי התחברות לכתובת {newStudent.email}</p>
-          <button
-            onClick={() => {
-              SetIsRegister();
-              debugger;
-            }}
-          >
-            סגור
-          </button>
-        </div>
-      )}
-=======
         <label>סיסמא</label>
         <input
           name="password"
@@ -121,7 +86,6 @@ const RegisterForm = ({ SetIsRegister }) => {
           הוסף
         </button>
       </form>
->>>>>>> a392d7be080a9d8626a91e4d9ffe0e43fd315ab0
     </>
   );
 };

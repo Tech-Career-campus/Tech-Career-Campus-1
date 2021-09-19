@@ -7,7 +7,7 @@ const addNewCourse = async (req, res) => {
   if (!staff) {
     res.status(401).json({ message: "staff not fond" });
   } else {
-    const { name, CourseInformation,courseType } = req.body;
+    const { name, CourseInformation, courseType } = req.body;
     const newCourse = new CourseModel({
       name: name,
       courseType: courseType,
