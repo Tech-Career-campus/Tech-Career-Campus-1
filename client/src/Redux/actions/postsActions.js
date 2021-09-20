@@ -9,11 +9,11 @@ import {
   FETCH_POST,
 } from "../actions/types";
 import jwt_decode from "jwt-decode";
-const token = localStorage.getItem("jwtToken");
-const user = jwt_decode(token);
 
 export const getPost = (id) => async (dispatch) => {
   dispatch({ type: START_LOADING });
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
   await fetcher(`http://localhost:8080/api/forum/${id}`)
     .then((response) => {
       dispatch({
@@ -26,8 +26,9 @@ export const getPost = (id) => async (dispatch) => {
 };
 
 export const getPosts = (page) => async (dispatch) => {
-
   dispatch({ type: START_LOADING });
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
   await fetcher(`http://localhost:8080/api/forum?page=${page}`)
     .then((response) => {
       dispatch({
@@ -39,8 +40,10 @@ export const getPosts = (page) => async (dispatch) => {
   dispatch({ type: STOP_LOADING });
 };
 
-export const createPostStaff = (post,history) => async (dispatch) => {
+export const createPostStaff = (post, history) => async (dispatch) => {
   dispatch({ type: START_LOADING });
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
   try {
     await fetch(`http://localhost:8080/api/forum/staff`, {
       method: "POST",
@@ -60,14 +63,16 @@ export const createPostStaff = (post,history) => async (dispatch) => {
           type: CREATE,
           payload: res.data,
         });
-        history.push(`/forum/${res.data._id}`)
+        history.push(`/forum/${res.data._id}`);
       });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const createPostStudent = (post,history) => async (dispatch) => {
+export const createPostStudent = (post, history) => async (dispatch) => {
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
   try {
     await fetch(`http://localhost:8080/api/forum/student`, {
       method: "POST",
@@ -87,7 +92,7 @@ export const createPostStudent = (post,history) => async (dispatch) => {
           type: CREATE,
           payload: res.data,
         });
-        history.push(`/forum/${res.data._id}`)
+        history.push(`/forum/${res.data._id}`);
       });
   } catch (error) {
     console.log(error);
@@ -95,6 +100,8 @@ export const createPostStudent = (post,history) => async (dispatch) => {
 };
 
 export const updatePost = (id, post) => async (dispatch) => {
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
   try {
     await fetch(`http://localhost:8080/api/forum/${id}`, {
       method: "PUT",
@@ -121,6 +128,8 @@ export const updatePost = (id, post) => async (dispatch) => {
 };
 
 export const deletePost = (id) => async (dispatch) => {
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
   try {
     await fetch(`http://localhost:8080/api/forum/${id}`, {
       method: "DELETE",
