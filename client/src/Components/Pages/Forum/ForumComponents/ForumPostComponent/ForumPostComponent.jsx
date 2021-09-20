@@ -34,7 +34,6 @@ const ForumPostComponent = ({ post, setCurrentId }) =>{
         </div>
         </ButtonBase>
         {user?.email === post?.email && (
-<<<<<<< HEAD
           <div className="overlay2">
             <button
               className="post-btn"
@@ -45,16 +44,6 @@ const ForumPostComponent = ({ post, setCurrentId }) =>{
               <MoreHorizIcon fontSize="medium" />
             </button>
           </div>
-=======
-          <button
-            size="small"
-            className="btn post-btn"
-            onClick={() => dispatch(deletePost(post._id))}
-          >
-            <DeleteIcon fontSize="small" />
-            {hebrewVariables.delete}
-          </button>
->>>>>>> 225fd99758db7e25d721b4459fd7d47d8e5bea53
         )}
         
       

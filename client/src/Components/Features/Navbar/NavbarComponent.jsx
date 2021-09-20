@@ -12,10 +12,6 @@ const logout = () => {
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.user);
-<<<<<<< HEAD
-=======
-  console.log(user);
->>>>>>> 225fd99758db7e25d721b4459fd7d47d8e5bea53
   return (
     <>
       <div className="navbar-main">
