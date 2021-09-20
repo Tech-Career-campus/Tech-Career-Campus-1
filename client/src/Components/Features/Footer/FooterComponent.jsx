@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import {hebrewVariables} from '../../../utils/hebrewVariables'
 
 
 const Footer = () => {
@@ -10,11 +11,11 @@ const Footer = () => {
         <div className="aboutUsClass">
           <div className="about">
             <div className="title1">
-              <h2>טק-קריירה</h2>
+              <h2>{hebrewVariables.techCarrer}</h2>
             </div>
             <ol>
-              <li>מרכז הכשרה טכנולוגי,</li>
-              <li>לצעירים יוצאי קהילת אתיופיה בישראל</li>
+              <li>{hebrewVariables.techCarrerDescription1}</li>
+              <li>{hebrewVariables.techCarrerDescription2}</li>
             </ol>
           </div>
           <ul>
@@ -58,40 +59,39 @@ const Footer = () => {
         </div>
         <div className="quick-link">
           <div className="title2">
-            <h4>לינקים</h4>
+            <h4>{hebrewVariables.links}</h4>
           </div>
           <ul className="quick-links">
             <li>
-              <Link to={"/news"}>חדשות </Link>
+              <Link to={"/news"}>{hebrewVariables.news} </Link>
             </li>
             <li>
-              <Link to={"/events"}>אירועים </Link>
+              <Link to={"/events"}>{hebrewVariables.events} </Link>
             </li>
             <li>
-              <Link to={"/forum"}>פורום </Link>
+              <Link to={"/forum"}>{hebrewVariables.forum} </Link>
             </li>
             <li>
-              <Link to={"/my-course"}> הקורס שלי</Link>
+              <Link to={"/my-course"}> {hebrewVariables.myCourse}</Link>
             </li>
             <li>
-              <Link to={"/class-schedule"}>לו"ז כיתות</Link>
+              <Link to={"/class-schedule"}>{hebrewVariables.classSchedual}</Link>
             </li>
           </ul>
         </div>
         <div className="contactUsClass">
           <div className="title2">
-            <h4>צור קשר</h4>
+            <h4>{hebrewVariables.contact}</h4>
           </div>
           <ul>
             <li>
-              <i className="fas fa-map-marker-alt"></i> בת שבע 3, מתחם טלרד,
-                לוד
+              <i className="fas fa-map-marker-alt"></i>{hebrewVariables.techAdress}
               </li>
             <li>
-              <i className="fas fa-phone"></i> 08-3738000
+              <i className="fas fa-phone"></i> {hebrewVariables.techPhone}
               </li>
             <li>
-              <i className="far fa-envelope"></i> info@tech-career.org
+              <i className="far fa-envelope"></i> {hebrewVariables.techEmail}
               </li>
           </ul>
         </div>

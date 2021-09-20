@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import "./postDetails.css";
-import { getPost } from "../../../Redux/actions/postsActions";
+import { getPost } from "../../../../../Redux/actions/postsActions";
 const PostDetails = () => {
   const { post, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();

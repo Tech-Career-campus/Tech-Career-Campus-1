@@ -1,5 +1,6 @@
 const eventModel = require("../models/eventModel");
 const staffModel = require("../models/staffModel");
+const {nullError} = require("../utils/nullError")
 const { ObjectId } = require("mongodb");
 
 const getAllEventPost = async (req, res) => {
@@ -48,9 +49,10 @@ const postNewEvent = async (req, res) => {
 
 const deleteEventPost = async (req, res) => {
   try {
-    await eventModel.findByIdAndDelete(req.params.id, (error, result) => {
+    await eventModel.findByIdAndRemove(req.params.id,(error, result) => {
+      nullError(result , res);
       if (error) throw error;
-      res.status(200).json({ massage: "deleted event success", data: result });
+     
     });
   } catch (error) {
     res.status(500).json({ massage: "deleted event field", error: error });

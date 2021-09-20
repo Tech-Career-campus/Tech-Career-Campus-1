@@ -32,13 +32,18 @@ const staffSchema = new Schema(
     },
     role: {
       type: String,
-      default: "Staff",
     },
     profileImg: {
       type: String,
-      default: "",
     },
     IdNumber: {
+      type: String,
+    },
+    jod:{
+      type: String,
+      default: "",
+    },
+    responsible:{
       type: String,
       default: "",
     },

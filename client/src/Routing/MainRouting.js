@@ -7,7 +7,7 @@ import Forum from '../Components/Pages/Forum/ForumComponent'
 import MyCourse from '../Components/Pages/MyCourse/MyCourseComponent';
 import ClassSchedule from '../Components/Pages/ClassSchedule/ClassScheduleComponent';
 import Home from '../Components/Pages/Home/HomeComponent';
-import PostDetails from '../Components/Pages/PostDetails/PostDetails';
+import PostDetails from '../Components/Pages/Forum/ForumComponents/PostDetails/PostDetails';
 
 const MainRouting = () =>{
     return(

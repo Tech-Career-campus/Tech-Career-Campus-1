@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editGrade, deleteTest } from "../../../Redux/actions/studentActions";
 import "./EditGradeComponent.css";
 import AddGrade from "./AddGrade";
+import {hebrewVariables} from '../../../utils/hebrewVariables'
 const EditGradeComponent = ({ handleFnc }) => {
   const student = useSelector((state) => state.student);
 
@@ -75,7 +76,7 @@ const EditGradeComponent = ({ handleFnc }) => {
       })}
       <AddGrade studentId={student._id} />
       <button className="btn " onClick={() => handleFnc()}>
-        סגור
+        {hebrewVariables.closeBtn}
       </button>
     </div>
   );

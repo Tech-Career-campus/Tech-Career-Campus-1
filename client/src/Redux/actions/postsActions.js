@@ -8,6 +8,9 @@ import {
   STOP_LOADING,
   FETCH_POST,
 } from "../actions/types";
+import jwt_decode from "jwt-decode";
+const token = localStorage.getItem("jwtToken");
+const user = jwt_decode(token);
 
 export const getPost = (id) => async (dispatch) => {
   dispatch({ type: START_LOADING });
@@ -43,8 +46,8 @@ export const createPostStaff = (post,history) => async (dispatch) => {
       method: "POST",
       body: JSON.stringify({
         post,
-        _id: "612416b7721110539c4ebf44",
-        role: "Staff",
+        _id: user.id,
+        role: user.role,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -70,8 +73,8 @@ export const createPostStudent = (post,history) => async (dispatch) => {
       method: "POST",
       body: JSON.stringify({
         post,
-        _id: "612416b7721110539c4ebf44",
-        role: "Staff",
+        _id: user.id,
+        role: user.role,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -97,8 +100,8 @@ export const updatePost = (id, post) => async (dispatch) => {
       method: "PUT",
       body: JSON.stringify({
         post,
-        _id: "612416b7721110539c4ebf44",
-        role: "Staff",
+        _id: user.id,
+        role: user.role,
       }),
       headers: {
         "Content-Type": "application/json",

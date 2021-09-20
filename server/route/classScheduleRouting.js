@@ -10,5 +10,4 @@ router.post('/',authRole("Staff"),scheduleCtrl.postClasses);
 router.delete('/',authRole("Staff"),scheduleCtrl.deleteClasses)
 router.put('/updateClassesName',authRole("Staff"),scheduleCtrl.updateClassesName)
 
-
 module.exports = router;

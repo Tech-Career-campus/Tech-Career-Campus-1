@@ -34,15 +34,12 @@ const studentSchema = new Schema(
         },
         role: {
           type: String,
-          default: "Student",
         },
         profileImg: {
           type: String,
-          default: "",
         },
         IdNumber: {
           type: String,
-          default: "",
         },
         tests: {
           type: [

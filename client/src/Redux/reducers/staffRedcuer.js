@@ -8,7 +8,7 @@ const staffRedcuer = (state = { staff: [], errors: {} }, action) => {
             }
         case ADD_STAFF:
             return {
-                ...state, staff: [...state.staff ,action.payload]
+                errors:{}, staff: [...state.staff ,action.payload]
             }
         case DELETE_STAFF:
             return {...state, staff: state.staff.filter(item => item._id !== action.payload._id)}
