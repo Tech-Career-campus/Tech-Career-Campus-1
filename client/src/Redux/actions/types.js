@@ -36,7 +36,11 @@ export const STAFF_ERRORS="STAFF_ERRORS"
 // Course
 
 // Courses
-export const GET_COURSES = "GET_COURSES"
+export const GET_COURSES = "GET_COURSES";
+export const CREATE_COURSE = "CREATE_COURSE";
+export const CREATE_COURSE_ERRORS = "CREATE_COURSE_ERRORS";
+
+
 
 //Course
 export const GET_COURSE = " GET_COURSE"

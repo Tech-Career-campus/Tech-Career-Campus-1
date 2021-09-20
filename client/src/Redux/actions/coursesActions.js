@@ -1,11 +1,35 @@
 import fetcher from "../../utils/fetcher"
-import { GET_COURSES } from "./types"
+import { CREATE_COURSE, CREATE_COURSE_ERRORS, GET_COURSES } from "./types"
 
-export const getCourses =()=> async dispatch =>{
+export const getCourses = () => async dispatch => {
     await fetcher('http://localhost:8080/api/course')
-    .then(response=> dispatch({
-        type: GET_COURSES,
-        payload:response.data
-    }))
+        .then(response => dispatch({
+            type: GET_COURSES,
+            payload: response.data
+        }))
 }
 
+export const createCourse = (newCorse) => async dispatch => {
+    try {
+        debugger
+        await fetcher(`http://localhost:8080/api/course/addNewCourse`, {
+            method: 'POST',
+            body: JSON.stringify(newCorse)
+        })
+            .then(response => {
+                if (!response || !response.data) throw response
+                return response
+            })
+            .then(response => dispatch({
+                type: CREATE_COURSE,
+                payload: response.data
+            }))
+    }
+    catch (error) {
+        dispatch({
+            type: CREATE_COURSE_ERRORS,
+            payload: error.error || error
+        })
+    }
+
+}

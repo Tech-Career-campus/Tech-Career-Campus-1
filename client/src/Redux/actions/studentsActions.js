@@ -31,7 +31,6 @@ export const createStudent = (newStudent) => async dispatch => {
 
 
 export const deleteStudent = (studentId) => async dispatch => {
-    debugger
     await fetcher("http://localhost:8080/api/student/deleteStudent", {
         method: 'DELETE',
         body: JSON.stringify({ _id: studentId })

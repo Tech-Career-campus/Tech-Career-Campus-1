@@ -4,10 +4,10 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import jwt_decode from "jwt-decode";
 import "./post.css";
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../Redux/actions/postsActions";
-import { hebrewVariables } from "../../../utils/hebrewVariables";
+import { deletePost } from "../../../../../Redux/actions/postsActions";
+import { hebrewVariables } from "../../../../../utils/hebrewVariables";
 
-const ForumPostComponent = ({ post, setCurrentId }) => {
+const ForumPostComponent = ({ post, setCurrentId }) =>{
   const dispatch = useDispatch();
   const token = localStorage.getItem("jwtToken");
   const user = jwt_decode(token);
