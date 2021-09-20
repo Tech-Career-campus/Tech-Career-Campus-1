@@ -43,7 +43,16 @@ const ForumPostComponent = ({ post, setCurrentId }) =>{
             >
               <MoreHorizIcon fontSize="medium" />
             </button>
+            <button
+            size="small"
+            className="btn post-btn"
+            onClick={() => dispatch(deletePost(post._id))}
+          >
+            <DeleteIcon fontSize="small" />
+            {hebrewVariables.delete}
+          </button>
           </div>
+      
         )}
         
       

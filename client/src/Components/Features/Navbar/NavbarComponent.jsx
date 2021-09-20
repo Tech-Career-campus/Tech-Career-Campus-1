@@ -12,6 +12,7 @@ const logout = () => {
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.user);
+  console.log(user);
   return (
     <>
       <div className="navbar-main">
