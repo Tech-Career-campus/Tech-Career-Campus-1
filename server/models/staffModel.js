@@ -32,15 +32,12 @@ const staffSchema = new Schema(
     },
     role: {
       type: String,
-      default: "Staff",
     },
     profileImg: {
       type: String,
-      default: "",
     },
     IdNumber: {
       type: String,
-      default: "",
     },
     jod:{
       type: String,
