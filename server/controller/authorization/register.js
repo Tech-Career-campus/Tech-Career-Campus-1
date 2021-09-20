@@ -17,7 +17,6 @@ const register = async (req, res) => {
       if (staff) {
         return res.status(401).json({ massage: "email already exists" });
       }
-
       SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
@@ -67,6 +66,8 @@ const register = async (req, res) => {
       if (student) {
         return res.status(400).json({ errors: { email: "email already exists" } });
       }
+      SendEmails(req, res);
+
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         if (err) throw err;

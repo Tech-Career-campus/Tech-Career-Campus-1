@@ -26,7 +26,6 @@ const RegisterForm = ({ SetIsRegister }) => {
   });
 
   const [isSend, setIsSend] = useState(false);
-
   useEffect(() => {
     if (!errors) {
       setIsSend(true);
@@ -71,6 +70,7 @@ const RegisterForm = ({ SetIsRegister }) => {
             type={"text"}
           />
           <p> {errors?.phone ? errors.phone : ""} </p>
+
 
           <label>{hebrewVariables.age}</label>
           <input

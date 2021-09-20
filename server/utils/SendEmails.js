@@ -1,5 +1,6 @@
 const path = require("path");
 const nodemailer = require("nodemailer");
+const {EMAIL_API ,EMAIL_ADDRESS} = process.env;
 
 const SendEmails = (req, res) => {
   const { firstName, lastName, email, password } = req.body;
@@ -13,17 +14,17 @@ const SendEmails = (req, res) => {
       <h3>!שים לב </h3>
       <h3> אינך יכול לשלוח מייל בחזרה למשתמש זה</h3>
     `;
-
   const transporter = nodemailer.createTransport({
-    service: "outlook",
+    service: "gmail",
+    host: 'smtp.gmail.com',
     auth: {
-      user: "Tech_Career@outlook.com",
-      pass: "TC123456@!",
+      user: EMAIL_ADDRESS,
+      pass: EMAIL_API,
     },
   });
 
   const options = {
-    from: '"Tech_Career" Tech_Career@outlook.com', 
+    from: `"Tech_Career" ${EMAIL_ADDRESS}`, 
     to: `${email}`, 
     subject: "Tech_Career Request", 
     text: "שלום רב", 
