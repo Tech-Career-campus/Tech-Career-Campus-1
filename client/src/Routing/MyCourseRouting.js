@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import CourseSchedule from '../Components/Pages/CourseSchedule/CourseScheduleComponent';
-
 import StudentGradesComponent from '../Components/Pages/Grades/StudentGradesComponent'
 import AdminGradesComponent from '../Components/Pages/Grades/AdminGradesComponent'
 import Syllabus from '../Components/Pages/Syllabus/SyllabusComponent'
@@ -17,7 +16,7 @@ import { hebrewVariables } from '../utils/hebrewVariables';
 const MyCourseRouting = () => {
     const { user } = useSelector(state => state.user);
     const course = useSelector((state) => state.course);
-    const courses = useSelector((state) => state.courses);
+    const {courses} = useSelector((state) => state.courses);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -30,13 +29,12 @@ const MyCourseRouting = () => {
             {
                 !course._id ? <ChooseCourse /> :
                     <>
-                        <h2>{course.name}</h2>
+                        <h2>{course?.name}</h2>
 
                         {
                             user.role === "Staff" ?
                                 <select onChange={(e) => dispatch(getCourse(e.target.value))}>
-                                    
-                                    {
+                                    <option></option>                                    {
                                         courses.map(course => <option key={course._id} value={course._id}>{course.name}</option>
                                         )
                                     }

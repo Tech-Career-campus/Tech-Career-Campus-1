@@ -14,7 +14,6 @@ const SendEmails = (req, res) => {
       <h3>!שים לב </h3>
       <h3> אינך יכול לשלוח מייל בחזרה למשתמש זה</h3>
     `;
-
   const transporter = nodemailer.createTransport({
     service: "gmail",
     host: 'smtp.gmail.com',

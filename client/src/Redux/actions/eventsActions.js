@@ -11,7 +11,6 @@ export const getEvents = () => async dispatch => {
 }
 
 export const createEvent = (event) => async dispatch => {
-    // debugger
     try {
         await fetcher(`http://localhost:8080/api/event/${event.userId}`, {
             method: 'POST',
@@ -32,7 +31,6 @@ export const createEvent = (event) => async dispatch => {
 }
 
 export const updateEvent = (eventUpdate) => async dispatch => {
-    debugger
     try {
         await fetcher(`http://localhost:8080/api/event/${eventUpdate.eventId}`, {
             method: 'PUT',
@@ -53,7 +51,6 @@ export const updateEvent = (eventUpdate) => async dispatch => {
 }
 
 export const deleteEvent = (deleteId) => async dispatch => {
-    debugger
     try {
             await fetcher(`http://localhost:8080/api/event/${deleteId}`, {
                 method: 'DELETE',

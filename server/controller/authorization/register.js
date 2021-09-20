@@ -3,13 +3,13 @@ const StudentModel = require("../../models/studentModel");
 const CourseModel = require("../../models/courseModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
-const {SendEmails} = require("../../utils/SendEmails")
+const { SendEmails } = require("../../utils/SendEmails")
 
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
-      return res.status(401).json({errors:errors});
+      return res.status(401).json({ errors: errors });
     }
 
     await StaffModel.findOne({ email: req.body.email }, (err, staff) => {
@@ -17,15 +17,14 @@ const register = async (req, res) => {
       if (staff) {
         return res.status(401).json({ massage: "email already exists" });
       }
-      
-      // SendEmails(req, res);
+      SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         bcrypt.hash(req.body.password, salt, async (err, hash) => {
           if (err) throw err;
           req.body.password = hash;
 
-          const { firstName, lastName, age, email, phone } = req.body;
+          const { firstName, lastName, age, email, phone, role, profileImg, IdNumber } = req.body;
           const newStaff = new StaffModel({
             firstName: firstName,
             lastName: lastName,
@@ -33,6 +32,9 @@ const register = async (req, res) => {
             phone: phone,
             password: req.body.password,
             age: age,
+            role: role !=='Student'?role:'Staff',
+            profileImg: profileImg ? profileImg : "",
+            IdNumber: IdNumber? IdNumber: ""
           });
           try {
             await newStaff.save();
@@ -64,7 +66,8 @@ const register = async (req, res) => {
       if (student) {
         return res.status(400).json({ errors: { email: "email already exists" } });
       }
-      // SendEmails(req, res);
+      SendEmails(req, res);
+
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         if (err) throw err;
@@ -83,7 +86,7 @@ const register = async (req, res) => {
               });
           }
 
-          const { firstName, lastName, age, email, courseName, phone } = req.body;
+          const { firstName, lastName, age, email, courseName, phone, role, profileImg, IdNumber } = req.body;
           const newStudent = new StudentModel({
             firstName: firstName,
             lastName: lastName,
@@ -92,7 +95,10 @@ const register = async (req, res) => {
             password: req.body.password,
             age: age,
             courseName: courseName,
-            courseId: course._id
+            courseId: course._id,
+            role: role !== 'Staff'?role:'Student',
+            profileImg: profileImg ? profileImg : "",
+            IdNumber: IdNumber? IdNumber: ""
           });
           try {
             if (req.file) {
