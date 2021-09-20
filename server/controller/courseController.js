@@ -240,15 +240,12 @@ const searchCorseAutocomplete =  async(req,res)=>{
               }
             
       ]).toArray();
+      console.log(result);
       res.send(result)
   } catch (error) {
       res.status(500).json({error:error.message})
   }
 };
-
-
-
-
 const getStudentsByCourse = async (req, res) => {
   try {
     await CourseModel.findById(req.params.id)
@@ -264,7 +261,7 @@ const getStudentsByCourse = async (req, res) => {
   catch (err) {
       res.status(500).json({ massage: "wrong", error: err })
   }
-}
+};
 
 module.exports = {
   addNewCourse,
