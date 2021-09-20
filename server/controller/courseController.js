@@ -225,30 +225,26 @@ const updateSubject = async (req, res) => {
 };
 const searchCorseAutocomplete = async (req, res) => {
   try {
-    let result = await collection.aggregate([
-
-      {
-        '$search': {
-          'index': 'default',
-          'text': {
-            'query': `${req.query.term}`,
-            'path': {
-              'wildcard': '*'
-            }
-          }
-        }
-      }
-
-    ]).toArray();
-    res.send(result)
+      let result = await collection.aggregate([     
+              {
+                '$search': {
+                  'index': 'default',
+                  'text': {
+                    'query': `${req.query.term}`,
+                    'path': {
+                      'wildcard': '*'
+                    }
+                  }
+                }
+              }
+            
+      ]).toArray();
+      console.log(result);
+      res.send(result)
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
 };
-
-
-
-
 const getStudentsByCourse = async (req, res) => {
   try {
     await CourseModel.findById(req.params.id)
@@ -264,7 +260,7 @@ const getStudentsByCourse = async (req, res) => {
   catch (err) {
     res.status(500).json({ massage: "wrong", error: err })
   }
-}
+};
 
 module.exports = {
   addNewCourse,
