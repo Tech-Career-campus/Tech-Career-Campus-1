@@ -82,7 +82,7 @@ const deleteSubSubject = async (req, res) => {
           const errorNull = new Error("result is null");
           res
             .status(500)
-            .json({ message: "Delete course faild", error: errorNull.message });
+            .json({ message: "Delete course failed", error: errorNull.message });
         }
       }
     );
@@ -114,7 +114,7 @@ const addSubSubject = async (req, res) => {
     }
     else {
       const arrayError = new Error("you need to choose which array links or topics")
-      res.status(301).json({ message: "update course faild", error: arrayError.message })
+      res.status(301).json({ message: "update course failed", error: arrayError.message })
       throw arrayError
     }
     await CourseModel.findOneAndUpdate(
@@ -147,7 +147,7 @@ const updateSubSubject = async (req, res) => {
   try {
     const array = await req.body.array
     const arrayField = await req.body.arrayField
-    const ArrayPath = `CourseInformation.$.${array}.$[objcet].${arrayField}`
+    const ArrayPath = `CourseInformation.$.${array}.$[object].${arrayField}`
     const ArrayObject = {};
     ArrayObject[ArrayPath] = req.body.newValue
     const query = {
@@ -162,7 +162,7 @@ const updateSubSubject = async (req, res) => {
       query,
       { $set: ArrayObject },
       {
-        arrayFilters: [{ "objcet._id": { _id: req.body.array_id } }],
+        arrayFilters: [{ "object._id": { _id: req.body.array_id } }],
         upsert: true
       },
       (err, result) => {
@@ -192,14 +192,14 @@ const updateSubject = async (req, res) => {
     if (field === "topics" || field === "links") {
       throw new Error("you cant update arrays only static fields")
     }
-    const SubjectPath = `CourseInformation.$[objcet].${field}`
+    const SubjectPath = `CourseInformation.$[object].${field}`
     const SubjectField = {}
     SubjectField[SubjectPath] = req.body.newValue
     await CourseModel.findOneAndUpdate(
       { _id: req.body._id },
       { $set: SubjectField },
       {
-        arrayFilters: [{ "objcet._id": { _id: req.body.Subject_id } }],
+        arrayFilters: [{ "object._id": { _id: req.body.Subject_id } }],
         upsert: true
       },
       (err, result) => {
