@@ -2,11 +2,7 @@ import "./Class.css";
 import {WorkWeek,Month,Agenda,Inject,ScheduleComponent,Day,Week,ViewsDirective,ViewDirective} from "@syncfusion/ej2-react-schedule";
 import { loadCldr} from "@syncfusion/ej2-base";
 
-//לאדמין תינתן האפשרות לערוך ולשנות כיתות שתפוסות באמצעות שליחת בקשה לדטה בייס
-//במקרה שהכיתה תפוסה נשלח פוסט טרו ויזואלית נקבל וי בויו
-// לסטודנט תיהיה האפשרות רק לראות
-//  טבלה עם מספר הכיתות ושם הכיתות ,תפוסה\זמינה ,ושעות בהן היא תפוסה
-//
+
 const ClassScheduleComponent = () => {
   // const [myData, setMyData] = useState();
 
