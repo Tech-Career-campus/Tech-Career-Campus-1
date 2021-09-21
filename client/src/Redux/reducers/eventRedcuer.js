@@ -1,7 +1,6 @@
 import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT, GET_EVENTS } from '../actions/types';
 
 function eventsReducer(events = [], action) {
-    debugger
     switch (action.type) {
         case GET_EVENTS:
             return action.payload

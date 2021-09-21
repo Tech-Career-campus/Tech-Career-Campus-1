@@ -4,7 +4,7 @@ const staffController = require("../controller/staffController")
 const {authRole} = require('../controller/authentication/auth');
 
 router.get('/', staffController.getAllStaff);
-router.get('/getStaffById', staffController.getStaffById);
+router.get('/getStaffById/:id', staffController.getStaffById);
 router.delete('/',authRole("Staff"), staffController.deleteStaffById);
 router.put('/:id',authRole("Staff"), staffController.updateStaffById);
 

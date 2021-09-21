@@ -16,12 +16,18 @@ export const CREATE_STUDENT = "CREATE_STUDENT";
 export const DELETE_STUDENT = "DELETE_STUDENT";
 export const UPDATE_STUDENT = "UPDATE_STUDENT";
 
-//psots constatnts
+//forum constatnts
 
 export const CREATE = "CREATE";
 export const UPDATE = "UPDATE";
 export const DELETE = "DELETE";
 export const FETCH_ALL = "FETCH_ALL";
+export const START_LOADING = "START_LOADING";
+export const STOP_LOADING = "STOP_LOADING";
+export const FETCH_POST = "FETCH_POST";
+export const COMMENT = "COMMENT"
+
+
 
 //SYLLABUS
 
@@ -36,7 +42,11 @@ export const STAFF_ERRORS="STAFF_ERRORS"
 // Course
 
 // Courses
-export const GET_COURSES = "GET_COURSES"
+export const GET_COURSES = "GET_COURSES";
+export const CREATE_COURSE = "CREATE_COURSE";
+export const CREATE_COURSE_ERRORS = "CREATE_COURSE_ERRORS";
+
+
 
 //Course
 export const GET_COURSE = " GET_COURSE"

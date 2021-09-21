@@ -5,6 +5,8 @@ import { getStudent } from "../../../Redux/actions/studentActions";
 import EditGradesComponent from "../../Features/Grade/EditGradeComponent";
 import "./admin.css";
 import PageHeader from "../../Features/PageHeader/PageHeaderComponent";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
+
 const AdminGradesComponent = () => {
   const dispatch = useDispatch();
   const { students } = useSelector((state) => state.students);
@@ -18,7 +20,7 @@ const AdminGradesComponent = () => {
   return (
     <div className="admin-grade-contaniner">
       <div>
-        <PageHeader title={"ציוני סטודנטים"} />
+        <PageHeader title={hebrewVariables.studentsGrades} />
         <div className="wrap">
           <div className="search">
             <input className="search-term" type="text" />
@@ -38,10 +40,10 @@ const AdminGradesComponent = () => {
         <table className="table table-hover">
           <thead>
             <tr>
-              <th scope="col">שם פרטי</th>
-              <th scope="col">שם משפחה</th>
-              <th scope="col">קורס</th>
-              <th scope="col">ערוך</th>
+              <th scope="col">{hebrewVariables.firstName}</th>
+              <th scope="col">{hebrewVariables.lastName}</th>
+              <th scope="col">{hebrewVariables.course}</th>
+              <th scope="col">{hebrewVariables.edit}</th>
             </tr>
           </thead>
           <tbody>

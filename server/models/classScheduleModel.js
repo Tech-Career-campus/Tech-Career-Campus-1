@@ -3,16 +3,30 @@ const Schema = mongoose.Schema;
 
 const scheduleSchema = new Schema(
   {
-    className: {
-      type: String,
-      required: true,
-    },
+    days: {
+      type: [
+              {
+                hours: [
+                  {
+                    hour: {
+                      type: String,
+                      required: true
+                    },                           
+                    className: {
+                      type: String,
+                      required: true
+                    },
 
-    isTaken: {
-      type: Boolean,
-      required: true,
-      default:false
-    },
+                    isTaken: {
+                      type: Boolean,
+                      required: true,
+                      default: false
+                    },
+                  }
+                ]
+              }
+            ],
+          },
   },
   { timestamps: true }
 );

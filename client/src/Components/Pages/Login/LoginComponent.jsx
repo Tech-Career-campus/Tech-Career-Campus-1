@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./Login.css";
 import handleChange from "../../../utils/handleChange";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 
 const Login = () => {
   const { errors } = useSelector((state) => state.user);
@@ -121,17 +122,17 @@ const Login = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  טק קריירה
+                  {hebrewVariables.techCarrer}
                 </a>
               </h1>
             </div>
             <div className="formbg-outer">
               <div className="formbg">
                 <div className="formbg-inner padding-horizontal--48">
-                  <span className="padding-bottom--15">התחבר לחשבונך</span>
+                  <span className="padding-bottom--15">{hebrewVariables.login}</span>
                   <form id="stripe-login">
                     <div className="field padding-bottom--24">
-                      <label htmlFor="email">אימייל</label>
+                      <label htmlFor="email">{hebrewVariables.email}</label>
                       <input
                         type="email"
                         name="email"
@@ -157,7 +158,7 @@ const Login = () => {
                       <p className="errors">{errors?.password}</p>
                     </div>
                     <div>
-                      <p>התחבר כ</p>
+                      <p>{hebrewVariables.loginAs}</p>
                       <label>
                         <input
                           type="radio"
@@ -167,7 +168,7 @@ const Login = () => {
                           name="role"
                           value="Student"
                         />
-                        סטודנט
+                        {hebrewVariables.student}
                       </label>
                       <label>
                         <input
@@ -178,7 +179,7 @@ const Login = () => {
                           name="role"
                           value="Staff"
                         />
-                        צוות
+                        {hebrewVariables.staff}
                       </label>
                     </div>
                     <div className="field padding-bottom--24">
