@@ -21,8 +21,7 @@ const ForumPostComponents = ({post}) => {
   }
   return (
       <div className="chat-container">
-        comment section
-      <ul className="chat-thread">
+              <ul className="chat-thread">
       {comments.map((c,i)=>(
         <li  key={i}>
        <strong>{c.split(": ")[0]}: </strong> 

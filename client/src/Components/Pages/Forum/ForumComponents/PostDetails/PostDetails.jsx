@@ -27,9 +27,9 @@ const PostDetails = () => {
     <div className='post-details-media'>
       <div className="post-details-card">
         <div className="post-details-section">
-          <h3>כותרת: {post.data.title}</h3>
-          <h4>פוסט: {post.data.message}</h4>
-          <h4>נוצר על ידי: {post.data.firstName}</h4>
+          <h3><strong>כותרת:</strong> {post.data.title}</h3>
+          <h4><strong>פוסט:</strong> {post.data.message}</h4>
+          <h4><strong>נוצר על ידי:</strong> {post.data.firstName}</h4>
           <p>{moment(post.data.createdAt).fromNow()}</p>
           <hr style={{ margin: "20px 0" }} />
           <CommentSection post={post} />

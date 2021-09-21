@@ -154,8 +154,9 @@ export const commentPost = (id, value) => async (dispatch) => {
 };
 
 export const deletePost = (id) => async (dispatch) => {
+  dispatch({ type: START_LOADING });
   try {
-    await fetch(`http://localhost:8080/api/forum/${id}`, {
+    const data = await fetch(`http://localhost:8080/api/forum/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -163,12 +164,12 @@ export const deletePost = (id) => async (dispatch) => {
       },
     })
       .then((res) => res.json())
-      .then((res) =>
+      
         dispatch({
           type: DELETE,
-          payload: res.data.id,
+          payload:data.id,
         })
-      );
+        dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log(error);
   }
