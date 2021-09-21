@@ -19,18 +19,15 @@ const RegisterForm = ({ SetIsRegister }) => {
 
   const [newStudent, setNewStudent] = useState({
     registeredAs: "Student",
-    id: user.id,
+    id: user._id,
     courseId: course._id,
     courseName: course.name,
     password: password,
   });
 
   const [isSend, setIsSend] = useState(false);
-  useEffect(() => {
-    if (!errors) {
-      setIsSend(true);
-    }
-  }, []);
+ 
+
   return (
     <>
       {!isSend ? (
@@ -108,16 +105,3 @@ const RegisterForm = ({ SetIsRegister }) => {
 };
 export default RegisterForm;
 
-  //  <div>
-  //    <h3>
-  //      {newStudent.firstName} {newStudent.lastName} נרשם במערכת
-  //    </h3>
-  //    <p> נשלח מייל עם פרטי התחברות לכתובת {newStudent.email}</p>
-  //    <button
-  //      onClick={() => {
-  //        SetIsRegister();
-  //      }}
-  //    >
-  //      סגור
-  //    </button>
-  //  </div>;

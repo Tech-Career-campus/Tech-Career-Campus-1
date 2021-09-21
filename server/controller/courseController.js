@@ -239,7 +239,6 @@ const searchCorseAutocomplete = async (req, res) => {
               }
             
       ]).toArray();
-      console.log(result);
       res.send(result)
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -263,7 +262,7 @@ const getStudentsByCourse = async (req, res) => {
 };
 const deleteCourse = async (req,res)=>{
   try{
-    await CourseModel.findByIdAndDelete(req.body.id,(err,result)=>{
+    await CourseModel.findByIdAndDelete(req.params.id,(err,result)=>{
       if(err)throw err
       res.status(201).json({message:"success delete course",data:result})
     })

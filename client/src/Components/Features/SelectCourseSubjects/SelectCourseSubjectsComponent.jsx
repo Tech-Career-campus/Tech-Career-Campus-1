@@ -13,7 +13,6 @@ const SelectCourseSubjects = ({
   const [inputValue, setInputValue] = useState();
 
   useEffect(() => {
-    debugger
     fetcher(`http://localhost:8080/api/course/search?term=${corseType}`).then(
       (response) =>
         setCourseOptions(response ? response[0]?.CourseInformation : [])

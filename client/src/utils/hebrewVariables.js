@@ -58,6 +58,16 @@ export const hebrewVariables=
     testName:"שם מבחן",
     grade:"ציון",
     addTest:"הוסף מבחן",
-    login:"התחבר לחשבונך"
-
+    login:"התחבר לחשבונך",
+    courseName:"שם הקורס",
+    developer: "פיתוח",
+    devNetEngineers:"ניהול רשתות",
+    SOCAnalyst: "סייבר",
+    createNewSubject:"צור נושא חדש",
+    courseType:"סוג קורס",
+    currentPassword:"סיסמא נוכחית",
+    newPassword:"סיסמא חדשה",
+    confirmPassword:"אימות סיסמא",
+    updatePassword:"עדכן סיסמא",
+    CourseSchedule: "לוז קורס"
 } 

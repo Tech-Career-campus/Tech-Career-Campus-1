@@ -1,5 +1,7 @@
 const StaffModel = require("../models/staffModel");
 const { nullError } = require("../utils/nullError");
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const getAllStaff = async (req, res) => {
   try {
@@ -50,8 +52,11 @@ const updateStaffById = async (req, res) => {
     await StaffModel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
+      { new: true },
       (err, result) => {
-        nullError(result, res);
+        delete result.password
+        const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
+        res.status(200).json({ message: "success", data: result, result: token });
         if (err) throw err;
       }
     );
