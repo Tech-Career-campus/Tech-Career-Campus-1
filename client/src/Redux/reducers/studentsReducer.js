@@ -1,5 +1,6 @@
 import { CREATE_STUDENT, CREATE_STUDENT_ERRORS, DELETE_STUDENT, GET_STUDENTS, UPDATE_STUDENT } from '../actions/types'
 function studentsReducer(state = { students: [], errors: {} }, action) {
+    debugger
     switch (action.type) {
         case GET_STUDENTS:
             return { errors: {}, students: action.payload }

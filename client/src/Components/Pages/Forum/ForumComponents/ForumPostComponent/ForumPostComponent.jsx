@@ -11,8 +11,6 @@ const ForumPostComponent = ({ post, setCurrentId }) =>{
   const dispatch = useDispatch();
   const token = localStorage.getItem("jwtToken");
   const user = jwt_decode(token);
-  console.log(user);
-  console.log(post);
   return (
     <div className="card">
       <div className="media" title={post.title} />

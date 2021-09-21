@@ -10,8 +10,8 @@ export const getCourses = () => async dispatch => {
 }
 
 export const createCourse = (newCorse) => async dispatch => {
+    debugger
     try {
-        debugger
         await fetcher(`http://localhost:8080/api/course/addNewCourse`, {
             method: 'POST',
             body: JSON.stringify(newCorse)

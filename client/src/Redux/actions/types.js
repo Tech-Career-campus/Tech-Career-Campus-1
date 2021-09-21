@@ -1,6 +1,7 @@
 //User
 export const SET_USER = "SET_USER";
 export const SET_USER_ERRORS = "SET_USER_ERRORS";
+export const UPDATE_USER = "UPDATE_USER";
 
 //Student
 export const EDIT_GRADE = "EDIT_GRADE";
@@ -33,6 +34,7 @@ export const GET_STAFF_LIST="GET_STAFF_LIST"
 export const ADD_STAFF="ADD_STAFF"
 export const DELETE_STAFF="DELETE_STAFF"
 export const STAFF_ERRORS="STAFF_ERRORS"
+export const UPDATE_STAFF ="UPDATE_STAFF"
 // Course
 
 // Courses

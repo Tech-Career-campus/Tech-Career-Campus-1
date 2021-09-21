@@ -13,6 +13,6 @@ router.post('/', authRole("Staff"), courseController.addNewCourse);
 router.post('/addSubSubject', authRole("Staff"), courseController.addSubSubject);
 router.put('/updateSubSubject', authRole("Staff"), courseController.updateSubSubject);
 router.put('/updateSubject', authRole("Staff"), courseController.updateSubject);
-router.get('/students/:id',authRole("Staff"),courseController.getStudentsByCourse)
+router.get('/students/:id',courseController.getStudentsByCourse)
 
 module.exports = router;
