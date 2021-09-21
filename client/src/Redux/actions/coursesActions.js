@@ -6,6 +6,6 @@ export const getCourses =()=> async dispatch =>{
     .then(response=> dispatch({
         type: GET_COURSES,
         payload:response.data
-    }))
+    })).catch(error =>console.log(error))
 }
 

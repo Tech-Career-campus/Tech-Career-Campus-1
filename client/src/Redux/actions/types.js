@@ -26,6 +26,8 @@ export const FETCH_ALL = "FETCH_ALL";
 //SYLLABUS
 
 export const GET_SYLLABUS="GET_SYLLABUS"
+export const UPDATE_SYLLABUS="UPDATE_SYLLABUS"
+export const UPDATE_SUB_SUBJECT = "UPDATE_SUB_SUBJECT"
 
 //Staff
 
