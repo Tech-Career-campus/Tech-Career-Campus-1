@@ -12,7 +12,6 @@ const Students = () => {
   const { user } = useSelector((state) => state.user);
 const dispatch = useDispatch()
   useEffect(()=> {
-    debugger
     if (user.role === "Student") dispatch(getStudents(user.courseId));
   }, [])
   const [isRegister, SetIsRegister] = useState(false);

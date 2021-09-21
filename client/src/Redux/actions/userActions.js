@@ -38,7 +38,6 @@ export const getUser = (loginInfo) => async dispatch => {
 
 export const updateUser = (updateData) => async dispatch => {
     const { _id } = { ...updateData };
-debugger
     const basicStaff = `http://localhost:8080/api/staff/`
     const basicStudent = `http://localhost:8080/api/student/updateStudent/`
     await fetcher(`${updateData.role === 'Staff' ? basicStaff : basicStudent}${_id}`, {
