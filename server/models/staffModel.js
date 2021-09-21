@@ -48,7 +48,6 @@ const staffSchema = new Schema(
       default: "",
     },
     courses: [{ type: Schema.Types.ObjectId, ref: "course"}],
-    events: [{ type: Schema.Types.ObjectId, ref: "event" }],
     messages: [{ type: Schema.Types.ObjectId, ref: "forum" }]
   },
   { timestamps: true }
