@@ -1,56 +1,115 @@
-import { FETCH_ALL, UPDATE, CREATE, DELETE } from "../actions/types";
+import fetcher from "../../utils/fetcher";
+import {
+  FETCH_ALL,
+  UPDATE,
+  CREATE,
+  DELETE,
+  START_LOADING,
+  STOP_LOADING,
+  FETCH_POST,
+  COMMENT,
+} from "../actions/types";
+import jwt_decode from "jwt-decode";
 
-export const getPosts = () => async (dispatch) => {
-  try {
-    await fetch("http://localhost:8080/api/forum" , {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`,
-      },
-    }).then((res) => res.json())
-    .then((res) =>
+export const getPost = (id) => async (dispatch) => {
+  dispatch({ type: START_LOADING });
+  await fetcher(`http://localhost:8080/api/forum/${id}`)
+    .then((response) => {
+      dispatch({
+        type: FETCH_POST,
+        payload: response,
+      });
+    })
+    .catch((err) => console.log(err));
+  dispatch({ type: STOP_LOADING });
+};
+
+export const getPosts = (page) => async (dispatch) => {
+  dispatch({ type: START_LOADING });
+  await fetcher(`http://localhost:8080/api/forum?page=${page}`)
+    .then((response) => {
       dispatch({
         type: FETCH_ALL,
-        payload: res.data,
-      }))
+        payload: response,
+      });
+    })
+    .catch((err) => console.log(err));
+  dispatch({ type: STOP_LOADING });
+};
+
+export const createPostStaff = (post, history) => async (dispatch) => {
+  dispatch({ type: START_LOADING });
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
+  try {
+    await fetch(`http://localhost:8080/api/forum/staff`, {
+      method: "POST",
+      body: JSON.stringify({
+        post,
+        _id: user._id,
+        role: user.role,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        dispatch({
+          type: CREATE,
+          payload: res.data,
+        });
+        history.push(`/forum/${res.data._id}`);
+      });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const createPost = (post) => async (dispatch) => {
+export const createPostStudent = (post, history) => async (dispatch) => {
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
   try {
-    await fetch(`http://localhost:8080/api/forum/staff`, {
+    await fetch(`http://localhost:8080/api/forum/student`, {
       method: "POST",
-      body: JSON.stringify( {post:post, _id: "612416b7721110539c4ebf44",
-      role: "Staff",} ),
+      body: JSON.stringify({
+        post,
+        _id: user._id,
+        role: user.role,
+      }),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
       },
     })
       .then((res) => res.json())
-      .then((res) =>
+      .then((res) => {
         dispatch({
           type: CREATE,
           payload: res.data,
-        })
-      );
+        });
+        history.push(`/forum/${res.data._id}`);
+      });
   } catch (error) {
     console.log(error);
   }
 };
 
 export const updatePost = (id, post) => async (dispatch) => {
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
   try {
     await fetch(`http://localhost:8080/api/forum/${id}`, {
       method: "PUT",
-      body: JSON.stringify( {post, _id: "612416b7721110539c4ebf44",
-      role: "Staff",} ),
+      body: JSON.stringify({
+        post,
+        _id: user._id,
+        role: user.role,
+      }),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
       },
     })
       .then((res) => res.json())
@@ -60,27 +119,57 @@ export const updatePost = (id, post) => async (dispatch) => {
           payload: res.data,
         })
       );
-  } catch (error) { 
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const commentPost = (id, value) => async (dispatch) => {
+  const token = localStorage.getItem("jwtToken");
+  const user = jwt_decode(token);
+  try {
+    const data = await fetch(`http://localhost:8080/api/forum/${id}/commentPost`, {
+      method: "POST",
+      body: JSON.stringify({
+        value,
+        _id: user._id,
+        role: user.role,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    }).then((res) => res.json())
+     
+        dispatch({
+          type: COMMENT,
+          payload: data,
+        });
+       
+     return data.comments
+      
+  } catch (error) {
     console.log(error);
   }
 };
 
 export const deletePost = (id) => async (dispatch) => {
+  dispatch({ type: START_LOADING });
   try {
-    await fetch(`http://localhost:8080/api/forum/${id}`, {
+    const data = await fetch(`http://localhost:8080/api/forum/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
       },
     })
       .then((res) => res.json())
-      .then((res) =>
+      
         dispatch({
           type: DELETE,
-          payload: res.data.id,
+          payload:data.id,
         })
-      );
+        dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log(error);
   }

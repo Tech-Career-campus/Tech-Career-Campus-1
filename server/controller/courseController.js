@@ -239,7 +239,6 @@ const searchCorseAutocomplete = async (req, res) => {
               }
             
       ]).toArray();
-      console.log(result);
       res.send(result)
   } catch (error) {
     res.status(500).json({ error: error.message })

@@ -1,10 +1,10 @@
 const StaffModel = require("../../models/staffModel");
 const StudentModel = require("../../models/studentModel");
 const CourseModel = require("../../models/courseModel");
-const path = require("path")
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
-const { SendEmails } = require("../../utils/SendEmails")
+const { SendEmails } = require("../../utils/SendEmails");
+const path = require("path")
 
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
