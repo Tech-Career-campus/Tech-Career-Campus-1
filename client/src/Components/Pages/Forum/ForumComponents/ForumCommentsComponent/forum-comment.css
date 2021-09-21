@@ -1,16 +1,16 @@
 .chat-container{
-    height: 800px;
+    height: fit-content;
  
 }
 
-::-webkit-scrollbar {
+.chat-container ::-webkit-scrollbar {
     width: 10px;
 }
-::-webkit-scrollbar-track {
+.chat-container ::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: rgba(147, 60, 25, 0.1);
 }
-::-webkit-scrollbar-thumb {
+.chat-container ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(147, 60, 25, 0.2);
 }
@@ -51,7 +51,7 @@
     height: 0;
     border-top: 15px solid rgba(25, 147, 147, 0.2);
 }
-.chat-thread li:nth-child(odd) {
+.chat-thread li {
     animation: show-chat-odd 0.15s 1 ease-in;
     -moz-animation: show-chat-odd 0.15s 1 ease-in;
     -webkit-animation: show-chat-odd 0.15s 1 ease-in;
@@ -59,33 +59,17 @@
     margin-right: 80px;
     color: #d56c0a;
 }
-.chat-thread li:nth-child(odd):before {
+.chat-thread li:before {
     right: -80px;
     background-color: yellow;
 }
-.chat-thread li:nth-child(odd):after {
+.chat-thread li:after {
     border-right: 15px solid transparent;
     right: -15px;
 }
-.chat-thread li:nth-child(even) {
-    animation: show-chat-even 0.15s 1 ease-in;
-    -moz-animation: show-chat-even 0.15s 1 ease-in;
-    -webkit-animation: show-chat-even 0.15s 1 ease-in;
-    float: left;
-    margin-left: 80px;
-    color: #ffe15a;
-}
-.chat-thread li:nth-child(even):before {
-    left: -80px;
-    background-color: red;
-}
-.chat-thread li:nth-child(even):after {
-    border-left: 15px solid transparent;
-    left: -15px;
-}
+
 .chat-window {
-    position: fixed;
-    bottom: 200px;
+    margin: auto;
 }
 .chat-window-message {
     width: 100%;

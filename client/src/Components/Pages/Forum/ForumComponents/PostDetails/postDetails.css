@@ -1,8 +1,12 @@
 .post-details-media {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
   border-radius: "20px";
   object-fit: "cover";
-  width: "100%";
+  width: "60vw";
   max-height: "600px";
+  
 }
 .post-details-card {
   display: "flex";

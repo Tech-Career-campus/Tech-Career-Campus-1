@@ -7,13 +7,12 @@ import {
   START_LOADING,
   STOP_LOADING,
   FETCH_POST,
+  COMMENT,
 } from "../actions/types";
 import jwt_decode from "jwt-decode";
 
 export const getPost = (id) => async (dispatch) => {
   dispatch({ type: START_LOADING });
-  const token = localStorage.getItem("jwtToken");
-  const user = jwt_decode(token);
   await fetcher(`http://localhost:8080/api/forum/${id}`)
     .then((response) => {
       dispatch({
@@ -27,8 +26,6 @@ export const getPost = (id) => async (dispatch) => {
 
 export const getPosts = (page) => async (dispatch) => {
   dispatch({ type: START_LOADING });
-  const token = localStorage.getItem("jwtToken");
-  const user = jwt_decode(token);
   await fetcher(`http://localhost:8080/api/forum?page=${page}`)
     .then((response) => {
       dispatch({
@@ -127,9 +124,36 @@ export const updatePost = (id, post) => async (dispatch) => {
   }
 };
 
-export const deletePost = (id) => async (dispatch) => {
+export const commentPost = (id, value) => async (dispatch) => {
   const token = localStorage.getItem("jwtToken");
   const user = jwt_decode(token);
+  try {
+    const data = await fetch(`http://localhost:8080/api/forum/${id}/commentPost`, {
+      method: "POST",
+      body: JSON.stringify({
+        value,
+        _id: user.id,
+        role: user.role,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+      },
+    }).then((res) => res.json())
+     
+        dispatch({
+          type: COMMENT,
+          payload: data,
+        });
+       
+     return data.comments
+      
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deletePost = (id) => async (dispatch) => {
   try {
     await fetch(`http://localhost:8080/api/forum/${id}`, {
       method: "DELETE",

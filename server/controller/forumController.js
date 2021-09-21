@@ -10,7 +10,7 @@ const messagesByStaff = async (req, res) => {
     email: req.body.post.email,
     title: req.body.post.title,
     message: req.body.post.message,
-    authorByStaff:staff._id ,
+    authorByStaff: staff._id,
   });
   try {
     await newMessages.save();
@@ -34,7 +34,7 @@ const messagesByStudent = async (req, res) => {
     email: req.body.post.email,
     title: req.body.post.title,
     message: req.body.post.message,
-   authorByStudent: student.id,
+    authorByStudent: student.id,
   });
   try {
     await newMessages.save();
@@ -97,19 +97,29 @@ const updateMessage = async (req, res) => {
     res.json({ message: "problem with update", error: err });
   }
 };
- const getPost = async(req,res)=>{
+const getPost = async (req, res) => {
   try {
     await ForumModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      res.json({ message: "delete message success", data: result });
+      res.json({ message: "got message success", data: result });
     });
   } catch (err) {
     res.json({ message: "problem with update", error: err });
   }
+};
+const commentPost = async (req, res) => {
+  const { value } = req.body;
+  const post = await ForumModel.findById(req.params.id);
 
-}
+  post.comments.push(value);
+  const updatedPost = await ForumModel.findByIdAndUpdate(req.params.id, post, {
+    new: true,
+  });
+  res.json(updatedPost)
+};
 
 module.exports = {
+  commentPost,
   getPost,
   messagesByStaff,
   messagesByStudent,
