@@ -1,61 +1,98 @@
 const eventModel = require("../models/eventModel");
 const staffModel = require("../models/staffModel");
-const {nullError} = require("../utils/nullError")
+const { nullError } = require("../utils/nullError")
 const { ObjectId } = require("mongodb");
 
 const getAllEventPost = async (req, res) => {
   try {
-    await eventModel.find({}, (error, result) => {
-      if (error) throw error;
-      res.status(200).json({ massage: "get event post success", data: result });
+    await eventModel.find({}, (err, result) => {
+      if (err) throw err;
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "get event post success",
+          data: result
+        });
     });
   } catch (err) {
-    res.status(500).json({ massage: "get event post field", error: err });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "get event post field",
+        error: err
+      });
   }
 };
 
 const getEventById = async (req, res) => {
   try {
-    await eventModel.findById(req.params.id, (error, result) => {
-      if (error) throw error;
+    await eventModel.findById(req.params.id, (err, result) => {
+      if (err) throw err;
       res
         .status(200)
-        .json({ massage: "get event by id success", data: result });
+        .json({
+          success: true,
+          message: "get event by id success",
+          data: result
+        });
     });
-  } catch (error) {
-    res.status(500).json({ massage: "get event by id field  ", error: error });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "get event by id field",
+        error: err
+      });
   }
 };
 
 const postNewEvent = async (req, res) => {
   const staff = await staffModel.findById(req.params.id);
-  const { eventName, massage } = req.body;
-  const newevent = new eventModel({
+  const { eventName, message } = req.body;
+  const newEvent = new eventModel({
     eventName: eventName,
-    massage: massage,
+    message: message,
   });
   try {
-    await newevent.save();
-    staff.events.push(newevent);
+    await newEvent.save();
+    staff.events.push(newEvent);
     await staff.save();
-    res.status(200).json({
-      massage: "post added successfully, success",
-      data: newevent,
-    });
+    res
+      .status(201)
+      .json({
+        success: true,
+        message: "post added successfully, success",
+        data: newEvent,
+      });
   } catch (err) {
-    res.status(500).json({ massage: "post added field ", error: err });
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "post added field ",
+        error: err
+      });
   }
 };
 
 const deleteEventPost = async (req, res) => {
   try {
-    await eventModel.findByIdAndRemove(req.params.id,(error, result) => {
-      nullError(result , res);
-      if (error) throw error;
-     
+    await eventModel.findByIdAndRemove(req.params.id, (err, result) => {
+      nullError(result, res);
+      if (err) throw err;
+
     });
-  } catch (error) {
-    res.status(500).json({ massage: "deleted event field", error: error });
+  } catch (err) {
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "deleted event field",
+        error: err
+      });
   }
 };
 
@@ -63,13 +100,25 @@ const updateEventPost = async (req, res) => {
   try {
     await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
-      (error, result) => {
-        if (error) throw error;
-        res.status(200).json({ massage: "update event success", data: result });
+      (err, result) => {
+        if (err) throw err;
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "update event success",
+            data: result
+          });
       }
     );
-  } catch (error) {
-    res.status(500).json({ massage: "update event field", error: error });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "update event field",
+        error: err
+      });
   }
 };
 module.exports = {

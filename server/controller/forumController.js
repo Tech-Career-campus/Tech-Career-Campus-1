@@ -4,7 +4,14 @@ const StudentModel = require("../models/studentModel");
 
 const messagesByStaff = async (req, res) => {
   const staff = await StaffModel.findById(req.body._id);
-  console.log(staff);
+  if (!staff) {
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "staff not fond",
+      });
+  }
   const newMessages = new ForumModel({
     firstName: req.body.post.firstName,
     email: req.body.post.email,
@@ -18,16 +25,31 @@ const messagesByStaff = async (req, res) => {
     await staff.save();
     res
       .status(201)
-      .json({ message: "create new message success", data: newMessages });
-  } catch (error) {
-    res.status(500).json({ message: "create new message filed", error: error });
+      .json({
+        success: true,
+        message: "create new message success",
+        data: newMessages
+      });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "create new message filed",
+        error: err
+      });
   }
 };
 
 const messagesByStudent = async (req, res) => {
   const student = await StudentModel.findById(req.body.id);
   if (!student) {
-    return res.status(500).json({ message: "student not fond", error: error });
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "student not fond",
+      });
   }
   const newMessages = new ForumModel({
     firstName: req.body.post.firstName,
@@ -42,9 +64,19 @@ const messagesByStudent = async (req, res) => {
     await student.save();
     res
       .status(201)
-      .json({ message: "create new message success", data: newMessages });
-  } catch (error) {
-    res.status(500).json({ message: "create new message filed", error: error });
+      .json({
+        success: true,
+        message: "create new message success",
+        data: newMessages
+      });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "create new message filed",
+        error: err
+      });
   }
 };
 const getAllMessages = async (req, res) => {
@@ -55,19 +87,28 @@ const getAllMessages = async (req, res) => {
     const total = await ForumModel.countDocuments({});
 
     await ForumModel.find({}, (err, result) => {
-      if (err) console.log(err);
-      res.json({
-        message: "success",
-        data: result,
-        currentPage: Number(page),
-        numberOfPages: Math.ceil(total / LIMIT),
-      });
+      if (err) throw err;
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "success",
+          data: result,
+          currentPage: Number(page),
+          numberOfPages: Math.ceil(total / LIMIT),
+        });
     })
       .sort({ _id: -1 })
       .limit(LIMIT)
       .skip(startIndex);
   } catch (err) {
-    res.json({ message: "problem in database", error: err });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "problem in database",
+        error: err
+      });
   }
 };
 
@@ -75,10 +116,22 @@ const deleteMessage = async (req, res) => {
   try {
     await ForumModel.findByIdAndDelete(req.params.id, (err, result) => {
       if (err) throw err;
-      res.json({ message: "delete message success", data: result });
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "delete message success",
+          data: result
+        });
     });
   } catch (err) {
-    res.json({ message: "problem with update", error: err });
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "delete message failed",
+        error: err
+      });
   }
 };
 const updateMessage = async (req, res) => {
@@ -90,21 +143,45 @@ const updateMessage = async (req, res) => {
       { new: true },
       (err, result) => {
         if (err) throw err;
-        res.json({ message: "updated message success", data: result });
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "updated message success",
+            data: result
+          });
       }
     );
   } catch (err) {
-    res.json({ message: "problem with update", error: err });
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "problem with update",
+        error: err
+      });
   }
 };
 const getPost = async (req, res) => {
   try {
     await ForumModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      res.json({ message: "got message success", data: result });
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "get message success",
+          data: result
+        });
     });
   } catch (err) {
-    res.json({ message: "problem with update", error: err });
+    res
+    status(400)
+      .json({
+        success: false,
+        message: "get message failed",
+        error: err
+      });
   }
 };
 const commentPost = async (req, res) => {

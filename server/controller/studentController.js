@@ -8,36 +8,68 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const getStudent = async (req, res) => {
   try {
     await StudentModel.findById(req.params.id, (err, result) => {
-      if (err) console.log(err);
-      res.status(200).json({ massage: "get Student success!", data: result });
+      if (err) throw err;
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "get Student success!",
+          data: result
+        });
     });
   } catch (err) {
-    res.status(500).json({ massage: "get Student field", error: err });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "get Student field",
+        error: err
+      });
   }
 };
 const getStudents = async (req, res) => {
   try {
     await StudentModel.find({}, (err, result) => {
-      if (error) throw error;
-      res.status(200).json({ massage: "get Students success!", data: result });
+      if (err) throw err;
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "get Students success!",
+          data: result
+        });
     });
   } catch (err) {
-    res.status(500).json({ massage: "get Students field", error: err });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "get Students field",
+        error: err
+      });
   }
 };
 
 const getStudentGradeById = async (req, res) => {
   try {
-    StudentModel.findById(req.params.id, (error, result) => {
-      if (error) throw error;
+    StudentModel.findById(req.params.id, (err, result) => {
+      if (err) throw err;
       res
         .status(200)
-        .json({ massage: "get Student grades by id success!", data: result.tests });
+        .json({
+          success: true,
+          message: "get Student grades by id success!",
+          data: result.tests
+        });
     });
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "get Student grades by id failed", error: err });
+      .json({
+        success: false,
+        message: "get Student grades by id failed",
+        error: err
+      });
   }
 };
 
@@ -47,12 +79,13 @@ const addStudentTestById = async (req, res) => {
       req.body.id,
       { $addToSet: { tests: { name: req.body.name, grade: req.body.grade } } },
       { new: true },
-      (error, result) => {
-        if (error) throw error;
+      (err, result) => {
+        if (err) throw err;
         res
           .status(200)
           .json({
-            massage: "add test to a student by name was a success",
+            success: true,
+            message: "add test to a student by name was a success",
             data: result.tests,
           });
       }
@@ -60,7 +93,11 @@ const addStudentTestById = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "adding a test to the test array failed", error: err });
+      .json({
+        success: false,
+        message: "adding a test to the test array failed",
+        error: err
+      });
   }
 };
 
@@ -69,12 +106,13 @@ const updateStudentTestById = async (req, res) => {
     await StudentModel.findOneAndUpdate(
       { _id: req.params._id, tests: { $elemMatch: { _id: req.body.id } } },
       { $set: { "tests.$.grade": req.body.grade } }, { new: true },
-      (error, result) => {
-        if (error) throw error;
+      (err, result) => {
+        if (err) throw err;
         res
           .status(200)
           .json({
-            massage: "updating a student test was a success",
+            success: true,
+            message: "updating a student test was a success",
             data: result.tests,
           });
       }
@@ -82,7 +120,11 @@ const updateStudentTestById = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "updating a student test faild", error: err });
+      .json({
+        success: false,
+        message: "updating a student test failed",
+        error: err
+      });
   }
 };
 
@@ -92,12 +134,13 @@ const deleteStudentTestById = async (req, res) => {
       req.params._id,
       { $pull: { tests: { _id: req.body.id } } },
       { new: true },
-      (error, result) => {
-        if (error) throw error;
+      (err, result) => {
+        if (err) throw err;
         res
           .status(200)
           .json({
-            massage: "deleting a student test was a success",
+            success: true,
+            message: "deleting a student test success",
             data: result.tests,
           });
       }
@@ -105,7 +148,11 @@ const deleteStudentTestById = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "deleting a student test faild", error: err });
+      .json({
+        success: true,
+        message: "deleting a student test failed",
+        error: err
+      });
   }
 };
 const updateStudent = async (req, res) => {
@@ -115,30 +162,46 @@ const updateStudent = async (req, res) => {
       throw new Error("you cant update arrays only static fields")
     }
     await StudentModel.findByIdAndUpdate(
-       req.params.id ,
-      { $set: req.body},
+      req.params.id,
+      { $set: req.body },
       { new: true },
       (err, result) => {
         delete result.password
 
         const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
-        res.status(200).json({ message: "success", data: result, result: token });
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "success",
+            data: token
+          });
 
         if (err) throw err;
         // if (result !== null) {
         //   res
         //     .status(200)
-        //     .json({ message: "update student  was success!", data: result });
+        //     .json({
+        // success:true,
+        //  message: "update student  was success!",
+        //   data: result 
+        // });
         // } else {
         //   const errorNull = new Error("result is null");
         //   res
         //     .status(500)
-        //     .json({ message: "update student  faild", error: errorNull.message });
+        //     .json({ message: "update student  failed", error: errorNull.message });
         // }
       }
     );
   } catch (err) {
-    res.status(500).json({ message: "update student  faild", error: err.message });
+    res
+      .status(400)
+      .json({
+        success: true,
+        message: "update student failed",
+        error: err
+      });
   }
 
 };
@@ -150,30 +213,56 @@ const deleteStudent = async (req, res) => {
       if (result !== null) {
         res
           .status(200)
-          .json({ message: "delete student  was success!", data: result });
+          .json({
+            success: true,
+            message: "delete student  was success!",
+            data: result
+          });
       } else {
         const errorNull = new Error("result is null");
         res
           .status(500)
-          .json({ message: "delete student  faild", error: errorNull.message });
+          .json({
+            success: false,
+            message: "delete student failed",
+            error: errorNull.message
+          });
       }
     }
   );
 }
 const getSyllabusByCourse = async (req, res) => {
   try {
-      await StudentModel.findById(req.body.id)
-          .populate('courseId')
-          .then(student => {
-              res.status(201).json({ massage: 'The student is ', data: student})
+    await StudentModel.findById(req.body.id)
+      .populate('courseId')
+      .then(student => {
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: 'The student is ',
+            data: student
           })
-          .catch(err => {
-              res.status(500).json({ massage: 'error with population', data: err });
-          })
+      })
+      .catch(err => {
+        res
+          .status(400)
+          .json({
+            success: true,
+            message: 'error with population',
+            error: err
+          });
+      })
 
   }
   catch (err) {
-      res.status(500).json({ massage: "wrong", error: err })
+    res
+      .status(500)
+      .json({
+        success: true,
+        message: "wrong",
+        error: err
+      })
   }
 }
 module.exports = {

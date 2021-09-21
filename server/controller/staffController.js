@@ -10,17 +10,29 @@ const getAllStaff = async (req, res) => {
       if (err) throw err;
     });
   } catch (err) {
-    res.status(500).json({ massage: "find staff filed", data: error });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "find staff filed",
+        error: err
+      });
   }
 };
 const getStaffById = async (req, res) => {
   try {
     await StaffModel.findById(req.params.id, (err, result) => {
-       nullError(result , res);
-       if (err) throw err;
+      nullError(result, res);
+      if (err) throw err;
     });
-  } catch (error) {
-    res.status(500).json({ massage: "find by id staff filed", data: error });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "find by id staff filed",
+        error: err
+      });
   }
 };
 
@@ -32,8 +44,14 @@ const getStaffById = async (req, res) => {
 //     });
 //     const staff = await StaffModel.findById(id);
 //     return staff;
-//   } catch (error) {
-//     res.status(500).json({ massage: "find by id staff filed", data: error });
+//   } catch (err) {
+//     res
+// .status(500)
+//   .json({
+//     success: false,
+//     message: "find by id staff filed",
+//     error: err
+//   });
 //   }
 // };
 
@@ -43,8 +61,14 @@ const deleteStaffById = async (req, res) => {
       nullError(result, res);
       if (err) throw err;
     });
-  } catch (error) {
-    res.status(500).json({ massage: "delete by id staff filed", data: error });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "delete by id staff filed",
+        error: err
+      });
   }
 };
 const updateStaffById = async (req, res) => {
@@ -54,14 +78,26 @@ const updateStaffById = async (req, res) => {
       { $set: req.body },
       { new: true },
       (err, result) => {
+        if (err) throw err;
         delete result.password
         const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
-        res.status(200).json({ message: "success", data: result, result: token });
-        if (err) throw err;
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "success",
+            data: token
+          });
       }
     );
-  } catch (error) {
-    res.status(500).json({ massage: "update staff filed", data: error });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "update staff filed",
+        error: err
+      });
   }
 };
 
