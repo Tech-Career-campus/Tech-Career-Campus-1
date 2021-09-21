@@ -4,14 +4,14 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(74, 81, 87);
+    background-color: #73777e;
     color: white;
     width: 100vw;
     height: 280px;
 }
 
 .footer{
-    background-color: rgb(74, 81, 87);
+    background-color: #73777e;
     width: 100vw;
     height: 50px;
     display: flex;
@@ -132,12 +132,13 @@ display: flex;
 align-items: flex-start;
 flex-direction: column;
 font-size: 18px;
-color: white; 
+color: white;
+font-weight: 600; 
 /* border: 1px solid black; */
 
 }
 .Line{
-     border: 1px solid rgb(121, 121, 121);
+     border: 1px solid rgb(89, 92, 100);
      width: 1000px;
 }
 

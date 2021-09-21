@@ -3,33 +3,32 @@ const Schema = mongoose.Schema;
 
 const forumSchema = new Schema(
   {
-
-    firstName:{
-      type:String
+    firstName: {
+      type: String,
     },
-    email:{
-      type:String
+    email: {
+      type: String,
     },
-    title:{
-      type:String
+    title: {
+      type: String,
     },
     message: {
       type: String,
-      required:true
+      required: true,
     },
     expireAt: {
       type: Date,
       required: true,
       default: Date.now,
-      index: { expires: '90d' }
+      index: { expires: "90d" },
     },
+    comments: { type: [String], default: [] },
     authorByStudent: { type: Schema.Types.ObjectId, ref: "student" },
     authorByStaff: { type: Schema.Types.ObjectId, ref: "staff" },
-    comments:[{ type: Schema.Types.ObjectId, ref: "student" }]
+   // comments: [{ type: Schema.Types.ObjectId, ref: "student" }],
   },
   { timestamps: true }
 );
 
 const Forum = mongoose.model("forum", forumSchema);
 module.exports = Forum;
- 

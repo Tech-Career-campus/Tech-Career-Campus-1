@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost, updatePost } from "../../../Redux/actions/postsActions";
+import {
+  createPostStaff,
+  createPostStudent,
+  updatePost,
+} from "../../../../../Redux/actions/postsActions";
 import jwt_decode from "jwt-decode";
+import { useHistory } from "react-router-dom";
 import "./form.css";
 const ForumFormComponent = ({ currentId, setCurrentId }) => {
+  const history = useHistory();
   const [postData, setPostData] = useState({
     title: "",
     message: "",
   });
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+    currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
   const dispatch = useDispatch();
   const token = localStorage.getItem("jwtToken");
@@ -30,14 +36,23 @@ const ForumFormComponent = ({ currentId, setCurrentId }) => {
         })
       );
     } else {
+      if(user?.role === "Staff"){
       dispatch(
-        createPost({
+        createPostStaff({
           ...postData,
           firstName: user?.firstName,
           email: user?.email,
-        })
+        }, history)
       );
-    }
+    }else{
+      dispatch(
+        createPostStudent({
+          ...postData,
+          firstName: user?.firstName,
+          email: user?.email,
+        }, history)
+      );
+    }}
     clear();
   };
   const clear = () => {
