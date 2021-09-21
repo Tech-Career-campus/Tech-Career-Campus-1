@@ -7,7 +7,6 @@ const ChooseCourse = () => {
   const dispatch = useDispatch();
   const {courses} = useSelector((state) => state.courses);
    const { user } = useSelector((state) => state.user);
-   console.log(courses)
    useEffect(() => {
      if (user.role === "Staff") dispatch(getCourses());
    }, [dispatch, user]);

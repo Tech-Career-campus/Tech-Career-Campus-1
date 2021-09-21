@@ -22,7 +22,6 @@ const AddGrade = ({ studentId }) => {
         value={newTest.name}
         name={"name"}
         onChange={(e) => handleChange(e, newTest, setNewTest)}
-        required
       />
       <label>{hebrewVariables.grade}</label>
       <input
@@ -31,12 +30,16 @@ const AddGrade = ({ studentId }) => {
         placeholder={hebrewVariables.grade}
         name={"grade"}
         onChange={(e) => handleChange(e, newTest, setNewTest)}
-        required
       />
       <button
         className="btn"
-        onClick={(e) => {
+        onClick={() => {
           dispatch(addTest(newTest));
+          setNewTest({
+            grade: "",
+            name: "",
+            studentId,
+          });
         }}
       >
         {hebrewVariables.addTest}

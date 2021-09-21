@@ -3,7 +3,8 @@ const StudentModel = require("../../models/studentModel");
 const CourseModel = require("../../models/courseModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
-const { SendEmails } = require("../../utils/SendEmails")
+const { SendEmails } = require("../../utils/SendEmails");
+const path = require("path")
 
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
@@ -32,11 +33,14 @@ const register = async (req, res) => {
             phone: phone,
             password: req.body.password,
             age: age,
-            role: role !=='Student'?role:'Staff',
+            role: role !== 'Student' ? role : 'Staff',
             profileImg: profileImg ? profileImg : "",
-            IdNumber: IdNumber? IdNumber: ""
+            IdNumber: IdNumber ? IdNumber : ""
           });
           try {
+            if (req.file) {
+              newStaff.profileImg = req.file.path;
+            }
             await newStaff.save();
             res.status(201).json({
               success: true,
@@ -96,9 +100,9 @@ const register = async (req, res) => {
             age: age,
             courseName: courseName,
             courseId: course._id,
-            role: role !== 'Staff'?role:'Student',
+            role: role !== 'Staff' ? role : 'Student',
             profileImg: profileImg ? profileImg : "",
-            IdNumber: IdNumber? IdNumber: ""
+            IdNumber: IdNumber ? IdNumber : ""
           });
           try {
             if (req.file) {

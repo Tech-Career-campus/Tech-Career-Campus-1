@@ -30,7 +30,7 @@ const Events = () => {
     const hendleChange = (e) => {
         setNewEvent(
             {
-                ...newEvent, userId: user.id,
+                ...newEvent, userId: user._id,
                 [e.target.name]: e.target.value
             }
         )
