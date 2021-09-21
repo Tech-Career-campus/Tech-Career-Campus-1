@@ -9,7 +9,7 @@ const logout = () => {
   localStorage.removeItem("jwtToken");
   window.location.href = "./";
 };
-//Ticker moving news
+
 const Navbar = () => {
   const [editProfile, setEditProfile] = useState(false)
   const { user } = useSelector((state) => state.user);

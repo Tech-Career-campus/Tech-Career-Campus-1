@@ -21,7 +21,7 @@ const SyllabusComponent = () => {
       {
         <>
           <h1>{syllabus.name}</h1>
-          <Timeline>
+          <Timeline position="alternate">
             {syllabus?.CourseInformation?.map((courseItem) => {
               return (
                 <>
@@ -31,20 +31,20 @@ const SyllabusComponent = () => {
                       <TimelineConnector />
                     </TimelineSeparator>
                     <TimelineContent>
-                      <Paper elevation={3}>
+                      <Paper elevation={6} style={{backgroundColor:'#f1f1f1'}} >
                         <Typography variant="h6" component="h1">
                           <h2>{courseItem.nameSubject}</h2>
                         </Typography>
-                        <Typography>
-                          <h4>
-                            <ul>
+                        <Typography style={{padding:'20px'}} sx={{ m: 3 }}>
+                          <h4> 
+                            <ul style={{listStyleType:'none',}}>
                               {courseItem.topics.map((topic, index) => {
                                 return <li key={index}>{topic.subject}</li>;
                               })}
                             </ul>
                           </h4>
                           <p>{courseItem.summery}</p>
-                          <ul>
+                          <ul style={{listStyleType:'none'}}>
                             <h3>Links:</h3>
                             {courseItem.links.map((link) => {
                               return (

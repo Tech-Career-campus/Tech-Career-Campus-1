@@ -260,7 +260,16 @@ const getStudentsByCourse = async (req, res) => {
     res.status(500).json({ massage: "wrong", error: err })
   }
 };
-
+// const deleteCorsById = async (req, res) => {
+//   try {
+//     await CourseModel.findByIdAndRemove(req.params.id, (err, result) => {
+//       nullError(result, res);
+//       if (err) throw err;
+//     });
+//   } catch (error) {
+//     res.status(500).json({ massage: "delete by id staff filed", data: error });
+//   }
+// };
 module.exports = {
   addNewCourse,
   getAllCourses,
@@ -270,5 +279,5 @@ module.exports = {
   updateSubSubject,
   updateSubject,
   searchCorseAutocomplete,
-  getStudentsByCourse
+  getStudentsByCourse,
 };
