@@ -2,7 +2,6 @@ import { GET_SYLLABUS ,UPDATE_SYLLABUS,UPDATE_SUB_SUBJECT} from "./types";
 import fetcher from "../../utils/fetcher"
 
 export const getSyllabus = (course) => async dispatch => {
-
     return dispatch({
         type: GET_SYLLABUS,
         payload: course,
@@ -31,12 +30,7 @@ export const updateSyllabus = (newSyllabus,e) => async dispatch => {
         .catch(error => console.log(error))
 }
 export const updateSubSubject = (newSyllabus) => async dispatch => {
-    console.log(newSyllabus._id + " newSyllabus._id ")
-    console.log(newSyllabus.SubjectId + " newSyllabus.SubjectId ")
-    console.log(newSyllabus.name + " newSyllabus.name ")
-    console.log(newSyllabus.value + " newSyllabus.value ")
-    
-    await fetcher("/api/course/updateSubSubject", {
+    await fetcher("http://localhost:8080/api/course/updateSubSubject", {
         method: 'PUT',
         headers:{
             "Accept":"apllication/json",

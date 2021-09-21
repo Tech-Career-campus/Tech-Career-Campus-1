@@ -1,7 +1,6 @@
 const CourseModel = require("../models/courseModel");
 const StaffModel = require("../models/staffModel");
 const { collection } = require('../models/courseModel');
-const {findCourseInformation } =require("../utils/db_query")
 
 const addNewCourse = async (req, res) => {
   const staff = await StaffModel.findById(req.body.id);
@@ -55,12 +54,20 @@ const getCourseById = async (req, res) => {
 };
 const deleteSubSubject = async (req, res) => {
   try {
+    const query = {
+      _id: req.body.course_id,
+      CourseInformation: {
+        $elemMatch: {
+          _id: req.body.courseInformationId,
+        },
+      },
+    };
     const array = await req.body.array
     const ArrayPath = `CourseInformation.$[].${array}`
     const ArrayObject = {};
     ArrayObject[ArrayPath] = { _id: req.body.ElementId }
     await CourseModel.findOneAndUpdate(
-      findCourseInformation(req),
+      query,
       { $pull: ArrayObject },
       {
         new: true,
@@ -87,7 +94,14 @@ const deleteSubSubject = async (req, res) => {
 };
 const addSubSubject = async (req, res) => {
   try {
-
+    const query = {
+      _id: req.body.course_id,
+      CourseInformation: {
+        $elemMatch: {
+          _id: req.body.courseInformationId,
+        },
+      },
+    };
     const array = await req.body.array
     const ArrayPath = `CourseInformation.$[].${array}`
     const ArrayObject = {};
@@ -104,7 +118,7 @@ const addSubSubject = async (req, res) => {
       throw arrayError
     }
     await CourseModel.findOneAndUpdate(
-      findCourseInformation(req),
+      query,
       { $addToSet: ArrayObject },
       {
         new: true,
@@ -136,12 +150,21 @@ const updateSubSubject = async (req, res) => {
     const ArrayPath = `CourseInformation.$.${array}.$[object].${arrayField}`
     const ArrayObject = {};
     ArrayObject[ArrayPath] = req.body.newValue
+    const query = {
+      _id: req.body._id,
+      CourseInformation: {
+        $elemMatch: {
+          _id: req.body.courseInformationId,
+        },
+      },
+    };
     await CourseModel.findOneAndUpdate(
-      findCourseInformation(req),
+      query,
       { $set: ArrayObject },
       {
         arrayFilters: [{ "object._id": { _id: req.body.array_id } }],
-        upsert: true
+        upsert: true,
+        new: true
       },
       (err, result) => {
         if (err) throw err;
@@ -178,7 +201,8 @@ const updateSubject = async (req, res) => {
       { $set: SubjectField },
       {
         arrayFilters: [{ "object._id": { _id: req.body.Subject_id } }],
-        upsert: true
+        upsert: true,
+        new:true
       },
       (err, result) => {
         if (err) throw err;
@@ -238,7 +262,6 @@ const getStudentsByCourse = async (req, res) => {
     res.status(500).json({ massage: "wrong", error: err })
   }
 };
-
 // const deleteCorsById = async (req, res) => {
 //   try {
 //     await CourseModel.findByIdAndRemove(req.params.id, (err, result) => {
@@ -249,7 +272,6 @@ const getStudentsByCourse = async (req, res) => {
 //     res.status(500).json({ massage: "delete by id staff filed", data: error });
 //   }
 // };
-
 module.exports = {
   addNewCourse,
   getAllCourses,
