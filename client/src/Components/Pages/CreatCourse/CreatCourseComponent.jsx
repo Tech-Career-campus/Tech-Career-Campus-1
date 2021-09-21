@@ -5,7 +5,7 @@ import { hebrewVariables } from "../../../utils/hebrewVariables";
 import SelectCourseSubjects from "../../Features/SelectCourseSubjects/SelectCourseSubjectsComponent";
 import CreateNewSubject from "../../Features/CreateNewSubject/CreateNewSubjectComponent";
 import { createCourse } from "../../../Redux/actions/coursesActions";
-import isEmpty from "is-empty";
+
 
 const CreatCourse = () => {
   const [corseType, setCourseType] = useState();
