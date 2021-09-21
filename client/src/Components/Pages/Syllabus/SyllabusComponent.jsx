@@ -53,13 +53,10 @@ const SyllabusComponent = () => {
       {
         <>
           <h1>{syllabus.name}</h1>
-<<<<<<< HEAD
-          <Timeline>
-            {syllabus?.CourseInformation?.map((courseItem, index) => {
-=======
+
           <Timeline position="alternate">
-            {syllabus?.CourseInformation?.map((courseItem) => {
->>>>>>> main
+            {syllabus?.CourseInformation?.map((courseItem,index) => {
+
               return (
                 <div key={index}>
                   <TimelineItem>
@@ -117,7 +114,7 @@ const SyllabusComponent = () => {
                                           {`נושא מספר  ${++index}`}
                                         </label>
                                         <input
-                                          // placeholder={topic.subject}
+              
                                           key={topic._id}
                                           name="subject"
                                           type="text"
@@ -148,12 +145,12 @@ const SyllabusComponent = () => {
                             </ul>
                           </h4>
                           <p>{courseItem.summery}</p>
-<<<<<<< HEAD
 
-                          <ul>
-=======
+
+                          
+
                           <ul style={{listStyleType:'none'}}>
->>>>>>> main
+
                             <h3>Links:</h3>
                             {courseItem.links.map((link) => {
                               return (

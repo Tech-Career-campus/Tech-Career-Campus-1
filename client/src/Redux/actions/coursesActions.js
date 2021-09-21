@@ -3,17 +3,11 @@ import { CREATE_COURSE, CREATE_COURSE_ERRORS, GET_COURSES } from "./types"
 
 export const getCourses = () => async dispatch => {
     await fetcher('http://localhost:8080/api/course')
-<<<<<<< HEAD
+
     .then(response=> dispatch({
         type: GET_COURSES,
         payload:response.data
     })).catch(error =>console.log(error))
-=======
-        .then(response => dispatch({
-            type: GET_COURSES,
-            payload: response.data
-        }))
->>>>>>> main
 }
 
 export const createCourse = (newCorse) => async dispatch => {
