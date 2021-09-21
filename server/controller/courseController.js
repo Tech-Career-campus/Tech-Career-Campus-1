@@ -261,6 +261,17 @@ const getStudentsByCourse = async (req, res) => {
     res.status(500).json({ massage: "wrong", error: err })
   }
 };
+const deleteCourse = async (req,res)=>{
+  try{
+    await CourseModel.findByIdAndDelete(req.body.id,(err,result)=>{
+      if(err)throw err
+      res.status(201).json({message:"success delete course",data:result})
+    })
+  }
+  catch(err){
+    res.status(500).json({ massage: "delete course field", error: err });
+  }
+}
 
 module.exports = {
   addNewCourse,
@@ -271,5 +282,6 @@ module.exports = {
   updateSubSubject,
   updateSubject,
   searchCorseAutocomplete,
-  getStudentsByCourse
+  getStudentsByCourse,
+  deleteCourse
 };
