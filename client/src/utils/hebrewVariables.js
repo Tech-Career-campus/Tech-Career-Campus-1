@@ -7,6 +7,8 @@ export const hebrewVariables=
     classSchedual:'לו"ז כיתות',
     logout:"התנתק",
     syllabus:"סילבוס",
+    edit:"עריכה",
+    addChanges: "בצע שינויים",
     studentsGrades:"ציוני סטודנטים",
     students:"סטודנטים",
     createCourse:"יצירת קורס",

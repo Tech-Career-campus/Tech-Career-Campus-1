@@ -13,6 +13,8 @@ import TimelineContent from "@material-ui/lab/TimelineContent";
 import TimelineDot from "@material-ui/lab/TimelineDot";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
+
 
 const SyllabusComponent = () => {
   const syllabus = useSelector((state) => state.syllabus);
@@ -75,7 +77,7 @@ const SyllabusComponent = () => {
                               setIsClicked(true);
                             }}
                           >
-                            עריכה
+                            {hebrewVariables.edit}
                           </button>
                           {isClicked ? (
                             <div>
@@ -96,7 +98,7 @@ const SyllabusComponent = () => {
                                 }}
                                 className="btn"
                               >
-                                בצע שינויים
+                                {hebrewVariables.addChanges} 
                               </button>
                             </div>
                           ) : null}
@@ -111,7 +113,7 @@ const SyllabusComponent = () => {
                                     {isClicked ? (
                                       <div>
                                         <label htmlFor="" style={{ display: 'inline' }}>
-                                          {`נושא מספר  ${++index}`}
+                                          {` ${++index}`}
                                         </label>
                                         <input
               
@@ -135,7 +137,8 @@ const SyllabusComponent = () => {
 
                                           className="btn"
                                         >
-                                          בצע שינויים
+                                           {hebrewVariables.addChanges} 
+                                          
                                         </button>
                                       </div>
                                     ) : null}

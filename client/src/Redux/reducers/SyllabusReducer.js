@@ -1,6 +1,6 @@
 import { GET_SYLLABUS ,UPDATE_SYLLABUS,UPDATE_SUB_SUBJECT } from '../actions/types'
 
-function SyllabusReducer(syllabus = {}, action) {
+function SyllabusReducer(syllabus = [], action) {
     switch (action.type) {
         case GET_SYLLABUS:
             return action.payload
