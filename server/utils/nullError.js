@@ -1,3 +1,4 @@
+
 const nullError = (result, res) => {
     try {
     if (result === null || result === undefined) {
