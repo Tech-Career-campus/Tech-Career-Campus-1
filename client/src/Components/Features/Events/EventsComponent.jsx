@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import "./Events.css";
 import { useState } from 'react';
-import { getEvents, createEvent, updateEvent, deleteEvent } from '../../../Redux/actions/eventsActions';
+import { getEvents, updateEvent, deleteEvent } from '../../../Redux/actions/eventsActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
+import FormEvent from './FormEventComponent';
 
 const Events = () => {
     const dispatch = useDispatch();
@@ -13,10 +14,7 @@ const Events = () => {
 
     const [isForm, setForm] = useState(false)
     const [isUpdate, setUpdate] = useState(false)
-    const [newEvent, setNewEvent] = useState({
-        eventName: "",
-        massage: ""
-    });
+
 
     const [eventUpdate, setEventUpdate] = useState({
         eventId: "",
@@ -27,15 +25,6 @@ const Events = () => {
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
-
-    const hendleChange = (e) => {
-        setNewEvent(
-            {
-                ...newEvent, userId: user._id,
-                [e.target.name]: e.target.value
-            }
-        )
-    }
 
     const hendleChange1 = (e) => {
         setEventUpdate(
@@ -59,24 +48,12 @@ const Events = () => {
                         </div>
                         : ""
                 }
-
             </div>
-            <div className="body-updete">
 
+            <div className="body-updete">
                 {
                     isForm ?
-                        <div className="form-event">
-                            <form onSubmit={(e) => { e.preventDefault() }}>
-                                <input type="text" name="eventName" id="eventName" value={newEvent.eventName} placeholder={hebrewVariables.eventNamePlaceholder} onChange={(e) => { hendleChange(e) }} />
-                                <br></br>
-                                <br></br>
-                                <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder={hebrewVariables.eventMassagePlaceholder} onChange={(e) => { hendleChange(e) }}></textarea>
-                                <br />
-                                <div className="bth-send-event">
-                                    <button type="submit" onClick={() => { dispatch(createEvent(newEvent)) }} > {hebrewVariables.send} </button>
-                                </div>
-                            </form>
-                        </div>
+                        <FormEvent user={user} />
                         : ""
                 }
                 {
