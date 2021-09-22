@@ -18,6 +18,7 @@ const routeForum = require("./route/forumRouting");
 const routeLoginRegister = require("./route/loginRouting");
 const classScheduleRouting = require("./route/classScheduleRouting");
 const routeEvent = require("./route/eventsRouting");
+const routeHomework = require("./route/homeworkRouting");
 const isToken = require("./controller/authorization/isToken");
 
 //DB connection
@@ -34,6 +35,7 @@ app.use("/api/forum", isToken, routeForum);
 app.use("/api", routeLoginRegister);
 app.use("/api/event", isToken, routeEvent);
 app.use("/api/classSchedule", isToken, classScheduleRouting);
+app.use("/api/homework", isToken, routeHomework);
 
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
