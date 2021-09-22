@@ -62,6 +62,7 @@ export const createPostStaff = (post, history) => async (dispatch) => {
         });
         history.push(`/forum/${res.data._id}`);
       });
+      dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log(error);
   }
@@ -91,6 +92,7 @@ export const createPostStudent = (post, history) => async (dispatch) => {
         });
         history.push(`/forum/${res.data._id}`);
       });
+        dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log(error);
   }

@@ -93,7 +93,6 @@ const SyllabusComponent = () => {
                                 type="button"
                                 onClick={(e) => {
                                   setIsClicked(false);
-                                  // console.log(newSyllabus);
                                   dispatch(updateSyllabus(newSyllabus,e));
                                 }}
                                 className="btn"

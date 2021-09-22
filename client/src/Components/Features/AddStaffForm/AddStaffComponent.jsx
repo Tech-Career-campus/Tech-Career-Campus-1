@@ -9,6 +9,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { addStuff } from '../../../Redux/actions/staffAction';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
+import Alert from '@mui/material/Alert';
+
 
 
 const AddStaffComponent = ({ open, handleClose }) => {
@@ -25,7 +27,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
             [e.target.name]: e.target.value
         })
     }
-    
+
     const handleRegisterWindow = () => {
 
         setIsRegister(!isRegister)
@@ -42,7 +44,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
     }
 
     const checkErrors = () => {
-        return (Object.keys(errors).length === 0);
+        return Object.keys(errors).length === 0;
     }
 
 
@@ -50,23 +52,21 @@ const AddStaffComponent = ({ open, handleClose }) => {
     return (
         <div>
             <Dialog aria-labelledby="form-dialog-title" open={open}  >
-                <DialogTitle id="form-dialog-title">{hebrewVariables.createStaff}</DialogTitle>
+                <DialogTitle id="form-dialog-title"> {hebrewVariables.createStaff}
+                    {
+                        isRegister && checkErrors() ? <>
+                            <Alert severity="success">{`${staff[staff.length - 1]?.firstName} ${staff[staff.length - 1]?.lastName} ${hebrewVariables.registerd}`}</Alert>
+                            <Button color="primary" onClick={() => handleRegisterWindow()}>
+                                סגור
+                            </Button>
+                        </>
+                            :
+                            ""
+                    }
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         {hebrewVariables.fillDetails}
-
-                        {
-                            isRegister ? <div aria-labelledby="form-dialog-title" style={{border:"1px solid"}}   >
-                                <h5 id="form-dialog-title">משתמש נרשם</h5>
-                                <h1>{`${staff[staff.length - 1]?.firstName} ${staff[staff.length - 1]?.lastName} ${hebrewVariables.registerd}`}</h1>
-                                <Button color="primary" onClick={() => handleRegisterWindow()}>
-                                    סגור
-                                </Button>
-                            </div> : ""
-                        }
-
-
-
                     </DialogContentText>
                     <TextField
                         name="firstName"
@@ -141,7 +141,30 @@ const AddStaffComponent = ({ open, handleClose }) => {
 
                     />
                     <strong className="errors">{errors?.age ? errors.age : ""}</strong>
+                    <TextField
+                        name="jod"
+                        margin="dense"
+                        id="name"
+                        label={hebrewVariables.job}
+                        type="text"
+                        fullWidth
+                        onChange={(e) => createStaff(e)}
+                        value={staffUser.jod}
+
+                    />
+                    <TextField
+                        name="responsible"
+                        margin="dense"
+                        id="name"
+                        label={hebrewVariables.responsibleFor}
+                        type="text"
+                        fullWidth
+                        onChange={(e) => createStaff(e)}
+                        value={staffUser.responsible}
+
+                    />
                 </DialogContent>
+
                 <DialogActions>
                     <Button color="primary" onClick={(e) => addStaff(e)}>
                         {hebrewVariables.createStuffBtn}

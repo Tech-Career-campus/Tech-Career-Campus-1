@@ -1,9 +1,11 @@
 import { SET_USER, SET_USER_ERRORS, UPDATE_USER } from './types';
 import jwt_decode from "jwt-decode";
 import fetcher from '../../utils/fetcher';
+import checkToken from '../../utils/currentTime ';
 
 export const getUser = (loginInfo) => async dispatch => {
     try {
+        debugger
         if (!localStorage.jwtToken) {
             await fetch("/api/login", {
                 method: 'POST',
@@ -21,8 +23,11 @@ export const getUser = (loginInfo) => async dispatch => {
                 .then((response) => localStorage.setItem("jwtToken", response.result))
                 .catch(err => { throw err })
         }
+
         const token = localStorage.getItem("jwtToken")
         const decoded = jwt_decode(token);
+        checkToken(decoded);
+
         return dispatch({
             type: SET_USER,
             payload: decoded
@@ -38,7 +43,6 @@ export const getUser = (loginInfo) => async dispatch => {
 
 export const updateUser = (updateData) => async dispatch => {
     const { _id } = { ...updateData };
-debugger
     const basicStaff = `http://localhost:8080/api/staff/`
     const basicStudent = `http://localhost:8080/api/student/updateStudent/`
     await fetcher(`${updateData.role === 'Staff' ? basicStaff : basicStudent}${_id}`, {
@@ -50,7 +54,7 @@ debugger
     const token = localStorage.getItem("jwtToken")
     const decoded = jwt_decode(token);
     return dispatch({
-        type: UPDATE_USER ,
+        type: UPDATE_USER,
         payload: decoded
     })
 
