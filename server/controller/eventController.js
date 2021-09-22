@@ -32,7 +32,7 @@ const postNewEvent = async (req, res) => {
   const newEvent = new eventModel({
     eventName: eventName,
     massage: massage,
-    createBy:staff._id
+    createBy: staff._id
   });
   try {
     await newEvent.save();
@@ -61,6 +61,7 @@ const updateEventPost = async (req, res) => {
   try {
     await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
+      { new: true },
       (error, result) => {
         if (error) throw error;
         nullError(result , res);
