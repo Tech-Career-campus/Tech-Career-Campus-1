@@ -5,25 +5,26 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 3px 3px 20px -6px rgb(23,41,74);
-    width: 95vw;
-    height: 500px;
-    margin: 50px;
+    width: 90vw;
+    height: 600px;
+    margin: 50px auto;
     padding: 0px 130px;
 }
 
 .news-ticker-div{
-    width: 50vw;
-    height: 450px;
+    z-index: 0;
+    width:60vw;
+    height: 550px;
     margin: auto;
 }
-.news-ticker-div>img{
-    height: 350px;
-    width: 500px;
+.news-ticker-div img{
+    width: 300px;
 }
-
+.news-ticker-div a{
+    cursor: pointer;
+    color: #000;
+}
 .card-news{
-    background-color: #f2f2f2;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 400px;
     height: 500px;
+    width: 60vw;
 }
