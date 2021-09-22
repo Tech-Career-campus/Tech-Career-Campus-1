@@ -15,13 +15,13 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
 
-
 const SyllabusComponent = () => {
   const syllabus = useSelector((state) => state.syllabus);
   const course = useSelector((state) => state.course);
   const [isClicked, setIsClicked] = useState(false);
   const [courseId, setcourseId] = useState("");
-  const [topicSubject, setTopicSubject] = useState("");
+  const [nameSubject, setNameSubject] = useState([""]);
+  const [topics, setTopics] = useState("");
   const [newSyllabus, setNewSyllabus] = useState({});
   const [subSubject, setsubSubject] = useState({});
   const HandleChange = (e, subjectId) => {
@@ -38,18 +38,19 @@ const SyllabusComponent = () => {
       ...subSubject,
       _id: courseId,
       courseInformationId: subjectId,
-      array, array,
+      array,
+      array,
       array_id: array_id,
       arrayField: e.target.name,
-      newValue: e.target.value
+      newValue: e.target.value,
     });
   };
 
   const dispatch = useDispatch();
   useEffect(() => dispatch(getSyllabus(course)), [dispatch, course]);
   useEffect(() => {
-    setcourseId(syllabus._id)
-  }, [HandleChange, HandleTopicChange])
+    setcourseId(syllabus._id);
+  }, [HandleChange, HandleTopicChange]);
   return (
     <>
       {
@@ -57,8 +58,7 @@ const SyllabusComponent = () => {
           <h1>{syllabus.name}</h1>
 
           <Timeline position="alternate">
-            {syllabus?.CourseInformation?.map((courseItem,index) => {
-
+            {syllabus?.CourseInformation?.map((courseItem, index) => {
               return (
                 <div key={index}>
                   <TimelineItem>
@@ -67,14 +67,18 @@ const SyllabusComponent = () => {
                       <TimelineConnector />
                     </TimelineSeparator>
                     <TimelineContent>
-                      <Paper elevation={6} style={{backgroundColor:'#f1f1f1'}} >
+                      <Paper
+                        elevation={6}
+                        style={{ backgroundColor: "#f1f1f1" }}
+                      >
                         <Typography variant="h6" component="h1">
                           <h2>{courseItem.nameSubject}</h2>
 
                           <button
                             className="btn"
                             onClick={(e) => {
-                              setIsClicked(true);
+                              setIsClicked(isClicked ? false : true);
+                              setNameSubject(courseItem.nameSubject);
                             }}
                           >
                             {hebrewVariables.edit}
@@ -82,47 +86,58 @@ const SyllabusComponent = () => {
                           {isClicked ? (
                             <div>
                               <input
-                                placeholder={courseItem.nameSubject}
+                              key={index}
+                                value={newSyllabus.name}
                                 name="nameSubject"
                                 type="text"
                                 onChange={(e) =>
-                                  HandleChange(e, courseItem._id)
+                                  HandleChange(
+                                    e,
+                                    courseItem._id,
+                                    setNameSubject(e.target.value)
+                                  )
                                 }
                               />
                               <button
                                 type="button"
                                 onClick={(e) => {
                                   setIsClicked(false);
-                                  // console.log(newSyllabus);
-                                  dispatch(updateSyllabus(newSyllabus,e));
+                                  dispatch(updateSyllabus(newSyllabus, e));
                                 }}
                                 className="btn"
                               >
-                                {hebrewVariables.addChanges} 
+                                {hebrewVariables.addChanges}
                               </button>
                             </div>
                           ) : null}
                         </Typography>
-                        <Typography style={{padding:'20px'}} sx={{ m: 3 }}>
-                          <h4> 
-                            <ul style={{listStyleType:'none',}}>
+                        <Typography style={{ padding: "20px" }} sx={{ m: 3 }}>
+                          <h4>
+                            <ul style={{ listStyleType: "none" }}>
                               {courseItem.topics.map((topic, index) => {
                                 return (
                                   <div>
                                     <li key={topic._id}>{topic.subject} </li>
                                     {isClicked ? (
                                       <div>
-                                        <label htmlFor="" style={{ display: 'inline' }}>
+                                        <label
+                                          htmlFor=""
+                                          style={{ display: "inline" }}
+                                        >
                                           {` ${++index}`}
                                         </label>
                                         <input
-              
+                                          value={subSubject.subject}
                                           key={topic._id}
                                           name="subject"
                                           type="text"
-                                          placeholder={topic.subject}
                                           onChange={(e) =>
-                                            HandleTopicChange(e, courseItem._id, "topics", topic._id)
+                                            HandleTopicChange(
+                                              e,
+                                              courseItem._id,
+                                              "topics",
+                                              topic._id
+                                            )
                                           }
                                           type="text"
                                         />
@@ -131,14 +146,13 @@ const SyllabusComponent = () => {
                                           value={topic._id}
                                           onClick={() => {
                                             setIsClicked(false);
-                                            dispatch(updateSubSubject(subSubject))
-                                          }
-                                          }
-
+                                            dispatch(
+                                              updateSubSubject(subSubject)
+                                            );
+                                          }}
                                           className="btn"
                                         >
-                                           {hebrewVariables.addChanges} 
-                                          
+                                          {hebrewVariables.addChanges}
                                         </button>
                                       </div>
                                     ) : null}
@@ -149,11 +163,7 @@ const SyllabusComponent = () => {
                           </h4>
                           <p>{courseItem.summery}</p>
 
-
-                          
-
-                          <ul style={{listStyleType:'none'}}>
-
+                          <ul style={{ listStyleType: "none" }}>
                             <h3>Links:</h3>
                             {courseItem.links.map((link) => {
                               return (
