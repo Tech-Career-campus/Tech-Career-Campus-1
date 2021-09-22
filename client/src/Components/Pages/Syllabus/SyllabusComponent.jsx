@@ -10,18 +10,11 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import Timeline from "@material-ui/lab/Timeline";
-import TimelineItem from "@material-ui/lab/TimelineItem";
-import TimelineSeparator from "@material-ui/lab/TimelineSeparator";
-import TimelineConnector from "@material-ui/lab/TimelineConnector";
-import TimelineContent from "@material-ui/lab/TimelineContent";
-import TimelineDot from "@material-ui/lab/TimelineDot";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
-import WorkIcon from "@material-ui/icons/Work";
 import SchoolIcon from "@material-ui/icons/School";
-import StarIcon from "@material-ui/icons/Star";
+
 
 const SyllabusComponent = () => {
   const syllabus = useSelector((state) => state.syllabus);
@@ -46,7 +39,6 @@ const SyllabusComponent = () => {
       _id: courseId,
       courseInformationId: subjectId,
       array,
-      array,
       array_id: array_id,
       arrayField: e.target.name,
       newValue: e.target.value,
@@ -60,7 +52,7 @@ const SyllabusComponent = () => {
   }, [HandleChange, HandleTopicChange]);
   return (
    
-        <>
+        <div>
           <h1>{syllabus.name}</h1>
 
           <VerticalTimeline>
@@ -68,7 +60,6 @@ const SyllabusComponent = () => {
               return (
                   <VerticalTimelineElement
                   key={index}
-                    className="vertical-timeline-element"
                     contentStyle={{
                       background: "transparent",
                       color: "#fff",
@@ -76,13 +67,14 @@ const SyllabusComponent = () => {
                     }}
                     contentArrowStyle={{
                       borderRight: "7px solid  rgb(0, 0, 0)",
-                    }}
-                    date="2011 - present"
+                    }} 
+                    icon={<SchoolIcon/>}
                     iconStyle={{
                       background: "rgb(210, 235, 255)",
-                      color: "#fff",
+                      color: "#000000",
                     }}
-                   position={(index+1) % 2 === 0 ? "right" : "left"}
+                   position={index % 2 === 0 ? "right" : "left "}
+                  
                   >
                     <Paper elevation={6} style={{ backgroundColor: "#f1f1f1" }}>
                       <Typography variant="h6" component="h1">
@@ -194,7 +186,7 @@ const SyllabusComponent = () => {
               );
             })}
           </VerticalTimeline>
-        </>
+        </div>
      
       )
    

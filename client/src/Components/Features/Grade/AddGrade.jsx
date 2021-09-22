@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addTest } from "../../../Redux/actions/studentActions";
 import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
-
+import "./EditGradeComponent.css";
 const AddGrade = ({ studentId }) => {
   const [newTest, setNewTest] = useState({
     grade: "",
