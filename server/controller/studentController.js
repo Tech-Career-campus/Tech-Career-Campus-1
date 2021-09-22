@@ -1,9 +1,9 @@
 const StudentModel = require("../models/studentModel");
-const { nullError } = require("../utils/nullError");
+const CourseModel = require("../models/courseModel");
+const { ObjectId } = require("mongoose");
+const { nullError } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
-
-
 
 const getStudent = async (req, res) => {
   try {
@@ -32,7 +32,10 @@ const getStudentGradeById = async (req, res) => {
       if (error) throw error;
       res
         .status(200)
-        .json({ massage: "get Student grades by id success!", data: result.tests });
+        .json({
+          massage: "get Student grades by id success!",
+          data: result.tests,
+        });
     });
   } catch (err) {
     res
@@ -49,12 +52,10 @@ const addStudentTestById = async (req, res) => {
       { new: true },
       (error, result) => {
         if (error) throw error;
-        res
-          .status(200)
-          .json({
-            massage: "add test to a student by name was a success",
-            data: result.tests,
-          });
+        res.status(200).json({
+          massage: "add test to a student by name was a success",
+          data: result.tests,
+        });
       }
     );
   } catch (err) {
@@ -68,15 +69,14 @@ const updateStudentTestById = async (req, res) => {
   try {
     await StudentModel.findOneAndUpdate(
       { _id: req.params._id, tests: { $elemMatch: { _id: req.body.id } } },
-      { $set: { "tests.$.grade": req.body.grade } }, { new: true },
+      { $set: { "tests.$.grade": req.body.grade } },
+      { new: true },
       (error, result) => {
         if (error) throw error;
-        res
-          .status(200)
-          .json({
-            massage: "updating a student test was a success",
-            data: result.tests,
-          });
+        res.status(200).json({
+          massage: "updating a student test was a success",
+          data: result.tests,
+        });
       }
     );
   } catch (err) {
@@ -94,12 +94,10 @@ const deleteStudentTestById = async (req, res) => {
       { new: true },
       (error, result) => {
         if (error) throw error;
-        res
-          .status(200)
-          .json({
-            massage: "deleting a student test was a success",
-            data: result.tests,
-          });
+        res.status(200).json({
+          massage: "deleting a student test was a success",
+          data: result.tests,
+        });
       }
     );
   } catch (err) {
@@ -110,72 +108,66 @@ const deleteStudentTestById = async (req, res) => {
 };
 const updateStudent = async (req, res) => {
   try {
-    const field = await req.body.field
+    const field = await req.body.field;
     if (field === "tests") {
-      throw new Error("you cant update arrays only static fields")
+      throw new Error("you cant update arrays only static fields");
     }
     await StudentModel.findByIdAndUpdate(
-       req.params.id ,
-      { $set: req.body},
+      req.params.id,
+      { $set: req.body },
       { new: true },
       (err, result) => {
-        delete result.password
-
-        const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
-        res.status(200).json({ message: "success", data: result, result: token });
-
+        delete result.password;
+        const token = jwt.sign(result.toJSON(), SECRET_KEY, {
+          expiresIn: "1d",
+        });
+        res
+          .status(200)
+          .json({ message: "success", data: result, result: token });
         if (err) throw err;
-        // if (result !== null) {
-        //   res
-        //     .status(200)
-        //     .json({ message: "update student  was success!", data: result });
-        // } else {
-        //   const errorNull = new Error("result is null");
-        //   res
-        //     .status(500)
-        //     .json({ message: "update student  faild", error: errorNull.message });
-        // }
       }
     );
   } catch (err) {
-    res.status(500).json({ message: "update student  faild", error: err.message });
+    res
+      .status(500)
+      .json({ message: "update student  faild", error: err.message });
   }
-
 };
 const deleteStudent = async (req, res) => {
-  await StudentModel.findByIdAndDelete(
-    { _id: req.body._id },
-    (err, result) => {
+  try {
+    const student = await StudentModel.findById(req.params.id, (err) => {
       if (err) throw err;
-      if (result !== null) {
-        res
-          .status(200)
-          .json({ message: "delete student  was success!", data: result });
-      } else {
-        const errorNull = new Error("result is null");
-        res
-          .status(500)
-          .json({ message: "delete student  faild", error: errorNull.message });
+    });
+
+    await CourseModel.findByIdAndUpdate(
+      req.body.id,
+      { $pull: { students: student._id } },
+      (err, result) => {
+        if (err) throw err;
+        student.remove({});
+        res.status(200).json({ massage: "delete by id student success!" });
       }
-    }
-  );
-}
+    );
+  } catch (err) {
+    res
+      .status(500)
+      .json({ massage: "delete by id student filed", error: err.message });
+  }
+};
 const getSyllabusByCourse = async (req, res) => {
   try {
-      await StudentModel.findById(req.body.id)
-          .populate('courseId')
-          .then(student => {
-              res.status(201).json({ massage: 'The student is ', data: student})
-          })
-          .catch(err => {
-              res.status(500).json({ massage: 'error with population', data: err });
-          })
-
+    await StudentModel.findById(req.body.id)
+      .populate("courseId")
+      .then((student) => {
+        res.status(201).json({ massage: "The student is ", data: student });
+      })
+      .catch((err) => {
+        res.status(500).json({ massage: "error with population", data: err });
+      });
+  } catch (err) {
+    res.status(500).json({ massage: "wrong", error: err });
   }
-  catch (err) {
-      res.status(500).json({ massage: "wrong", error: err })
-  }
-}
+};
 module.exports = {
   getStudent,
   getStudents,
@@ -185,5 +177,5 @@ module.exports = {
   deleteStudentTestById,
   updateStudent,
   deleteStudent,
-  getSyllabusByCourse
-}
+  getSyllabusByCourse,
+};
