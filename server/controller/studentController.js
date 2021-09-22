@@ -1,14 +1,9 @@
 const StudentModel = require("../models/studentModel");
-<<<<<<< HEAD
-const fs = require('fs');
-const path = require("path");
-=======
 const { nullError } = require("../utils/nullError");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
 
->>>>>>> main
 
 const getStudent = async (req, res) => {
   try {
@@ -119,22 +114,9 @@ const updateStudent = async (req, res) => {
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields")
     }
-<<<<<<< HEAD
-    // const { studentUpdate} = req.body;
-    // let profileImg;
-    if (req.file) {
-      profileImg = req.file.filename;
-      console.log(profileImg);
-    }
-    await StudentModel.findOneAndUpdate(
-      { _id: req.body._id },
-      // { $set: studentUpdate ,profileImg},
-      { $set: req.body,profileImg},
-=======
     await StudentModel.findByIdAndUpdate(
        req.params.id ,
       { $set: req.body},
->>>>>>> main
       { new: true },
       (err, result) => {
         delete result.password

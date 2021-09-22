@@ -4,10 +4,7 @@ const CourseModel = require("../../models/courseModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
 const { SendEmails } = require("../../utils/SendEmails");
-<<<<<<< HEAD
-=======
 const path = require("path")
->>>>>>> main
 
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
@@ -21,10 +18,6 @@ const register = async (req, res) => {
       if (staff) {
         return res.status(401).json({ massage: "email already exists" });
       }
-<<<<<<< HEAD
-
-=======
->>>>>>> main
       SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
@@ -48,13 +41,6 @@ const register = async (req, res) => {
 
           });
           try {
-<<<<<<< HEAD
-            if (req.file) {
-              newStaff.profileImg = req.file.path;
-            }
-=======
-
->>>>>>> main
             await newStaff.save();
             res.status(201).json({
               success: true,
@@ -86,11 +72,7 @@ const register = async (req, res) => {
           .status(400)
           .json({ errors: { email: "email already exists" } });
       }
-<<<<<<< HEAD
-
-=======
       SendEmails(req, res);
->>>>>>> main
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         if (err) throw err;
@@ -107,12 +89,7 @@ const register = async (req, res) => {
             });
           }
 
-<<<<<<< HEAD
-          const { firstName, lastName, age, email, courseName, phone } =
-            req.body;
-=======
           const { firstName, lastName, age, email, courseName, phone, role, IdNumber } = req.body;
->>>>>>> main
           const newStudent = new StudentModel({
             firstName: firstName,
             lastName: lastName,
@@ -122,12 +99,9 @@ const register = async (req, res) => {
             age: age,
             courseName: courseName,
             courseId: course._id,
-<<<<<<< HEAD
-=======
             role: role !== 'Staff'?role:'Student',
             profileImg: req.file ? req.file.path : "",
             IdNumber: IdNumber? IdNumber: ""
->>>>>>> main
           });
           try {
             await newStudent.save();
