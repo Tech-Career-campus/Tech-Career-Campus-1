@@ -69,5 +69,14 @@ export const hebrewVariables=
     newPassword:"סיסמא חדשה",
     confirmPassword:"אימות סיסמא",
     updatePassword:"עדכן סיסמא",
-    CourseSchedule: "לוז קורס"
+    CourseSchedule: "לוז קורס",
+    eventsHeadline: "ארועים בטק קריירה",
+    eventNamePlaceholder: "שם הארוע",
+    eventMassagePlaceholder: "הקלד כאן",
+    sendEventBtn: "שלח",
+    eventNameTitle: "שם הארוע",
+    eventMassagetTitle: "הודעה",
+    updateEventBtn: "עדכן",
+    confirmUpdatesBtn: "אישור עידכונים",
+    deleteEventBtn: "מחק",
 } 
