@@ -1,6 +1,6 @@
 const StudentModel = require("../models/studentModel");
-
-
+const fs = require('fs');
+const path = require("path");
 
 const getStudent = async (req, res) => {
   try {
@@ -111,10 +111,16 @@ const updateStudent = async (req, res) => {
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields")
     }
-    const { studentUpdate } = req.body;
+    // const { studentUpdate} = req.body;
+    // let profileImg;
+    if (req.file) {
+      profileImg = req.file.filename;
+      console.log(profileImg);
+    }
     await StudentModel.findOneAndUpdate(
       { _id: req.body._id },
-      { $set: studentUpdate },
+      // { $set: studentUpdate ,profileImg},
+      { $set: req.body,profileImg},
       { new: true },
       (err, result) => {
         if (err) throw err;
