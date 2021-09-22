@@ -1,6 +1,6 @@
 const eventModel = require("../models/eventModel");
 const staffModel = require("../models/staffModel");
-const {nullError} = require("../utils/nullError")
+const { nullError } = require("../utils/nullError")
 
 const getAllEventPost = async (req, res) => {
   try {
@@ -32,7 +32,7 @@ const postNewEvent = async (req, res) => {
   const newEvent = new eventModel({
     eventName: eventName,
     massage: massage,
-    createBy:staff._id
+    createBy: staff._id
   });
   try {
     await newEvent.save();
@@ -47,10 +47,10 @@ const postNewEvent = async (req, res) => {
 
 const deleteEventPost = async (req, res) => {
   try {
-    await eventModel.findByIdAndRemove(req.params.id,(error, result) => {
-      nullError(result , res);
+    await eventModel.findByIdAndRemove(req.params.id, { new: true },(error, result) => {
+      nullError(result, res);
       if (error) throw error;
-     
+
     });
   } catch (error) {
     res.status(500).json({ massage: "deleted event field", error: error });
@@ -61,8 +61,9 @@ const updateEventPost = async (req, res) => {
   try {
     await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
+      { new: true },
       (error, result) => {
-        nullError(result , res);
+        nullError(result, res);
         if (error) throw error;
       }
     );
