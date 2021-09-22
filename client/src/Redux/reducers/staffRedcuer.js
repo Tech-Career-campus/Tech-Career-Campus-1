@@ -3,7 +3,6 @@ import { GET_STAFF_LIST, ADD_STAFF, DELETE_STAFF, STAFF_ERRORS, UPDATE_STAFF } f
 const staffRedcuer = (state = { staff: [], errors: {} }, action) => {
     switch (action.type) {
         case GET_STAFF_LIST:
-            debugger
             return {
                 ...state, staff: action.payload
             }
