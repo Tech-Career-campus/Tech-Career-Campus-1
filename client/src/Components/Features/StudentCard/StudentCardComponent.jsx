@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   deleteStudent,
   updateStudent,
@@ -10,15 +10,8 @@ import "./studentCard.css";
 const StudentCard = ({ student }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
-
-  const [studentUpdate, setStudentUpdate] = useState({
-    firstName: student.firstName,
-    lastName: student.lastName,
-    email: student.email,
-    age: student.age,
-    phone: student.phone,
-    _id: student._id,
-  });
+  const [studentUpdate, setStudentUpdate] = useState({ ...student });
+  const { user } = useSelector((state) => state.user);
 
   return (
     <div className="student-card">
@@ -33,12 +26,20 @@ const StudentCard = ({ student }) => {
           <h3>
             {hebrewVariables.fullName}: {student.firstName} {student.lastName}
           </h3>
-          <p>{hebrewVariables.course}: {student.courseName}</p>
-          <p>{hebrewVariables.email}: {student.email}</p>
-          <p>{hebrewVariables.phone}: {student.phone}</p>
-          <p>{hebrewVariables.age}: {student.age}</p>
-          <div className='student-card-body-btn'>
-            <button
+          <p>
+            {hebrewVariables.course}: {student.courseName}
+          </p>
+          <p>
+            {hebrewVariables.email}: {student.email}
+          </p>
+          <p>
+            {hebrewVariables.phone}: {student.phone}
+          </p>
+          <p>
+            {hebrewVariables.age}: {student.age}
+          </p>
+          <div className="student-card-body-btn">
+            {user.role === "Staff" ? <> <button
               className="btn"
               onClick={() => dispatch(deleteStudent(student._id))}
             >
@@ -52,12 +53,12 @@ const StudentCard = ({ student }) => {
               }}
             >
               {hebrewVariables.edit}
-            </button>
+            </button></> : ""}          
           </div>
         </div>
       ) : (
         <div className="student-card-body">
-          <form className='student-card-body-form'>
+          <form className="student-card-body-form">
             <label>{hebrewVariables.firstName}</label>
             <input
               name="firstName"

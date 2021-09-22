@@ -39,8 +39,15 @@ const staffSchema = new Schema(
     IdNumber: {
       type: String,
     },
+    jod:{
+      type: String,
+      default: "",
+    },
+    responsible:{
+      type: String,
+      default: "",
+    },
     courses: [{ type: Schema.Types.ObjectId, ref: "course"}],
-    events: [{ type: Schema.Types.ObjectId, ref: "event" }],
     messages: [{ type: Schema.Types.ObjectId, ref: "forum" }]
   },
   { timestamps: true }

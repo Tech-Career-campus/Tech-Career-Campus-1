@@ -5,7 +5,7 @@ export const getStudents = (courseId) => async dispatch => {
         .then((response) => dispatch({
             type: GET_STUDENTS,
             payload: response.data,
-        }))
+        })).then(res=>console.log(res))
         .catch((err) => console.log(err));
 }
 export const createStudent = (newStudent) => async dispatch => {
@@ -43,10 +43,9 @@ export const deleteStudent = (studentId) => async dispatch => {
 
 export const updateStudent = (studentUpdate) => async dispatch => {
     const { _id } = { ...studentUpdate };
-    delete studentUpdate._id;
-    await fetcher("http://localhost:8080/api/student/updateStudent", {
+    await fetcher(`http://localhost:8080/api/student/updateStudent/${_id}`, {
         method: 'PUT',
-        body: JSON.stringify({ studentUpdate, _id })
+        body: JSON.stringify(studentUpdate)
     })
         .then(response => dispatch({
             type: UPDATE_STUDENT,

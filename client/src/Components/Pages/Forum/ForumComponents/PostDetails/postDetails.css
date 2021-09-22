@@ -1,0 +1,30 @@
+.post-details-media {
+  object-fit: cover;
+  width: 60vw;
+  max-height: 600px;
+  margin: 5px auto;
+  background-color:#fff;
+}
+.post-details-card {
+  display: flex;
+  width: 100%;
+}
+.post-details-section {
+  border-radius: 20px;
+  margin: 10px;
+  flex: 1;
+}
+.post-details-section>p{
+  direction:ltr;
+  font-size: 12px;
+font-style: oblique;
+}
+
+.post-details-loadingPaper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 15px;
+  height: 39vh;
+}

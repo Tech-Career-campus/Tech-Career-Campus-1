@@ -8,7 +8,7 @@ const StudentGradesComponent = () => {
   const dispatch = useDispatch()
 
   const {user} = useSelector(state => state.user);
-  useEffect(() => dispatch(getStudentTest(user.id)), [dispatch, user.id]);
+  useEffect(() => dispatch(getStudentTest(user._id)), [dispatch, user._id]);
   const student = useSelector((state) => state.student);
   return (
     <>

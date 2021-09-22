@@ -16,7 +16,7 @@ import { hebrewVariables } from '../utils/hebrewVariables';
 const MyCourseRouting = () => {
     const { user } = useSelector(state => state.user);
     const course = useSelector((state) => state.course);
-    const {courses} = useSelector((state) => state.courses);
+    const { courses } = useSelector((state) => state.courses);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const MyCourseRouting = () => {
 
                                 </select> : ""}
                         <Tabs
-                            defaultActiveKey="home"
+                            defaultActiveKey="course-schedule"
                             transition={false}
                             id="noanim-tab-example"
                             className="mb-3"
@@ -52,7 +52,7 @@ const MyCourseRouting = () => {
                     <DailySchedule />
                 </Tab> */}
 
-                            <Tab eventKey="course-schedule" title={hebrewVariables.classSchedual}  >
+                            <Tab eventKey="course-schedule" title={hebrewVariables.CourseSchedule}  >
                                 <CourseSchedule />
                             </Tab>
                             <Tab eventKey="syllabus" title={hebrewVariables.syllabus}>
@@ -69,9 +69,9 @@ const MyCourseRouting = () => {
                                     </Tab>
                             }
                             {
-                                user.role === "Staff" ? <Tab eventKey="Students" title={hebrewVariables.students} >
+                                <Tab eventKey="Students" title={hebrewVariables.students} >
                                     <Students />
-                                </Tab> : ""
+                                </Tab>
                             }
                             {
                                 user.role === "Staff" ? <Tab eventKey="Creat-course" title={hebrewVariables.createCourse} >

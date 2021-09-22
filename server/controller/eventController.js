@@ -1,6 +1,6 @@
 const eventModel = require("../models/eventModel");
 const staffModel = require("../models/staffModel");
-const { ObjectId } = require("mongodb");
+const {nullError} = require("../utils/nullError")
 
 const getAllEventPost = async (req, res) => {
   try {
@@ -29,17 +29,16 @@ const getEventById = async (req, res) => {
 const postNewEvent = async (req, res) => {
   const staff = await staffModel.findById(req.params.id);
   const { eventName, massage } = req.body;
-  const newevent = new eventModel({
+  const newEvent = new eventModel({
     eventName: eventName,
     massage: massage,
+    createBy:staff._id
   });
   try {
-    await newevent.save();
-    staff.events.push(newevent);
-    await staff.save();
+    await newEvent.save();
     res.status(200).json({
       massage: "post added successfully, success",
-      data: newevent,
+      data: newEvent,
     });
   } catch (err) {
     res.status(500).json({ massage: "post added field ", error: err });
@@ -48,9 +47,10 @@ const postNewEvent = async (req, res) => {
 
 const deleteEventPost = async (req, res) => {
   try {
-    await eventModel.findByIdAndDelete(req.params.id, (error, result) => {
+    await eventModel.findByIdAndRemove(req.params.id,(error, result) => {
+      nullError(result , res);
       if (error) throw error;
-      res.status(200).json({ massage: "deleted event success", data: result });
+     
     });
   } catch (error) {
     res.status(500).json({ massage: "deleted event field", error: error });
@@ -62,8 +62,8 @@ const updateEventPost = async (req, res) => {
     await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
       (error, result) => {
+        nullError(result , res);
         if (error) throw error;
-        res.status(200).json({ massage: "update event success", data: result });
       }
     );
   } catch (error) {
