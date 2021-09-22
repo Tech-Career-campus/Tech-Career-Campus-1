@@ -25,7 +25,7 @@ const News = () => {
       <div className="news-ticker-div">
         <Ticker move={move} height='500' mode="smooth" direction="toRight">
           {({ index }) => (
-            <a onMouseEnter={()=> setMove(false)}  onMouseLeave={()=> setMove(true)}   target="_blank" href={newsData[index]?.url}>
+            <a onMouseEnter={()=> setMove(false)}  onMouseLeave={()=> setMove(true)} rel="noreferrer"  target="_blank" href={newsData[index]?.url}>
             <div className="card-news">
               <h1>{newsData[index]?.source?.name}</h1>
               <h1>{newsData[index]?.description}</h1>
