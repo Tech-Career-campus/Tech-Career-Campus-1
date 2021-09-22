@@ -2,18 +2,15 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStaff } from '../../../Redux/actions/staffAction';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import AddStaffComponent from '../../Features/AddStaffForm/AddStaffComponent';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { deleteStaff } from '../../../Redux/actions/staffAction';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
+import StaffCard from '../../Features/StaffCard/StaffCard';
+import staffImg from '../../../images/1632247546163.jpg'
+
 
 
 
@@ -22,66 +19,32 @@ import { hebrewVariables } from '../../../utils/hebrewVariables';
 const StaffComponents = () => {
 
     const [open, setOpen] = useState(false)
+    const [isEdit, setIsEdit] = useState(false)
+
     const dispatch = useDispatch();
     const staff = useSelector((state) => state.staff.staff);
 
-    const deletestaffHandler = (_id) => {
-        dispatch(deleteStaff(_id))
-    }
     useEffect(() => dispatch(getStaff()), [dispatch]);
 
     return (
         <div className="body-staff">
-            {
-                open ? <AddStaffComponent open={open} handleClose={() => setOpen(!open)} /> : ""
-            }
-            <TableContainer component={Paper}>
-                <Table aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>
-                                <Button variant="contained" onClick={() => setOpen(!open)}>
-                                    {hebrewVariables.addStuff}
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell>ID</TableCell>
-                            <TableCell align="right">{hebrewVariables.firstName}</TableCell>
-                            <TableCell align="right">{hebrewVariables.lastName}</TableCell>
-                            <TableCell align="right">{hebrewVariables.email}</TableCell>
-                            <TableCell align="right">{hebrewVariables.phone}</TableCell>
-                            <TableCell align="right">{hebrewVariables.courses}</TableCell>
-                            <TableCell align="right">{hebrewVariables.students}</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {staff?.map((staffItem) => (
+            <h1>הצוות שלנו</h1>
+            <Paper>
+                {
+                    open ? <AddStaffComponent open={open} handleClose={() => setOpen(!open)} /> : ""
+                }
 
-                            <TableRow key={staffItem._id} >
-                                <TableCell>
-                                    <Button>
-                                        <DeleteIcon onClick={() => deletestaffHandler(staffItem._id)} />
+                <Button variant="contained" onClick={() => setOpen(!open)}>
+                    {hebrewVariables.addStuff}
+                </Button>
 
-                                    </Button>
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                    {staffItem._id}
-                                </TableCell>
-                                <TableCell align="right">{staffItem.firstName}</TableCell>
-                                <TableCell align="right">{staffItem.lastName}</TableCell>
-                                <TableCell align="right">{staffItem.email}</TableCell>
-                                <TableCell align="right">{staffItem.phone}</TableCell>
-                                <TableCell align="right">{staffItem?.courses?.length}</TableCell>
-                                <TableCell align="right">{staffItem?.students?.length}</TableCell>
-                            </TableRow>
-                        ))}
-
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
+                {staff?.map((staffItem) => (
+                    <div>
+                        <StaffCard staffItem={staffItem} isEdit={isEdit} setIsEdit={()=>setIsEdit(!isEdit)} />
+                    </div>
+                ))}
+            </Paper>
+        </div >
     )
 }
 

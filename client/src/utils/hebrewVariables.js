@@ -71,5 +71,7 @@ export const hebrewVariables=
     newPassword:"סיסמא חדשה",
     confirmPassword:"אימות סיסמא",
     updatePassword:"עדכן סיסמא",
-    CourseSchedule: "לוז קורס"
+    CourseSchedule: "לוז קורס",
+    responsibleFor:"אחראי על:",
+    job:"תפקיד:"
 } 
