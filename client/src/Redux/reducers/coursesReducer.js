@@ -1,11 +1,16 @@
-import { GET_COURSES } from "../actions/types";
+import { CREATE_COURSE, CREATE_COURSE_ERRORS, GET_COURSES } from "../actions/types";
 
-function coursesReducer(courses = [], action) {
+function coursesReducer(state = { courses:[], errors:{} }, action) {
     switch (action.type) {
         case GET_COURSES:
-            return action.payload
+            return { errors:{}, courses : action.payload}
+        case CREATE_COURSE:
+            return { errors: {}, courses: [...state.courses, action.payload]}
+        case CREATE_COURSE_ERRORS:
+            return {...state, errors: action.payload.errors}
+
         default:
-            return courses;
+            return state;
     }
 }
 

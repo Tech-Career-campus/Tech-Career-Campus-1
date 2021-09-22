@@ -27,19 +27,9 @@ const login = async (req, res) => {
         return res.status(400).json({ errors: { password: "wrong password" } });
       };
 
-      let payload = {
-        id: staff._id,
-        email: staff.email,
-        firstName: staff.firstName,
-        lastName: staff.lastName,
-        role: staff.role,
-        phone: staff.phone,
-        age: staff.age,
-        profileImg: staff.profileImg,
-        IdNumber: staff.IdNumber,
-      };
+      delete staff.password
 
-      const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1d" });
+      const token = jwt.sign(staff.toJSON() , SECRET_KEY, { expiresIn: "1d" });
       res.status(200).json({ message: "success", result: token });
 
     } catch (err) {
@@ -72,15 +62,17 @@ const login = async (req, res) => {
       };
         
 
-      const payload = {
-        id: student._id,
-        email: student.email,
-        firstName: student.firstName,
-        lastName: student.lastName,
-        role: student.role,
-      };
+      // const payload = {
+      //   id: student._id,
+      //   email: student.email,
+      //   firstName: student.firstName,
+      //   lastName: student.lastName,
+      //   role: student.role,
+      //   courseId: student.courseId
+      // };
+      delete student.password
 
-      const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1d" });
+      const token = jwt.sign(student.toJSON(), SECRET_KEY, { expiresIn: "1d" });
       res.status(200).json({ message: "success", result: token });
 
     } catch (err) {

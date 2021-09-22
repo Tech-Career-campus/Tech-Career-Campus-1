@@ -1,8 +1,7 @@
-import { GET_STAFF_LIST, ADD_STAFF, DELETE_STAFF,STAFF_ERRORS } from "./types";
+import { GET_STAFF_LIST, ADD_STAFF, DELETE_STAFF, STAFF_ERRORS, UPDATE_STAFF } from "./types";
 import fetcher from "../../utils/fetcher";
 
 export const getStaff = () => async dispatch => {
-
     await fetcher('http://localhost:8080/api/staff')
         .then((response) => dispatch({
             type: GET_STAFF_LIST,
@@ -24,7 +23,9 @@ export const addStuff = (staff) => async dispatch => {
                 email: staff.email,
                 phone: staff.phone,
                 password: staff.password,
-                age: staff.age
+                age: staff.age,
+                jod: staff.jod,
+                responsible:staff.responsible
             }),
         })
             .then((response) => {
@@ -39,7 +40,7 @@ export const addStuff = (staff) => async dispatch => {
             .catch(error => { throw error })
     }
     catch (error) {
-        dispatch({type:STAFF_ERRORS, payload:error.errors || error})
+        dispatch({ type: STAFF_ERRORS, payload: error.errors || error })
     }
 
 }
@@ -62,4 +63,18 @@ export const deleteStaff = (staffId) => async dispatch => {
         console.log(error);
     }
 
+}
+
+export const updateStaff = (updateStaff) => async dispatch => {
+    
+    const { id } = { ...updateStaff };
+    await fetcher(`http://localhost:8080/api/staff/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(updateStaff)
+    })
+        .then(response => dispatch({
+            type: UPDATE_STAFF,
+            payload: response.data
+        }))
+        .catch(error => console.log(error))
 }

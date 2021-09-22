@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStudent } from "../../../Redux/actions/studentsActions";
 import handleChange from "../../../utils/handleChange";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 import "./registerForm.css";
+
 let generator = require("generate-password");
 
 let password = generator.generate({
@@ -17,19 +19,15 @@ const RegisterForm = ({ SetIsRegister }) => {
 
   const [newStudent, setNewStudent] = useState({
     registeredAs: "Student",
-    id: user.id,
+    id: user._id,
     courseId: course._id,
     courseName: course.name,
     password: password,
   });
 
   const [isSend, setIsSend] = useState(false);
+ 
 
-  useEffect(() => {
-    if (!errors) {
-      setIsSend(true);
-    }
-  }, [dispatch]);
   return (
     <>
       {!isSend ? (
@@ -39,7 +37,7 @@ const RegisterForm = ({ SetIsRegister }) => {
             e.preventDefault();
           }}
         >
-          <label>שם פרטי</label>
+          <label>{hebrewVariables.firstName}</label>
           <input
             name="firstName"
             onChange={(e) => handleChange(e, newStudent, setNewStudent)}
@@ -47,7 +45,7 @@ const RegisterForm = ({ SetIsRegister }) => {
           />
           <p> {errors?.firstName ? errors.firstName : ""} </p>
 
-          <label>שם משפחה</label>
+          <label>{hebrewVariables.lastName}</label>
           <input
             name="lastName"
             onChange={(e) => handleChange(e, newStudent, setNewStudent)}
@@ -55,14 +53,14 @@ const RegisterForm = ({ SetIsRegister }) => {
           />
           <p> {errors?.lastName ? errors.lastName : ""} </p>
 
-          <label>אימייל</label>
+          <label>{hebrewVariables.email}</label>
           <input
             name="email"
             onChange={(e) => handleChange(e, newStudent, setNewStudent)}
             type={"email"}
           />
           <p> {errors?.email ? errors.email : ""} </p>
-          <label>מס טלפון</label>
+          <label>{hebrewVariables.phone}</label>
           <input
             name="phone"
             onChange={(e) => handleChange(e, newStudent, setNewStudent)}
@@ -70,7 +68,8 @@ const RegisterForm = ({ SetIsRegister }) => {
           />
           <p> {errors?.phone ? errors.phone : ""} </p>
 
-          <label>גיל</label>
+
+          <label>{hebrewVariables.age}</label>
           <input
             name="age"
             onChange={(e) => handleChange(e, newStudent, setNewStudent)}
@@ -78,7 +77,7 @@ const RegisterForm = ({ SetIsRegister }) => {
           />
           <p> {errors?.age ? errors.age : ""} </p>
 
-          <label>סיסמא</label>
+          <label>{hebrewVariables.password}</label>
           <input
             name="password"
             onChange={(e) => handleChange(e, newStudent, setNewStudent)}
@@ -86,22 +85,23 @@ const RegisterForm = ({ SetIsRegister }) => {
             value={newStudent.password}
           />
           <button onClick={() => dispatch(createStudent(newStudent))}>
-            הוסף
+            {hebrewVariables.add}
           </button>
         </form>
       ) : (
         <div>
           <h3>
-            {newStudent.firstName} {newStudent.lastName} נרשם במערכת
+            {newStudent.firstName} {newStudent.lastName}{hebrewVariables.registerd}
           </h3>
-          <p> נשלח מייל עם פרטי התחברות לכתובת {newStudent.email}</p>
+          <p> {hebrewVariables.emailSent} {newStudent.email}</p>
           <button onClick={() => {
             SetIsRegister();
             setIsSend(false)
-          }}>סגור</button>
+          }}>{hebrewVariables.closeBtn}</button>
         </div>
       )}
     </>
   );
 };
 export default RegisterForm;
+

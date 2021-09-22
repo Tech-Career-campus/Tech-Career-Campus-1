@@ -7,7 +7,7 @@ import postsReducer from './posts'
 import staffRedcuer from "./staffRedcuer";
 import coursesReducer from "./coursesReducer";
 import courseReducer from "./courseReducer";
-
+import eventsReducer from "./eventRedcuer";
 
 export default combineReducers({
     user : userReducer,
@@ -17,5 +17,6 @@ export default combineReducers({
     posts: postsReducer,
     staff:staffRedcuer,
     courses: coursesReducer,
-    course: courseReducer
+    course: courseReducer,
+    events: eventsReducer
 })

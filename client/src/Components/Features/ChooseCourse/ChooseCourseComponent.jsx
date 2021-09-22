@@ -5,17 +5,19 @@ import { getCourses } from "../../../Redux/actions/coursesActions";
 
 const ChooseCourse = () => {
   const dispatch = useDispatch();
-  const courses = useSelector((state) => state.courses);
+  const {courses} = useSelector((state) => state.courses);
    const { user } = useSelector((state) => state.user);
-   console.log(courses)
    useEffect(() => {
      if (user.role === "Staff") dispatch(getCourses());
-   }, [dispatch]);
+   }, [dispatch, user]);
    
   return (
     <div>
       {courses.map((course) => (
-        <button onClick={() => dispatch(getCourse(course._id))}>
+        <button
+          key={course._id}
+          onClick={() => dispatch(getCourse(course._id))}
+        >
           {course.name}
         </button>
       ))}

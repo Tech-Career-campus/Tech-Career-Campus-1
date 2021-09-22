@@ -1,6 +1,14 @@
 const StudentModel = require("../models/studentModel");
+<<<<<<< HEAD
 const fs = require('fs');
 const path = require("path");
+=======
+const { nullError } = require("../utils/nullError");
+const jwt = require("jsonwebtoken");
+const SECRET_KEY = process.env.SECRET_KEY;
+
+
+>>>>>>> main
 
 const getStudent = async (req, res) => {
   try {
@@ -15,7 +23,7 @@ const getStudent = async (req, res) => {
 const getStudents = async (req, res) => {
   try {
     await StudentModel.find({}, (err, result) => {
-      if (err) console.log(err);
+      if (error) throw error;
       res.status(200).json({ massage: "get Students success!", data: result });
     });
   } catch (err) {
@@ -111,6 +119,7 @@ const updateStudent = async (req, res) => {
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields")
     }
+<<<<<<< HEAD
     // const { studentUpdate} = req.body;
     // let profileImg;
     if (req.file) {
@@ -121,19 +130,29 @@ const updateStudent = async (req, res) => {
       { _id: req.body._id },
       // { $set: studentUpdate ,profileImg},
       { $set: req.body,profileImg},
+=======
+    await StudentModel.findByIdAndUpdate(
+       req.params.id ,
+      { $set: req.body},
+>>>>>>> main
       { new: true },
       (err, result) => {
+        delete result.password
+
+        const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
+        res.status(200).json({ message: "success", data: result, result: token });
+
         if (err) throw err;
-        if (result !== null) {
-          res
-            .status(200)
-            .json({ message: "update student  was success!", data: result });
-        } else {
-          const errorNull = new Error("result is null");
-          res
-            .status(500)
-            .json({ message: "update student  faild", error: errorNull.message });
-        }
+        // if (result !== null) {
+        //   res
+        //     .status(200)
+        //     .json({ message: "update student  was success!", data: result });
+        // } else {
+        //   const errorNull = new Error("result is null");
+        //   res
+        //     .status(500)
+        //     .json({ message: "update student  faild", error: errorNull.message });
+        // }
       }
     );
   } catch (err) {

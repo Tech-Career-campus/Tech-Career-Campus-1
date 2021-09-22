@@ -7,9 +7,10 @@ const addNewCourse = async (req, res) => {
   if (!staff) {
     res.status(401).json({ message: "staff not fond" });
   } else {
-    const { name, CourseInformation } = req.body;
+    const { name, CourseInformation, courseType } = req.body;
     const newCourse = new CourseModel({
       name: name,
+      courseType: courseType,
       CourseInformation: CourseInformation,
       createBy: staff._id,
     });
@@ -37,10 +38,9 @@ const getAllCourses = async (req, res) => {
     res.status(500).json({ massage: "get course field", error: err });
   }
 };
-
 const getCourseById = async (req, res) => {
   try {
-    await CourseModel.findById( req.params.id , (err, result) => {
+    await CourseModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       res
         .status(200)
@@ -74,7 +74,6 @@ const deleteSubSubject = async (req, res) => {
       },
       (err, result) => {
         if (err) throw err;
-
         if (result !== null) {
           res
             .status(200)
@@ -83,7 +82,7 @@ const deleteSubSubject = async (req, res) => {
           const errorNull = new Error("result is null");
           res
             .status(500)
-            .json({ message: "Delete course faild", error: errorNull.message });
+            .json({ message: "Delete course failed", error: errorNull.message });
         }
       }
     );
@@ -115,7 +114,7 @@ const addSubSubject = async (req, res) => {
     }
     else {
       const arrayError = new Error("you need to choose which array links or topics")
-      res.status(301).json({ message: "update course faild", error: arrayError.message })
+      res.status(301).json({ message: "update course failed", error: arrayError.message })
       throw arrayError
     }
     await CourseModel.findOneAndUpdate(
@@ -148,7 +147,7 @@ const updateSubSubject = async (req, res) => {
   try {
     const array = await req.body.array
     const arrayField = await req.body.arrayField
-    const ArrayPath = `CourseInformation.$.${array}.$[objcet].${arrayField}`
+    const ArrayPath = `CourseInformation.$.${array}.$[object].${arrayField}`
     const ArrayObject = {};
     ArrayObject[ArrayPath] = req.body.newValue
     const query = {
@@ -163,8 +162,9 @@ const updateSubSubject = async (req, res) => {
       query,
       { $set: ArrayObject },
       {
-        arrayFilters: [{ "objcet._id": { _id: req.body.array_id } }],
-        upsert: true
+        arrayFilters: [{ "object._id": { _id: req.body.array_id } }],
+        upsert: true,
+        new: true
       },
       (err, result) => {
         if (err) throw err;
@@ -193,15 +193,16 @@ const updateSubject = async (req, res) => {
     if (field === "topics" || field === "links") {
       throw new Error("you cant update arrays only static fields")
     }
-    const SubjectPath = `CourseInformation.$[objcet].${field}`
+    const SubjectPath = `CourseInformation.$[object].${field}`
     const SubjectField = {}
     SubjectField[SubjectPath] = req.body.newValue
     await CourseModel.findOneAndUpdate(
       { _id: req.body._id },
       { $set: SubjectField },
       {
-        arrayFilters: [{ "objcet._id": { _id: req.body.Subject_id } }],
-        upsert: true
+        arrayFilters: [{ "object._id": { _id: req.body.Subject_id } }],
+        upsert: true,
+        new:true
       },
       (err, result) => {
         if (err) throw err;
@@ -224,10 +225,9 @@ const updateSubject = async (req, res) => {
   }
 
 };
-const searchCorseAutocomplete =  async(req,res)=>{
+const searchCorseAutocomplete = async (req, res) => {
   try {
-      let result = await collection.aggregate([
-         
+      let result = await collection.aggregate([     
               {
                 '$search': {
                   'index': 'default',
@@ -243,30 +243,35 @@ const searchCorseAutocomplete =  async(req,res)=>{
       ]).toArray();
       res.send(result)
   } catch (error) {
-      res.status(500).json({error:error.message})
+    res.status(500).json({ error: error.message })
   }
 };
-
-
-
-
 const getStudentsByCourse = async (req, res) => {
   try {
     await CourseModel.findById(req.params.id)
-          .populate('students')
-          .then(course => {
-              res.status(201).json({ massage: 'The student is ', data: course.students.map((student) => student ) })
-          })
-          .catch(err => {
-              res.status(500).json({ massage: 'error with population', data: err });
-          })
+      .populate('students')
+      .then(course => {
+        res.status(201).json({ massage: 'The student is ', data: course.students.map((student) => student) })
+      })
+      .catch(err => {
+        res.status(500).json({ massage: 'error with population', data: err });
+      })
 
   }
   catch (err) {
-      res.status(500).json({ massage: "wrong", error: err })
+    res.status(500).json({ massage: "wrong", error: err })
   }
-}
-
+};
+// const deleteCorsById = async (req, res) => {
+//   try {
+//     await CourseModel.findByIdAndRemove(req.params.id, (err, result) => {
+//       nullError(result, res);
+//       if (err) throw err;
+//     });
+//   } catch (error) {
+//     res.status(500).json({ massage: "delete by id staff filed", data: error });
+//   }
+// };
 module.exports = {
   addNewCourse,
   getAllCourses,
@@ -276,5 +281,5 @@ module.exports = {
   updateSubSubject,
   updateSubject,
   searchCorseAutocomplete,
-  getStudentsByCourse
+  getStudentsByCourse,
 };

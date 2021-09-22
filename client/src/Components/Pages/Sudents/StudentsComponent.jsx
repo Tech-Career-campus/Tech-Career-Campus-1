@@ -1,28 +1,32 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PageHeader from "../../Features/PageHeader/PageHeaderComponent";
 import RegisterForm from "../../Features/RegisterForm/RegisterFormComponent";
 import StudentCard from "../../Features/StudentCard/StudentCardComponent";
+import { hebrewVariables } from "../../../utils/hebrewVariables";
 import './student.css'
+import { getStudents } from "../../../Redux/actions/studentsActions";
 
 const Students = () => {
-const {students} = useSelector((state) => state.students);
+  const { students } = useSelector((state) => state.students);
+  const { user } = useSelector((state) => state.user);
+const dispatch = useDispatch()
+  useEffect(()=> {
+    if (user.role === "Student") dispatch(getStudents(user.courseId));
+  }, [])
   const [isRegister, SetIsRegister] = useState(false);
   return (
     <div>
       <PageHeader title={"סטודנטים"} />
-      <button
+      {user.role === "Staff" ? <button
         className="btn"
         onClick={() => SetIsRegister(isRegister ? false : true)}
       >
-        הוספת סטודנט
-      </button>
+        {hebrewVariables.addStudent}
+      </button> : ""}
+      
       <div className="students-card-container">
-        {isRegister ? (
-          <RegisterForm SetIsRegister={() => SetIsRegister(false)} isRegister />
-        ) : (
-          ""
-        )}
+        {isRegister ? <RegisterForm SetIsRegister={SetIsRegister} /> : ""}
         <div className="student-card-container">
           {students.map((student, index) => (
             <StudentCard key={index} student={student} />
