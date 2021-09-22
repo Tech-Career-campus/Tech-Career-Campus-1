@@ -24,8 +24,8 @@ const Events = () => {
     });
 
     useEffect(() => {
-        dispatch(getEvents());
-    }, [])
+      dispatch(getEvents());
+    }, [dispatch]);
 
     const hendleChange = (e) => {
         setNewEvent(
