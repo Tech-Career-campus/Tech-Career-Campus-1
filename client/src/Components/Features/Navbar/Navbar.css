@@ -13,19 +13,22 @@
   justify-content: space-around;
   flex-direction: row;
   align-items: flex-end;
-  height: 40px;
-  width: 200px;
+  height: 50px;
+  width: 250px;
+  
 }
 .navbar-log-user .navbar-user{
   display: flex;
-  justify-content: flex-end;
-  width: 100px;
-  height: 40px;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 130px;
+  height: 50px;
+  /* border: 1px solid black; */
 }
 .navbar-user img{
-  width: 60px;
-   height: 50px;
-  border-radius: 100px;
+  width: 45px;
+   height: 45px;
+  border-radius: 50px;
 }
 .navbar-user .btn{
   height: 20px;
