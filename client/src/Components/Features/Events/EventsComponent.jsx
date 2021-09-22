@@ -26,7 +26,7 @@ const Events = () => {
 
     useEffect(() => {
         dispatch(getEvents());
-    }, [])
+    }, [dispatch]);
 
     const hendleChange = (e) => {
         setNewEvent(
@@ -73,7 +73,7 @@ const Events = () => {
                                 <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder={hebrewVariables.eventMassagePlaceholder} onChange={(e) => { hendleChange(e) }}></textarea>
                                 <br />
                                 <div className="bth-send-event">
-                                    <button type="submit" onClick={() => { dispatch(createEvent(newEvent)) }} > {hebrewVariables.sendEventBtn} </button>
+                                    <button type="submit" onClick={() => { dispatch(createEvent(newEvent)) }} > {hebrewVariables.send} </button>
                                 </div>
                             </form>
                         </div>
@@ -95,16 +95,16 @@ const Events = () => {
                                         {
                                             user.role === "Staff" ?
                                                 <>
-                                                    <button onClick={() => { setUpdate(isUpdate ? false : true); setEventUpdate({ ...eventUpdate, eventId: event._id }) }}> {hebrewVariables.updateEventBtn} </button>
+                                                    <button onClick={() => { setUpdate(isUpdate ? false : true); setEventUpdate({ ...eventUpdate, eventId: event._id }) }}> {hebrewVariables.update} </button>
                                                     {
                                                         isUpdate && event._id === eventUpdate.eventId ?
                                                             <div>
                                                                 <input type="text" name="eventName" value={eventUpdate.eventName} onChange={(e) => { hendleChange1(e) }} />
                                                                 <textarea cols="100" rows="0.5" name="massage" value={eventUpdate.massage} onChange={(e) => { hendleChange1(e) }}></textarea>
-                                                                <input type="button" id="confirmUpdates" value={hebrewVariables.confirmUpdatesBtn} onClick={() => { dispatch(updateEvent(eventUpdate)); setUpdate(false) }} />
+                                                                <input type="button" id="confirmUpdates" value={hebrewVariables.confirmUpdates} onClick={() => { dispatch(updateEvent(eventUpdate)); setUpdate(false) }} />
                                                             </div> : ""
                                                     }
-                                                    <button type="button" id="deleteBtn" value={hebrewVariables.deleteEventBtn} onClick={() => dispatch(deleteEvent(event._id))}></button>
+                                                    <button id="deleteBtn" onClick={() => dispatch(deleteEvent(event._id))}> {hebrewVariables.delete}</button>
                                                 </> : ""
                                         }
                                     </div>

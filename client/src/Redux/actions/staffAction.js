@@ -23,7 +23,9 @@ export const addStuff = (staff) => async dispatch => {
                 email: staff.email,
                 phone: staff.phone,
                 password: staff.password,
-                age: staff.age
+                age: staff.age,
+                jod: staff.jod,
+                responsible:staff.responsible
             }),
         })
             .then((response) => {

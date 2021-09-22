@@ -163,7 +163,8 @@ const updateSubSubject = async (req, res) => {
       { $set: ArrayObject },
       {
         arrayFilters: [{ "object._id": { _id: req.body.array_id } }],
-        upsert: true
+        upsert: true,
+        new: true
       },
       (err, result) => {
         if (err) throw err;
@@ -200,7 +201,8 @@ const updateSubject = async (req, res) => {
       { $set: SubjectField },
       {
         arrayFilters: [{ "object._id": { _id: req.body.Subject_id } }],
-        upsert: true
+        upsert: true,
+        new:true
       },
       (err, result) => {
         if (err) throw err;

@@ -7,6 +7,8 @@ export const hebrewVariables=
     classSchedual:'לו"ז כיתות',
     logout:"התנתק",
     syllabus:"סילבוס",
+    edit:"עריכה",
+    addChanges: "בצע שינויים",
     studentsGrades:"ציוני סטודנטים",
     students:"סטודנטים",
     createCourse:"יצירת קורס",
@@ -73,10 +75,8 @@ export const hebrewVariables=
     eventsHeadline: "ארועים בטק קריירה",
     eventNamePlaceholder: "שם הארוע",
     eventMassagePlaceholder: "הקלד כאן",
-    sendEventBtn: "שלח",
     eventNameTitle: "שם הארוע",
     eventMassagetTitle: "הודעה",
-    updateEventBtn: "עדכן",
-    confirmUpdatesBtn: "אישור עידכונים",
-    deleteEventBtn: "מחק",
+    responsibleFor:"אחראי על:",
+    job:"תפקיד:"
 } 
