@@ -8,23 +8,28 @@
   
   
 }
-.log-user{
+.navbar-log-user{
   display: flex;
   justify-content: space-around;
   flex-direction: row;
   align-items: flex-end;
   height: 40px;
   width: 200px;
-  
 }
-.log-user .user{
+.navbar-log-user .navbar-user{
   display: flex;
   justify-content: flex-end;
   width: 100px;
-  height: 20px;
-  
+  height: 40px;
 }
-
+.navbar-user img{
+  width: 60px;
+   height: 50px;
+  border-radius: 100px;
+}
+.navbar-user .btn{
+  height: 20px;
+}
 
 .navbar-links {
   margin-top: 20px; 
@@ -64,6 +69,8 @@
     height: 65px;
     border-radius: 0px 0px 14px 14px;
 }
+
+
 @media only screen and (max-width: 768px){
   .navbar{
     height: 85px;
