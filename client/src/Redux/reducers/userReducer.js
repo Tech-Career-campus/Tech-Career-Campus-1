@@ -1,8 +1,11 @@
-import {  SET_USER, SET_USER_ERRORS} from '../actions/types'
+import {  SET_USER, SET_USER_ERRORS, UPDATE_USER} from '../actions/types'
 function userReducer(state = {user:{}, errors:{}}, action) {
     switch (action.type) {
-
-            case SET_USER:
+        case SET_USER:
+                return {
+                    ...state, user:action.payload
+                }
+        case UPDATE_USER:
                 return {
                     ...state, user:action.payload
                 }

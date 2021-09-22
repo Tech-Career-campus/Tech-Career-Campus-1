@@ -3,7 +3,8 @@ const StudentModel = require("../../models/studentModel");
 const CourseModel = require("../../models/courseModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
-const { SendEmails } = require("../../utils/SendEmails")
+const { SendEmails } = require("../../utils/SendEmails");
+const path = require("path")
 
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
@@ -24,7 +25,7 @@ const register = async (req, res) => {
           if (err) throw err;
           req.body.password = hash;
 
-          const { firstName, lastName, age, email, phone, role, profileImg, IdNumber } = req.body;
+          const { firstName, lastName, age, email, phone, role, IdNumber,responsible,jod } = req.body;
           const newStaff = new StaffModel({
             firstName: firstName,
             lastName: lastName,
@@ -33,10 +34,14 @@ const register = async (req, res) => {
             password: req.body.password,
             age: age,
             role: role !=='Student'?role:'Staff',
-            profileImg: profileImg ? profileImg : "",
-            IdNumber: IdNumber? IdNumber: ""
+            profileImg: req.file ? req.file.path : "",
+            IdNumber: IdNumber? IdNumber: "",
+            responsible: responsible? responsible:"",
+            jod: jod? jod:"",
+
           });
           try {
+
             await newStaff.save();
             res.status(201).json({
               success: true,
@@ -67,7 +72,6 @@ const register = async (req, res) => {
         return res.status(400).json({ errors: { email: "email already exists" } });
       }
       SendEmails(req, res);
-
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         if (err) throw err;
@@ -78,15 +82,15 @@ const register = async (req, res) => {
           const course = await CourseModel.findById(req.body.courseId)
           if (!course) {
             res
-              .status(400)
+              .status(403)
               .json({
                 success: false,
-                message: "find course filed",
-                error: "this is an error",
+                message: "filed",
+                error: "find course filed",
               });
           }
 
-          const { firstName, lastName, age, email, courseName, phone, role, profileImg, IdNumber } = req.body;
+          const { firstName, lastName, age, email, courseName, phone, role, IdNumber } = req.body;
           const newStudent = new StudentModel({
             firstName: firstName,
             lastName: lastName,
@@ -97,13 +101,10 @@ const register = async (req, res) => {
             courseName: courseName,
             courseId: course._id,
             role: role !== 'Staff'?role:'Student',
-            profileImg: profileImg ? profileImg : "",
+            profileImg: req.file ? req.file.path : "",
             IdNumber: IdNumber? IdNumber: ""
           });
           try {
-            if (req.file) {
-              newStudent.profileImg = req.file.path;
-            }
             await newStudent.save();
             course.students.push(newStudent);
             await course.save();

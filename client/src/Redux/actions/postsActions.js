@@ -46,7 +46,7 @@ export const createPostStaff = (post, history) => async (dispatch) => {
       method: "POST",
       body: JSON.stringify({
         post,
-        _id: user.id,
+        _id: user._id,
         role: user.role,
       }),
       headers: {
@@ -62,6 +62,7 @@ export const createPostStaff = (post, history) => async (dispatch) => {
         });
         history.push(`/forum/${res.data._id}`);
       });
+      dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log(error);
   }
@@ -75,7 +76,7 @@ export const createPostStudent = (post, history) => async (dispatch) => {
       method: "POST",
       body: JSON.stringify({
         post,
-        _id: user.id,
+        _id: user._id,
         role: user.role,
       }),
       headers: {
@@ -91,6 +92,7 @@ export const createPostStudent = (post, history) => async (dispatch) => {
         });
         history.push(`/forum/${res.data._id}`);
       });
+        dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log(error);
   }
@@ -104,7 +106,7 @@ export const updatePost = (id, post) => async (dispatch) => {
       method: "PUT",
       body: JSON.stringify({
         post,
-        _id: user.id,
+        _id: user._id,
         role: user.role,
       }),
       headers: {
@@ -132,7 +134,7 @@ export const commentPost = (id, value) => async (dispatch) => {
       method: "POST",
       body: JSON.stringify({
         value,
-        _id: user.id,
+        _id: user._id,
         role: user.role,
       }),
       headers: {

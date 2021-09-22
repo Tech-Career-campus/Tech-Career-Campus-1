@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import techLogo from "../../../images/tech-logo.jpeg";
 import "./Navbar.css";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
-
+import EditProfile from "../EditProfile/EditProfileConponent";
 const logout = () => {
   localStorage.removeItem("jwtToken");
   window.location.href = "./";
 };
 
 const Navbar = () => {
+  const [editProfile, setEditProfile] = useState(false)
   const { user } = useSelector((state) => state.user);
-  console.log(user);
+  const [open, setOpen] = useState(false);
+  
   return (
     <>
       <div className="navbar-main">
@@ -33,15 +35,30 @@ const Navbar = () => {
             <Link to={"/class-schedule"}>{hebrewVariables.classSchedual}</Link>
           </li>
         </ul>
-        <div className="log-user">
-          <div className="user">
-        <p >
-          היי, {user.firstName} {user.lastName}
-        </p>
-        </div>
-        <button className="btn" onClick={() => logout()}>
-          {hebrewVariables.logout}
-        </button>
+        <div className="navbar-log-user">
+          <div className="navbar-user">
+            <h6>
+              היי, {user.firstName} {user.lastName}
+            </h6>
+            <img
+              src="https://img.lovepik.com/element/40170/3915.png_860.png"
+              alt={"Student"}
+            />
+            
+            {editProfile ? <EditProfile open={open} setOpen={setOpen} user={user} setEditProfile= {setEditProfile}/> : ""}
+          </div>
+          <button
+              className="btn"
+              onClick={() => {
+                setEditProfile(editProfile ? false : true);
+                setOpen(true);
+              }}
+            >
+              <i class="fas fa-cog"></i>
+            </button>
+          <button className="btn" onClick={() => logout()}>
+            {hebrewVariables.logout}
+          </button>
         </div>
       </div>
     </>

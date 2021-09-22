@@ -1,7 +1,6 @@
 const eventModel = require("../models/eventModel");
 const staffModel = require("../models/staffModel");
-const {nullError} = require("../utils/nullError")
-const { ObjectId } = require("mongodb");
+const {nullError} = require("../utils/Errors");
 
 const getAllEventPost = async (req, res) => {
   try {
@@ -16,31 +15,30 @@ const getAllEventPost = async (req, res) => {
 
 const getEventById = async (req, res) => {
   try {
-    await eventModel.findById(req.params.id, (error, result) => {
-      if (error) throw error;
+    await eventModel.findById(req.params.id, (err, result) => {
+      if (err) throw err;
       res
         .status(200)
         .json({ massage: "get event by id success", data: result });
     });
-  } catch (error) {
-    res.status(500).json({ massage: "get event by id field  ", error: error });
+  } catch (err) {
+    res.status(500).json({ massage: "get event by id field  ", error: err });
   }
 };
 
 const postNewEvent = async (req, res) => {
   const staff = await staffModel.findById(req.params.id);
   const { eventName, massage } = req.body;
-  const newevent = new eventModel({
+  const newEvent = new eventModel({
     eventName: eventName,
     massage: massage,
+    createBy: staff._id
   });
   try {
-    await newevent.save();
-    staff.events.push(newevent);
-    await staff.save();
+    await newEvent.save();
     res.status(200).json({
       massage: "post added successfully, success",
-      data: newevent,
+      data: newEvent,
     });
   } catch (err) {
     res.status(500).json({ massage: "post added field ", error: err });
@@ -50,8 +48,8 @@ const postNewEvent = async (req, res) => {
 const deleteEventPost = async (req, res) => {
   try {
     await eventModel.findByIdAndRemove(req.params.id,(error, result) => {
-      nullError(result , res);
       if (error) throw error;
+      nullError(result , res);
      
     });
   } catch (error) {
@@ -63,9 +61,10 @@ const updateEventPost = async (req, res) => {
   try {
     await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
+      { new: true },
       (error, result) => {
         if (error) throw error;
-        res.status(200).json({ massage: "update event success", data: result });
+        nullError(result , res);
       }
     );
   } catch (error) {

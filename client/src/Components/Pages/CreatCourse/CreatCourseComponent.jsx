@@ -5,6 +5,8 @@ import { hebrewVariables } from "../../../utils/hebrewVariables";
 import SelectCourseSubjects from "../../Features/SelectCourseSubjects/SelectCourseSubjectsComponent";
 import CreateNewSubject from "../../Features/CreateNewSubject/CreateNewSubjectComponent";
 import { createCourse } from "../../../Redux/actions/coursesActions";
+
+
 const CreatCourse = () => {
   const [corseType, setCourseType] = useState();
   const [newCourse, setNewCourse] = useState();
@@ -14,7 +16,6 @@ const CreatCourse = () => {
   const { user } = useSelector((state) => state.user);
   const { errors } = useSelector((state) => state.courses);
   const { courses } = useSelector((state) => state.courses);
-  console.log(errors);
   const [createCourseErrors, setCreateCourseErrors] = useState(true);
 
   useEffect(() => {
@@ -29,23 +30,23 @@ const CreatCourse = () => {
 
   return (
     <div>
-      <PageHeader title={"יצירת קורס"} />
+      <PageHeader title={hebrewVariables.createCourse} />
       {createCourseErrors ? (
         <>
           <form>
-            <label>שם הקורס</label>
+            <label>{hebrewVariables.courseName}</label>
             <input
               type={"text"}
               onChange={(e) =>
                 setNewCourse({
                   ...newCourse,
                   name: e.target.value,
-                  id: user.id,
+                  id: user._id,
                 })
               }
             />
             {errors?.name ? "שם הקורס הינו שדה חובה" : ""}
-            <label>סוג קורס</label>
+            <label>{hebrewVariables.courseType}</label>
             {errors?.courseType ? "סוג הקורס הינו שדה חובה" : ""}
 
             <select
@@ -55,15 +56,21 @@ const CreatCourse = () => {
               }}
             >
               <option></option>
-              <option value="פיתוח">פיתוח</option>
-              <option value="ניהול רשתות">ניהול רשתות</option>
-              <option value="סייבר">סייבר</option>
+              <option value={hebrewVariables.developer}>
+                {hebrewVariables.developer}
+              </option>
+              <option value={hebrewVariables.devNetEngineers}>
+                {hebrewVariables.devNetEngineers}
+              </option>
+              <option value={hebrewVariables.SOCAnalyst}>
+                {hebrewVariables.SOCAnalyst}
+              </option>
             </select>
           </form>
           <button
             onClick={() => setNewSubjectForm(newSubjectForm ? false : true)}
           >
-            צור נושא חדש
+            {hebrewVariables.createNewSubject}
           </button>
           {newSubjectForm ? (
             <CreateNewSubject
@@ -88,7 +95,7 @@ const CreatCourse = () => {
               })
             }
           >
-            צור קורס
+            {hebrewVariables.createCourse}
           </button>
         </>
       ) : (
@@ -101,7 +108,7 @@ const CreatCourse = () => {
               setCourseType();
             }}
           >
-            צור קורס נוסף
+            {hebrewVariables.createCourse}
           </button>
         </div>
       )}

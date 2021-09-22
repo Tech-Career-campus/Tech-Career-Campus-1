@@ -1,3 +1,4 @@
+
 const nullError = (result, res) => {
     try {
     if (result === null || result === undefined) {
@@ -14,10 +15,13 @@ const nullError = (result, res) => {
       .status(500)
       .json({ massage: "filed", data: error.message });
     }
-
-
 };
-
+const isEmptyId = (req) => {
+  if (req.body.id === "" || req.params.id === "" || req.body._id === "") {
+      throw new Error("The id field is empty, you are required to pass a 24-character entry");
+};
+};
 module.exports = {
   nullError,
+  isEmptyId,
 };
