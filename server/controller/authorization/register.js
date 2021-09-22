@@ -36,7 +36,7 @@ const register = async (req, res) => {
           if (err) throw err;
           req.body.password = hash;
 
-          const { firstName, lastName, age, email, phone, role, profileImg, IdNumber } = req.body;
+          const { firstName, lastName, age, email, phone, role, IdNumber,responsible,jod } = req.body;
           const newStaff = new StaffModel({
             firstName: firstName,
             lastName: lastName,
@@ -44,14 +44,15 @@ const register = async (req, res) => {
             phone: phone,
             password: req.body.password,
             age: age,
-            role: role !== 'Student' ? role : 'Staff',
-            profileImg: profileImg ? profileImg : "",
-            IdNumber: IdNumber ? IdNumber : ""
+            role: role !=='Student'?role:'Staff',
+            profileImg: req.file ? req.file.path : "",
+            IdNumber: IdNumber? IdNumber: "",
+            responsible: responsible? responsible:"",
+            jod: jod? jod:"",
+
           });
           try {
-            if (req.file) {
-              newStaff.profileImg = req.file.path;
-            }
+
             await newStaff.save();
             res
             .status(201)
@@ -97,7 +98,6 @@ const register = async (req, res) => {
       });
       }
       SendEmails(req, res);
-
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
         if (err) throw err;
@@ -115,7 +115,7 @@ const register = async (req, res) => {
               });
           }
 
-          const { firstName, lastName, age, email, courseName, phone, role, profileImg, IdNumber } = req.body;
+          const { firstName, lastName, age, email, courseName, phone, role, IdNumber } = req.body;
           const newStudent = new StudentModel({
             firstName: firstName,
             lastName: lastName,
@@ -125,14 +125,11 @@ const register = async (req, res) => {
             age: age,
             courseName: courseName,
             courseId: course._id,
-            role: role !== 'Staff' ? role : 'Student',
-            profileImg: profileImg ? profileImg : "",
-            IdNumber: IdNumber ? IdNumber : ""
+            role: role !== 'Staff'?role:'Student',
+            profileImg: req.file ? req.file.path : "",
+            IdNumber: IdNumber? IdNumber: ""
           });
           try {
-            if (req.file) {
-              newStudent.profileImg = req.file.path;
-            }
             await newStudent.save();
             course.students.push(newStudent);
             await course.save();

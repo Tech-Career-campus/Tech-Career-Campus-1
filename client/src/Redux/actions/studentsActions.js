@@ -1,7 +1,6 @@
 import fetcher from '../../utils/fetcher';
 import { CREATE_STUDENT, CREATE_STUDENT_ERRORS, DELETE_STUDENT, GET_STUDENTS, UPDATE_STUDENT } from './types'
 export const getStudents = (courseId) => async dispatch => {
-    debugger
     await fetcher(`http://localhost:8080/api/course/students/${courseId}`)
         .then((response) => dispatch({
             type: GET_STUDENTS,

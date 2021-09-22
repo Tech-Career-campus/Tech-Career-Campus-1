@@ -1,7 +1,6 @@
 const eventModel = require("../models/eventModel");
 const staffModel = require("../models/staffModel");
-const { nullError } = require("../utils/nullError")
-const { ObjectId } = require("mongodb");
+const {nullError} = require("../utils/nullError")
 
 const getAllEventPost = async (req, res) => {
   try {
@@ -55,6 +54,7 @@ const postNewEvent = async (req, res) => {
   const newEvent = new eventModel({
     eventName: eventName,
     message: message,
+    createBy:staff._id
   });
   try {
     await newEvent.save();
@@ -101,14 +101,8 @@ const updateEventPost = async (req, res) => {
     await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
       (err, result) => {
+        nullError(result , res);
         if (err) throw err;
-        res
-          .status(200)
-          .json({
-            success: true,
-            message: "update event success",
-            data: result
-          });
       }
     );
   } catch (err) {
