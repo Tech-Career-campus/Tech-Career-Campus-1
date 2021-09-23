@@ -16,12 +16,12 @@ import Typography from "@material-ui/core/Typography";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
 
 const SyllabusComponent = () => {
+  const { user } = useSelector(state => state.user);
   const syllabus = useSelector((state) => state.syllabus);
   const course = useSelector((state) => state.course);
   const [isClicked, setIsClicked] = useState(false);
   const [courseId, setcourseId] = useState("");
-  const [nameSubject, setNameSubject] = useState([""]);
-  const [topics, setTopics] = useState("");
+  const [topicSubject, setTopicSubject] = useState("");
   const [newSyllabus, setNewSyllabus] = useState({});
   const [subSubject, setsubSubject] = useState({});
   const HandleChange = (e, subjectId) => {
@@ -73,29 +73,27 @@ const SyllabusComponent = () => {
                       >
                         <Typography variant="h6" component="h1">
                           <h2>{courseItem.nameSubject}</h2>
+                              
+                            {
+                              user.role === "Staff" ?
+                              <button
+                              className="btn"
+                              onClick={(e) => {
+                                setIsClicked(isClicked ? false : true);
+                              }}
+                            >
+                              {hebrewVariables.edit}
+                            </button> :""
+                            }
 
-                          <button
-                            className="btn"
-                            onClick={(e) => {
-                              setIsClicked(isClicked ? false : true);
-                              setNameSubject(courseItem.nameSubject);
-                            }}
-                          >
-                            {hebrewVariables.edit}
-                          </button>
                           {isClicked ? (
                             <div>
                               <input
-                              key={index}
-                                value={newSyllabus.name}
+                                placeholder={courseItem.nameSubject}
                                 name="nameSubject"
                                 type="text"
                                 onChange={(e) =>
-                                  HandleChange(
-                                    e,
-                                    courseItem._id,
-                                    setNameSubject(e.target.value)
-                                  )
+                                  HandleChange(e, courseItem._id)
                                 }
                               />
                               <button
@@ -127,10 +125,10 @@ const SyllabusComponent = () => {
                                           {` ${++index}`}
                                         </label>
                                         <input
-                                          value={subSubject.subject}
                                           key={topic._id}
                                           name="subject"
                                           type="text"
+                                          placeholder={topic.subject}
                                           onChange={(e) =>
                                             HandleTopicChange(
                                               e,
