@@ -382,29 +382,7 @@ const getStudentsByCourse = async (req, res) => {
       })
   }
 };
-const deleteCourse = async (req, res) => {
-  try {
-    await CourseModel.findByIdAndDelete(req.params.id, (err, result) => {
-      if (err) throw err
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "success delete course",
-          data: result
-        })
-    })
-  }
-  catch (err) {
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "delete course field",
-        error: err
-      });
-  }
-}
+
 
 module.exports = {
   addNewCourse,
@@ -416,5 +394,4 @@ module.exports = {
   updateSubject,
   searchCorseAutocomplete,
   getStudentsByCourse,
-  deleteCourse
 };

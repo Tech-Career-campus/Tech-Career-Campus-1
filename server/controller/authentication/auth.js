@@ -33,7 +33,7 @@ const authRole = (Role) => {
     //       message: "you don't have access",
     //       error: err
     //     });
-  }
+  // }
 };
 
 };
