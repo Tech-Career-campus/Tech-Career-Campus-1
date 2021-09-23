@@ -2,13 +2,15 @@ const CourseModel = require("../models/courseModel");
 const StaffModel = require("../models/staffModel");
 const { collection } = require('../models/courseModel');
 const {findCourseInformation} = require("../utils/db_query");
-const { nullError } = require("../utils/Errors");
+const { nullError, isEmptyId } = require("../utils/Errors");
 
 const addNewCourse = async (req, res) => {
+  try {
+  isEmptyId(req)
   const staff = await StaffModel.findById(req.body.id);
   if (!staff) {
     res.status(401).json({ message: "staff not fond" });
-  } else {
+  }
     const { name, CourseInformation, courseType } = req.body;
     const newCourse = new CourseModel({
       name: name,
@@ -16,19 +18,19 @@ const addNewCourse = async (req, res) => {
       CourseInformation: CourseInformation,
       createBy: `${staff.firstName} ${staff.lastName} `,
     });
-    try {
+
       await newCourse.save();
       staff.courses.push(newCourse);
       await staff.save();
       res
         .status(201)
         .json({ message: "create new course success", data: newCourse });
-    } catch (error) {
+    } catch (err) {
       res
         .status(409)
-        .json({ message: "create new course filed", error: error });
+        .json({ message: "create new course filed", error: err.message });
     }
-  }
+
 };
 const getAllCourses = async (req, res) => {
   try {
