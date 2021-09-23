@@ -60,7 +60,6 @@ const updateClassesName = async (req, res) => {
             }
         );
     } catch (err) {
-        console.log(err);
         res.status(500).json({ message: "update class spot field", error: err });
     }
 }
@@ -102,7 +101,6 @@ const updateClasses = async (req, res) => {
             }
         );
     } catch (err) {
-        console.log(err);
         res.status(500).json({ message: "update class spot field", error: err });
     }
 }

@@ -16,14 +16,13 @@ const News = () => {
       .catch(err => console.log(err))
   }, [newsApi, newsApiKey]);
 
-  console.log(newsData);
   return !newsData.length ? (
     <CircularProgress />
 
   ) : (
       <div className="BodyNew">
         <div className="news-ticker-div">
-          <Ticker move={move} height='500' mode="smooth" direction="toRight">
+          <Ticker speed={20} move={move} height='500' mode="smooth" direction="toRight">
             {({ index }) => (
               <a onMouseEnter={() => setMove(false)} onMouseLeave={() => setMove(true)} rel="noreferrer" target="_blank" href={newsData[index]?.url}>
                 <div className="card-news">
