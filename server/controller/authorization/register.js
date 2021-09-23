@@ -82,13 +82,6 @@ const register = async (req, res) => {
 
           const course = await CourseModel.findById(req.body.courseId);
           if (!course) {
-<<<<<<< HEAD
-            res.status(400).json({
-              success: false,
-              message: "find course filed",
-              error: "this is an error",
-            });
-=======
             res
               .status(403)
               .json({
@@ -96,7 +89,6 @@ const register = async (req, res) => {
                 message: "filed",
                 error: "find course filed",
               });
->>>>>>> main
           }
 
           const { firstName, lastName, age, email, courseName, phone, role, IdNumber } = req.body;
