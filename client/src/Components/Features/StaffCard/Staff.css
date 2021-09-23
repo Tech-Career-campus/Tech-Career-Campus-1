@@ -1,49 +1,49 @@
-.student-card{
+.staff-card{
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
-    width: 20vw;
+    width: 30vw;
     height: 30vh ;
     border-radius: 15px;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
     background-color: #f4f4f4;
 }
-.student-card-img{
+.staff-card-img{
     width: 30%;
     height: inherit;
 }
-.student-card-img > img {
+.staff-card-img  img {
     border-radius: 100%;
     width: 100%;
     padding: 10px;
 }
-.student-card-body{
+.staff-card-body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 60%;
     height: 100%;
 }
-.student-card-body>p{
+.staff-card-body>p{
     font-size: 18px;
 }
-.student-card-body-btn{
+.staff-card-body-btn{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: left;
 }
 
-.student-card-body-btn > .btn{
+.staff-card-body-btn  .btn{
     margin: 0 5px;
 }
 
-.student-card-body-form > input {
+.staff-card-body-form  input {
     font-size: 15px;
     border: none;
     border-radius: 25px;
     width: 60%;
 }
-.student-card-body-form> .btn{
+.staff-card-body-form .btn{
     margin:5px;
 }
