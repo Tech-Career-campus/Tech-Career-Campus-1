@@ -75,7 +75,7 @@ const Events = () => {
                 {
                     events?.map((event) => {
                         return (
-
+                            
                             <div className="EventsNews">
                                 <div key={event._id} >
 
@@ -100,6 +100,7 @@ const Events = () => {
                                     </div>
                                 </div>
                             </div>
+                            
                         )
                     })
                 }
