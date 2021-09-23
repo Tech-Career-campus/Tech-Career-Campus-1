@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import "./Staff.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteStaff, updateStaff } from '../../../Redux/actions/staffAction';
 import Button from '@material-ui/core/Button';
@@ -24,11 +25,11 @@ const StaffCard = ({ staffItem }) => {
 
 
     return (
-        <div>
+        <div className="body" >
 
             {
                 isEdit ?
-                    (<>
+                    (<div className="body-staff">
                         <div >
                             <img src={staffImg} width={"200px"} height={"200px"} alt={"staff"} />
                         </div>
@@ -75,9 +76,9 @@ const StaffCard = ({ staffItem }) => {
                         >
                             {hebrewVariables.update}
                         </Button>
-                    </>)
+                    </div>)
                     :
-                    (<div>
+                    (<div className="body-staff-cards">
                         <div >
                             <img src={staffImg} width={"200px"} height={"200px"} alt={"staff"} />
                         </div>
@@ -103,6 +104,7 @@ const StaffCard = ({ staffItem }) => {
                             </div>
 
                         </div>
+                        <div className="bth-card-staff">
                         <Button>
                             <DeleteIcon onClick={() => deletestaffHandler(staffItem._id)} />
                         </Button>
@@ -114,7 +116,7 @@ const StaffCard = ({ staffItem }) => {
                         >
                             {hebrewVariables.update}
                         </Button>
-
+                            </div>
                     </div>)
             }
 

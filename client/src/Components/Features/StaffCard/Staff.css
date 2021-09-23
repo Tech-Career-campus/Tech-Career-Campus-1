@@ -1,0 +1,25 @@
+.body{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.body-staff{
+   
+
+   
+    border: 1px solid black;
+    width: 100vw;
+    height: 100%;
+}
+.body-staff .body-staff-cards{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    border: 1px solid black;
+    width: 200px;
+    height: 450px;
+    margin-top: 50px;
+}
