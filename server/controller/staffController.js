@@ -1,5 +1,6 @@
 const StaffModel = require("../models/staffModel");
-const { nullError } = require("../utils/nullError");
+const CourseModel = require("../models/courseModel");
+const { nullError, isEmptyId } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -15,7 +16,7 @@ const getAllStaff = async (req, res) => {
       .json({
         success: false,
         message: "find staff filed",
-        error: err
+        error: err.message
       });
   }
 };
@@ -31,43 +32,30 @@ const getStaffById = async (req, res) => {
       .json({
         success: false,
         message: "find by id staff filed",
-        error: err
+        error: err.message
       });
   }
 };
-
-// const getStaffById = async (id) => {
-//   try {
-//     await StaffModel.findById(id, (err, result) => {
-//       //  nullError(result , res);
-//       if (err) throw err;
-//     });
-//     const staff = await StaffModel.findById(id);
-//     return staff;
-//   } catch (err) {
-//     res
-// .status(500)
-//   .json({
-//     success: false,
-//     message: "find by id staff filed",
-//     error: err
-//   });
-//   }
-// };
-
 const deleteStaffById = async (req, res) => {
   try {
     await StaffModel.findByIdAndDelete(req.body.id, (err, result) => {
-      nullError(result, res);
       if (err) throw err;
-    });
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "delete by id student success!"
+        });
+    }
+    );
   } catch (err) {
+    console.log(err);
     res
-      .status(400)
+      .status(500)
       .json({
         success: false,
-        message: "delete by id staff filed",
-        error: err
+        message: "delete by id student filed",
+        data: err.message
       });
   }
 };
@@ -96,7 +84,7 @@ const updateStaffById = async (req, res) => {
       .json({
         success: false,
         message: "update staff filed",
-        error: err
+        error: err.message
       });
   }
 };

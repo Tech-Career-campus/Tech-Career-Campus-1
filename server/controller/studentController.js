@@ -1,9 +1,9 @@
 const StudentModel = require("../models/studentModel");
-const { nullError } = require("../utils/nullError");
+const CourseModel = require("../models/courseModel");
+const { ObjectId } = require("mongoose");
+const { nullError } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
-
-
 
 const getStudent = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ const getStudent = async (req, res) => {
       .json({
         success: false,
         message: "get Student field",
-        error: err
+        error: err.message
       });
   }
 };
@@ -45,7 +45,7 @@ const getStudents = async (req, res) => {
       .json({
         success: false,
         message: "get Students field",
-        error: err
+        error: err.message
       });
   }
 };
@@ -68,7 +68,7 @@ const getStudentGradeById = async (req, res) => {
       .json({
         success: false,
         message: "get Student grades by id failed",
-        error: err
+        error: err.message
       });
   }
 };
@@ -96,7 +96,7 @@ const addStudentTestById = async (req, res) => {
       .json({
         success: false,
         message: "adding a test to the test array failed",
-        error: err
+        error: err.message
       });
   }
 };
@@ -123,7 +123,7 @@ const updateStudentTestById = async (req, res) => {
       .json({
         success: false,
         message: "updating a student test failed",
-        error: err
+        error: err.message
       });
   }
 };
@@ -151,15 +151,15 @@ const deleteStudentTestById = async (req, res) => {
       .json({
         success: true,
         message: "deleting a student test failed",
-        error: err
+        error: err.message
       });
   }
 };
 const updateStudent = async (req, res) => {
   try {
-    const field = await req.body.field
+    const field = await req.body.field;
     if (field === "tests") {
-      throw new Error("you cant update arrays only static fields")
+      throw new Error("you cant update arrays only static fields");
     }
     await StudentModel.findByIdAndUpdate(
       req.params.id,
@@ -174,7 +174,8 @@ const updateStudent = async (req, res) => {
           .json({
             success: true,
             message: "success",
-            data: token
+            data: result,
+            result: token
           });
 
         if (err) throw err;
@@ -200,37 +201,40 @@ const updateStudent = async (req, res) => {
       .json({
         success: true,
         message: "update student failed",
-        error: err
+        error: err.message
       });
   }
-
 };
 const deleteStudent = async (req, res) => {
-  await StudentModel.findByIdAndDelete(
-    { _id: req.body._id },
-    (err, result) => {
+  try {
+    const student = await StudentModel.findById(req.params.id, (err) => {
       if (err) throw err;
-      if (result !== null) {
+    });
+
+    await CourseModel.findByIdAndUpdate(
+      req.body.id,
+      { $pull: { students: student._id } },
+      (err, result) => {
+        if (err) throw err;
+        student.remove({});
         res
           .status(200)
           .json({
             success: true,
-            message: "delete student  was success!",
-            data: result
-          });
-      } else {
-        const errorNull = new Error("result is null");
-        res
-          .status(500)
-          .json({
-            success: false,
-            message: "delete student failed",
-            error: errorNull.message
+            message: "delete by id student success!"
           });
       }
-    }
-  );
-}
+    );
+  } catch (err) {
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "delete by id student filed",
+        error: err.message
+      });
+  }
+};
 const getSyllabusByCourse = async (req, res) => {
   try {
     await StudentModel.findById(req.body.id)
@@ -250,7 +254,7 @@ const getSyllabusByCourse = async (req, res) => {
           .json({
             success: true,
             message: 'error with population',
-            error: err
+            error: err.message
           });
       })
 
@@ -261,10 +265,10 @@ const getSyllabusByCourse = async (req, res) => {
       .json({
         success: true,
         message: "wrong",
-        error: err
+        error: err.message
       })
   }
-}
+};
 module.exports = {
   getStudent,
   getStudents,
@@ -274,5 +278,5 @@ module.exports = {
   deleteStudentTestById,
   updateStudent,
   deleteStudent,
-  getSyllabusByCourse
-}
+  getSyllabusByCourse,
+};

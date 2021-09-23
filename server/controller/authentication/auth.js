@@ -12,30 +12,18 @@ const authUser = (req, res, next) => {
 
 const authRole = (Role) => {
   return (req, res, next) => {
-
-    // try {
     if (req.body.role !== Role) {
       res
-        .status(401)
+        .status(403)
         .json({
           success: false,
           message: "you don't have access",
-          error: err
+          error: error
         });
     } else {
       next();
     }
-    // } catch (err) {
-    //   res
-    //     .status(401)
-    //     .json({
-    //       success: false,
-    //       message: "you don't have access",
-    //       error: err
-    //     });
-  // }
-};
-
+  };
 };
 module.exports = {
   authUser,

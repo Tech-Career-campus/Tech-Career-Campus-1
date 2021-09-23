@@ -1,6 +1,6 @@
 const eventModel = require("../models/eventModel");
 const staffModel = require("../models/staffModel");
-const {nullError} = require("../utils/nullError")
+const { nullError } = require("../utils/Errors");
 
 const getAllEventPost = async (req, res) => {
   try {
@@ -20,7 +20,7 @@ const getAllEventPost = async (req, res) => {
       .json({
         success: false,
         message: "get event post field",
-        error: err
+        error: err.message
       });
   }
 };
@@ -43,7 +43,7 @@ const getEventById = async (req, res) => {
       .json({
         success: false,
         message: "get event by id field",
-        error: err
+        error: err.message
       });
   }
 };
@@ -54,7 +54,7 @@ const postNewEvent = async (req, res) => {
   const newEvent = new eventModel({
     eventName: eventName,
     message: message,
-    createBy:staff._id
+    createBy: staff._id
   });
   try {
     await newEvent.save();
@@ -73,7 +73,7 @@ const postNewEvent = async (req, res) => {
       .json({
         success: false,
         message: "post added field ",
-        error: err
+        error: err.message
       });
   }
 };
@@ -81,8 +81,8 @@ const postNewEvent = async (req, res) => {
 const deleteEventPost = async (req, res) => {
   try {
     await eventModel.findByIdAndRemove(req.params.id, (err, result) => {
-      nullError(result, res);
       if (err) throw err;
+      nullError(result, res);
 
     });
   } catch (err) {
@@ -91,7 +91,7 @@ const deleteEventPost = async (req, res) => {
       .json({
         success: false,
         message: "deleted event field",
-        error: err
+        error: err.message
       });
   }
 };
@@ -100,9 +100,10 @@ const updateEventPost = async (req, res) => {
   try {
     await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
+      { new: true },
       (err, result) => {
-        nullError(result , res);
         if (err) throw err;
+        nullError(result, res);
       }
     );
   } catch (err) {
@@ -111,7 +112,7 @@ const updateEventPost = async (req, res) => {
       .json({
         success: false,
         message: "update event field",
-        error: err
+        error: err.message
       });
   }
 };

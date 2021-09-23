@@ -67,7 +67,7 @@ const register = async (req, res) => {
             .json({
               success: false,
               message: "create new staff filed",
-              error: err,
+              error: err.message,
             });
           }
         });
@@ -108,10 +108,11 @@ const register = async (req, res) => {
           const course = await CourseModel.findById(req.body.courseId)
           if (!course) {
             res
-              .status(400)
+              .status(403)
               .json({
                 success: false,
-                message: "find course filed",
+                message: "filed",
+                error: "find course filed",
               });
           }
 
@@ -146,7 +147,7 @@ const register = async (req, res) => {
             .json({
               success: false,
               message: "create new student filed",
-              error: err,
+              error: err.message
             });
           }
         });
