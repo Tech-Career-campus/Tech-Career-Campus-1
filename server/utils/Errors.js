@@ -18,12 +18,20 @@ const nullError = (result, res) => {
 };
 const isEmptyId = (req) => {
 if (req.body.id === "" || req.params.id === "" || req.body._id === "") {
-      throw new Error("The id field is empty, you are required to pass a 24-character entry");
+   throw new Error("The id field is empty, you are required to pass a 24-character entry");
 };
-// if (req.body.id === undefined || req.params.id === undefined || req.body._id === undefined) {
-//   throw new Error("The id field is empty, you are required to pass a 24-character entry");
+if (!req.body.id || !req.params.id || !req.body._id) {
+  throw new Error("The id field is equal to null or undefined");
+};
+};
+
+// const nullVariable = (data) => {
+//   if (!data) {
+//     throw new Error("Failed to find information, please make sure you provide existing data in the appropriate format");
+//   };
 // };
-};
+  
+
 module.exports = {
   nullError,
   isEmptyId,

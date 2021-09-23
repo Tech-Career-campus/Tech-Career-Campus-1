@@ -63,14 +63,11 @@ const studentSchema = new Schema(
   { timestamps: true }
 );
 
-studentSchema.pre('update',function(next) {
-  this.model('course').update(
-      { },
-      { "$pull": { "students": this._id } },
-      { "multi": true },
-      next
-  );
-})
+// studentSchema.pre('findOneAndDelete',function(next) {
+//   console.log("hello fro studentSchema");
+//   this.model("course").findOneAndUpdate({_id:req.body._id },{ $pull: { students: this._id } },{ multi: true },next);
+  
+// });
 
 const Student = mongoose.model("student", studentSchema);
 module.exports = Student;

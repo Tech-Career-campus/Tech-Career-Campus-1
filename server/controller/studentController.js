@@ -154,6 +154,22 @@ const deleteStudent = async (req, res) => {
       .json({ massage: "delete by id student filed", error: err.message });
   }
 };
+
+// const deleteStudent = async (req, res) => {
+//   try {
+//       await StudentModel.findOneAndDelete({_id:req.body.id}, (err) => {
+//       if (err) throw err;
+//       res
+//       .status(200)
+//       .json({ massage: "delete by id student success"});
+//     });
+
+//   } catch (err) {
+//     res
+//       .status(500)
+//       .json({ massage: "delete by id student filed", error: err.message });
+//   }
+// };
 const getSyllabusByCourse = async (req, res) => {
   try {
     await StudentModel.findById(req.body.id)
