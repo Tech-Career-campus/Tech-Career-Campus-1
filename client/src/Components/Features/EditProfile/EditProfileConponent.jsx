@@ -3,19 +3,32 @@ import { useDispatch } from "react-redux";
 import { updateUser } from "../../../Redux/actions/userActions";
 import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import './editProfile.css'
 
-const EditProfile = ({ user , setEditProfile}) => {
+const EditProfile = ({ setOpen,open, user , setEditProfile}) => {
   const [changePassword, setChangePassword] = useState(false);
   //   const [updateUser, setUpdateUser] = useState({...user, password:"", newPassword:"", confirmPassword:"" })
   const [userUpdate, setUserUpdate] = useState({ ...user });
   const dispatch = useDispatch();
 
   useEffect(() => setUserUpdate({ ...user}), [user]);
-  
+
+  const handleClose = () => setOpen(false);
 
   return (
-    <div>
-      <form onSubmit={(e) => e.preventDefault()}>
+    
+    <div className="edit-profile">
+        <Modal
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box className="edit-profile-box">
+      <form className='edit-profile-form' onSubmit={(e) => e.preventDefault()}>
         <label> {hebrewVariables.firstName}</label>
         <input
           value={userUpdate.firstName}
@@ -44,11 +57,8 @@ const EditProfile = ({ user , setEditProfile}) => {
           name={"phone"}
           onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
         />
-        <button
-          onClick={() => setChangePassword(changePassword ? false : true)}
-        >
-          {hebrewVariables.updatePassword}
-        </button>
+        <div className={`edit-profile-btn-container ${changePassword?"edit-profile-form":""}`}>
+        
         {changePassword ? (
           <>
             <label>{hebrewVariables.currentPassword}</label>
@@ -61,13 +71,24 @@ const EditProfile = ({ user , setEditProfile}) => {
         ) : (
           ""
         )}
-        <button onClick={() => dispatch(updateUser(userUpdate))}>
+        <button
+        className='btn'
+          onClick={() => setChangePassword(changePassword ? false : true)}
+        >
+          {hebrewVariables.updatePassword}
+        </button>
+        <button className='btn' onClick={() => dispatch(updateUser(userUpdate))}>
           {hebrewVariables.update}
         </button>
+
+        </div>
+       
       </form>
-      <button onClick={() => setEditProfile(false)}>
+      <button style={{width:"100%"}} className='btn' onClick={() => setEditProfile(false)}>
         {hebrewVariables.closeBtn}
       </button>
+      </Box>
+      </Modal>
     </div>
   );
 };

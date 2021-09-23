@@ -13,6 +13,9 @@ const logout = () => {
 const Navbar = () => {
   const [editProfile, setEditProfile] = useState(false)
   const { user } = useSelector((state) => state.user);
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  
   return (
     <>
       <div className="navbar-main">
@@ -33,25 +36,27 @@ const Navbar = () => {
             <Link to={"/class-schedule"}>{hebrewVariables.classSchedual}</Link>
           </li>
         </ul>
-        <div className="log-user">
-          <div className="user">
-            <p>
+        <div className="navbar-log-user">
+          <div className="navbar-user">
+            <h4>
               היי, {user.firstName} {user.lastName}
-            </p>
+            </h4>
             <img
               src="https://img.lovepik.com/element/40170/3915.png_860.png"
               alt={"Student"}
-              style={{ width: "60px", height: "50px" }}
             />
-            <button
+            
+            {editProfile ? <EditProfile open={open}  setOpen={setOpen} user={user} setEditProfile= {setEditProfile}/> : ""}
+          </div>
+          <button
+              className="btn"
               onClick={() => {
                 setEditProfile(editProfile ? false : true);
+                setOpen(true);
               }}
             >
               <i class="fas fa-cog"></i>
             </button>
-            {editProfile ? <EditProfile user={user} setEditProfile= {setEditProfile}/> : ""}
-          </div>
           <button className="btn" onClick={() => logout()}>
             {hebrewVariables.logout}
           </button>
