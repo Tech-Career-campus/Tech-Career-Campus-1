@@ -30,7 +30,8 @@
 }
 .card-news{  
     height: 650px;
-    width: 90vw;
+    width:fit-content;
+  
 }
 .card-news-titel{
     /* border: 1px solid black; */

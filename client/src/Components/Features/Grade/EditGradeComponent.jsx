@@ -28,12 +28,14 @@ const EditGradeComponent = ({ handleFnc }) => {
   };
   return (
     <div className="student-info">
-      <h3>
+      <div> &nbsp;</div>
+      <h1>
         {student?.firstName} {student?.lastName}
-      </h3>
+      </h1>
+      <hr />
       {student?.tests.map((test, index) => {
         return (
-          <div key={test._id}>
+          <div className="grade-form" key={test._id}>
             <h4>{test.name}</h4>
             {editTest.isEdit && editTest.testId === test._id ? (
               <>
@@ -55,8 +57,7 @@ const EditGradeComponent = ({ handleFnc }) => {
                 ></i>
               </>
             ) : (
-              <p>
-                {test.grade}
+              <div className="grade-icon">        
                 <i
                   onClick={() => {
                     setEditTest({ isEdit: true, testId: test._id });
@@ -69,13 +70,16 @@ const EditGradeComponent = ({ handleFnc }) => {
                   }}
                   className="far fa-trash-alt"
                 ></i>
-              </p>
+                 &nbsp; &nbsp; <span>{test.grade}</span>
+              </div>
+              
             )}
+            <hr />
           </div>
         );
       })}
       <AddGrade studentId={student._id} />
-      <button className="btn " onClick={() => handleFnc()}>
+      <button className="btn" onClick={() => handleFnc()}>
         {hebrewVariables.closeBtn}
       </button>
     </div>
