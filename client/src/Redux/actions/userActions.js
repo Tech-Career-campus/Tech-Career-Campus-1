@@ -5,7 +5,6 @@ import checkToken from '../../utils/currentTime ';
 
 export const getUser = (loginInfo) => async dispatch => {
     try {
-        debugger
         if (!localStorage.jwtToken) {
             await fetch("/api/login", {
                 method: 'POST',

@@ -8,7 +8,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const getStudent = async (req, res) => {
   try {
     await StudentModel.findById(req.params.id, (err, result) => {
-      if (err) console.log(err);
+      if (err) throw err;
       res.status(200).json({ massage: "get Student success!", data: result });
     });
   } catch (err) {

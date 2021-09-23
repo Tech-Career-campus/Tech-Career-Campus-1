@@ -18,9 +18,7 @@ const ForumFormComponent = ({ currentId, setCurrentId }) => {
     currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
   const dispatch = useDispatch();
-  const token = localStorage.getItem("jwtToken");
-  const user = jwt_decode(token);
-
+  const { user } = useSelector((state) => state.user);
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
@@ -36,23 +34,30 @@ const ForumFormComponent = ({ currentId, setCurrentId }) => {
         })
       );
     } else {
-      if(user?.role === "Staff"){
-      dispatch(
-        createPostStaff({
-          ...postData,
-          firstName: user?.firstName,
-          email: user?.email,
-        }, history)
-      );
-    }else{
-      dispatch(
-        createPostStudent({
-          ...postData,
-          firstName: user?.firstName,
-          email: user?.email,
-        }, history)
-      );
-    }}
+      if (user?.role === "Staff") {
+        dispatch(
+          createPostStaff(
+            {
+              ...postData,
+              firstName: user?.firstName,
+              email: user?.email,
+            },
+            history
+          )
+        );
+      } else {
+        dispatch(
+          createPostStudent(
+            {
+              ...postData,
+              firstName: user?.firstName,
+              email: user?.email,
+            },
+            history
+          )
+        );
+      }
+    }
     clear();
   };
   const clear = () => {
