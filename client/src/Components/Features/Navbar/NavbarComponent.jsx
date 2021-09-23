@@ -38,9 +38,9 @@ const Navbar = () => {
         </ul>
         <div className="navbar-log-user">
           <div className="navbar-user">
-            <h6>
+            <h4>
               היי, {user.firstName} {user.lastName}
-            </h6>
+            </h4>
             <img
               src="https://img.lovepik.com/element/40170/3915.png_860.png"
               alt={"Student"}
