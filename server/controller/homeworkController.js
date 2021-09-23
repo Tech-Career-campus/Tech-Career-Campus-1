@@ -25,10 +25,10 @@ const creatNewHomework = async (req, res) => {
       .json({ message: "create new homework filed", error: err.message });
   }
 };
-const getAllHomework = async (req, res) => {
+const getHomeworkById = async (req, res) => {
   try {
     isEmptyId(req);
-    await HomeworkModel.find({}, (err, result) => {
+    await HomeworkModel.find({courseId:req.params.id}, (err, result) => {
       nullError(result, res);
       if (err) throw err;
     });
@@ -55,7 +55,7 @@ const updateHomeworkById = async (req, res) => {
 const deleteHomeworkById = async (req, res) => {
   isEmptyId(req);
   try {
-    await HomeworkModel.findByIdAndDelete(req.body.id, (err, result) => {
+    await HomeworkModel.findByIdAndDelete(req.params.id, (err, result) => {
       if (err) throw err;
       nullError(result, res);
     });
@@ -68,7 +68,7 @@ const deleteHomeworkById = async (req, res) => {
 
 module.exports = {
   creatNewHomework,
-  getAllHomework,
+  getHomeworkById,
   updateHomeworkById,
   deleteHomeworkById,
 };
