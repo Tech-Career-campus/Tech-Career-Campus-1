@@ -82,7 +82,6 @@ const deleteSubSubject = async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: "update course field", error: err });
   }
 
@@ -127,7 +126,6 @@ const addSubSubject = async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: "update course field", error: err });
   }
 };
@@ -162,7 +160,6 @@ const updateSubSubject = async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: "update course field", error: err });
   }
 
@@ -200,7 +197,6 @@ const updateSubject = async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: "update course subject field", error: err.message });
   }
 

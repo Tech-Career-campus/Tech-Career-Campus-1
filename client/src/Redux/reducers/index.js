@@ -8,6 +8,7 @@ import staffRedcuer from "./staffRedcuer";
 import coursesReducer from "./coursesReducer";
 import courseReducer from "./courseReducer";
 import eventsReducer from "./eventRedcuer";
+import homeworkReducer from "./homeworkReducer";
 
 export default combineReducers({
     user : userReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
     staff:staffRedcuer,
     courses: coursesReducer,
     course: courseReducer,
-    events: eventsReducer
+    events: eventsReducer,
+    homework: homeworkReducer
 })
