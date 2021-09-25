@@ -79,9 +79,9 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-     /* border: 1px solid black;*/ 
+     /* border: 1px solid black;  */
     width: 300px;
-    height: 30px;
+    height: 50px;
     
     
 }
@@ -102,9 +102,11 @@
     transition: all 0.5s;
 }
 .footerDiv .aboutUsClass ul li a:hover{
-    background: linear-gradient(to bottom right,rgb(248,78,3),rgb(238,73,94),rgb(277,67,196));
+    /* background: linear-gradient(to bottom right,rgb(41, 91, 255),rgb(23,41,74),rgb(41, 91, 255)); */
+   background-color: rgb(23,41,74);
     color: #f7f4f4;
     text-decoration: none;
+    
     
 }
 .title1 {

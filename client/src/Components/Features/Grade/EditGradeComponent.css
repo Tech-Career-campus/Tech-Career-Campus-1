@@ -1,43 +1,65 @@
 .student-info{
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-around;
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0,0.2);
     position: absolute;
     z-index: 10;
     margin: 10px  40%;
     width: 400px;
-    height: fit-content;
-    background-color: rgb(255, 165, 48);
-    padding: 30px;
+    max-height: 820px;
+    background-color: #f2f2f2;
+    padding: 50px;
+    bottom: -100px;
+    overflow-y: auto;
+}
+.student-info ::-webkit-scrollbar {
+  width: 10px;
+}
+.student-info ::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #17294a;
+}
+.student-info ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(30, 24, 110, 0.2);
 }
 
-.btn{
-    background-color: #17294A;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, #17294A 0px 0px 0px 1px,
-      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-}
-.btn:hover{
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, #17294A 0px 0px 0px 1px,
-      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
-    color: #17294A;
-    font-weight: 600;
-    cursor: pointer;
-}
 .grade-form{
     display: flex;
     height: 40%;
     flex-direction: column;
     justify-content: space-evenly;
     margin:15px;
+}
+
+/* AddGrafe */
+
+
+.student-info .btn{
+  margin: auto;
+  width: 99%;
+}
+.grade-form .grade-icon i,span{
+  font-size: 18px;
+}
+.edit-profile-btn-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.grade-form>input{
+  color: #3c3c3c;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 0;
+  line-height: 22px;
+  background-color: #fbfbfb;
+  padding: 13px 13px 13px 54px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 3px solid rgba(0, 0, 0, 0);
 }

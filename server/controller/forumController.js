@@ -176,7 +176,7 @@ const getPost = async (req, res) => {
     });
   } catch (err) {
     res
-    status(400)
+    .status(400)
       .json({
         success: false,
         message: "get message failed",
