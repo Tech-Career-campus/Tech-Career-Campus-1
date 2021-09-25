@@ -8,6 +8,7 @@
     width: 100vw;
     height: 1250px;
     margin-top: 20px;
+    box-shadow: 3px 3px 20px -14px rgb(23,41,74);
 }
 .title-info{
     display: flex;
@@ -23,7 +24,7 @@
 
 .body-home-info-cards{
 margin-top: 50px;
-box-shadow: 3px 3px 20px -6px rgb(23,41,74);
+box-shadow: 3px 3px 20px -10px rgb(23,41,74);
    border-radius: 8px;
     /* border: 1px solid black; */
     width: 330px;
