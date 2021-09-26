@@ -41,7 +41,6 @@ const register = async (req, res) => {
 
           });
           try {
-
             await newStaff.save();
             res.status(201).json({
               success: true,
@@ -69,7 +68,9 @@ const register = async (req, res) => {
     await StudentModel.findOne({ email: req.body.email }, (err, student) => {
       if (err) throw err;
       if (student) {
-        return res.status(400).json({ errors: { email: "email already exists" } });
+        return res
+          .status(400)
+          .json({ errors: { email: "email already exists" } });
       }
       SendEmails(req, res);
       //Password Encryption Before That it enters to the database
@@ -79,7 +80,7 @@ const register = async (req, res) => {
           if (err) throw err;
           req.body.password = hash;
 
-          const course = await CourseModel.findById(req.body.courseId)
+          const course = await CourseModel.findById(req.body.courseId);
           if (!course) {
             res
               .status(403)
@@ -108,13 +109,11 @@ const register = async (req, res) => {
             await newStudent.save();
             course.students.push(newStudent);
             await course.save();
-            res
-              .status(201)
-              .json({
-                success: true,
-                message: "create new student success",
-                data: newStudent,
-              });
+            res.status(201).json({
+              success: true,
+              message: "create new student success",
+              data: newStudent,
+            });
           } catch (error) {
             res.status(400).json({
               success: false,

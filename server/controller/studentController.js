@@ -5,6 +5,9 @@ const { nullError, isEmptyId, nullVariable } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
+const path = require("path");
+const fs = require("fs");
+
 const getStudent = async (req, res) => {
   try {
     isEmptyId(req);
@@ -115,16 +118,18 @@ const deleteStudentTestById = async (req, res) => {
 
 const updateStudent = async (req, res) => { 
   try {
-    console.log(req.params.id);
     isEmptyId(req);
     const field = await req.body.field;
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields");
     }
-
+    if (req.file) {
+      profileImg = req.file.filename;
+      console.log(profileImg);
+    }
     await StudentModel.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body},
+      { $set: req.body, profileImg},
       { new: true },
       (err, result) => {
         delete result.password;
