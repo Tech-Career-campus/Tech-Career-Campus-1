@@ -1,24 +1,16 @@
 const StudentModel = require("../models/studentModel");
 const CourseModel = require("../models/courseModel");
-const { ObjectId } = require("mongoose");
-const { nullError } = require("../utils/Errors");
+const fs =require("fs");
+const { nullError, isEmptyId, nullVariable } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
-const path = require("path");
-const fs = require("fs");
-
 const getStudent = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "get Student success!",
-          data: result
-        });
+      nullError(result, res);
     });
   } catch (err) {
     res
@@ -30,17 +22,12 @@ const getStudent = async (req, res) => {
       });
   }
 };
+
 const getStudents = async (req, res) => {
   try {
     await StudentModel.find({}, (err, result) => {
       if (err) throw err;
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "get Students success!",
-          data: result
-        });
+      nullError(result, res);
     });
   } catch (err) {
     res
@@ -55,6 +42,7 @@ const getStudents = async (req, res) => {
 
 const getStudentGradeById = async (req, res) => {
   try {
+    isEmptyId(req);
     StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       res
@@ -78,6 +66,7 @@ const getStudentGradeById = async (req, res) => {
 
 const addStudentTestById = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findByIdAndUpdate(
       req.body.id,
       { $addToSet: { tests: { name: req.body.name, grade: req.body.grade } } },
@@ -106,6 +95,7 @@ const addStudentTestById = async (req, res) => {
 
 const updateStudentTestById = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findOneAndUpdate(
       { _id: req.params._id, tests: { $elemMatch: { _id: req.body.id } } },
       { $set: { "tests.$.grade": req.body.grade } }, { new: true },
@@ -133,6 +123,7 @@ const updateStudentTestById = async (req, res) => {
 
 const deleteStudentTestById = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findByIdAndUpdate(
       req.params._id,
       { $pull: { tests: { _id: req.body.id } } },
@@ -152,14 +143,16 @@ const deleteStudentTestById = async (req, res) => {
     res
       .status(500)
       .json({
-        success: true,
+        success: false,
         message: "deleting a student test failed",
         error: err.message
       });
   }
 };
-const updateStudent = async (req, res) => {
+
+const updateStudent = async (req, res) => { 
   try {
+    isEmptyId(req);
     const field = await req.body.field;
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields");
@@ -186,38 +179,26 @@ const updateStudent = async (req, res) => {
           });
 
         if (err) throw err;
-        // if (result !== null) {
-        //   res
-        //     .status(200)
-        //     .json({
-        // success:true,
-        //  message: "update student  was success!",
-        //   data: result 
-        // });
-        // } else {
-        //   const errorNull = new Error("result is null");
-        //   res
-        //     .status(500)
-        //     .json({ message: "update student  failed", error: errorNull.message });
-        // }
       }
     );
   } catch (err) {
     res
       .status(400)
       .json({
-        success: true,
+        success: false,
         message: "update student failed",
         error: err.message
       });
   }
 };
+
 const deleteStudent = async (req, res) => {
   try {
+    isEmptyId(req);
     const student = await StudentModel.findById(req.params.id, (err) => {
       if (err) throw err;
     });
-
+    nullVariable(student);
     await CourseModel.findByIdAndUpdate(
       req.body.id,
       { $pull: { students: student._id } },
@@ -242,8 +223,26 @@ const deleteStudent = async (req, res) => {
       });
   }
 };
+
+// const deleteStudent = async (req, res) => {
+//   try {
+//       await StudentModel.findOneAndDelete({_id:req.body.id}, (err) => {
+//       if (err) throw err;
+//       res
+//       .status(200)
+//       .json({ message: "delete by id student success"});
+//     });
+
+//   } catch (err) {
+//     res
+//       .status(500)
+//       .json({ message: "delete by id student filed", error: err.message });
+//   }
+// };
+
 const getSyllabusByCourse = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findById(req.body.id)
       .populate('courseId')
       .then(student => {

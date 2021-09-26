@@ -95,6 +95,7 @@ const register = async (req, res) => {
           success: false,
           message: "email already exists",
       });
+    }
       SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {

@@ -4,15 +4,9 @@ const { nullError } = require("../utils/Errors");
 
 const getAllEventPost = async (req, res) => {
   try {
-    await eventModel.find({}, (err, result) => {
-      if (err) throw err;
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "get event post success",
-          data: result
-        });
+    await eventModel.find({}, (error, result) => {
+      if (error) throw error;
+      nullError(result, res);
     });
   } catch (err) {
     res

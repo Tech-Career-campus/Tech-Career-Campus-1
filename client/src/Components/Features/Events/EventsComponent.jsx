@@ -59,7 +59,7 @@ const Events = () => {
                 {
                     events?.map((event) => {
                         return (
-                            <div className="EventsNews">
+                            <div className="EventsNews" key={event._id} >
                                 <div key={event._id} >
 
                                     <div className="inputs-massage">
