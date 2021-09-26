@@ -8,19 +8,19 @@ const storage = multer.diskStorage({
         cb(null, 'images/')
     },
     filename: (req, file, cb) => {
-        const ext = path.extname(file.originalname)
-        cb(null, Date.now() + ext)
+        // const ext = path.extname(file.originalname)
+        cb(null, `${Date.now()}_${file.originalname}`)
     }
 })
 
 const upload = multer({
     storage:storage,
     fileFilter: (req, file, cb) => {
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        if (file.mimetype.startsWith('image')) {
             cb(null, true)
         }
         else{
-            console.log('only jpg & png file supported!');
+            console.log('only image is allowed!');
             cb(null, false)
         }
     },
