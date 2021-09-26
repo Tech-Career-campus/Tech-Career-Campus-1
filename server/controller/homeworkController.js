@@ -18,11 +18,20 @@ const creatNewHomework = async (req, res) => {
     await course.save();
     res
       .status(201)
-      .json({ message: "create new homework success", data: newHomework });
+      .json({
+         success:true,
+         message: "create new homework success",
+         data: newHomework 
+      });
   } catch (err) {
     res
-      .status(400)
-      .json({ message: "create new homework filed", error: err.message });
+    res
+    .status(400)
+    .json({
+      success:false,
+      massage: "delete by id homework filed",
+      error: err.message 
+    });
   }
 };
 
@@ -34,7 +43,13 @@ const getHomeworkById = async (req, res) => {
       nullError(result, res);
     });
   } catch (err) {
-    res.status(500).json({ massage: "find homework filed", error: err });
+    res
+    .status(500)
+    .json({
+      success:false,
+      massage: "delete by id homework filed",
+      error: err.message 
+    });
   }
 };
 
@@ -51,7 +66,13 @@ const updateHomeworkById = async (req, res) => {
       }
     );
   } catch (err) {
-    res.status(500).json({ massage: "update homework filed", error: err.message });
+    res
+    .status(500)
+    .json({
+      success:false,
+      massage: "delete by id homework filed",
+      error: err.message 
+    });
   }
 };
 
@@ -67,13 +88,22 @@ const deleteHomeworkById = async (req, res) => {
       (err, result) => {
         if (err) throw err;
         homework.remove({});
-        res.status(200).json({ massage: "delete by id homework success!" });
+        res
+        .status(200)
+        .json({
+          success:true,
+           massage: "delete by id homework success!",
+        });
       }
     );
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "delete by id homework filed", error: err.message });
+      .json({
+        success:false,
+        massage: "delete by id homework filed",
+        error: err.message 
+    });
   }
 };
 

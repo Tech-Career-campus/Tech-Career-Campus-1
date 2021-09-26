@@ -24,11 +24,23 @@ const checkPassword = async (req, res, next) => {
                 next()
             }
             else {
-                res.status(403).json({ message: "wrong password"});
+                res
+                .status(401)
+                .json({
+                    success:false,
+                     message: "wrong password"
+
+                });
             }
         })
     } catch (err) {
-        res.status(500).json({ message: "wrong", error: err.message});
+        res
+        .status(500)
+        .json({ 
+            success:false,
+            message: "wrong",
+            error: err.message
+        });
     }
 
 
@@ -59,13 +71,25 @@ const changePassword = (req, res) => {
 
                 person.findByIdAndUpdate(id, { $set: { password: newPassword } }, (err, result) => {
                     if(err) throw err;
-                    res.status(201).json({ message: "update was success", result: result })
+                    res
+                    .status(201)
+                    .json({ 
+                        success:true,
+                        message: "update was success",
+                        result: result
+                     })
                 })
             })
         })
 
     } catch (err) {
-        res.status(500).json({ message: "update was success", error: err.message })
+        res
+        .status(500)
+        .json({
+            success:true,
+             message: "update was success",
+              error: err.message 
+       })
     }
 };
 module.exports = { checkPassword, changePassword }

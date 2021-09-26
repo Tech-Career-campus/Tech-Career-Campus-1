@@ -17,7 +17,13 @@ const isToken = (req, res, next) => {
   }
 }
 } catch (err) {
-  res.status(401).json({ message: "invalid or expired token", error:err.message });
+  res
+  .status(400)
+  .json({
+    success:false,
+    message: "invalid or expired token",
+    error:err.message 
+  });
 }
 };
 

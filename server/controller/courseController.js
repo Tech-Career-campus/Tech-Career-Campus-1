@@ -16,10 +16,7 @@ const addNewCourse = async (req, res) => {
       CourseInformation: CourseInformation,
       createBy: `${staff.firstName} ${staff.lastName} `,
     });
-
       await newCourse.save();
-      staff.courses.push(newCourse);
-      await staff.save();
       res
         .status(201)
         .json({
