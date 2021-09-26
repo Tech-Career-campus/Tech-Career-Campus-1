@@ -12,7 +12,7 @@ const authRole = (Role) => {
     if (req.body.role !== Role) {
         res
         .status(403)
-        .json({ success: false, massage: "you don't have access", error: error });
+        .json({ success: false, massage: "you don't have access"});
       } else {   
         next();
       }

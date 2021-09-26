@@ -32,23 +32,24 @@ const addNewCourse = async (req, res) => {
     }
 
 };
+
 const getAllCourses = async (req, res) => {
   try {
     await CourseModel.find({}, (err, result) => {
       if (err) throw err;
-      res.status(200).json({ massage: "get course success!", data: result });
+      nullError(result,res);
     });
   } catch (err) {
-    res.status(500).json({ massage: "get course field", error: err });
+    res.status(500).json({ message: "get course field", error: err.message });
   }
 };
+
 const getCourseById = async (req, res) => {
   try {
+    isEmptyId(req);
     await CourseModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      res
-        .status(200)
-        .json({ message: "get course by id success!", data: result });
+     nullError(result, res)
     });
   } catch (err) {
     res
@@ -56,6 +57,7 @@ const getCourseById = async (req, res) => {
       .json({ message: "get course by id field", error: err.message });
   }
 };
+
 const deleteSubSubject = async (req, res) => {
   try {
     const array = await req.body.array
@@ -71,26 +73,16 @@ const deleteSubSubject = async (req, res) => {
       (err, result) => { 
         if (err) throw err;
         nullError(result, res);
-        // if (result !== null) {
-        //   res
-        //     .status(200)
-        //     .json({ message: "Delete course was success!", data: result });
-        // } else {
-        //   const errorNull = new Error("result is null");
-        //   res
-        //     .status(500)
-        //     .json({ message: "Delete course failed", error: errorNull.message });
-        // }
       }
     );
   } catch (err) {
-    res.status(500).json({ message: "update course field", error: err });
+    res.status(500).json({ message: "update course field", error: err.message });
   }
 
 };
+
 const addSubSubject = async (req, res) => {
   try {
-
     const array = await req.body.array
     const ArrayPath = `CourseInformation.$[].${array}`
     const ArrayObject = {};
@@ -131,6 +123,7 @@ const addSubSubject = async (req, res) => {
     res.status(500).json({ message: "update course field", error: err });
   }
 };
+
 const updateSubSubject = async (req, res) => {
   try {
     const array = await req.body.array
@@ -149,23 +142,14 @@ const updateSubSubject = async (req, res) => {
       (err, result) => {
         if (err) throw err;
         nullError(result, res);
-        // if (result !== null) {
-        //   res
-        //     .status(200)
-        //     .json({ message: "update corse success!", data: result });
-        // } else {
-        //   const errorNull = new Error("result is null");
-        //   res
-        //     .status(500)
-        //     .json({ message: "update course field", error: errorNull.message });
-        // }
       }
     );
   } catch (err) {
-    res.status(500).json({ message: "update course field", error: err });
+    res.status(500).json({ message: "update course field", error: err.message });
   }
 
 };
+
 const updateSubject = async (req, res) => {
   try {
     const field = await req.body.field
@@ -186,16 +170,6 @@ const updateSubject = async (req, res) => {
       (err, result) => {
         if (err) throw err;
         nullError(result, res);
-        // if (result !== null) {
-        //   res
-        //     .status(200)
-        //     .json({ message: "update corse subject was success!", data: result });
-        // } else {
-        //   const errorNull = new Error("result is null");
-        //   res
-        //     .status(500)
-        //     .json({ message: "update course subject field", error: errorNull.message });
-        // }
       }
     );
   } catch (err) {
@@ -203,6 +177,7 @@ const updateSubject = async (req, res) => {
   }
 
 };
+
 const searchCorseAutocomplete = async (req, res) => {
   try {
       let result = await collection.aggregate([     
@@ -219,38 +194,39 @@ const searchCorseAutocomplete = async (req, res) => {
               }
             
       ]).toArray();
-      res.send(result)
-  } catch (error) {
-    res.status(500).json({ error: error.message })
+      nullError(result, res);
+  } catch (err) {
+    res.status(500).json({ error: err.message })
   }
 };
+
 const getStudentsByCourse = async (req, res) => {
   try {
+    isEmptyId(req);
     await CourseModel.findById(req.params.id)
       .populate('students')
       .then(course => {
-        res.status(201).json({ massage: 'The student is ', data: course.students.map((student) => student) })
+        res.status(201).json({ message: 'The student is ', data: course.students.map((student) => student) })
       })
       .catch(err => {
-        res.status(500).json({ massage: 'error with population', data: err });
+        res.status(500).json({ message: 'error with population', error: err.message });
       })
 
   }
   catch (err) {
-    res.status(500).json({ massage: "wrong", error: err })
+    res.status(500).json({ message: "wrong", error: err.message })
   }
 };
+
 const deleteCorsById = async (req, res) => {
   try {
-      await CourseModel.findByIdAndRemove(req.params.id).pre('remove', function(err,result,next) {
-      this.model('staff').remove({ courses: this._id }, next)
-      this.model('student').remove({ courseId: this._id }, next);
+      await CourseModel.findByIdAndDelete(req.body.id , (err, result) =>{
       if (err) throw err;
-      // nullError(result, res);
-      res.status(200).json({ massage: "delete by id cors success!", data: result });
-  });;
-  } catch (error) {
-    res.status(500).json({ massage: "delete by id cors filed", data: error });
+      res.status(200).json({ message: "delete by id cors success!"});
+
+ })
+  } catch (err) {
+    res.status(500).json({ message: "delete by id cors filed", error: err.message });
   }
 };
 module.exports = {

@@ -1,59 +1,63 @@
 const StudentModel = require("../models/studentModel");
 const CourseModel = require("../models/courseModel");
-const { ObjectId } = require("mongoose");
-const { nullError } = require("../utils/Errors");
+const fs =require("fs");
+const { nullError, isEmptyId, nullVariable } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
 const getStudent = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      res.status(200).json({ massage: "get Student success!", data: result });
+      nullError(result, res);
     });
   } catch (err) {
-    res.status(500).json({ massage: "get Student field", error: err });
+    res.status(500).json({ message: "get Student field", error: err.message });
   }
 };
+
 const getStudents = async (req, res) => {
   try {
     await StudentModel.find({}, (err, result) => {
-      if (error) throw error;
-      res.status(200).json({ massage: "get Students success!", data: result });
+      if (err) throw err;
+      nullError(result, res);
     });
   } catch (err) {
-    res.status(500).json({ massage: "get Students field", error: err });
+    res.status(500).json({ message: "get Students field", error: err.message });
   }
 };
 
 const getStudentGradeById = async (req, res) => {
   try {
-    StudentModel.findById(req.params.id, (error, result) => {
-      if (error) throw error;
+    isEmptyId(req);
+    StudentModel.findById(req.params.id, (err, result) => {
+      if (err) throw err;
       res
         .status(200)
         .json({
-          massage: "get Student grades by id success!",
+          message: "get Student grades by id success!",
           data: result.tests,
         });
     });
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "get Student grades by id failed", error: err });
+      .json({ message: "get Student grades by id failed", error: err.message });
   }
 };
 
 const addStudentTestById = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findByIdAndUpdate(
       req.body.id,
       { $addToSet: { tests: { name: req.body.name, grade: req.body.grade } } },
       { new: true },
-      (error, result) => {
-        if (error) throw error;
+      (err, result) => {
+        if (err) throw err;
         res.status(200).json({
-          massage: "add test to a student by name was a success",
+          message: "add test to a student by name was a success",
           data: result.tests,
         });
       }
@@ -61,20 +65,21 @@ const addStudentTestById = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "adding a test to the test array failed", error: err });
+      .json({ message: "adding a test to the test array failed", error: err.message });
   }
 };
 
 const updateStudentTestById = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findOneAndUpdate(
       { _id: req.params._id, tests: { $elemMatch: { _id: req.body.id } } },
       { $set: { "tests.$.grade": req.body.grade } },
       { new: true },
-      (error, result) => {
-        if (error) throw error;
+      (err, result) => {
+        if (err) throw err;
         res.status(200).json({
-          massage: "updating a student test was a success",
+          message: "updating a student test was a success",
           data: result.tests,
         });
       }
@@ -82,20 +87,21 @@ const updateStudentTestById = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "updating a student test faild", error: err });
+      .json({ message: "updating a student test failed", error: err.message });
   }
 };
 
 const deleteStudentTestById = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findByIdAndUpdate(
       req.params._id,
       { $pull: { tests: { _id: req.body.id } } },
       { new: true },
-      (error, result) => {
-        if (error) throw error;
+      (err, result) => {
+        if (err) throw err;
         res.status(200).json({
-          massage: "deleting a student test was a success",
+          message: "deleting a student test was a success",
           data: result.tests,
         });
       }
@@ -103,18 +109,22 @@ const deleteStudentTestById = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "deleting a student test faild", error: err });
+      .json({ message: "deleting a student test failed", error: err.message });
   }
 };
-const updateStudent = async (req, res) => {
+
+const updateStudent = async (req, res) => { 
   try {
+    console.log(req.params.id);
+    isEmptyId(req);
     const field = await req.body.field;
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields");
     }
+
     await StudentModel.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body },
+      { $set: req.body},
       { new: true },
       (err, result) => {
         delete result.password;
@@ -130,28 +140,30 @@ const updateStudent = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ message: "update student  faild", error: err.message });
+      .json({ message: "update student  failed", error: err.message });
   }
 };
+
 const deleteStudent = async (req, res) => {
   try {
+    isEmptyId(req);
     const student = await StudentModel.findById(req.params.id, (err) => {
       if (err) throw err;
     });
-
+    nullVariable(student);
     await CourseModel.findByIdAndUpdate(
       req.body.id,
       { $pull: { students: student._id } },
       (err, result) => {
         if (err) throw err;
         student.remove({});
-        res.status(200).json({ massage: "delete by id student success!" });
+        res.status(200).json({ message: "delete by id student success!" });
       }
     );
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "delete by id student filed", error: err.message });
+      .json({ message: "delete by id student failed", error: err.message });
   }
 };
 
@@ -161,27 +173,29 @@ const deleteStudent = async (req, res) => {
 //       if (err) throw err;
 //       res
 //       .status(200)
-//       .json({ massage: "delete by id student success"});
+//       .json({ message: "delete by id student success"});
 //     });
 
 //   } catch (err) {
 //     res
 //       .status(500)
-//       .json({ massage: "delete by id student filed", error: err.message });
+//       .json({ message: "delete by id student filed", error: err.message });
 //   }
 // };
+
 const getSyllabusByCourse = async (req, res) => {
   try {
+    isEmptyId(req);
     await StudentModel.findById(req.body.id)
       .populate("courseId")
       .then((student) => {
-        res.status(201).json({ massage: "The student is ", data: student });
+        res.status(201).json({ message: "The student is ", data: student });
       })
       .catch((err) => {
-        res.status(500).json({ massage: "error with population", data: err });
+        res.status(500).json({ message: "error with population", data: err.message });
       });
   } catch (err) {
-    res.status(500).json({ massage: "wrong", error: err });
+    res.status(500).json({ message: "wrong", error: err.message});
   }
 };
 module.exports = {

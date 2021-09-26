@@ -1,12 +1,12 @@
 const StudentModel = require("../../models/studentModel");
 const bcrypt = require("bcrypt");
 const staffModel = require("../../models/staffModel");
-const { isEmptyId } = require('../../utils/Errors')
+const { isEmptyId ,nullVariable} = require('../../utils/Errors')
 
 const checkPassword = async (req, res, next) => {
     try {
         isEmptyId(req)
-        const { id, currntPassword, role } = req.body
+        const { id, currentPassword, role } = req.body
         let person;
         if (role === 'Student') {
             person = StudentModel
@@ -14,32 +14,32 @@ const checkPassword = async (req, res, next) => {
         else if (role == 'Staff') {
             person = staffModel
         }
-        if (!person){
-            throw  new Error("middalware problem")
-        }
-        person.findById(id, async (error, result) => {
-            if(error) throw error
-            console.log(result)
-            const isPasswordCorrect = await bcrypt.compare(currntPassword, result.password);
+        //Checks if person is not equal to null or undefined
+        nullVariable(person);
+
+        person.findById(id, async (err, result) => {
+            if(err) throw err;
+            const isPasswordCorrect = await bcrypt.compare(currentPassword, result.password);
             if (isPasswordCorrect) {
                 next()
             }
             else {
-                res.send("wrong password")
+                res.status(403).json({ message: "wrong password"});
             }
         })
-    } catch (error) {
-        res.send(error.message)
+    } catch (err) {
+        res.status(500).json({ message: "wrong", error: err.message});
     }
 
 
 
-}
+};
+
 const changePassword = (req, res) => {
 
     try {
         isEmptyId(req)
-        let { id, newPassword, role } = req.body
+        const { id, newPassword, role } = req.body
         let person;
         if (role === 'Student') {
             person = StudentModel
@@ -47,22 +47,25 @@ const changePassword = (req, res) => {
         else if (role == 'Staff') {
             person = staffModel
         }
-        if (!person){
-            throw  new Error("sdf")
-        }
-        bcrypt.genSalt(12, (err, salt) => {
-            bcrypt.hash(newPassword, salt, async (err, hash) => {
-                if (err) throw err
-                newPassword = hash
 
-                person.findByIdAndUpdate(id, { $set: { password: newPassword } }, (error, result) => {
-                    res.json({ message: "update was success", result: result })
+        //Checks if person is not equal to null or undefined
+        nullVariable(person);
+
+        bcrypt.genSalt(12, (err, salt) => {
+            if (err) throw err;
+            bcrypt.hash(newPassword, salt, async (err, hash) => {
+                if (err) throw err;
+                newPassword = has
+
+                person.findByIdAndUpdate(id, { $set: { password: newPassword } }, (err, result) => {
+                    if(err) throw err;
+                    res.status(201).json({ message: "update was success", result: result })
                 })
             })
         })
 
-    } catch (error) {
-        res.send(error.message)
+    } catch (err) {
+        res.status(500).json({ message: "update was success", error: err.message })
     }
-}
+};
 module.exports = { checkPassword, changePassword }

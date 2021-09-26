@@ -7,39 +7,44 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const getAllStaff = async (req, res) => {
   try {
     await StaffModel.find({}, (err, result) => {
-      nullError(result, res);
       if (err) throw err;
+      nullError(result, res);
     });
   } catch (err) {
-    res.status(500).json({ massage: "find staff filed", data: error });
+    res.status(500).json({ message: "find staff filed", data: err.message });
   }
 };
+
 const getStaffById = async (req, res) => {
   try {
+    isEmptyId(req);
     await StaffModel.findById(req.params.id, (err, result) => {
+       if (err) throw err; 
        nullError(result , res);
-       if (err) throw err;
     });
-  } catch (error) {
-    res.status(500).json({ massage: "find by id staff filed", data: error });
+  } catch (err) {
+    res.status(500).json({ message: "find by id staff filed", error: err.message });
   }
 };
+
 const deleteStaffById = async (req, res) => {
   try {
+    isEmptyId(req);
     await StaffModel.findByIdAndDelete(req.body.id,(err, result) => {
         if (err) throw err;
-        res.status(200).json({ massage: "delete by id student success!" });
+        res.status(200).json({ message: "delete by id student success!" });
       }
     );
   } catch (err) {
-    console.log(error);
     res
       .status(500)
-      .json({ massage: "delete by id student filed", data: err.message });
+      .json({ message: "delete by id student filed", data: err.message });
   }
 };
+
 const updateStaffById = async (req, res) => {
   try {
+    isEmptyId(req);
      await StaffModel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body},
@@ -51,8 +56,8 @@ const updateStaffById = async (req, res) => {
         if (err) throw err;
       }
     );
-  } catch (error) {
-    res.status(500).json({ massage: "update staff filed", data: error });
+  } catch (err) {
+    res.status(500).json({ massage: "update staff filed", error: err.message });
   }
 };
 

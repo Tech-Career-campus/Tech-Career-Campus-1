@@ -21,21 +21,23 @@ const creatNewHomework = async (req, res) => {
       .json({ message: "create new homework success", data: newHomework });
   } catch (err) {
     res
-      .status(500)
+      .status(400)
       .json({ message: "create new homework filed", error: err.message });
   }
 };
+
 const getHomeworkById = async (req, res) => {
   try {
     isEmptyId(req);
-    await HomeworkModel.find({courseId:req.params.id}, (err, result) => {
-      nullError(result, res);
+    await HomeworkModel.findOne({courseId:req.params.id}, (err, result) => {
       if (err) throw err;
+      nullError(result, res);
     });
   } catch (err) {
     res.status(500).json({ massage: "find homework filed", error: err });
   }
 };
+
 const updateHomeworkById = async (req, res) => {
   try {
     isEmptyId(req);
@@ -49,17 +51,26 @@ const updateHomeworkById = async (req, res) => {
       }
     );
   } catch (err) {
-    res.status(500).json({ massage: "update homework filed", error: err });
+    res.status(500).json({ massage: "update homework filed", error: err.message });
   }
 };
+
 const deleteHomeworkById = async (req, res) => {
   isEmptyId(req);
   try {
-    await HomeworkModel.findByIdAndDelete(req.params.id, (err, result) => {
+    const homework = await HomeworkModel.findByIdAndDelete(req.params.id, (err, result) => {
       if (err) throw err;
-      nullError(result, res);
     });
-  } catch (error) {
+    await CourseModel.findByIdAndUpdate(
+      req.body.id,
+      { $pull: { homeworks: homework._id } },
+      (err, result) => {
+        if (err) throw err;
+        homework.remove({});
+        res.status(200).json({ massage: "delete by id homework success!" });
+      }
+    );
+  } catch (err) {
     res
       .status(500)
       .json({ massage: "delete by id homework filed", error: err.message });

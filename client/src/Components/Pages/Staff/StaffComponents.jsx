@@ -39,7 +39,7 @@ const StaffComponents = () => {
                 </Button>
 
                 {staff?.map((staffItem) => (
-                    <div>
+                    <div key={staffItem._id}>
                         <StaffCard staffItem={staffItem} isEdit={isEdit} setIsEdit={()=>setIsEdit(!isEdit)} />
                     </div>
                 ))}

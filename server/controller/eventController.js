@@ -6,7 +6,7 @@ const getAllEventPost = async (req, res) => {
   try {
     await eventModel.find({}, (error, result) => {
       if (error) throw error;
-      res.status(200).json({ massage: "get event post success", data: result });
+      nullError(result, res);
     });
   } catch (err) {
     res.status(500).json({ massage: "get event post field", error: err });
