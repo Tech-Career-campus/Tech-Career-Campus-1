@@ -4,23 +4,34 @@ const CourseModel = require("../../models/courseModel");
 const bcrypt = require("bcrypt");
 const validateRegisterInput = require("./registerValidator");
 const { SendEmails } = require("../../utils/SendEmails");
-const path = require("path")
 
 const register = async (req, res) => {
   if (req.body.registeredAs === "Staff") {
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
-      return res.status(401).json({ errors: errors });
+      return res
+      .status(401)
+      .json({
+        success: false,
+        message: "there is error with validation",
+        error: errors 
+      });
     }
 
-    await StaffModel.findOne({ email: req.body.email }, (err, staff) => {
+    await StaffModel.findOne({ email: req.body.email }, (err, result) => {
       if (err) throw err;
-      if (staff) {
-        return res.status(401).json({ massage: "email already exists" });
+      if (result) {
+        return res
+        .status(401)
+        .json({                
+          success: false,
+          message: "email already exists",
+        });
       }
       SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
+        if (err) throw err; 
         bcrypt.hash(req.body.password, salt, async (err, hash) => {
           if (err) throw err;
           req.body.password = hash;
@@ -42,16 +53,20 @@ const register = async (req, res) => {
           });
           try {
             await newStaff.save();
-            res.status(201).json({
+            res
+            .status(201)
+            .json({
               success: true,
               message: "create new staff success",
               data: newStaff,
             });
-          } catch (error) {
-            res.status(401).json({
+          } catch (err) {
+            res
+            .status(400)
+            .json({
               success: false,
               message: "create new staff filed",
-              error: error,
+              error: err.message,
             });
           }
         });
@@ -62,16 +77,24 @@ const register = async (req, res) => {
   if (req.body.registeredAs === "Student") {
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res
+      .status(400)
+      .json({
+        success:false,
+        message:"there is error with validation",
+        error:errors
+      });
     }
 
-    await StudentModel.findOne({ email: req.body.email }, (err, student) => {
+    await StudentModel.findOne({ email: req.body.email }, (err, result) => {
       if (err) throw err;
-      if (student) {
+      if (result) {
         return res
-          .status(400)
-          .json({ errors: { email: "email already exists" } });
-      }
+        .status(400)
+        .json({
+          success: false,
+          message: "email already exists",
+      });
       SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
@@ -109,16 +132,20 @@ const register = async (req, res) => {
             await newStudent.save();
             course.students.push(newStudent);
             await course.save();
-            res.status(201).json({
-              success: true,
-              message: "create new student success",
-              data: newStudent,
-            });
-          } catch (error) {
-            res.status(400).json({
+            res
+              .status(201)
+              .json({
+                success: true,
+                message: "create new student success",
+                data: newStudent,
+              });
+          } catch (err) {
+            res
+            .status(400)
+            .json({
               success: false,
               message: "create new student filed",
-              error: error,
+              error: err.message
             });
           }
         });
