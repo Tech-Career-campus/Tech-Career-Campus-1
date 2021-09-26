@@ -6,14 +6,22 @@ const nullError = (result, res) => {
       "the result equal to null or undefined Please check that you are sending the required details in the correct format"
     );
   }else {
-        res
-          .status(200)
-          .json({ massage: "success!", data: result });
-      }      
-    } catch (err) {
     res
+    .status(200)
+    .json({
+        success: true,
+        message: "success",
+        data: result
+    })
+  }   
+    } catch (err) {
+      res
       .status(400)
-      .json({ massage: "filed", data: err.message });
+      .json({
+          success: false,
+          message: "failing",
+          error: err.message
+      })
     }
 };
 
@@ -26,7 +34,7 @@ if (req.body.id === "" || req.params.id === "" || req.body._id === "" || req.par
 
 const nullVariable = (data) => {
   if (!data) {
-    throw new Error("Failed to find information, please make sure you provide existing data in the appropriate format");
+    throw new Error("failed to find information, please make sure you provide existing data in the appropriate format");
   };
 };
   

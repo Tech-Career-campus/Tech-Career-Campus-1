@@ -13,7 +13,13 @@ const getStudent = async (req, res) => {
       nullError(result, res);
     });
   } catch (err) {
-    res.status(500).json({ message: "get Student field", error: err.message });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "get Student field",
+        error: err.message
+      });
   }
 };
 
@@ -24,7 +30,13 @@ const getStudents = async (req, res) => {
       nullError(result, res);
     });
   } catch (err) {
-    res.status(500).json({ message: "get Students field", error: err.message });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "get Students field",
+        error: err.message
+      });
   }
 };
 
@@ -36,14 +48,19 @@ const getStudentGradeById = async (req, res) => {
       res
         .status(200)
         .json({
+          success: true,
           message: "get Student grades by id success!",
-          data: result.tests,
+          data: result.tests
         });
     });
   } catch (err) {
     res
       .status(500)
-      .json({ message: "get Student grades by id failed", error: err.message });
+      .json({
+        success: false,
+        message: "get Student grades by id failed",
+        error: err.message
+      });
   }
 };
 
@@ -56,16 +73,23 @@ const addStudentTestById = async (req, res) => {
       { new: true },
       (err, result) => {
         if (err) throw err;
-        res.status(200).json({
-          message: "add test to a student by name was a success",
-          data: result.tests,
-        });
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "add test to a student by name was a success",
+            data: result.tests,
+          });
       }
     );
   } catch (err) {
     res
       .status(500)
-      .json({ message: "adding a test to the test array failed", error: err.message });
+      .json({
+        success: false,
+        message: "adding a test to the test array failed",
+        error: err.message
+      });
   }
 };
 
@@ -74,20 +98,26 @@ const updateStudentTestById = async (req, res) => {
     isEmptyId(req);
     await StudentModel.findOneAndUpdate(
       { _id: req.params._id, tests: { $elemMatch: { _id: req.body.id } } },
-      { $set: { "tests.$.grade": req.body.grade } },
-      { new: true },
+      { $set: { "tests.$.grade": req.body.grade } }, { new: true },
       (err, result) => {
         if (err) throw err;
-        res.status(200).json({
-          message: "updating a student test was a success",
-          data: result.tests,
-        });
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "updating a student test was a success",
+            data: result.tests,
+          });
       }
     );
   } catch (err) {
     res
       .status(500)
-      .json({ message: "updating a student test failed", error: err.message });
+      .json({
+        success: false,
+        message: "updating a student test failed",
+        error: err.message
+      });
   }
 };
 
@@ -100,16 +130,23 @@ const deleteStudentTestById = async (req, res) => {
       { new: true },
       (err, result) => {
         if (err) throw err;
-        res.status(200).json({
-          message: "deleting a student test was a success",
-          data: result.tests,
-        });
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "deleting a student test success",
+            data: result.tests,
+          });
       }
     );
   } catch (err) {
     res
       .status(500)
-      .json({ message: "deleting a student test failed", error: err.message });
+      .json({
+        success: false,
+        message: "deleting a student test failed",
+        error: err.message
+      });
   }
 };
 
@@ -129,20 +166,29 @@ const updateStudent = async (req, res) => {
       { $set: req.body, profileImg},
       { new: true },
       (err, result) => {
-        delete result.password;
-        const token = jwt.sign(result.toJSON(), SECRET_KEY, {
-          expiresIn: "1d",
-        });
+        delete result.password
+
+        const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
         res
           .status(200)
-          .json({ message: "success", data: result, result: token });
+          .json({
+            success: true,
+            message: "success",
+            data: result,
+            result: token
+          });
+
         if (err) throw err;
       }
     );
   } catch (err) {
     res
-      .status(500)
-      .json({ message: "update student  failed", error: err.message });
+      .status(400)
+      .json({
+        success: false,
+        message: "update student failed",
+        error: err.message
+      });
   }
 };
 
@@ -159,13 +205,22 @@ const deleteStudent = async (req, res) => {
       (err, result) => {
         if (err) throw err;
         student.remove({});
-        res.status(200).json({ message: "delete by id student success!" });
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "delete by id student success!"
+          });
       }
     );
   } catch (err) {
     res
       .status(500)
-      .json({ message: "delete by id student failed", error: err.message });
+      .json({
+        success: false,
+        message: "delete by id student filed",
+        error: err.message
+      });
   }
 };
 
@@ -189,15 +244,35 @@ const getSyllabusByCourse = async (req, res) => {
   try {
     isEmptyId(req);
     await StudentModel.findById(req.body.id)
-      .populate("courseId")
-      .then((student) => {
-        res.status(201).json({ message: "The student is ", data: student });
+      .populate('courseId')
+      .then(student => {
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: 'The student is ',
+            data: student
+          })
       })
-      .catch((err) => {
-        res.status(500).json({ message: "error with population", data: err.message });
-      });
-  } catch (err) {
-    res.status(500).json({ message: "wrong", error: err.message});
+      .catch(err => {
+        res
+          .status(400)
+          .json({
+            success: true,
+            message: 'error with population',
+            error: err.message
+          });
+      })
+
+  }
+  catch (err) {
+    res
+      .status(500)
+      .json({
+        success: true,
+        message: "wrong",
+        error: err.message
+      })
   }
 };
 module.exports = {

@@ -9,7 +9,13 @@ const getAllClasses = async (req, res) => {
     nullError(result, res);
   });      
   } catch (err) {
-    res.status(500).json({ message: "filed", error: err.message });
+    res
+    .status(500)
+    .json({
+        success: false,
+        message: "failing",
+        error: err.message
+    })
   } 
 };
 
@@ -20,7 +26,13 @@ const postClasses = async (req, res) => {
       nullError(result, res);
     });
   } catch (err) {
-    res.json({ message: "adding class failing", error: err.message });
+    res
+    .status(500)
+    .json({
+        success: false,
+        message: "failing",
+        error: err.message
+    })
   }
 };
 
@@ -44,7 +56,13 @@ const updateClassesName = async (req, res) => {
       }
     );
   } catch (err) {
-    res.status(500).json({ message: "update class spot field", error: err.message });
+    res
+    .status(500)
+    .json({
+        success: false,
+        message: "failing",
+        error: err.message
+    })
   }
 };
 
@@ -67,7 +85,13 @@ const updateClasses = async (req, res) => {
       }
     );
   } catch (err) {
-    res.status(500).json({ message: "update class spot field", error: err.message });
+    res
+    .status(500)
+    .json({
+        success: false,
+        message: "failing",
+        error: err.message
+    })
   }
 };
 
@@ -78,7 +102,13 @@ const deleteClasses = async (req, res) => {
       res.status(200).json({ message: "delete class success" });
     });
   } catch (err) {
-    res.status(500).json({ message: "delete class failed", error: err.message });
+    res
+    .status(500)
+    .json({
+        success: false,
+        message: "failing",
+        error: err.message
+    })
   }
 };
 
