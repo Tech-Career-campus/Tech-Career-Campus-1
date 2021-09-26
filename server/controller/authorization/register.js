@@ -52,7 +52,6 @@ const register = async (req, res) => {
 
           });
           try {
-
             await newStaff.save();
             res
             .status(201)
@@ -96,7 +95,6 @@ const register = async (req, res) => {
           success: false,
           message: "email already exists",
       });
-      }
       SendEmails(req, res);
       //Password Encryption Before That it enters to the database
       bcrypt.genSalt(12, (err, salt) => {
@@ -105,7 +103,7 @@ const register = async (req, res) => {
           if (err) throw err;
           req.body.password = hash;
 
-          const course = await CourseModel.findById(req.body.courseId)
+          const course = await CourseModel.findById(req.body.courseId);
           if (!course) {
             res
               .status(403)

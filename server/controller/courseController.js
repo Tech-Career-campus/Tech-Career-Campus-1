@@ -115,7 +115,6 @@ const deleteSubSubject = async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
     res
       .status(500)
       .json({
@@ -173,7 +172,6 @@ const addSubSubject = async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
     res
       .status(500)
       .json({
@@ -214,7 +212,6 @@ const updateSubSubject = async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
     res
       .status(500)
       .json({
@@ -258,7 +255,6 @@ const updateSubject = async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
     res
       .status(500)
       .json({

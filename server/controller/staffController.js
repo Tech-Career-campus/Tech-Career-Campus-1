@@ -3,6 +3,7 @@ const CourseModel = require("../models/courseModel");
 const { nullError, isEmptyId } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
+const path = require('path');
 
 const getAllStaff = async (req, res) => {
   try {
@@ -61,9 +62,13 @@ const deleteStaffById = async (req, res) => {
 };
 const updateStaffById = async (req, res) => {
   try {
-    await StaffModel.findByIdAndUpdate(
+    if (req.file) {
+      profileImg = req.file.filename;
+      console.log(profileImg);
+    }
+     await StaffModel.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body },
+      { $set: req.body, profileImg},
       { new: true },
       (err, result) => {
         if (err) throw err;
