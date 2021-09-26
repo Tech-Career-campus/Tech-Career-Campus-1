@@ -5,9 +5,6 @@ const { nullError, isEmptyId, nullVariable } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
-const path = require("path");
-const fs = require("fs");
-
 const getStudent = async (req, res) => {
   try {
     isEmptyId(req);

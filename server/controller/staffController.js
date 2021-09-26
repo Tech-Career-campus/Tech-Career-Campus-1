@@ -45,14 +45,11 @@ const deleteStaffById = async (req, res) => {
 
 const updateStaffById = async (req, res) => {
   try {
-<<<<<<< HEAD
     isEmptyId(req);
-=======
     if (req.file) {
       profileImg = req.file.filename;
       console.log(profileImg);
     }
->>>>>>> 9dcf18b8a4b271facff2253f69a052692e5e54fe
      await StaffModel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body, profileImg},

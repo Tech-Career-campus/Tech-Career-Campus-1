@@ -12,7 +12,7 @@ const nullError = (result, res) => {
       }      
     } catch (err) {
     res
-      .status(500)
+      .status(400)
       .json({ massage: "filed", data: err.message });
     }
 };

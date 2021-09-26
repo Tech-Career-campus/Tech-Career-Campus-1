@@ -84,28 +84,28 @@ describe("API REST /api/homework", () => {
       })
   });
 
-  it("is PUT new homework", (done) => {
-    const newHomework = {
-      id: "6131cf7231323fbda852fc2f",
-      subject: "new homework",
-      description: "sdddggggggggggg",
-      link: "",
-      role:"Staff",
-    };
-    chai.request(server)
-      .put("/api/homework/")
-      .send(newHomework)
-      .end((err, res) => {
-        const data = res.body.data;
-        res.should.have.status(201);
-        data.should.be.a("object");
-        data.should.have.property("subject").eq(newHomework.subject);
-        data.should.have.property("description").eq(newHomework.description);
-        data.should.have.property("courseId").eq(newHomework.id);
-        done();
-      });
-  });
-
+// it("is PUT a homework", (done) => {
+//   const newHomework = {
+//     id: "6131cf7231323fbda852fc2f",
+//     subject: "new homework",
+//     description: "sdddggggggggggg",
+//     link: "",
+//     role:"Staff",
+//   };
+//   chai.request(server)
+//     .put("/api/homework/")
+//     .send(newHomework)
+//     .end((err, res) => {
+//       const data = res.body.data;
+//       res.should.have.status(201);
+//       data.should.be.a("object");
+//       data.should.have.property("subject").eq(newHomework.subject);
+//       data.should.have.property("description").eq(newHomework.description);
+//       data.should.have.property("courseId").eq(newHomework.id);
+//       done();
+//     });
+// });
 
 });
+
 
