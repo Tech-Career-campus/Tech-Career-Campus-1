@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import "./Events.css";
 import { useState } from 'react';
 import { getEvents, updateEvent, deleteEvent } from '../../../Redux/actions/eventsActions';
@@ -6,22 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
 import FormEvent from './FormEventComponent';
-
-
 const Events = () => {
     const dispatch = useDispatch();
-    const events = useSelector((state) => state.events);
-    const { user } = useSelector((state) => state.user);
+    const events = useSelector(state => state.events);
+    const { user } = useSelector(state => state.user)
 
     const [isForm, setForm] = useState(false)
     const [isUpdate, setUpdate] = useState(false)
+
 
     const [eventUpdate, setEventUpdate] = useState({
         eventId: "",
         eventName: "",
         massage: "",
     });
-
 
     useEffect(() => {
         dispatch(getEvents());
@@ -60,8 +58,7 @@ const Events = () => {
                 {
                     events?.map((event) => {
                         return (
-
-                            <div className="EventsNews">
+                            <div className="EventsNews" key={event._id} >
                                 <div key={event._id} >
 
                                     <div className="inputs-massage">
@@ -89,12 +86,11 @@ const Events = () => {
                                     </div>
                                 </div>
                             </div>
-
                         )
                     })
                 }
             </div>
         </div>
-    );
-};
+    )
+}
 export default Events;
