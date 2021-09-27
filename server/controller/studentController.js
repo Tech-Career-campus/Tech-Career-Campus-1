@@ -33,12 +33,10 @@ const getStudentGradeById = async (req, res) => {
   try {
     StudentModel.findById(req.params.id, (error, result) => {
       if (error) throw error;
-      res
-        .status(200)
-        .json({
-          massage: "get Student grades by id success!",
-          data: result.tests,
-        });
+      res.status(200).json({
+        massage: "get Student grades by id success!",
+        data: result.tests,
+      });
     });
   } catch (err) {
     res
@@ -109,21 +107,31 @@ const deleteStudentTestById = async (req, res) => {
       .json({ massage: "deleting a student test faild", error: err });
   }
 };
+
 const updateStudent = async (req, res) => {
   try {
     const field = await req.body.field;
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields");
     }
-    if (req.file) {
-      profileImg = req.file.filename;
-      console.log(profileImg);
-    }
     await StudentModel.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body, profileImg},
+      { $set: req.body },
       { new: true },
       (err, result) => {
+        let profilePic;
+        if (req.file) {
+          profilePic = req.file.path;
+          try {
+            fs.unlinkSync("" + result.profileImg);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          profilePic = result.profileImg;
+        }
+        result.profileImg = profilePic;
+        result.save();
         delete result.password;
         const token = jwt.sign(result.toJSON(), SECRET_KEY, {
           expiresIn: "1d",
@@ -140,6 +148,7 @@ const updateStudent = async (req, res) => {
       .json({ message: "update student  faild", error: err.message });
   }
 };
+
 const deleteStudent = async (req, res) => {
   try {
     const student = await StudentModel.findById(req.params.id, (err) => {
