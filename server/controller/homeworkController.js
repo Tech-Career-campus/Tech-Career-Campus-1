@@ -29,7 +29,7 @@ const creatNewHomework = async (req, res) => {
     .status(400)
     .json({
       success:false,
-      massage: "create new homework filed",
+      message: "create new homework filed",
       error: err.message 
     });
   }
