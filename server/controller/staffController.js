@@ -24,7 +24,7 @@ const getAllStaff = async (req, res) => {
 
 const getStaffById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await StaffModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       nullError(result, res);
@@ -42,7 +42,7 @@ const getStaffById = async (req, res) => {
 
 const deleteStaffById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.body.id);
     await StaffModel.findByIdAndDelete(req.body.id, (err, result) => {
       if (err) throw err;
       res
@@ -66,6 +66,7 @@ const deleteStaffById = async (req, res) => {
 
 const updateStaffById = async (req, res) => {
   try {
+    isEmptyId(req.params.id);
      await StaffModel.findByIdAndUpdate(
       req.params.id,
       // { $set: req.body, profileImg},
