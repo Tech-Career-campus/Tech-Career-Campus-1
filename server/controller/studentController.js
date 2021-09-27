@@ -7,7 +7,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 const getStudent = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       nullError(result, res);
@@ -42,7 +42,7 @@ const getStudents = async (req, res) => {
 
 const getStudentGradeById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       res
@@ -66,7 +66,7 @@ const getStudentGradeById = async (req, res) => {
 
 const addStudentTestById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.body.id);
     await StudentModel.findByIdAndUpdate(
       req.body.id,
       { $addToSet: { tests: { name: req.body.name, grade: req.body.grade } } },
@@ -95,7 +95,8 @@ const addStudentTestById = async (req, res) => {
 
 const updateStudentTestById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.body.id);
+    isEmptyId(req.params._id);
     await StudentModel.findOneAndUpdate(
       { _id: req.params._id, tests: { $elemMatch: { _id: req.body.id } } },
       { $set: { "tests.$.grade": req.body.grade } }, { new: true },
@@ -123,7 +124,8 @@ const updateStudentTestById = async (req, res) => {
 
 const deleteStudentTestById = async (req, res) => {
   try {
-    isEmptyId(req);
+    // isEmptyId(req.body.id);
+    // isEmptyId(req.params._id);
     await StudentModel.findByIdAndUpdate(
       req.params._id,
       { $pull: { tests: { _id: req.body.id } } },
@@ -152,7 +154,7 @@ const deleteStudentTestById = async (req, res) => {
 
 const updateStudent = async (req, res) => { 
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     const field = await req.body.field;
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields");
@@ -167,7 +169,6 @@ const updateStudent = async (req, res) => {
       { new: true },
       (err, result) => {
         delete result.password
-
         const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
         res
           .status(200)
@@ -194,7 +195,7 @@ const updateStudent = async (req, res) => {
 
 const deleteStudent = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     const student = await StudentModel.findById(req.params.id, (err) => {
       if (err) throw err;
     });
@@ -242,7 +243,7 @@ const deleteStudent = async (req, res) => {
 
 const getSyllabusByCourse = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.body.id);
     await StudentModel.findById(req.body.id)
       .populate('courseId')
       .then(student => {

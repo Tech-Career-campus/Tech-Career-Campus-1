@@ -5,7 +5,7 @@ const { isEmptyId ,nullVariable} = require('../../utils/Errors')
 
 const checkPassword = async (req, res, next) => {
     try {
-        isEmptyId(req)
+        isEmptyId(req.body.id)
         const { id, currentPassword, role } = req.body
         let person;
         if (role === 'Student') {
@@ -50,7 +50,7 @@ const checkPassword = async (req, res, next) => {
 const changePassword = (req, res) => {
 
     try {
-        isEmptyId(req)
+        isEmptyId(req.body.id)
         const { id, newPassword, role } = req.body
         let person;
         if (role === 'Student') {

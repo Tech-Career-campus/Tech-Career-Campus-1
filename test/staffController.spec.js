@@ -26,7 +26,6 @@ chai.use(chaiHttp);
 //         done();
 //       });
 //   });
-
 // })
 
 // describe("API REST /api/homework", () => {
@@ -66,7 +65,7 @@ chai.use(chaiHttp);
 //     const newHomework = {
 //       id: "6131cf7231323fbda852fc2f",
 //       subject: "new homework",
-//       description: "klklklklklklklkl",
+//       description: "sdjkhksdjcnsedhsnkd",
 //       link: "",
 //     };
 //     chai

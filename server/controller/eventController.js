@@ -21,6 +21,7 @@ const getAllEventPost = async (req, res) => {
 
 const getEventById = async (req, res) => {
   try {
+    isEmptyId(req.params.id)
     await eventModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       res
@@ -74,6 +75,7 @@ const postNewEvent = async (req, res) => {
 
 const deleteEventPost = async (req, res) => {
   try {
+    isEmptyId(req.params.id)
     await eventModel.findByIdAndRemove(req.params.id, (err, result) => {
       if (err) throw err;
       nullError(result, res);
@@ -92,6 +94,7 @@ const deleteEventPost = async (req, res) => {
 
 const updateEventPost = async (req, res) => {
   try {
+    isEmptyId(req.params.id)
     await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
       { new: true },
