@@ -16,6 +16,7 @@ const getAllStaff = async (req, res) => {
 };
 const getStaffById = async (req, res) => {
   try {
+    isEmptyId(req.params.id);
     await StaffModel.findById(req.params.id, (err, result) => {
        nullError(result , res);
        if (err) throw err;
@@ -26,10 +27,16 @@ const getStaffById = async (req, res) => {
 };
 const deleteStaffById = async (req, res) => {
   try {
-    await StaffModel.findByIdAndDelete(req.body.id,(err, result) => {
-        if (err) throw err;
-        res.status(200).json({ massage: "delete by id student success!" });
-      }
+    isEmptyId(req.body.id);
+    await StaffModel.findByIdAndDelete(req.body.id, (err, result) => {
+      if (err) throw err;
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "delete by id student success!"
+        });
+    }
     );
   } catch (err) {
     console.log(error);
@@ -40,6 +47,7 @@ const deleteStaffById = async (req, res) => {
 };
 const updateStaffById = async (req, res) => {
   try {
+    isEmptyId(req.params.id);
      await StaffModel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body},

@@ -117,22 +117,44 @@ const updateStudent = async (req, res) => {
       { $set: req.body },
       { new: true },
       (err, result) => {
-        delete result.password;
-        const token = jwt.sign(result.toJSON(), SECRET_KEY, {
-          expiresIn: "1d",
-        });
+        if (err) throw err;
+        let profilePic;
+        if (req.file) {
+          profilePic = req.file.path;
+          try {
+            fs.unlinkSync("" + result.profileImg);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          profilePic = result.profileImg;
+        }
+        result.profileImg = profilePic;
+        result.save();
+        delete result.password
+        const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
         res
           .status(200)
-          .json({ message: "success", data: result, result: token });
-        if (err) throw err;
-      }
-    );
-  } catch (err) {
+          .json({
+            success: true,
+            message: "success",
+            data: result,
+            result: token
+          });
+        }
+      )
+    } catch (err) {
     res
-      .status(500)
-      .json({ message: "update student  faild", error: err.message });
-  }
+      .status(400)
+      .json({
+        success: false,
+        message: "update student failed",
+        error: err.message
+      });
+   }
 };
+
+
 const deleteStudent = async (req, res) => {
   try {
     const student = await StudentModel.findById(req.params.id, (err) => {
