@@ -2,6 +2,8 @@ const StaffModel = require("../models/staffModel");
 const { nullError, isEmptyId } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
+const path = require('path');
+const fs = require('fs');
 
 const getAllStaff = async (req, res) => {
   try {
@@ -64,17 +66,26 @@ const deleteStaffById = async (req, res) => {
 
 const updateStaffById = async (req, res) => {
   try {
-    isEmptyId(req);
-    if (req.file) {
-      profileImg = req.file.filename;
-      console.log(profileImg);
-    }
      await StaffModel.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body, profileImg},
+      // { $set: req.body, profileImg},
+      { $set: req.body},
       { new: true },
       (err, result) => {
         if (err) throw err;
+        let profilePic;
+        if (req.file) {
+          profilePic = req.file.path;
+          try {
+            fs.unlinkSync("" + result.profileImg);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          profilePic = result.profileImg;
+        }
+        result.profileImg = profilePic;
+        result.save();
         delete result.password
         const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
         res

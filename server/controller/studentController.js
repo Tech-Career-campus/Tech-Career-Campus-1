@@ -159,15 +159,29 @@ const updateStudent = async (req, res) => {
     if (field === "tests") {
       throw new Error("you cant update arrays only static fields");
     }
-    if (req.file) {
-      profileImg = req.file.filename;
-      console.log(profileImg);
-    }
     await StudentModel.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body, profileImg},
+      { $set: req.body },
       { new: true },
       (err, result) => {
+        if (err) throw err;
+        let profilePic;
+        if (req.file) {
+          profilePic = req.file.path;
+          try {
+            fs.unlinkSync("" + result.profileImg);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          profilePic = result.profileImg;
+        }
+        result.profileImg = profilePic;
+        result.save();
+        delete result.password;
+        const token = jwt.sign(result.toJSON(), SECRET_KEY, {
+          expiresIn: "1d",
+        });
         delete result.password
         const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
         res
@@ -178,8 +192,6 @@ const updateStudent = async (req, res) => {
             data: result,
             result: token
           });
-
-        if (err) throw err;
       }
     );
   } catch (err) {
