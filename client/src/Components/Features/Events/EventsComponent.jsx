@@ -9,18 +9,18 @@ import FormEvent from './FormEventComponent';
 
 
 const Events = () => {
-  const dispatch = useDispatch();
-  const events = useSelector((state) => state.events);
-  const { user } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const events = useSelector((state) => state.events);
+    const { user } = useSelector((state) => state.user);
 
     const [isForm, setForm] = useState(false)
     const [isUpdate, setUpdate] = useState(false)
 
-  const [eventUpdate, setEventUpdate] = useState({
-    eventId: "",
-    eventName: "",
-    massage: "",
-  });
+    const [eventUpdate, setEventUpdate] = useState({
+        eventId: "",
+        eventName: "",
+        massage: "",
+    });
 
 
     useEffect(() => {
@@ -60,7 +60,7 @@ const Events = () => {
                 {
                     events?.map((event) => {
                         return (
-                            
+
                             <div className="EventsNews">
                                 <div key={event._id} >
 
@@ -89,15 +89,12 @@ const Events = () => {
                                     </div>
                                 </div>
                             </div>
-                            
+
                         )
                     })
                 }
             </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 export default Events;

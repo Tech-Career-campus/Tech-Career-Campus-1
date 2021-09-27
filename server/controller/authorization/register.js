@@ -16,7 +16,7 @@ const register = async (req, res) => {
     await StaffModel.findOne({ email: req.body.email }, (err, staff) => {
       if (err) throw err;
       if (staff) {
-        return res.status(401).json({ massage: "email already exists" });
+        return res.status(401).json({ errors: { email: "email already exists" } });
       }
       SendEmails(req, res);
       //Password Encryption Before That it enters to the database
@@ -52,7 +52,7 @@ const register = async (req, res) => {
             res.status(401).json({
               success: false,
               message: "create new staff filed",
-              error: error,
+              errors: error,
             });
           }
         });
@@ -86,7 +86,7 @@ const register = async (req, res) => {
               .json({
                 success: false,
                 message: "filed",
-                error: "find course filed",
+                errors: "find course filed",
               });
           }
 
@@ -119,7 +119,7 @@ const register = async (req, res) => {
             res.status(400).json({
               success: false,
               message: "create new student filed",
-              error: error,
+              errors: error,
             });
           }
         });
