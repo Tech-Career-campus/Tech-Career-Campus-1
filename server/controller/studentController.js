@@ -178,10 +178,6 @@ const updateStudent = async (req, res) => {
         }
         result.profileImg = profilePic;
         result.save();
-        delete result.password;
-        const token = jwt.sign(result.toJSON(), SECRET_KEY, {
-          expiresIn: "1d",
-        });
         delete result.password
         const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
         res
@@ -192,9 +188,9 @@ const updateStudent = async (req, res) => {
             data: result,
             result: token
           });
-      }
-    );
-  } catch (err) {
+        }
+      )
+    } catch (err) {
     res
       .status(400)
       .json({
@@ -202,8 +198,9 @@ const updateStudent = async (req, res) => {
         message: "update student failed",
         error: err.message
       });
-  }
+   }
 };
+
 
 const deleteStudent = async (req, res) => {
   try {
