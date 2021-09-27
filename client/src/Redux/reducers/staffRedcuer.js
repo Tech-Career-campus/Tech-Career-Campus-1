@@ -14,9 +14,8 @@ const staffRedcuer = (state = { staff: [], errors: {} }, action) => {
             return { ...state, staff: state.staff.filter(item => item._id !== action.payload._id) }
 
         case UPDATE_STAFF:
-            debugger
             return {
-                erros: {}, staff: state.staff.map(item => item._id === action.payload._id ? action.payload : item)
+                errors: {}, staff: state.staff.map(item => item._id === action.payload._id ? action.payload : item)
             }
         case STAFF_ERRORS:
             return { ...state, errors: action.payload }

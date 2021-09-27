@@ -14,6 +14,7 @@ const Navbar = () => {
   const [editProfile, setEditProfile] = useState(false)
   const { user } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   
   return (
     <>
@@ -37,15 +38,15 @@ const Navbar = () => {
         </ul>
         <div className="navbar-log-user">
           <div className="navbar-user">
-            <h6>
+            <h4>
               היי, {user.firstName} {user.lastName}
-            </h6>
+            </h4>
             <img
               src="https://img.lovepik.com/element/40170/3915.png_860.png"
               alt={"Student"}
             />
             
-            {editProfile ? <EditProfile open={open} setOpen={setOpen} user={user} setEditProfile= {setEditProfile}/> : ""}
+            {editProfile ? <EditProfile open={open}  setOpen={setOpen} user={user} setEditProfile= {setEditProfile}/> : ""}
           </div>
           <button
               className="btn"
@@ -54,7 +55,7 @@ const Navbar = () => {
                 setOpen(true);
               }}
             >
-              <i class="fas fa-cog"></i>
+              <i className="fas fa-cog"></i>
             </button>
           <button className="btn" onClick={() => logout()}>
             {hebrewVariables.logout}
