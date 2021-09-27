@@ -1,10 +1,10 @@
 const HomeworkModel = require("../models/homeworkModel");
 const CourseModel = require("../models/courseModel");
-const { nullError, isEmptyId } = require("../utils/Errors");
+const { nullError, isEmptyId, nullVariable } = require("../utils/Errors");
 
 const creatNewHomework = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.body.id);
     const { subject, description, id } = req.body;
     const course = await CourseModel.findById(id);
     const newHomework = new HomeworkModel({
@@ -29,7 +29,7 @@ const creatNewHomework = async (req, res) => {
     .status(400)
     .json({
       success:false,
-      massage: "delete by id homework filed",
+      massage: "create new homework filed",
       error: err.message 
     });
   }
@@ -37,7 +37,7 @@ const creatNewHomework = async (req, res) => {
 
 const getHomeworkById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await HomeworkModel.findOne({courseId:req.params.id}, (err, result) => {
       if (err) throw err;
       nullError(result, res);
@@ -55,7 +55,7 @@ const getHomeworkById = async (req, res) => {
 
 const updateHomeworkById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await HomeworkModel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
@@ -70,26 +70,28 @@ const updateHomeworkById = async (req, res) => {
     .status(500)
     .json({
       success:false,
-      massage: "delete by id homework filed",
+      massage: "update by id homework filed",
       error: err.message 
     });
   }
 };
 
 const deleteHomeworkById = async (req, res) => {
-  isEmptyId(req);
   try {
-    const homework = await HomeworkModel.findByIdAndDelete(req.params.id, (err, result) => {
+    isEmptyId(req.params.id);
+    const homework = await HomeworkModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
+      nullVariable(result);
     });
+    
     await CourseModel.findByIdAndUpdate(
-      req.body.id,
+      homework.courseId,
       { $pull: { homeworks: homework._id } },
       (err, result) => {
         if (err) throw err;
         homework.remove({});
         res
-        .status(200)
+        .status(201)
         .json({
           success:true,
            massage: "delete by id homework success!",

@@ -6,7 +6,7 @@ const { nullError, isEmptyId ,nullVariable} = require("../utils/Errors");
 
 const addNewCourse = async (req, res) => {
   try {
-  isEmptyId(req)
+  isEmptyId(req.body.id)
   const staff = await StaffModel.findById(req.body.id);
   nullVariable(staff);
     const { name, CourseInformation, courseType } = req.body;
@@ -55,7 +55,7 @@ const getAllCourses = async (req, res) => {
 
 const getCourseById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await CourseModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       nullError(result, res);
@@ -228,7 +228,7 @@ const searchCorseAutocomplete = async (req, res) => {
               }
             
       ]).toArray();
-      nullError(result, res);
+      res.send(result);
   } catch (err) {
     res
     .status(500)
@@ -242,7 +242,7 @@ const searchCorseAutocomplete = async (req, res) => {
 
 const getStudentsByCourse = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await CourseModel.findById(req.params.id)
       .populate('students')
       .then(course => {
@@ -278,6 +278,7 @@ const getStudentsByCourse = async (req, res) => {
 
 const deleteCorsById = async (req, res) => {
   try {
+    isEmptyId(req.body.id);
       await CourseModel.findByIdAndDelete(req.body.id , (err, result) =>{
       if (err) throw err;
       res
