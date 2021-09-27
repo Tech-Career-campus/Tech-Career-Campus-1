@@ -52,7 +52,7 @@ const Homework = () => {
         ) : (
           ""
         )}
-        {homework.map((work) => (
+        {homework?.map((work) => (
           <div key={work._id}>
             {isEditHomework && updateHomework._id === work._id ? (
               <HomeworkFrom

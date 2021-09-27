@@ -1,74 +1,116 @@
 const eventModel = require("../models/eventModel");
 const staffModel = require("../models/staffModel");
-const {nullError} = require("../utils/Errors");
+const { nullError } = require("../utils/Errors");
 
 const getAllEventPost = async (req, res) => {
   try {
     await eventModel.find({}, (error, result) => {
       if (error) throw error;
-      res.status(200).json({ massage: "get event post success", data: result });
+      nullError(result, res);
     });
   } catch (err) {
-    res.status(500).json({ massage: "get event post field", error: err });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "get event post field",
+        error: err.message
+      });
   }
 };
 
 const getEventById = async (req, res) => {
   try {
+    isEmptyId(req.params.id)
     await eventModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       res
         .status(200)
-        .json({ massage: "get event by id success", data: result });
+        .json({
+          success: true,
+          message: "get event by id success",
+          data: result
+        });
     });
   } catch (err) {
-    res.status(500).json({ massage: "get event by id field  ", error: err });
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "get event by id field",
+        error: err.message
+      });
   }
 };
 
 const postNewEvent = async (req, res) => {
   const staff = await staffModel.findById(req.params.id);
-  const { eventName, massage } = req.body;
+  const { eventName, message } = req.body;
   const newEvent = new eventModel({
     eventName: eventName,
-    massage: massage,
+    message: message,
     createBy: staff._id
   });
   try {
     await newEvent.save();
-    res.status(200).json({
-      massage: "post added successfully, success",
-      data: newEvent,
-    });
+    staff.events.push(newEvent);
+    await staff.save();
+    res
+      .status(201)
+      .json({
+        success: true,
+        message: "post added successfully, success",
+        data: newEvent,
+      });
   } catch (err) {
-    res.status(500).json({ massage: "post added field ", error: err });
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "post added field ",
+        error: err.message
+      });
   }
 };
 
 const deleteEventPost = async (req, res) => {
   try {
-    await eventModel.findByIdAndRemove(req.params.id,(error, result) => {
-      if (error) throw error;
-      nullError(result , res);
-     
+    isEmptyId(req.params.id)
+    await eventModel.findByIdAndRemove(req.params.id, (err, result) => {
+      if (err) throw err;
+      nullError(result, res);
+
     });
-  } catch (error) {
-    res.status(500).json({ massage: "deleted event field", error: error });
+  } catch (err) {
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "deleted event field",
+        error: err.message
+      });
   }
 };
 
 const updateEventPost = async (req, res) => {
   try {
+    isEmptyId(req.params.id)
     await eventModel.findByIdAndUpdate(req.params.id,
       { $set: req.body },
       { new: true },
-      (error, result) => {
-        if (error) throw error;
-        nullError(result , res);
+      (err, result) => {
+        if (err) throw err;
+        nullError(result, res);
       }
     );
-  } catch (error) {
-    res.status(500).json({ massage: "update event field", error: error });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "update event field",
+        error: err.message
+      });
   }
 };
 module.exports = {
