@@ -18,16 +18,31 @@ const messagesByStaff = async (req, res) => {
     await staff.save();
     res
       .status(201)
-      .json({ message: "create new message success", data: newMessages });
-  } catch (error) {
-    res.status(500).json({ message: "create new message filed", error: error });
+      .json({
+        success: true,
+        message: "create new message success",
+        data: newMessages
+      });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "create new message filed",
+        error: err
+      });
   }
 };
 
 const messagesByStudent = async (req, res) => {
   const student = await StudentModel.findById(req.body.id);
   if (!student) {
-    return res.status(500).json({ message: "student not fond", error: error });
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "student not fond",
+      });
   }
   const newMessages = new ForumModel({
     firstName: req.body.post.firstName,
@@ -42,9 +57,19 @@ const messagesByStudent = async (req, res) => {
     await student.save();
     res
       .status(201)
-      .json({ message: "create new message success", data: newMessages });
-  } catch (error) {
-    res.status(500).json({ message: "create new message filed", error: error });
+      .json({
+        success: true,
+        message: "create new message success",
+        data: newMessages
+      });
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "create new message filed",
+        error: err
+      });
   }
 };
 const getAllMessages = async (req, res) => {
@@ -78,7 +103,13 @@ const deleteMessage = async (req, res) => {
       res.json({ message: "delete message success", data: result });
     });
   } catch (err) {
-    res.json({ message: "problem with update", error: err });
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "delete message failed",
+        error: err
+      });
   }
 };
 const updateMessage = async (req, res) => {

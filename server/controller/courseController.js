@@ -5,6 +5,8 @@ const {findCourseInformation} = require("../utils/db_query");
 const { nullError } = require("../utils/Errors");
 
 const addNewCourse = async (req, res) => {
+  try {
+  isEmptyId(req)
   const staff = await StaffModel.findById(req.body.id);
   if (!staff) {
     res.status(401).json({ message: "staff not fond" });
@@ -42,6 +44,7 @@ const getAllCourses = async (req, res) => {
 };
 const getCourseById = async (req, res) => {
   try {
+    isEmptyId(req);
     await CourseModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       res
@@ -245,13 +248,20 @@ const searchCorseAutocomplete = async (req, res) => {
               }
             
       ]).toArray();
-      res.send(result)
-  } catch (error) {
-    res.status(500).json({ error: error.message })
+      nullError(result, res);
+  } catch (err) {
+    res
+    .status(500)
+    .json({
+      success: true,
+      message: "failed aggregate",
+      error: err.message
+    })
   }
 };
 const getStudentsByCourse = async (req, res) => {
   try {
+    isEmptyId(req);
     await CourseModel.findById(req.params.id)
       .populate('students')
       .then(course => {
@@ -268,9 +278,7 @@ const getStudentsByCourse = async (req, res) => {
 };
 const deleteCorsById = async (req, res) => {
   try {
-      await CourseModel.findByIdAndRemove(req.params.id).pre('remove', function(err,result,next) {
-      this.model('staff').remove({ courses: this._id }, next)
-      this.model('student').remove({ courseId: this._id }, next);
+      await CourseModel.findByIdAndDelete(req.body.id , (err, result) =>{
       if (err) throw err;
       // nullError(result, res);
       res.status(200).json({ massage: "delete by id cors success!", data: result });

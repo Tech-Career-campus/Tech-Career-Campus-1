@@ -20,7 +20,7 @@ export const getUser = (loginInfo) => async dispatch => {
                     if (!response.data) throw response
                     return response
                 })
-                .then((response) => localStorage.setItem("jwtToken", response.data))
+                .then((response) => localStorage.setItem("jwtToken", response.result))
                 .catch(err => { throw err })
         }
 

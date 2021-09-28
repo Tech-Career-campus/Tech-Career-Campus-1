@@ -35,13 +35,31 @@ const login = async (req, res) => {
 
       delete staff.password
 
+<<<<<<< HEAD
       const token = jwt.sign(staff.toJSON() , SECRET_KEY, { expiresIn: "1d" });
       res.status(200).json({ message: "success", result: token });
+=======
+      const token = jwt.sign(staff.toJSON(), SECRET_KEY, { expiresIn: "1d" });
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "success",
+          data: token
+        });
+>>>>>>> parent of e331281 (isEmpty)
 
     } catch (err) {
       res
         .status(500)
+<<<<<<< HEAD
         .json({ message: "something went wrong", errors: err.message });
+=======
+        .json({
+          message: "something went wrong",
+          error: err
+        });
+>>>>>>> parent of e331281 (isEmpty)
     }
   }
 
@@ -84,7 +102,14 @@ const login = async (req, res) => {
     } catch (err) {
       res
         .status(500)
+<<<<<<< HEAD
         .json({ message: "something went wrong", errors: err.message });
+=======
+        .json({
+          message: "something went wrong",
+          error: err
+        });
+>>>>>>> parent of e331281 (isEmpty)
     }
   }
 };
