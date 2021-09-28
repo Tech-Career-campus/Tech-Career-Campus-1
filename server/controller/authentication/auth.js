@@ -1,22 +1,28 @@
 const authUser = (req, res, next) => {
   if (req.body == null) {
     res
-      .status(404)
-      .json({ screen: false, massage: "you have to login or register" });
+      .status(403)
+      .json({
+        success: false,
+        message: "you have to login or register"
+      });
   }
   next();
 };
 
 const authRole = (Role) => {
-    return (req, res, next) => { 
+  return (req, res, next) => {
     if (req.body.role !== Role) {
-        res
+      res
         .status(403)
-        .json({ success: false, massage: "you don't have access", error: error });
-      } else {   
-        next();
-      }
-    };
+        .json({
+          success: false,
+          message: "you don't have access",
+        });
+    } else {
+      next();
+    }
+  };
 };
 module.exports = {
   authUser,
