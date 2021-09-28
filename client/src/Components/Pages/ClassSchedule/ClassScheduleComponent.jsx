@@ -4,19 +4,11 @@ import { loadCldr} from "@syncfusion/ej2-base";
 
 
 const ClassScheduleComponent = () => {
-<<<<<<< HEAD
-//  const [myData, setMyData] = useState();
-
-//  useEffect(() => {
-//    fetchDailySchedule().then((response) => setMyData(response));
-//  }, []);
-=======
   // const [myData, setMyData] = useState();
 
   // useEffect(() => {
   //   fetchDailySchedule().then((response) => setMyData(response));
   // }, []);
->>>>>>> 59c1d87d9730b225968efd147a35d888f296504c
 
   loadCldr(
     require("cldr-data/main/he/ca-gregorian.json"),
@@ -48,7 +40,6 @@ const ClassScheduleComponent = () => {
   );
 };
 export default ClassScheduleComponent;
-<<<<<<< HEAD
 
 
 // const ClassScheduleComponent = () => {
@@ -210,5 +201,3 @@ export default ClassScheduleComponent;
 
 //   }
 //   export default ClassScheduleComponent;
-=======
->>>>>>> 59c1d87d9730b225968efd147a35d888f296504c

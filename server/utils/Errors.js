@@ -17,7 +17,6 @@ const nullError = (result, res) => {
     }
 };
 
-<<<<<<< HEAD
 const isEmptyId = (data) => {
 data = !isEmpty(data) ? data : "";
 if (Validator.isEmpty(data, {ignore_whitespace:false})) {
@@ -26,15 +25,16 @@ if (Validator.isEmpty(data, {ignore_whitespace:false})) {
 if (!Validator.isLength(data, { min: 24, max: 24 })) {
   throw new Error("The id field is lest then 24-character, you are required to pass a 24-character entry");
 }
-=======
-const isEmptyId = (req) => {
-if (req.body.id === "" || req.params.id === "" || req.body._id === "" || req.params._id === "") {
-   throw new Error("The id field is empty, you are required to pass a 24-character entry");
 };
 
->>>>>>> parent of e331281 (isEmpty)
+const nullVariable = (data) => {
+  if (!data) {
+    throw new Error("failed to find information, please make sure you provide existing data in the appropriate format");
+  };
 };
+
 module.exports = {
   nullError,
   isEmptyId,
+  nullVariable
 };

@@ -26,7 +26,13 @@ const postClasses = async (req, res) => {
     try {
         await ScheduleModel.insertMany([req.body], (err, result) => {
             if (err) throw err;
-            res.json({ massage: "day schedule updated", data: result });
+            res
+            .status(201)
+            .json({
+                success:true,
+                 message: "post schedule success",
+                  data: result 
+                });
         })
     }
     catch (err) {
@@ -139,7 +145,8 @@ const deleteClasses = async (req, res) => {
     try {
         await ScheduleModel.findByIdAndDelete(req.body.id, (err, result) => {
             if (err) throw err;
-            res.status(200).json({ massage: "delete class success", data: result })
+            console.log(result)
+            res.status(200).json({ message: "delete class success", data: result })
         })
     }
     catch (err) {
