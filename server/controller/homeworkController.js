@@ -4,7 +4,7 @@ const { nullError, isEmptyId } = require("../utils/Errors");
 
 const creatNewHomework = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.body.id);
     const { subject, description, id } = req.body;
     const course = await CourseModel.findById(id);
     const newHomework = new HomeworkModel({
@@ -12,13 +12,16 @@ const creatNewHomework = async (req, res) => {
       description: description,
       courseId: course._id,
     });
-
     await newHomework.save();
     course.homeworks.push(newHomework);
     await course.save();
     res
       .status(201)
-      .json({ message: "create new homework success", data: newHomework });
+      .json({
+         success:true,
+         message: "create new homework success",
+         data: newHomework 
+    });
   } catch (err) {
     res
     res
@@ -30,9 +33,9 @@ const creatNewHomework = async (req, res) => {
     });
   }
 };
-const getAllHomework = async (req, res) => {
+const getHomeworkById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await HomeworkModel.findOne({courseId:req.params.id}, (err, result) => {
       if (err) throw err;
       nullError(result, res);
@@ -43,7 +46,7 @@ const getAllHomework = async (req, res) => {
 };
 const updateHomeworkById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await HomeworkModel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
@@ -64,7 +67,7 @@ const updateHomeworkById = async (req, res) => {
   }
 };
 const deleteHomeworkById = async (req, res) => {
-  isEmptyId(req);
+  isEmptyId(req.params.id);
   try {
     const homework = await HomeworkModel.findByIdAndDelete(req.params.id, (err, result) => {
       if (err) throw err;
@@ -92,7 +95,7 @@ const deleteHomeworkById = async (req, res) => {
 
 module.exports = {
   creatNewHomework,
-  getAllHomework,
+  getHomeworkById,
   updateHomeworkById,
   deleteHomeworkById,
 };

@@ -28,10 +28,6 @@ const nullError = (result, res) => {
 };
 
 const isEmptyId = (data) => {
-// if (req.body.id === "" || req.params.id === "" || req.body._id === "" || req.params._id === "") {
-//    throw new Error("The id field is empty, you are required to pass a 24-character entry");
-// };
-
 data = !isEmpty(data) ? data : "";
 if (Validator.isEmpty(data, {ignore_whitespace:false})) {
   throw new Error("The id field is empty");
