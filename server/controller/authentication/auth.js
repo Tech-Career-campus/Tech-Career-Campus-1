@@ -1,19 +1,16 @@
 const authUser = (req, res, next) => {
   if (req.body == null) {
     res
-      .status(403)
-      .json({
-        success: false,
-        message: "you have to login or register"
-      });
+      .status(404)
+      .json({ screen: false, massage: "you have to login or register" });
   }
   next();
 };
 
 const authRole = (Role) => {
-  return (req, res, next) => {
+    return (req, res, next) => { 
     if (req.body.role !== Role) {
-      res
+        res
         .status(403)
         .json({
           success: false,

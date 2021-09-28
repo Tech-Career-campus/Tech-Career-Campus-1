@@ -6,13 +6,7 @@ const getAllClasses = async (req, res) => {
 try{
     await ScheduleModel.find({}, (err, result) => {
         if (err) throw err;
-        res
-            .status(200)
-            .json({
-                success: true,
-                message: "success",
-                data: result
-            })
+        res.json({ massage: "success", data: result })
 
     })
 }
@@ -32,13 +26,7 @@ const postClasses = async (req, res) => {
     try {
         await ScheduleModel.insertMany([req.body], (err, result) => {
             if (err) throw err;
-            res
-                .status(201)
-                .json({
-                    success: true,
-                    message: "day schedule updated",
-                    data: result
-                });
+            res.json({ massage: "day schedule updated", data: result });
         })
     }
     catch (err) {
@@ -47,12 +35,12 @@ const postClasses = async (req, res) => {
             .json({
                 success: false,
                 message: "adding class failed",
-                error: err
+                error: err.message
             })
     }
 }
 const updateClassesName = async (req, res) => {
-    const { className, spot, hours, classId, dayId, hourId } = await req.body;
+    const { className,spot, hours, classId, dayId, hourId } = await req.body;
     try {
         const ArrayPath = `days.$.${hours}.$[object].${spot}`
         const ArrayObject = {};
@@ -78,20 +66,12 @@ const updateClassesName = async (req, res) => {
                 if (result !== null) {
                     res
                         .status(200)
-                        .json({
-                            success: true,
-                            message: "update class spot success!",
-                            data: result
-                        });
+                        .json({ message: "update class spot success!", data: result });
                 } else {
                     const errorNull = new Error("result is null");
                     res
-                        .status(400)
-                        .json({
-                            success: false,
-                            message: "update class spot field",
-                            error: errorNull.message
-                        });
+                        .status(500)
+                        .json({ message: "update class spot field", error: errorNull.message });
                 }
             }
         );
@@ -102,7 +82,7 @@ const updateClassesName = async (req, res) => {
             .json({
                 success: false,
                 message: "update class spot field",
-                error: err
+                error: err.message
             });
     }
 }
@@ -112,7 +92,7 @@ const updateClasses = async (req, res) => {
     try {
         const ArrayPath = `days.$.${hours}.$[object].${spot}`
         const ArrayObject = {};
-        ArrayObject[ArrayPath] = isTaken ? false : true
+        ArrayObject[ArrayPath] =  isTaken ? false : true
         const query = {
             _id: classId,
             days: {
@@ -134,20 +114,12 @@ const updateClasses = async (req, res) => {
                 if (result !== null) {
                     res
                         .status(200)
-                        .json({
-                            success: true,
-                            message: "update class spot success!",
-                            data: result
-                        });
+                        .json({ message: "update class spot success!", data: result });
                 } else {
                     const errorNull = new Error("result is null");
                     res
-                        .status(400)
-                        .json({
-                            success: false,
-                            message: "update class spot field",
-                            error: errorNull.message
-                        });
+                        .status(500)
+                        .json({ message: "update class spot field", error: errorNull.message });
                 }
             }
         );
@@ -158,7 +130,7 @@ const updateClasses = async (req, res) => {
             .json({
                 success: false,
                 message: "update class spot field",
-                error: err
+                error: err.message
             });
     }
 }
@@ -167,23 +139,11 @@ const deleteClasses = async (req, res) => {
     try {
         await ScheduleModel.findByIdAndDelete(req.body.id, (err, result) => {
             if (err) throw err;
-            res
-                .status(200)
-                .json({
-                    success: true,
-                    message: "delete class success",
-                    data: result
-                })
+            res.status(200).json({ massage: "delete class success", data: result })
         })
     }
     catch (err) {
-        res
-            .status(500)
-            .json({
-                success: false,
-                message: "delete class failed",
-                error: err
-            })
+        res.json({ massage: "delete class failed", error: err })
     }
 }
 

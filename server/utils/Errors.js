@@ -16,10 +16,15 @@ const nullError = (result, res) => {
       .json({ massage: "filed", data: error.message });
     }
 };
-const isEmptyId = (req) => {
-  if (req.body.id === "" || req.params.id === "" || req.body._id === "") {
-      throw new Error("The id field is empty, you are required to pass a 24-character entry");
-};
+
+const isEmptyId = (data) => {
+data = !isEmpty(data) ? data : "";
+if (Validator.isEmpty(data, {ignore_whitespace:false})) {
+  throw new Error("The id field is empty");
+}
+if (!Validator.isLength(data, { min: 24, max: 24 })) {
+  throw new Error("The id field is lest then 24-character, you are required to pass a 24-character entry");
+}
 };
 module.exports = {
   nullError,
