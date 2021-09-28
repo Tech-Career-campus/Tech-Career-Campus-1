@@ -7,19 +7,33 @@ import { FaPlus } from 'react-icons/fa';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
 import FormEvent from './FormEventComponent';
 const Events = () => {
+<<<<<<< HEAD
     const dispatch = useDispatch();
     const events = useSelector(state => state.events);
     const { user } = useSelector(state => state.user)
+=======
+  const dispatch = useDispatch();
+  const events = useSelector((state) => state.events);
+  const { user } = useSelector((state) => state.user);
+>>>>>>> parent of 2810cd5 (404 page)
 
     const [isForm, setForm] = useState(false)
     const [isUpdate, setUpdate] = useState(false)
 
+<<<<<<< HEAD
 
     const [eventUpdate, setEventUpdate] = useState({
         eventId: "",
         eventName: "",
         massage: "",
     });
+=======
+  const [eventUpdate, setEventUpdate] = useState({
+    eventId: "",
+    eventName: "",
+    massage: "",
+  });
+>>>>>>> parent of 2810cd5 (404 page)
 
     useEffect(() => {
         dispatch(getEvents());
@@ -58,7 +72,12 @@ const Events = () => {
                 {
                     events?.map((event) => {
                         return (
+<<<<<<< HEAD
                             <div className="EventsNews" key={event._id} >
+=======
+                            
+                            <div className="EventsNews">
+>>>>>>> parent of 2810cd5 (404 page)
                                 <div key={event._id} >
 
                                     <div className="inputs-massage">
@@ -86,11 +105,24 @@ const Events = () => {
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
+=======
+                            
+>>>>>>> parent of 2810cd5 (404 page)
                         )
                     })
                 }
             </div>
+<<<<<<< HEAD
         </div>
     )
 }
+=======
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+>>>>>>> parent of 2810cd5 (404 page)
 export default Events;
