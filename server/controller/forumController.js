@@ -94,7 +94,7 @@ const getAllMessages = async (req, res) => {
       .json({
         success: false,
         message: "problem in database",
-        error: err
+        error: err.message
       });
   }
 };
@@ -124,6 +124,7 @@ const deleteMessage = async (req, res) => {
 const updateMessage = async (req, res) => {
   const post = req.body.post;
   try {
+    isEmptyId(req.params.id);
     await ForumModel.findByIdAndUpdate(
       req.params.id,
       post,
@@ -145,7 +146,7 @@ const updateMessage = async (req, res) => {
       .json({
         success: false,
         message: "problem with update",
-        error: err
+        error: err.message
       });
   }
 };
@@ -164,7 +165,7 @@ const getPost = async (req, res) => {
     });
   } catch (err) {
     res
-    status(400)
+      .status(400)
       .json({
         success: false,
         message: "get message failed",
@@ -173,9 +174,9 @@ const getPost = async (req, res) => {
   }
 };
 const commentPost = async (req, res) => {
+  isEmptyId(req.params.id)
   const { value } = req.body;
   const post = await ForumModel.findById(req.params.id);
-
   post.comments.push(value);
   const updatedPost = await ForumModel.findByIdAndUpdate(req.params.id, post, {
     new: true,

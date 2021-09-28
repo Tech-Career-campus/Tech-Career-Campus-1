@@ -1,6 +1,6 @@
 const eventModel = require("../models/eventModel");
 const staffModel = require("../models/staffModel");
-const { nullError } = require("../utils/Errors");
+const { nullError ,isEmptyId , nullVariable} = require("../utils/Errors");
 
 const getAllEventPost = async (req, res) => {
   try {
@@ -24,13 +24,7 @@ const getEventById = async (req, res) => {
     isEmptyId(req.params.id)
     await eventModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "get event by id success",
-          data: result
-        });
+      nullError(result,res);
     });
   } catch (err) {
     res
@@ -44,17 +38,17 @@ const getEventById = async (req, res) => {
 };
 
 const postNewEvent = async (req, res) => {
+  try {
+  isEmptyId(req.params.id)  
   const staff = await staffModel.findById(req.params.id);
+  nullVariable(staff)
   const { eventName, message } = req.body;
   const newEvent = new eventModel({
     eventName: eventName,
     message: message,
-    createBy: staff._id
+    createBy: `${staff.firstName} ${staff.lastName}`
   });
-  try {
     await newEvent.save();
-    staff.events.push(newEvent);
-    await staff.save();
     res
       .status(201)
       .json({

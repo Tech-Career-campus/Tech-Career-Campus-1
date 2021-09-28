@@ -97,14 +97,10 @@ const updateClasses = async (req, res) => {
 
 const deleteClasses = async (req, res) => {
   try {
+    isEmptyId(req.body.id)
     await ScheduleModel.findByIdAndDelete(req.body.id, (err, result) => {
       if (err) throw err;
-      res
-      .status(200)
-      .json({
-         success:true,
-         message: "delete class success",
-      });
+      nullError(result,res)
     });
   } catch (err) {
     res
