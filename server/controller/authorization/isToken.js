@@ -21,7 +21,7 @@ const isToken = (req, res, next) => {
           .json({
             success: false,
             message: "invalid or expired token",
-            error: err
+            error: err.message
           });
       }
     } else {

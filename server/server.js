@@ -34,7 +34,7 @@ app.use("/api/staff", isToken, routeStaff);
 app.use("/api/forum", isToken, routeForum);
 app.use("/api", routeLoginRegister);
 app.use("/api/event", isToken, routeEvent);
-app.use("/api/classSchedule", isToken, classScheduleRouting);
+app.use("/api/classSchedule",isToken, classScheduleRouting);
 app.use("/api/homework", isToken, routeHomework);
 
 if (process.env.NODE_ENV === "production") {
@@ -45,10 +45,12 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(
     `${chalk.green("tech_career")} ${chalk.yellow(
       "live and up on port"
     )} ${chalk.blue(PORT)}`
     );
 });
+
+module.exports = server

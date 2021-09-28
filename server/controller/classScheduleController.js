@@ -3,7 +3,7 @@ const ScheduleModel = require('../models/classScheduleModel');
 
 
 const getAllClasses = async (req, res) => {
-
+try{
     await ScheduleModel.find({}, (err, result) => {
         if (err) throw err;
         res
@@ -15,6 +15,16 @@ const getAllClasses = async (req, res) => {
             })
 
     })
+}
+catch(err){
+    res
+    .status(500)
+    .json({
+        success: false,
+        message: "get a class schedule failed",
+        error: err.message
+    })
+}
 }
 
 
@@ -36,7 +46,7 @@ const postClasses = async (req, res) => {
             .status(400)
             .json({
                 success: false,
-                message: "adding class failing",
+                message: "adding class failed",
                 error: err
             })
     }

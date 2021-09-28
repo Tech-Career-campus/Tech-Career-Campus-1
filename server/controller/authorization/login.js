@@ -27,6 +27,7 @@ const login = async (req, res) => {
           .json({
             success: false,
             message: "email not found",
+            error:"email not found"
           });
       };
 
