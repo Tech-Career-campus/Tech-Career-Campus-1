@@ -642,7 +642,6 @@ describe("API REST /api/students", () => {
                 .send(body)
                 .end((err, res) => {
                     const data = res.body
-                    console.log(data)
                     res.should.have.status(500);
                     data.should.have.property("message").equal("wrong")
                     data.should.have.property("success").equal(false);
