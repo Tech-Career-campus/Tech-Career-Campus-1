@@ -1,6 +1,7 @@
 import React from "react";
 import "./HomeInfo.css";
 import { informationForCorses, Collaborations, titles } from "./Information";
+import "animate.css";
 
 export const HomeInfo = () => {
   return (
@@ -13,6 +14,7 @@ export const HomeInfo = () => {
 
         {informationForCorses.map((item, index) => {
           return (
+            <div class="animate__animated animate__fadeInUp">
             <div key={index} className="body-home-info-cards">
               
                 <img src={item.img} />
@@ -23,7 +25,7 @@ export const HomeInfo = () => {
                 </div>
                 
               </div>
-            
+            </div>
           );
         })}
       </div>
