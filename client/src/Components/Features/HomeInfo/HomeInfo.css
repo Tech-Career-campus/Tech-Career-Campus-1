@@ -6,7 +6,7 @@
     background-color: white;
     /* border: 1px solid black; */
     width: 100vw;
-    height: 1250px;
+    height: 1000px;
     margin-top: 20px;
     box-shadow: 3px 3px 20px -14px rgb(23,41,74);
 }
@@ -27,18 +27,21 @@ margin-top: 50px;
 box-shadow: 3px 3px 20px -10px rgb(23,41,74);
    border-radius: 8px;
     /* border: 1px solid black; */
-    width: 330px;
-    height: 330px;
+    width: 280px;
+    height: 350px;
 }
 .body-home-info-cards .info{
 padding: 5px;
 
 }
+.body-home-info-cards, p{
+font-size: 12px;
+}
 .body-home-info img{
     display: flex;
     justify-content: center;
-    border-radius: 8px 8px 0px 0px;
-    width: 330px;
+    border-radius: 8px 8px 120px 0px;
+    width: 280px;
     height: 200px;
 } 
 .body-home-company{
