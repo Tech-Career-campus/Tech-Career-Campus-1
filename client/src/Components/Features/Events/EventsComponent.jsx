@@ -9,12 +9,11 @@ import FormEvent from './FormEventComponent';
 
 const Events = () => {
     const dispatch = useDispatch();
-    const {events} = useSelector(state => state.events);
-    const { user } = useSelector(state => state.user)
+    const events = useSelector(state => state.events);
+    const {user} = useSelector(state => state.user)
 
     const [isForm, setForm] = useState(false)
     const [isUpdate, setUpdate] = useState(false)
-
 
     const [eventUpdate, setEventUpdate] = useState({
         eventId: "",
@@ -66,6 +65,8 @@ const Events = () => {
                                         {hebrewVariables.eventNameTitle}: {event.eventName}
                                         <br></br>
                                         {hebrewVariables.eventMessageTitle}: {event.message}
+                                        <br></br>
+                                        {hebrewVariables.createBy}: {event.createBy}
                                     </div>
 
                                     <div className="bth-e">
