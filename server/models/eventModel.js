@@ -8,7 +8,7 @@ const eventSchema = new Schema(
       required: true,
     },
 
-    massage: {
+    message: {
       type: String,
       required: true,
     },

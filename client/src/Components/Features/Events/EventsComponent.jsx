@@ -9,7 +9,7 @@ import FormEvent from './FormEventComponent';
 
 const Events = () => {
     const dispatch = useDispatch();
-    const events = useSelector(state => state.events);
+    const {events} = useSelector(state => state.events);
     const { user } = useSelector(state => state.user)
 
     const [isForm, setForm] = useState(false)
@@ -26,7 +26,7 @@ const Events = () => {
         dispatch(getEvents());
     }, [dispatch]);
 
-    const hendleChange1 = (e) => {
+    const handelChange1 = (e) => {
         setEventUpdate(
             {
                 ...eventUpdate,
@@ -65,7 +65,7 @@ const Events = () => {
                                     <div className="inputs-massage">
                                         {hebrewVariables.eventNameTitle}: {event.eventName}
                                         <br></br>
-                                        {hebrewVariables.eventMassagetTitle}: {event.massage}
+                                        {hebrewVariables.eventMessageTitle}: {event.message}
                                     </div>
 
                                     <div className="bth-e">
@@ -76,8 +76,8 @@ const Events = () => {
                                                     {
                                                         isUpdate && event._id === eventUpdate.eventId ?
                                                             <div>
-                                                                <input type="text" name="eventName" value={eventUpdate.eventName} onChange={(e) => { hendleChange1(e) }} />
-                                                                <textarea cols="100" rows="0.5" name="massage" value={eventUpdate.massage} onChange={(e) => { hendleChange1(e) }}></textarea>
+                                                                <input type="text" name="eventName" value={eventUpdate.eventName} onChange={(e) => { handelChange1(e) }} />
+                                                                <textarea cols="100" rows="0.5" name="message" value={eventUpdate.message} onChange={(e) => { handelChange1(e) }}></textarea>
                                                                 <input type="button" id="confirmUpdates" value={hebrewVariables.confirmUpdates} onClick={() => { dispatch(updateEvent(eventUpdate)); setUpdate(false) }} />
                                                             </div> : ""
                                                     }
