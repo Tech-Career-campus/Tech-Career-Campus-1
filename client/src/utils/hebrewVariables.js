@@ -84,5 +84,6 @@ export const hebrewVariables=
     createHomework:"צור משימה",
     subject:"נושא",
     description:"תיאור",
+    createBy: "נוצר על ידי"
 
 } 
