@@ -1,23 +1,11 @@
 import React, { useEffect } from 'react';
 import "./Events.css";
-<<<<<<< HEAD
-import { useState } from "react";
-import {
-  getEvents,
-  createEvent,
-  updateEvent,
-  deleteEvent,
-} from "../../../Redux/actions/eventsActions";
-import { useDispatch, useSelector } from "react-redux";
-import { FaPlus } from "react-icons/fa";
-=======
 import { useState } from 'react';
 import { getEvents, updateEvent, deleteEvent } from '../../../Redux/actions/eventsActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
 import FormEvent from './FormEventComponent';
->>>>>>> 8c4baac3673c69d6b02e98ce3ddc9c307f0dd31f
 
 const Events = () => {
     const dispatch = useDispatch();
@@ -32,17 +20,11 @@ const Events = () => {
   });
 
 
-<<<<<<< HEAD
-  useEffect(() => {
-    dispatch(getEvents());
-  }, [dispatch]);
-=======
     const [eventUpdate, setEventUpdate] = useState({
         eventId: "",
         eventName: "",
         message: "",
     });
->>>>>>> 8c4baac3673c69d6b02e98ce3ddc9c307f0dd31f
 
   const hendleChange = (e) => {
     setNewEvent({
@@ -132,62 +114,6 @@ const Events = () => {
                   <br></br>
                   הודעה :{event.massage}
                 </div>
-<<<<<<< HEAD
-                <div className="bth-e">
-                  <button
-                    onClick={() => {
-                      setUpdate(isUpdate ? false : true);
-                      setEventUpdate({ ...eventUpdate, eventId: event._id });
-                    }}
-                  >
-                    
-                    עדכן
-                  </button>
-                 
-                  <input
-                    type="button"
-                    id="deleteBtn"
-                    value="מחק"
-                    onClick={() => dispatch(deleteEvent(event._id))}
-                  />
-                   {isUpdate && event._id === eventUpdate.eventId ? (
-                    <div className="form-event1">
-                      <input
-                        id="eventName"
-                        type="text"
-                        name="eventName"
-                        value={eventUpdate.eventName}
-                        onChange={(e) => {
-                          hendleChange1(e);
-                        }}
-                      />
-
-                      <textarea
-                        id="massage"
-                        cols="100"
-                        rows="0.5"
-                        name="massage"
-                        value={eventUpdate.massage}
-                        onChange={(e) => {
-                          hendleChange1(e);
-                        }}
-                      ></textarea>
-                      <input
-                        type="button"
-                        id="confirmUpdates"
-                        value="אישור עדכונים"
-                        onClick={() => {
-                          dispatch(updateEvent(eventUpdate));
-                          setUpdate(false);
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-=======
                 {
                     user.role === "Staff" ?
                         <div className="bth-add">
@@ -237,9 +163,8 @@ const Events = () => {
                         )
                     })
                 }
->>>>>>> 8c4baac3673c69d6b02e98ce3ddc9c307f0dd31f
             </div>
         </div>
-    )
+        )
 }
 export default Events;
