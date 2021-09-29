@@ -45,37 +45,52 @@ export default ClassScheduleComponent;
 // const ClassScheduleComponent = () => {
 //   const [isTaken, setIsTaken] = useState(false);
 //   const [className, setClassName] = useState("פיתוח");
+//   const [hourId, SetHourId] = useState("6147aa0d5adea82a506a1dd6");
+//   const [dayId, SetDayId] = useState("6147aa0d5adea82a506a1dd5");
+
+//   const select = className
 
 //   const data = useMemo(
 //     () => [
 //       {
 //         col1: '8-10',
 //         col2: isTaken,
-//         col3: ''
+//         col3: hourId,
 //       },
 //       {
 //         col1: '10-12',
 //         col2: isTaken ,
+//         col3: hourId,
 //       },
 //       {
 //         col1: '12-14',
 //         col2: isTaken,
+//         col3: hourId,
+
 //       },
 //       {
 //         col1: '14-16',
 //         col2: isTaken ,
+//         col3: hourId,
+
 //       },
 //       {
 //         col1: '16-18',
 //         col2: isTaken ,
+//         col3: hourId,
+
 //       },
 //       {
 //         col1: '18-20',
 //         col2: isTaken ,
+//         col3: hourId,
+
 //       },
 //       {
 //         col1: '20-22',
 //         col2: isTaken ,
+//         col3: hourId,
+
 //       },
 //     ],
 //     []
@@ -86,27 +101,35 @@ export default ClassScheduleComponent;
 //       {
 //         Header: 'שעות',
 //         accessor: 'col1', // accessor is the "key" in the data
-//         id:1
+//         id: dayId
 //       },
 //       {
 //         Header: 'ראשון',
 //         // accessor: 'col1', // accessor is the "key" in the data
+//         id: dayId
 //       },
 //       {
 //         Header: 'שני',
 //         // accessor: 'col2',
+//         id: dayId
+
 //       },
 //       {
 //         Header: 'שלישי',
 //         // accessor: 'col3', // accessor is the "key" in the data
+//         id: dayId
+
 //       },
 //       {
 //         Header: 'רביעי',
 //         // accessor: 'col1', // accessor is the "key" in the data
+//         id: dayId
+
 //       },
 //       {
 //         Header: 'חמישי',
 //         // accessor: 'col2', // accessor is the "key" in the data
+//         id: dayId
 //       },
 //     ],
 //     []
@@ -120,7 +143,7 @@ export default ClassScheduleComponent;
 //     prepareRow,
 //   } = useTable({ columns, data })
 
-//   const onOrOff = () => {
+//   const onOrOff = (value) => {
 //     console.log(columns);
 //     setIsTaken(
 //       isTaken ? false : true
@@ -153,7 +176,6 @@ export default ClassScheduleComponent;
 //               return (
 //                 <tr {...row.getRowProps()}>
 //                   {row.cells.map(cell => {
-
 //                     return (
 //                       <td 
 //                         {...cell.getCellProps()}
@@ -163,9 +185,8 @@ export default ClassScheduleComponent;
 //                         }}
 //                       >
 
-//                         <input onClick={onOrOff} style={{ width: '30px', height: '20px', backgroundColor:isTaken?"red":"green",display: {...columns[0].Header === 'שעות'?'none':'block'} }}/>
-//                         :
-
+//                         <button value={} onClick={onOrOff} style={{ width: '30px', height: '20px', backgroundColor:isTaken?"red":"green",display: {...columns[0].Header === 'שעות'?'none':'block'} }}/>
+                        
 //                         {cell.render('Cell')}
 //                       </td>
 //                     )

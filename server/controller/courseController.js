@@ -276,10 +276,10 @@ const getStudentsByCourse = async (req, res) => {
   }
 };
 
-const deleteCorsById = async (req, res) => {
+const deleteCourseById = async (req, res) => {
   try {
-    isEmptyId(req.body.id);
-      await CourseModel.findByIdAndDelete(req.body.id , (err, result) =>{
+    isEmptyId(req.params.id);
+      await CourseModel.findByIdAndDelete(req.params.id , (err, result) =>{
       if (err) throw err;
       res
       .status(200)
@@ -309,5 +309,5 @@ module.exports = {
   updateSubject,
   searchCorseAutocomplete,
   getStudentsByCourse,
-  deleteCorsById,
+  deleteCourseById,
 }

@@ -43,10 +43,10 @@ const nullVariable = (data) => {
     throw new Error("failed to find information, please make sure you provide existing data in the appropriate format");
   };
 };
-  
+
 
 module.exports = {
   nullError,
   isEmptyId,
-  nullVariable,
+  nullVariable
 };
