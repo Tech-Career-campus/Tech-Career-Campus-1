@@ -1,10 +1,12 @@
 const ForumModel = require("../models/forumModel");
 const StaffModel = require("../models/staffModel");
 const StudentModel = require("../models/studentModel");
+const {nullError , nullVariable ,isEmptyId} = require("../utils/Errors")
 
 const messagesByStaff = async (req, res) => {
+  try {
   const staff = await StaffModel.findById(req.body._id);
-  console.log(staff);
+  nullVariable(staff); 
   const newMessages = new ForumModel({
     firstName: req.body.post.firstName,
     email: req.body.post.email,
@@ -12,7 +14,6 @@ const messagesByStaff = async (req, res) => {
     message: req.body.post.message,
     authorByStaff: staff._id,
   });
-  try {
     await newMessages.save();
     staff.messages.push(newMessages);
     await staff.save();
@@ -29,21 +30,15 @@ const messagesByStaff = async (req, res) => {
       .json({
         success: false,
         message: "create new message filed",
-        error: err
+        error: err.message
       });
   }
 };
-
 const messagesByStudent = async (req, res) => {
+  try { 
+  isEmptyId(req.body.id)  
   const student = await StudentModel.findById(req.body.id);
-  if (!student) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        message: "student not fond",
-      });
-  }
+  nullVariable(student);
   const newMessages = new ForumModel({
     firstName: req.body.post.firstName,
     email: req.body.post.email,
@@ -51,7 +46,6 @@ const messagesByStudent = async (req, res) => {
     message: req.body.post.message,
     authorByStudent: student.id,
   });
-  try {
     await newMessages.save();
     student.messages.push(newMessages);
     await student.save();
@@ -68,7 +62,7 @@ const messagesByStudent = async (req, res) => {
       .json({
         success: false,
         message: "create new message filed",
-        error: err
+        error: err.message
       });
   }
 };
@@ -80,27 +74,42 @@ const getAllMessages = async (req, res) => {
     const total = await ForumModel.countDocuments({});
 
     await ForumModel.find({}, (err, result) => {
-      if (err) console.log(err);
-      res.json({
-        message: "success",
-        data: result,
-        currentPage: Number(page),
-        numberOfPages: Math.ceil(total / LIMIT),
-      });
+      if (err) throw err;
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "success",
+          data: result,
+          currentPage: Number(page),
+          numberOfPages: Math.ceil(total / LIMIT),
+        });
     })
       .sort({ _id: -1 })
       .limit(LIMIT)
       .skip(startIndex);
   } catch (err) {
-    res.json({ message: "problem in database", error: err });
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "problem in database",
+        error: err.message
+      });
   }
 };
-
 const deleteMessage = async (req, res) => {
   try {
+    isEmptyId(req.params.id);
     await ForumModel.findByIdAndDelete(req.params.id, (err, result) => {
       if (err) throw err;
-      res.json({ message: "delete message success", data: result });
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "delete message success",
+          data: result
+        });
     });
   } catch (err) {
     res
@@ -108,46 +117,66 @@ const deleteMessage = async (req, res) => {
       .json({
         success: false,
         message: "delete message failed",
-        error: err
+        error: err.message
       });
   }
 };
 const updateMessage = async (req, res) => {
   const post = req.body.post;
   try {
+    isEmptyId(req.params.id);
     await ForumModel.findByIdAndUpdate(
       req.params.id,
       post,
       { new: true },
       (err, result) => {
         if (err) throw err;
-        res.json({ message: "updated message success", data: result });
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "updated message success",
+            data: result
+          });
       }
     );
   } catch (err) {
-    res.json({ message: "problem with update", error: err });
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "problem with update",
+        error: err.message
+      });
   }
 };
 const getPost = async (req, res) => {
   try {
+    isEmptyId(req.params.id)
     await ForumModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      res.json({ message: "got message success", data: result });
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "get message success",
+          data: result
+        });
     });
   } catch (err) {
     res
-    .status(400)
+      .status(400)
       .json({
         success: false,
         message: "get message failed",
-        error: err
+        error: err.message
       });
   }
 };
 const commentPost = async (req, res) => {
+  isEmptyId(req.params.id)
   const { value } = req.body;
   const post = await ForumModel.findById(req.params.id);
-
   post.comments.push(value);
   const updatedPost = await ForumModel.findByIdAndUpdate(req.params.id, post, {
     new: true,

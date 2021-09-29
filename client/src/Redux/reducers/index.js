@@ -4,10 +4,10 @@ import studentReducer from "./studentReducer";
 import userReducer from "./userReducer";
 import SyllabusReducer from "./SyllabusReducer";
 import postsReducer from './posts'
-import staffRedcuer from "./staffRedcuer";
+import staffReducer from "./staffReducer";
 import coursesReducer from "./coursesReducer";
 import courseReducer from "./courseReducer";
-import eventsReducer from "./eventRedcuer";
+import eventsReducer from "./eventReducer";
 import homeworkReducer from "./homeworkReducer";
 
 export default combineReducers({
@@ -16,8 +16,9 @@ export default combineReducers({
     students: studentsReducer,
     student: studentReducer,
     posts: postsReducer,
-    staff:staffRedcuer,
+    staff: staffReducer,
     courses: coursesReducer,
     course: courseReducer,
-    events: eventsReducer
+    events: eventsReducer,
+    homework: homeworkReducer
 })

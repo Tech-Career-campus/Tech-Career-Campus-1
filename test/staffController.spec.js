@@ -65,7 +65,7 @@ chai.use(chaiHttp);
 //     const newHomework = {
 //       id: "6131cf7231323fbda852fc2f",
 //       subject: "new homework",
-//       description: "klklklklklklklkl",
+//       description: "sdjkhksdjcnsedhsnkd",
 //       link: "",
 //     };
 //     chai
@@ -122,7 +122,7 @@ chai.use(chaiHttp);
 //     const newHomework = {
 //       id: "6131cf7231323fbda852fc2f",
 //       subject: "put homework",
-//       description: "kjhdsfzdxfghkljvcb",
+//       description: "mmmmmmmmmmmmmmmmmmmmm",
 //       link: "",
 //     };
 //     chai
@@ -130,12 +130,11 @@ chai.use(chaiHttp);
 //       .put("/api/homework/" +id)
 //       .set(
 //         "Authorization",
-//         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIzLCJqb2QiOiLXqtek16fXmdeTIiwicmVzcG9uc2libGUiOiLXkNeX16jXkNeZ16oiLCJtZXNzYWdlcyI6WyI2MTUxYzMwZTc1NjBmMjc4ODhjZTQ5MzYiLCI2MTUxZDVmN2E3MzQ2MzRlOGM4MDZjYzQiXSwiX2lkIjoiNjEzZjk0YTBiYzQ0Njc1NDhjNzIxMzRlIiwicm9sZSI6IlN0YWZmIiwicHJvZmlsZUltZyI6ImltYWdlc1xcMTYzMjc2NTgwMzE5NF9naXJsYXZhdGFyLmpwZyIsIklkTnVtYmVyIjoiIiwiY291cnNlcyI6W10sImV2ZW50cyI6WyI2MTUzMzBhMTliOWMxMTM5ZTg4MzVmYzgiXSwic3R1ZGVudHMiOltdLCJmaXJzdE5hbWUiOiLXoNeV15kiLCJsYXN0TmFtZSI6Iten15XXp9eUIiwiZW1haWwiOiJ0YWxpZ2VyZ3JlQGdtYWlsLmNvbSIsInBob25lIjoiMDU0NjI2NTU3NSIsInBhc3N3b3JkIjoiJDJiJDEyJDJyd21QdS5iUEcvdXl0QS4xbFZFei5WVEZNc2F3UnN6RTdaNVRJbXVYWTBoUnlUZTU5VHFpIiwiY3JlYXRlZEF0IjoiMjAyMS0wOS0xM1QxODoxMjo0OC41MjJaIiwidXBkYXRlZEF0IjoiMjAyMS0wOS0yOFQxNToxMToyOS4yOTBaIiwiX192IjozLCJpYXQiOjE2MzI4NjkyNzgsImV4cCI6MTYzMjk1NTY3OH0.rtMvkgK1YY7bUMZJra1GtLi5MVOlrq4EFH3gIzjt5gw"
+//         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2UiOjIzLCJqb2QiOiLXqtek16fXmdeTIiwicmVzcG9uc2libGUiOiLXkNeX16jXkNeZ16oiLCJtZXNzYWdlcyI6W10sIl9pZCI6IjYxM2Y5NGEwYmM0NDY3NTQ4YzcyMTM0ZSIsInJvbGUiOiJTdGFmZiIsInByb2ZpbGVJbWciOiIxNjMyNDEyMDIzMjMxX2dpcmxhdmF0YXIuanBnIiwiSWROdW1iZXIiOiIiLCJjb3Vyc2VzIjpbXSwiZXZlbnRzIjpbXSwic3R1ZGVudHMiOltdLCJmaXJzdE5hbWUiOiLXoNeV15nXlCIsImxhc3ROYW1lIjoi16fXlden15QiLCJlbWFpbCI6InRhbGlnZXJncmVAZ21haWwuY29tIiwicGhvbmUiOiIwNTQ2MjY1NTc1IiwicGFzc3dvcmQiOiIkMmIkMTIkMnJ3bVB1LmJQRy91eXRBLjFsVkV6LlZURk1zYXdSc3pFN1o1VEltdVhZMGhSeVRlNTlUcWkiLCJjcmVhdGVkQXQiOiIyMDIxLTA5LTEzVDE4OjEyOjQ4LjUyMloiLCJ1cGRhdGVkQXQiOiIyMDIxLTA5LTIzVDE1OjQ3OjAzLjI3NFoiLCJfX3YiOjAsImlhdCI6MTYzMjY5MTA4MSwiZXhwIjoxNjMyNzc3NDgxfQ.x1NqSBkSjl47hsrCzO1FT_KtOmwt7l7hyptP3muXsfE"
 //       )
 //       .send(newHomework)
 //       .end((err, res) => {
 //         const data = res.body.data;
-//         console.log(res.text);
 //         res.should.have.status(200);
 //         data.should.be.a("object");
 //         data.should.have.property("subject").eq(newHomework.subject);

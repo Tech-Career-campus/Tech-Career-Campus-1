@@ -1,92 +1,30 @@
 import React, { useEffect } from 'react';
 import "./Events.css";
 import { useState } from 'react';
-import Popup from 'reactjs-popup';
+import { getEvents, updateEvent, deleteEvent } from '../../../Redux/actions/eventsActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaPlus } from 'react-icons/fa';
+import { hebrewVariables } from '../../../utils/hebrewVariables';
+import FormEvent from './FormEventComponent';
 
 const Events = () => {
-    const token = localStorage.getItem("jwtToken");
-    const defaultHeaders = {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
-    }
+    const dispatch = useDispatch();
+    const events = useSelector(state => state.events);
+    const { user } = useSelector(state => state.user)
 
-    const [events, setEvents] = useState([]);
-    const [newEvent, setNewEvent] = useState({
-        eventName: "",
-        massage: ""
-    });
+    const [isForm, setForm] = useState(false)
+    const [isUpdate, setUpdate] = useState(false)
+
 
     const [eventUpdate, setEventUpdate] = useState({
+        eventId: "",
         eventName: "",
-        massage: "",
+        message: "",
     });
-
-    const [eventUpdates, setEventUpdates] = useState({
-        eventName: "",
-        massage: "",
-    });
-    const optionPOST = {
-        method: 'POST',
-        body: JSON.stringify(newEvent),
-        headers: defaultHeaders,
-    }
-
-    const optionPUT = {
-        method: 'PUT',
-        body: JSON.stringify(eventUpdate),
-        headers: defaultHeaders,
-    }
-
-    const optionDELETE = {
-        method: 'DELETE',
-        body: JSON.stringify(),
-        headers: defaultHeaders,
-    }
 
     useEffect(() => {
-        getDat();
-    }, [])
-
-    const getDat = async () => {
-        await fetch("http://localhost:8080/api/event", { headers: defaultHeaders })
-            .then((res) => res.json())
-            .then((response) => setEvents(response.data))
-            .catch(err => { console.error("GET ALL FAIL") });
-    }
-
-    const sendEvent = async () => {
-        await fetch("http://localhost:8080/api/event", optionPOST)
-            .then((res) => res.json())
-            .then((res) => { setEvents([...events, ...res.data]); })
-            .catch(err => { console.error("GET ALL NOT SAND"); });
-    }
-
-    const updateEvent = async (_id) => {
-        await fetch(`http://localhost:8080/api/event/${_id}`, optionPUT)
-            .then((res) => res.json())
-            .then((res) => { setEventUpdate(res.data); })
-            .catch((err) => { console.log(err); })
-        getDat();
-    }
-
-    const deleteEvent = async (_id) => {
-        if (window.confirm('are you sure?')) {
-            await fetch(`http://localhost:8080/api/event/${_id}`, optionDELETE)
-                .then((res) => res.json())
-                .then((res) => (res.data))
-                .catch((err) => { console.log(err); })
-            getDat();
-        }
-    }
-
-    const hendleChange = (e) => {
-        setNewEvent(
-            {
-                ...newEvent,
-                [e.target.name]: e.target.value
-            }
-        )
-    }
+        dispatch(getEvents());
+    }, [dispatch]);
 
     const hendleChange1 = (e) => {
         setEventUpdate(
@@ -99,34 +37,55 @@ const Events = () => {
 
     return (
         <div className="Body">
-            <div>
-                <textarea name="eventName" id="eventName" cols="100" rows="0.5" value={newEvent.eventName} placeholder="שם האירוע" onChange={(e) => { hendleChange(e) }}></textarea>
-                <br></br>
-                <textarea name="massage" id="massage" cols="100" rows="10" value={newEvent.massage} placeholder="הקלד כאן" onChange={(e) => { hendleChange(e) }}></textarea>
-                <br></br>
-                <input type="button" id="sendBtn" value="שלח" onClick={sendEvent} />
+            <div className="titel-event">
+                <div className="updete">
+                    <p> {hebrewVariables.eventsHeadline} </p>
+                </div>
                 {
+                    user.role === "Staff" ?
+                        <div className="bth-add">
+                            <button onClick={() => { setForm(isForm ? false : true); }}> <FaPlus /> </button>
+                        </div>
+                        : ""
+                }
+            </div>
 
-                    events?.map((event, index) => {
+            <div className="body-updete">
+                {
+                    isForm ?
+                        <FormEvent user={user} />
+                        : ""
+                }
+                {
+                    events?.map((event) => {
                         return (
-                            <div className="EventsNews">
-                                <span key={event._id}>
-                                    שם הארוע :{event.eventName}
-                                    <br></br>
-                            הודעה :{event.massage}
-                                    <br></br>
-                                    <Popup trigger={<input type="button" id="updateBtn" value="עדכן" />} position="right center">
-                                        <div>
-                                            <textarea cols="100" rows="0.5" name="eventName" id="some" value={eventUpdate.eventName} onChange={(e) => { hendleChange1(e) }}></textarea>
-                                            <br></br>
-                                            <textarea cols="100" rows="0.5" name="massage" value={eventUpdate.massage} onChange={(e) => { hendleChange1(e) }}></textarea>
-                                            <br></br>
-                                            <input type="button" id="confirmUpdates" value="אישור עדכונים" onClick={() => { updateEvent(event._id) }} />
-                                        </div>
-                                    </Popup>
-                                    <input type="button" id="deleteBtn" value="מחק" onClick={() => { deleteEvent(event._id) }} />
-                                    <hr></hr>
-                                </span>
+                            <div className="EventsNews" key={event._id} >
+                                <div key={event._id} >
+
+                                    <div className="inputs-massage">
+                                        {hebrewVariables.eventNameTitle}: {event.eventName}
+                                        <br></br>
+                                        {hebrewVariables.eventMassagetTitle}: {event.massage}
+                                    </div>
+
+                                    <div className="bth-e">
+                                        {
+                                            user.role === "Staff" ?
+                                                <>
+                                                    <button onClick={() => { setUpdate(isUpdate ? false : true); setEventUpdate({ ...eventUpdate, eventId: event._id }) }}> {hebrewVariables.update} </button>
+                                                    {
+                                                        isUpdate && event._id === eventUpdate.eventId ?
+                                                            <div>
+                                                                <input type="text" name="eventName" value={eventUpdate.eventName} onChange={(e) => { hendleChange1(e) }} />
+                                                                <textarea cols="100" rows="0.5" name="massage" value={eventUpdate.massage} onChange={(e) => { hendleChange1(e) }}></textarea>
+                                                                <input type="button" id="confirmUpdates" value={hebrewVariables.confirmUpdates} onClick={() => { dispatch(updateEvent(eventUpdate)); setUpdate(false) }} />
+                                                            </div> : ""
+                                                    }
+                                                    <button id="deleteBtn" onClick={() => dispatch(deleteEvent(event._id))}> {hebrewVariables.delete}</button>
+                                                </> : ""
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         )
                     })

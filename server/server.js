@@ -34,8 +34,8 @@ app.use("/api/staff", isToken, routeStaff);
 app.use("/api/forum", isToken, routeForum);
 app.use("/api", routeLoginRegister);
 app.use("/api/event", isToken, routeEvent);
-app.use("/api/classSchedule",isToken, classScheduleRouting);
-app.use("/api/homework", isToken, routeHomework);
+app.use("/api/classSchedule", isToken, classScheduleRouting);
+app.use("/api/homework",isToken, routeHomework);
 
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
@@ -53,4 +53,4 @@ const server = app.listen(PORT, () => {
     );
 });
 
-module.exports = server
+module.exports = server;
