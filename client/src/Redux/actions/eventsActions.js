@@ -16,7 +16,7 @@ export const createEvent = (event) => async dispatch => {
             method: 'POST',
             body: JSON.stringify({
                 eventName: event.eventName,
-                massage: event.massage
+                message: event.message
             }),
         })
             .then((response) => dispatch({
@@ -36,7 +36,7 @@ export const updateEvent = (eventUpdate) => async dispatch => {
             method: 'PUT',
             body: JSON.stringify({
                 eventName: eventUpdate.eventName,
-                massage: eventUpdate.massage
+                message: eventUpdate.message
             }),
         })
             .then(response => dispatch({

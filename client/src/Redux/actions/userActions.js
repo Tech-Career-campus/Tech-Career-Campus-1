@@ -16,10 +16,11 @@ export const getUser = (loginInfo) => async dispatch => {
             })
                 .then(response => response.json())
                 .then((response) => {
-                    if (!response.result) throw response
+                    console.log(response.data);
+                    if (!response.data) throw response
                     return response
                 })
-                .then((response) => localStorage.setItem("jwtToken", response.result))
+                .then((response) => localStorage.setItem("jwtToken", response.data))
                 .catch(err => { throw err })
         }
 
@@ -48,7 +49,7 @@ export const updateUser = (updateData) => async dispatch => {
         method: 'PUT',
         body: JSON.stringify(updateData)
     })
-        .then((response) => localStorage.setItem("jwtToken", response.result))
+        .then((response) => localStorage.setItem("jwtToken", response.data))
 
     const token = localStorage.getItem("jwtToken")
     const decoded = jwt_decode(token);

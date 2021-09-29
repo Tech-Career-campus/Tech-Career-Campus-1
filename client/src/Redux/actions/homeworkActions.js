@@ -3,11 +3,12 @@ import { CREATE_HOMEWORK, DELETE_HOMEWORK, EDIT_HOMEWORK, GET_HOMEWORK } from ".
 
 export const getHomework = (id) => async dispatch => {
     await fetcher(`http://localhost:8080/api/homework/${id}`)
+        .then((response)=> console.log(response))
         .then(response => dispatch({
             type: GET_HOMEWORK,
             payload: response.data
         }))
-        .catch(error => console.log(error))
+        .catch(error => console.log(error.message))
 }
 
 export const createHomework = (newHomework) => async dispatch => {
