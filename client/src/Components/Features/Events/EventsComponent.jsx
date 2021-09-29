@@ -19,7 +19,7 @@ const Events = () => {
     const [eventUpdate, setEventUpdate] = useState({
         eventId: "",
         eventName: "",
-        massage: "",
+        message: "",
     });
 
     useEffect(() => {

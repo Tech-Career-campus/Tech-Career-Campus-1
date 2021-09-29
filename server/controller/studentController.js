@@ -10,7 +10,13 @@ const getStudent = async (req, res) => {
     isEmptyId(req.params.id);
     await StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      nullError(result, res);
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "get Student success!",
+          data: result
+        });
     });
   } catch (err) {
     res
@@ -179,6 +185,7 @@ const updateStudent = async (req, res) => {
         result.profileImg = profilePic;
         result.save();
         delete result.password
+
         const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
         res
           .status(200)

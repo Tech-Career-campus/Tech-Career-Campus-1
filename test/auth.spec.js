@@ -1,6 +1,6 @@
-const assert = require('chai').assert;
-const expect = require('chai').expect;
-const {authUser,authRole} = require('../server/controller/authentication/auth')
+// const assert = require('chai').assert;
+// const expect = require('chai').expect;
+// const {authUser,authRole} = require('../server/controller/authentication/auth')
 
 // describe('the authRole() Checks if your role allows you access to a particular action',()=>{
 //    it('authRole() mast by a function', ()=>{
@@ -29,7 +29,6 @@ const {authUser,authRole} = require('../server/controller/authentication/auth')
 //       expect(result);
 //    })
 // });
-
 
 // describe('the authRole() Checks if your role allows you access to a particular action',()=>{
 //    it('should get property of role', ()=>{
