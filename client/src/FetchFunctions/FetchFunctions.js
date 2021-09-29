@@ -31,8 +31,9 @@ export const fetchSyllabus = () => {
 }
 
 export const fetchDailySchedule = () => {
-    return fetch('http://localhost:8080/api/schedule')
+    return fetch('http://localhost:8080/api/classSchedule',{ headers: defaultHeaders})
    .then((res) =>  res.json())
    .then((response) => response)
    .catch(err => console.log(err));
 };
+
