@@ -11,14 +11,14 @@ const Homework = () => {
   const course = useSelector((state) => state.course);
   const dispatch = useDispatch();
   const homework = useSelector((state) => state.homework);
-console.log(homework)
+
   const [isCreateHomework, setIsCreateHomework] = useState(false);
   const [isEditHomework, setIsEditHomework] = useState(false);
   const [updateHomework, setUpdateHomework] = useState();
 
   const [newHomework, setNewHomework] = useState({
     id: "",
-    subject: "", 
+    subject: "",
     description: "",
   });
 
@@ -74,17 +74,6 @@ console.log(homework)
           </div>
         ))}
       </div>
-      {/* {
-        <div>
-          {homework?.map((item)=>{
-            return <div>
-              <h3>{item.subject}</h3>
-              <h3>{item.description}</h3>
-            </div>
-          })
-      }
-      </div>
-     } */}
     </>
   );
 };
