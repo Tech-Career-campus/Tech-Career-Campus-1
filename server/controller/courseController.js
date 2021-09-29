@@ -212,7 +212,7 @@ const updateSubject = async (req, res) => {
 
 };
 
-const searchCorseAutocomplete = async (req, res) => {
+const searchCourseAutocomplete = async (req, res) => {
   try {
       let result = await collection.aggregate([     
               {
@@ -285,7 +285,7 @@ const deleteCourseById = async (req, res) => {
       .status(200)
       .json({
         success: true,
-         message: "delete by id cors success!"
+         message: "delete by id course success!"
         });
 
     });
@@ -294,7 +294,7 @@ const deleteCourseById = async (req, res) => {
       .status(500)
       .json({
         success: false,
-        message: "update course field",
+        message: "update by id course field",
         error: err.message,
   })
 }
@@ -307,7 +307,7 @@ module.exports = {
   addSubSubject,
   updateSubSubject,
   updateSubject,
-  searchCorseAutocomplete,
+  searchCourseAutocomplete,
   getStudentsByCourse,
   deleteCourseById,
 }

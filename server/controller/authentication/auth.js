@@ -2,7 +2,10 @@ const authUser = (req, res, next) => {
   if (req.body == null) {
     res
       .status(404)
-      .json({ success: false, massage: "you have to login or register" });
+      .json({
+        success: false,
+        massage: "you have to login or register" 
+      });
   }
   next();
 };
