@@ -212,7 +212,7 @@ const updateSubject = async (req, res) => {
 
 };
 
-const searchCorseAutocomplete = async (req, res) => {
+const searchCourseAutocomplete = async (req, res) => {
   try {
       let result = await collection.aggregate([     
               {
@@ -276,16 +276,16 @@ const getStudentsByCourse = async (req, res) => {
   }
 };
 
-const deleteCorsById = async (req, res) => {
+const deleteCourseById = async (req, res) => {
   try {
-    isEmptyId(req.body.id);
-      await CourseModel.findByIdAndDelete(req.body.id , (err, result) =>{
+    isEmptyId(req.params.id);
+      await CourseModel.findByIdAndDelete(req.params.id , (err, result) =>{
       if (err) throw err;
       res
       .status(200)
       .json({
         success: true,
-         message: "delete by id cors success!"
+         message: "delete by id course success!"
         });
 
     });
@@ -294,7 +294,7 @@ const deleteCorsById = async (req, res) => {
       .status(500)
       .json({
         success: false,
-        message: "update course field",
+        message: "update by id course field",
         error: err.message,
   })
 }
@@ -307,7 +307,7 @@ module.exports = {
   addSubSubject,
   updateSubSubject,
   updateSubject,
-  searchCorseAutocomplete,
+  searchCourseAutocomplete,
   getStudentsByCourse,
-  deleteCorsById,
+  deleteCourseById,
 }

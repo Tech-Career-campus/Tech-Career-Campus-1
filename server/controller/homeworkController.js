@@ -28,7 +28,7 @@ const creatNewHomework = async (req, res) => {
     .status(400)
     .json({
       success:false,
-      massage: "delete by id homework filed",
+      message: "delete by id homework filed",
       error: err.message 
     });
   }
@@ -41,7 +41,13 @@ const getHomeworkById = async (req, res) => {
       nullError(result, res);
     });
   } catch (err) {
-    res.status(500).json({ massage: "find homework filed", error: err });
+    res
+    .status(500)
+    .json({
+       success:false,
+       massage: "find homework filed",
+       error: err.message 
+    });
   }
 };
 const updateHomeworkById = async (req, res) => {
@@ -81,7 +87,7 @@ const deleteHomeworkById = async (req, res) => {
         res
         .status(200)
         .json({
-          success:true,
+           success:true,
            massage: "delete by id homework success!",
         });
       }
@@ -89,7 +95,11 @@ const deleteHomeworkById = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ massage: "delete by id homework filed", error: err.message });
+      .json({
+         success:false,
+         massage: "delete by id homework filed",
+         error: err.message 
+      });
   }
 };
 
