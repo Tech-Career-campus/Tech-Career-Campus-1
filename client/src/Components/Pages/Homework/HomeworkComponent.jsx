@@ -18,7 +18,7 @@ console.log(homework)
 
   const [newHomework, setNewHomework] = useState({
     id: "",
-    subject: "",
+    subject: "", 
     description: "",
   });
 
@@ -74,7 +74,7 @@ console.log(homework)
           </div>
         ))}
       </div>
-      {
+      {/* {
         <div>
           {homework?.map((item)=>{
             return <div>
@@ -84,7 +84,7 @@ console.log(homework)
           })
       }
       </div>
-     }
+     } */}
     </>
   );
 };
