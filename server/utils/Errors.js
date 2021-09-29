@@ -45,8 +45,35 @@ const nullVariable = (data) => {
 };
 
 
+const nullErrorForStudentGrades = (result, res) => {
+  try {
+    if (!result) {
+      throw new Error(
+        "the result equal to null or undefined Please check that you are sending the required details in the correct format"
+      );
+    } else {
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "success",
+          data: result.tests
+        })
+    }
+  } catch (err) {
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: "failing",
+        error: err.message
+      })
+  }
+};
+
 module.exports = {
   nullError,
   isEmptyId,
-  nullVariable
+  nullVariable,
+  nullErrorForStudentGrades
 };

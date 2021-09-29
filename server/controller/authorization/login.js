@@ -14,7 +14,7 @@ const login = async (req, res) => {
         .json({
           success: false,
           message: "there is error with email or password.",
-          errors: errors
+          error: errors
         });
     };
 
@@ -69,7 +69,7 @@ const login = async (req, res) => {
         .status(400)
         .json({
           message: "there is error with email or password.",
-          errors: errors
+          error: errors
         })
     };
 
