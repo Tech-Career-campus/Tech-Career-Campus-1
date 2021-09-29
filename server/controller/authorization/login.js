@@ -27,6 +27,7 @@ const login = async (req, res) => {
           .json({
             success: false,
             message: "email not found",
+            errors: { email: "email not fond" },
           });
       };
 
@@ -37,6 +38,7 @@ const login = async (req, res) => {
           .json({
             success: false,
             message: "wrong password",
+            errors: { password: "wrong password" } ,
           });
       };
 
@@ -79,7 +81,8 @@ const login = async (req, res) => {
           .status(400)
           .json({
             success: false,
-            message: "email not fond"
+            message: "email not fond",
+            errors: { email: "email not fond" },
           });
       };
 
@@ -90,7 +93,8 @@ const login = async (req, res) => {
           .status(400)
           .json({
             success: false,
-            message: "wrong password"
+            message: "wrong password",
+            errors: { password: "wrong password" } ,
           });
       };
 
