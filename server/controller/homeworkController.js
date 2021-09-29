@@ -1,6 +1,6 @@
 const HomeworkModel = require("../models/homeworkModel");
 const CourseModel = require("../models/courseModel");
-const { nullError, isEmptyId } = require("../utils/Errors");
+const { nullError, isEmptyId,nullVariable } = require("../utils/Errors");
 
 const creatNewHomework = async (req, res) => {
   try {
@@ -78,6 +78,7 @@ const deleteHomeworkById = async (req, res) => {
     const homework = await HomeworkModel.findByIdAndDelete(req.params.id, (err, result) => {
       if (err) throw err;
     });
+    nullVariable(homework)
     await CourseModel.findByIdAndUpdate(
       req.body.id,
       { $pull: { homeworks: homework._id } },
