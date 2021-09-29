@@ -11,30 +11,28 @@ const options = {
   useCreateIndex: true,
 };
 
-if (process.env.TEST_ENV === "test") {
-console.log(dbConnection_test);
- mongoose
-  .connect(dbConnection_test, options)
-  .then(() => {
-    console.log(chalk.green("mongoDB connected"));
-  })
-  .catch((err) => {
-    console.log(chalk.red("Connection error", err.message));
-  });
-
-}else{
-  console.log(dbConnection);
-  mongoose
-  .connect(dbConnection, options)
-  .then(() => {
-    console.log(chalk.green("mongoDB connected"));
-  })
-  .catch((err) => {
-    console.log(chalk.red("Connection error", err.message));
-  });
-}
-
-
+  if (process.env.TEST_ENV === "test") {
+    console.log(dbConnection_test);
+     mongoose
+      .connect(dbConnection_test, options)
+      .then(() => {
+        console.log(chalk.green("mongoDB connected"));
+      })
+      .catch((err) => {
+        console.log(chalk.red("Connection error", err.message));
+      });
+    
+    }else{
+      console.log(dbConnection);
+      mongoose
+      .connect(dbConnection, options)
+      .then(() => {
+        console.log(chalk.green("mongoDB connected"));
+      })
+      .catch((err) => {
+        console.log(chalk.red("Connection error", err.message));
+      });
+    }
 
 const db = mongoose.connection;
 module.exports = db;

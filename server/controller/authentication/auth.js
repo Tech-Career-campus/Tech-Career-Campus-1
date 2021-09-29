@@ -1,10 +1,10 @@
 const authUser = (req, res, next) => {
   if (req.body == null) {
     res
-      .status(403)
+      .status(404)
       .json({
         success: false,
-        message: "you have to login or register"
+        massage: "you have to login or register" 
       });
   }
   next();
@@ -18,7 +18,6 @@ const authRole = (Role) => {
         .json({
           success: false,
           message: "you don't have access",
-          error: error
         });
     } else {
       next();

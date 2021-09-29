@@ -31,7 +31,6 @@ const login = async (req, res) => {
       };
 
       const isPasswordCorrect = await bcrypt.compare(password, staff.password);
-
       if (!isPasswordCorrect) {
         return res
           .status(400)
@@ -42,7 +41,6 @@ const login = async (req, res) => {
       };
 
       delete staff.password
-
       const token = jwt.sign(staff.toJSON(), SECRET_KEY, { expiresIn: "1d" });
       res
         .status(200)
@@ -57,7 +55,7 @@ const login = async (req, res) => {
         .status(500)
         .json({
           message: "something went wrong",
-          error: err
+          error: err.message
         });
     }
   }
@@ -76,7 +74,6 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     try {
       const student = await StudentModel.findOne({ email });
-
       if (!student) {
         return res
           .status(400)
@@ -98,7 +95,6 @@ const login = async (req, res) => {
       };
 
       delete student.password
-
       const token = jwt.sign(student.toJSON(), SECRET_KEY, { expiresIn: "1d" });
       res
         .status(200)
@@ -112,7 +108,7 @@ const login = async (req, res) => {
         .status(500)
         .json({
           message: "something went wrong",
-          error: err
+          error: err.message
         });
     }
   }

@@ -2,6 +2,8 @@ const StaffModel = require("../models/staffModel");
 const { nullError, isEmptyId } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
+const path = require('path');
+const fs = require('fs');
 
 const getAllStaff = async (req, res) => {
   try {
@@ -22,7 +24,7 @@ const getAllStaff = async (req, res) => {
 
 const getStaffById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await StaffModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       nullError(result, res);
@@ -40,14 +42,14 @@ const getStaffById = async (req, res) => {
 
 const deleteStaffById = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.body.id);
     await StaffModel.findByIdAndDelete(req.body.id, (err, result) => {
       if (err) throw err;
       res
         .status(200)
         .json({
           success: true,
-          message: "delete by id student success!"
+          message: "delete by id staff success!"
         });
     }
     );
@@ -56,7 +58,7 @@ const deleteStaffById = async (req, res) => {
       .status(500)
       .json({
         success: false,
-        message: "delete by id student filed",
+        message: "delete by id staff filed",
         data: err.message
       });
   }
@@ -64,17 +66,27 @@ const deleteStaffById = async (req, res) => {
 
 const updateStaffById = async (req, res) => {
   try {
-    isEmptyId(req);
-    if (req.file) {
-      profileImg = req.file.filename;
-      console.log(profileImg);
-    }
+    isEmptyId(req.params.id);
      await StaffModel.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body, profileImg},
+      // { $set: req.body, profileImg},
+      { $set: req.body},
       { new: true },
       (err, result) => {
         if (err) throw err;
+        let profilePic;
+        if (req.file) {
+          profilePic = req.file.path;
+          try {
+            fs.unlinkSync("" + result.profileImg);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          profilePic = result.profileImg;
+        }
+        result.profileImg = profilePic;
+        result.save();
         delete result.password
         const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
         res
