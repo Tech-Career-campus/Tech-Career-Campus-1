@@ -8,7 +8,7 @@ const upload = require("../middleware/upload");
 
 router.get("/", staffController.getAllStaff);
 router.get("/getStaffById/:id", staffController.getStaffById);
-router.delete("/", authRole(ADMIN), staffController.deleteStaffById);
+router.delete("/",authRole(ADMIN), staffController.deleteStaffById);
 router.put("/:id", authRole(ADMIN), upload.single('profileImg'), staffController.updateStaffById);
 router.put('/changePassword',checkPassword,changePassword);
 module.exports = router;

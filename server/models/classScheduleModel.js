@@ -5,28 +5,27 @@ const scheduleSchema = new Schema(
   {
     days: {
       type: [
-              {
-                hours: [
-                  {
-                    hour: {
-                      type: String,
-                      required: true
-                    },                           
-                    className: {
-                      type: String,
-                      required: true
-                    },
-
-                    isTaken: {
-                      type: Boolean,
-                      required: true,
-                      default: false
-                    },
-                  }
-                ]
-              }
-            ],
-          },
+        {
+          hours: [
+            {
+              hour: {
+                type: String,
+                required: true
+              },
+              className: {
+                type: String,
+                required: true
+              },
+              isTaken: {
+                type: Boolean,
+                required: true,
+                default: false
+              },
+            }
+          ],
+        }
+      ],
+    },
   },
   { timestamps: true }
 );

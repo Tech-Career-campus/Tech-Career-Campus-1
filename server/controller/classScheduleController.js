@@ -27,10 +27,10 @@ const postClasses = async (req, res) => {
     });
   } catch (err) {
     res
-    .status(500)
+    .status(400)
     .json({
         success: false,
-        message: "failing",
+        message: "post failed",
         error: err.message
     })
   }
