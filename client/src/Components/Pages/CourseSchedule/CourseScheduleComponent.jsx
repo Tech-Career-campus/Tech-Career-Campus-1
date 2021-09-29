@@ -10,7 +10,7 @@ const CourseSchedule = ()=>{
         src="https://calendar.google.com/calendar/embed?src=104sovb0e3cdrk1rplkap2b91g%40group.calendar.google.com&ctz=Asia%2FJerusalem"
         style={{ border: " 0" }}
         fontSize="16"
-        width="800"
+        width="1000"
         height="600"
         frameBorder="1"
         scrolling="yes"
