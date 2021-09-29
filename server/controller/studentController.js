@@ -7,7 +7,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 const getStudent = async (req, res) => {
   try {
-    isEmptyId(req);
+    isEmptyId(req.params.id);
     await StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       res
