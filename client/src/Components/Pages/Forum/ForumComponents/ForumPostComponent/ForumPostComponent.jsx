@@ -49,7 +49,7 @@ const ForumPostComponent = ({ post, setCurrentId }) => {
         {user?.email === post?.email && (
           <button
             size="small"
-            className="btn post-btn"
+            className="btn"
             onClick={() => dispatch(deletePost(post._id))}
           >
             <DeleteIcon fontSize="small" />
