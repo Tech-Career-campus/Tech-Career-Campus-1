@@ -5,7 +5,7 @@ import { hebrewVariables } from "../../../utils/hebrewVariables";
 import PageHeader from "../../Features/PageHeader/PageHeaderComponent";
 import HomeworkFrom from "../../Features/HomeworkForm/HomeworkFormComponent";
 import HomeworkCard from "../../Features/HomeworkCard/HomeworkCardComponent";
-
+import './homework.css'
 const Homework = () => {
   const { user } = useSelector((state) => state.user);
   const course = useSelector((state) => state.course);

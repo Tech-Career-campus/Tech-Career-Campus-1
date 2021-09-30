@@ -35,8 +35,8 @@ const ForumPostComponents = ({post}) => {
           className="chat-window-message"
           name="chat-window-message"
           type="text"
-          autocomplete="off"
-          autofocus
+          autoComplete="off"
+          autoFocus
           placeholder='הקלד כאן...'
           value={comment}
           onChange={(e)=> setComment(e.target.value)}
