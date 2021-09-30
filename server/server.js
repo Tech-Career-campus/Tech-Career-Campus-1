@@ -37,13 +37,6 @@ app.use("/api/event", isToken, routeEvent);
 app.use("/api/classSchedule", isToken, classScheduleRouting);
 app.use("/api/homework",isToken, routeHomework);
 
-if (process.env.NODE_ENV === "production") {
-  // Serve any static files
-  app.use(express.static(path.join(__dirname, "../client/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-  });
-}
 
 const server = app.listen(PORT, () => {
   console.log(
@@ -54,3 +47,11 @@ const server = app.listen(PORT, () => {
 });
 
 module.exports = server;
+
+if (process.env.NODE_ENV === "production") {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+  });
+}
