@@ -88,17 +88,16 @@
   height: 50px;
   width: 250px;
 }
-.navbar-log-user .navbar-user {
+.navbar-user {
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
   width: 130px;
-  height: 50px;
   /* border: 1px solid black; */
 }
+
 .navbar-user img {
   width: 45px;
-  height: 45px;
   border-radius: 50px;
 }
 .navbar-user .btn {
@@ -107,12 +106,12 @@
 
 .navbar-logo {
   /* border: 1px solid black; */
-  height: inherit;
+  width: 150px;
+  height: fit-content;
 }
 
 .navbar-logo img {
-  width: 150px;
-  height: 65px;
+  width: 100%;
   border-radius: 0px 0px 14px 14px;
 }
 
