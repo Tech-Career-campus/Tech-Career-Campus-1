@@ -25,7 +25,7 @@ const options = {
     }else{
       console.log(dbConnection);
       mongoose
-      .connect(dbConnection_test, options)
+      .connect(dbConnection, options)
       .then(() => {
         console.log(chalk.green("mongoDB connected"));
       })
