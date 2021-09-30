@@ -27,10 +27,9 @@ const ForumPostComponents = ({post}) => {
        {c.split(":")[1]}
         </li>
       ))}
-      <li ref={commentRef}></li>
+      <li style={{height:'0' ,backgroundColor:'transparent',overflow:'hidden'}} ref={commentRef}/>
       </ul>
       <div className="chat-window">
-       
         <input
           className="chat-window-message"
           name="chat-window-message"

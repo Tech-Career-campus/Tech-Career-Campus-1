@@ -6,12 +6,11 @@
     width: 10px;
 }
 .chat-container ::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #17294a;
+    background-color: rgb(97, 148, 231);
 }
 .chat-container ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(30, 24, 110, 0.2);
+    background-color:#2954a3 ;
 }
 
 .chat-thread {
@@ -30,7 +29,7 @@
     margin: 0 0 20px 0;
     font: 16px/20px 'Noto Sans', sans-serif;
     border-radius: 10px;
-    background-color: rgba(28, 255, 255, 0.2);
+    background-color: rgb(150, 253, 253);
 }
 /* Chat - Avatar */
 .chat-thread li:before {
@@ -48,7 +47,7 @@
     content: '';
     width: 0;
     height: 0;
-    border-top: 15px solid rgba(5, 255, 255, 0.2);
+    border-top: 15px solid rgb(150, 253, 253);;
 }
 .chat-thread li {
     animation: show-chat-odd 0.15s 1 ease-in;
@@ -60,7 +59,7 @@
 }
 .chat-thread li:before {
     right: -80px;
-    background-color: rgb(0, 89, 255);
+    background-color: rgb(150, 253, 253);;
 }
 .chat-thread li:after {
     border-right: 15px solid transparent;
