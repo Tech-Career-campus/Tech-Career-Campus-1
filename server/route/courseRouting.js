@@ -15,6 +15,6 @@ router.post('/addSubSubject', authRole(ADMIN), courseController.addSubSubject);
 router.put('/updateSubSubject', authRole(ADMIN), courseController.updateSubSubject);
 router.put('/updateSubject', authRole(ADMIN), courseController.updateSubject);
 router.get('/students/:id',courseController.getStudentsByCourse);
-router.delete('/deleteCourseById:id', authRole(ADMIN), courseController.deleteCourseById);
+router.delete('/deleteCourseById/:id', authRole(ADMIN), courseController.deleteCourseById);
 
 module.exports = router;
