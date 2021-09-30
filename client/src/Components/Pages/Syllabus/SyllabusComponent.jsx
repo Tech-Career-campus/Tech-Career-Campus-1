@@ -17,6 +17,7 @@ import SchoolIcon from "@material-ui/icons/School";
 
 
 const SyllabusComponent = () => {
+  const { user } = useSelector(state => state.user);
   const syllabus = useSelector((state) => state.syllabus);
   const course = useSelector((state) => state.course);
   const [isClicked, setIsClicked] = useState(false);
@@ -79,7 +80,9 @@ const SyllabusComponent = () => {
                     <Paper elevation={6} style={{ backgroundColor: "#f1f1f1" }}>
                       <Typography variant="h6" component="h1">
                         <h2>{courseItem.nameSubject}</h2>
-
+                        {
+                          user.role === "Staff" ?
+                        
                         <button
                           className="btn"
                           onClick={(e) => {
@@ -87,7 +90,7 @@ const SyllabusComponent = () => {
                           }}
                         >
                           {hebrewVariables.edit}
-                        </button>
+                        </button> : "" }
                         {isClicked ? (
                           <div>
                             <input
