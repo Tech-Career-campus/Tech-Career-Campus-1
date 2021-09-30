@@ -19,6 +19,17 @@ const getAllClasses = async (req, res) => {
   } 
 };
 
+const getClassById = async (req,res) => {
+  try {
+      await ScheduleModel.findByIdAndUpdate(req.body._id, {$set:{_id:req.body._id}}, (err, result)=>{
+          if(err) throw err;
+          res.status(200).json({ massage: "get class by id success", data: result })
+      })
+  } catch (error) {
+      res.status(500).json({ massage: "get class by id failed", data: result })
+  }
+}
+
 const postClasses = async (req, res) => {
   try {
     await ScheduleModel.insertMany([req.body], (err, result) => {
@@ -119,4 +130,5 @@ module.exports = {
   postClasses,
   deleteClasses,
   updateClassesName,
+  getClassById
 };
