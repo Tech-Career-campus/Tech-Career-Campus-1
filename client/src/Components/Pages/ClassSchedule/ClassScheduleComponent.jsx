@@ -52,208 +52,204 @@ import { useTable } from 'react-table';
 
 
 
-const ClassScheduleComponent = () => {
-  const [schedule, setScheduled] = useState({})
-  const [isTaken, setIsTaken] = useState(false);
-  const [className, setClassName] = useState("פיתוח");
-  const [hourId, SetHourId] = useState("");
-  const [dayId, SetDayId] = useState("");
+// const ClassScheduleComponent = () => {
+//   const [schedule, setScheduled] = useState({})
+//   const [isTaken, setIsTaken] = useState(false);
+//   const [className, setClassName] = useState("פיתוח");
+//   const [hourId, SetHourId] = useState("");
+//   const [dayId, SetDayId] = useState("");
 
-  useEffect(() => {
-    fetchDailySchedule().then((response) => setScheduled(response));
-  }, []);
-  console.log(schedule)
+//   useEffect(() => {
+//     fetchDailySchedule().then((response) => setScheduled(response));
+//   }, []);
+//   console.log(schedule)
 
 
-  //    const updateSchedule = (newSchedule) => async dispatch => {
-  //     await fetcher("http://localhost:8080/api/classSchedule", {
-  //         method: 'POST',
-  //         headers:{
-  //             "Accept":"apllication/json",
-  //             "Content-Type":"application/json" 
-  //         },
-  //         body: JSON.stringify({ 
+//   //    const updateSchedule = (newSchedule) => async dispatch => {
+//   //     await fetcher("http://localhost:8080/api/classSchedule", {
+//   //         method: 'POST',
+//   //         headers:{
+//   //             "Accept":"apllication/json",
+//   //             "Content-Type":"application/json" 
+//   //         },
+//   //         body: JSON.stringify({ 
 
-  //         })
-  //     })
-  //         // .then(response => dispatch({
-  //         //     type: UPDATE_SCHEDULE,
-  //         //     payload: response.data
-  //         // }))
-  //         // .catch(error => console.log(error))
-  // }
+//   //         })
+//   //     })
+//   //         // .then(response => dispatch({
+//   //         //     type: UPDATE_SCHEDULE,
+//   //         //     payload: response.data
+//   //         // }))
+//   //         // .catch(error => console.log(error))
+//   // }
 
-  const select = className
+//   const select = className
 
-  const data = useMemo(
-    () => [
-      {
-        col1: '8-10',
-        col2: isTaken,
-        col3: hourId,
-      },
-      {
-        col1: '10-12',
-        col2: isTaken,
-        col3: hourId,
-      },
-      {
-        col1: '12-14',
-        col2: isTaken,
-        col3: hourId,
+//   const data = useMemo(
+//     () => [
+//       {
+//         col1: '8-10',
+//         col2: isTaken,
+//         col3: hourId,
+//       },
+//       {
+//         col1: '10-12',
+//         col2: isTaken,
+//         col3: hourId,
+//       },
+//       {
+//         col1: '12-14',
+//         col2: isTaken,
+//         col3: hourId,
 
-      },
-      {
-        col1: '14-16',
-        col2: isTaken,
-        col3: hourId,
+//       },
+//       {
+//         col1: '14-16',
+//         col2: isTaken,
+//         col3: hourId,
 
-      },
-      {
-        col1: '16-18',
-        col2: isTaken,
-        col3: hourId,
+//       },
+//       {
+//         col1: '16-18',
+//         col2: isTaken,
+//         col3: hourId,
 
-      },
-      {
-        col1: '18-20',
-        col2: isTaken,
-        col3: hourId,
+//       },
+//       {
+//         col1: '18-20',
+//         col2: isTaken,
+//         col3: hourId,
 
-      },
-      {
-        col1: '20-22',
-        col2: isTaken,
-        col3: hourId,
+//       },
+//       {
+//         col1: '20-22',
+//         col2: isTaken,
+//         col3: hourId,
 
-      },
-    ],
-    []
-  )
+//       },
+//     ],
+//     []
+//   )
 
-  const columns = useMemo(()=>{
-    const x=()=>(change)=>{
-      schedule[0].map((day,i)=> i === change? !day:day)
-    }
-    () => [
-      {
-        Header: 'שעות',
-        accessor: 'col1', // accessor is the "key" in the data
-        id: dayId
-      },
-      {
-        Header: 'ראשון',
-        // accessor: 'col1', // accessor is the "key" in the data
-        id: dayId,
-        Cell: ({row})=>(
-          setIsTaken(row[i])
-        )
-      },
-      {
-        Header: 'שני',
-        // accessor: 'col2',
-        id: dayId
+//   const columns = useMemo(
+//     () => [
+//       {
+//         Header: 'שעות',
+//         accessor: 'col1', // accessor is the "key" in the data
+//         id: dayId
+//       },
+//       {
+//         Header: 'ראשון',
+//         // accessor: 'col1', // accessor is the "key" in the data
+//         id: dayId,
+   
+//       },
+//       {
+//         Header: 'שני',
+//         // accessor: 'col2',
+//         id: dayId
 
-      },
-      {
-        Header: 'שלישי',
-        // accessor: 'col3', // accessor is the "key" in the data
-        id: dayId
+//       },
+//       {
+//         Header: 'שלישי',
+//         // accessor: 'col3', // accessor is the "key" in the data
+//         id: dayId
 
-      },
-      {
-        Header: 'רביעי',
-        // accessor: 'col1', // accessor is the "key" in the data
-        id: dayId
+//       },
+//       {
+//         Header: 'רביעי',
+//         // accessor: 'col1', // accessor is the "key" in the data
+//         id: dayId
 
-      },
-      {
-        Header: 'חמישי',
-        // accessor: 'col2', // accessor is the "key" in the data
-        id: dayId
-      },
-    ]
-  },
-    [schedule]
-  )
+//       },
+//       {
+//         Header: 'חמישי',
+//         // accessor: 'col2', // accessor is the "key" in the data
+//         id: dayId
+//       },
+//     ]
+//     [schedule]
+//   )
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data })
+//   const {
+//     getTableProps,
+//     getTableBodyProps,
+//     headerGroups,
+//     rows,
+//     prepareRow,
+//   } = useTable({ columns, data })
 
-  const onOrOff = (value) => {
-    console.log(columns);
-    setIsTaken(
-      isTaken ? false : true
-    )
-  }
-  return (
+//   console.log(isTaken)
+//   const onOrOff = (value) => {
+//     console.log(columns);
+//     setIsTaken(
+//       isTaken ? false : true
+//        )
 
-    <div>
-      {
-        schedule[0]?.data?.map((day, index) => {
-          return <div>
-            {day[index].map((hour, index) => {
-              return <p>{hour[index]}</p>
-            })}
+//   }
+//   return (
 
-          </div>
-        })
-      }
-      <table {...getTableProps()} style={{ border: 'solid 1px black' }}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()} >
-              {headerGroup.headers.map(column => (
-                <th
-                  {...column.getHeaderProps()}
-                  style={{
-                    borderBottom: 'solid 3px blue',
-                    color: 'black',
-                  }}
-                >
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row)
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  if (cell.index == 0) { return <td></td> }
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      style={{
-                        padding: '20px',
-                        border: 'solid 1px gray',
-                      }}
-                    >
+//     <div>
+//       {
+//         schedule[0]?.data?.map((day, index) => {
+//           return <div>
+//             {day[index].map((hour, index) => {
+//               return <p>{hour[index]}</p>
+//             })}
 
-                      <button onClick={onOrOff} style={{ width: '30px', height: '20px', backgroundColor: isTaken ? "red" : "green", display: { ...columns[0].Header === 'שעות' ? 'none' : 'block' } }} />
+//           </div>
+//         })
+//       }
+//       <table {...getTableProps()} style={{ border: 'solid 1px black' }}>
+//         <thead>
+//           {headerGroups.map(headerGroup => (
+//             <tr {...headerGroup.getHeaderGroupProps()} >
+//               {headerGroup.headers.map(column => (
+//                 <th
+//                   {...column.getHeaderProps()}
+//                   style={{
+//                     borderBottom: 'solid 3px blue',
+//                     color: 'black',
+//                   }}
+//                 >
+//                   {column.render('Header')}
+//                 </th>
+//               ))}
+//             </tr>
+//           ))}
+//         </thead>
+//         <tbody {...getTableBodyProps()}>
+//           {rows.map((row) => {
+//             prepareRow(row)
+//             return (
+//               <tr {...row.getRowProps()}>
+//                 {row.cells.map(cell => {
+//                   if (cell.index == 0) { return <td></td> }
+//                   return (
+//                     <td
+//                       {...cell.getCellProps()}
+//                       style={{
+//                         padding: '20px',
+//                         border: 'solid 1px gray',
+//                       }}
+//                     >
 
-                      {cell.render('Cell')}
-                    </td>
-                  )
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table >
-    </div >
-  );
+//                       <button onClick={onOrOff} style={{ width: '30px', height: '20px', backgroundColor: isTaken ? "red" : "green", display: { ...columns[0].Header === 'שעות' ? 'none' : 'block' } }} />
 
-}
-export default ClassScheduleComponent;
+//                       {cell.render('Cell')}
+//                     </td>
+//                   )
+//                 })}
+//               </tr>
+//             )
+//           })}
+//         </tbody>
+//       </table >
+//     </div >
+//   );
+
+// }
+// export default ClassScheduleComponent;
 
 
 
