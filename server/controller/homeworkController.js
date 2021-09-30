@@ -36,7 +36,7 @@ const creatNewHomework = async (req, res) => {
 const getHomeworkById = async (req, res) => {
   try {
     isEmptyId(req.params.id);
-    await HomeworkModel.findOne({ courseId: req.params.id }, (err, result) => {
+    await HomeworkModel.find({ courseId: req.params.id }, (err, result) => {
       if (err) throw err;
       nullError(result, res);
     });
