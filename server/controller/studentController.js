@@ -11,13 +11,6 @@ const getStudent = async (req, res) => {
     await StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
       nullError(result, res);
-      // res
-      //   .status(200)
-      //   .json({
-      //     success: true,
-      //     message: "get Student success!",
-      //     data: result
-      //   });
     });
   } catch (err) {
     res
@@ -99,13 +92,6 @@ const updateStudentTestById = async (req, res) => {
       (err, result) => {
         if (err) throw err;
         nullErrorForStudentGrades(result,res)
-        // res
-        //   .status(200)
-        //   .json({
-        //     success: true,
-        //     message: "updating a student test was a success",
-        //     data: result.tests,
-        //   });
       }
     );
   } catch (err) {
@@ -121,8 +107,6 @@ const updateStudentTestById = async (req, res) => {
 
 const deleteStudentTestById = async (req, res) => {
   try {
-    isEmptyId(req.body.id);
-    isEmptyId(req.params._id);
     await StudentModel.findByIdAndUpdate(
       req.params._id,
       { $pull: { tests: { _id: req.body.id } } },
@@ -130,13 +114,6 @@ const deleteStudentTestById = async (req, res) => {
       (err, result) => {
         if (err) throw err;
         nullErrorForStudentGrades(result,res)
-        // res
-        //   .status(200)
-        //   .json({
-        //     success: true,
-        //     message: "deleting a student test success",
-        //     data: result.tests,
-        //   });
       }
     );
   } catch (err) {
@@ -153,8 +130,7 @@ const deleteStudentTestById = async (req, res) => {
 const updateStudent = async (req, res) => { 
   try {
     isEmptyId(req.params.id);
-    const field = await req.body.field;
-    nullVariable(field)
+    const field = req.body.field;
     if (field === "tests" ) {
       throw new Error("you cant update arrays only static fields");
     }
@@ -181,7 +157,6 @@ const updateStudent = async (req, res) => {
         result.profileImg = profilePic;
         result.save();
         delete result.password
-
         const token = jwt.sign(result.toJSON(), SECRET_KEY, { expiresIn: "1d" });
         res
           .status(200)
@@ -213,16 +188,17 @@ const deleteStudent = async (req, res) => {
     });
     nullVariable(student);
     await CourseModel.findByIdAndUpdate(
-      req.body.id,
+      req.body.courseId,
       { $pull: { students: student._id } },
       (err, result) => {
         if (err) throw err;
-        student.remove({});
+        student.remove();
         res
           .status(200)
           .json({
             success: true,
-            message: "delete by id student success!"
+            message: "delete by id student success!",
+            data:student
           });
       }
     );

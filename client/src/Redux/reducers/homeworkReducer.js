@@ -7,7 +7,7 @@ function homeworkReducer(homework = [], action) {
         case CREATE_HOMEWORK:
             return [...homework, action.payload]
         case DELETE_HOMEWORK:
-           return homework.filter(work => work._id !== action.payload._id)
+           return homework.filter(work => work._id !== action.payload)
         case EDIT_HOMEWORK:
             return homework.map(work => work._id !== action.payload._id ? work : action.payload)
 

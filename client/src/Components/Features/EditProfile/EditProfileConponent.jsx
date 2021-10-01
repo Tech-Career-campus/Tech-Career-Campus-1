@@ -6,6 +6,9 @@ import { hebrewVariables } from "../../../utils/hebrewVariables";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import './editProfile.css'
+import {
+  updateStaffPassword,
+} from "../../../Redux/actions/staffAction";
 
 const EditProfile = ({ setOpen,open, user , setEditProfile}) => {
   const [changePassword, setChangePassword] = useState(false);
@@ -62,18 +65,18 @@ const EditProfile = ({ setOpen,open, user , setEditProfile}) => {
         {changePassword ? (
           <>
             <label>{hebrewVariables.currentPassword}</label>
-            <input type="password" />
+            <input name="password" type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}/>
             <label>{hebrewVariables.newPassword}</label>
-            <input value={userUpdate.newPassword} type="password" />
+            <input name="newPassword" value={userUpdate.newPassword} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
             <label>{hebrewVariables.confirmPassword}</label>
-            <input value={userUpdate.confirm} type="password" />
+            <input name="confirm" value={userUpdate.confirm} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}/>
           </>
         ) : (
           ""
         )}
         <button
         className='btn'
-          onClick={() => setChangePassword(changePassword ? false : true)}
+          onClick={() => {setChangePassword(changePassword ? false : true); dispatch(updateStaffPassword({...user , currentPassword:userUpdate.password, newPassword:userUpdate.newPassword }))}}
         >
           {hebrewVariables.updatePassword}
         </button>

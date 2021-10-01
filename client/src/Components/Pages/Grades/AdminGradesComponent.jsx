@@ -12,10 +12,25 @@ const AdminGradesComponent = () => {
   const { students } = useSelector((state) => state.students);
   const course = useSelector((state) => state.course);
   const [openTests, setOpenTests] = useState(false);
+  const [studentMatch, setStudentMatch] = useState([]);
   useEffect(
     () => dispatch(getStudents(course._id)),
     [dispatch, openTests, course]
   );
+
+//   const searchStudent = (e) =>{
+//     let inputValue = e.target.value
+//     let matches = students?.filter((oneStudent)=>{  
+//     const regex = new RegExp(`^${inputValue}`);
+//     console.log(oneStudent)
+//     if(inputValue.length < 0){
+//     return oneStudent.firstName.match(regex);
+//     }
+    
+//  });
+//  setStudentMatch(matches);
+//  console.log(studentMatch)
+// }
 
   return (
     <div className="admin-grade-contaniner">
