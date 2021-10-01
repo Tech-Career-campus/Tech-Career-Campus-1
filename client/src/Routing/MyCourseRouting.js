@@ -12,7 +12,7 @@ import StaffComponents from '../Components/Pages/Staff/StaffComponents';
 import ChooseCourse from '../Components/Features/ChooseCourse/ChooseCourseComponent'
 import { getCourse } from '../Redux/actions/courseActions';
 import { hebrewVariables } from '../utils/hebrewVariables';
-
+import Homework from '../Components/Pages/Homework/HomeworkComponent';
 const MyCourseRouting = () => {
     const { user } = useSelector(state => state.user);
     const course = useSelector((state) => state.course);
@@ -29,18 +29,19 @@ const MyCourseRouting = () => {
             {
                 !course._id ? <ChooseCourse /> :
                     <>
-                        <h2>{course?.name}</h2>
+                        <h2 style={{fontSize:"30px",padding:"10px"}}>{course?.name}</h2>
 
                         {
                             user.role === "Staff" ?
-                                <select onChange={(e) => dispatch(getCourse(e.target.value))}>
-                                    <option></option>                                    {
+                                <select style={{fontSize:"18px"}}  onChange={(e) => dispatch(getCourse(e.target.value))}>
+                                                                   {
                                         courses.map(course => <option key={course._id} value={course._id}>{course.name}</option>
                                         )
                                     }
 
                                 </select> : ""}
                         <Tabs
+                        style={{fontSize:"16px"}}
                             defaultActiveKey="course-schedule"
                             transition={false}
                             id="noanim-tab-example"
@@ -52,38 +53,41 @@ const MyCourseRouting = () => {
                     <DailySchedule />
                 </Tab> */}
 
-                            <Tab eventKey="course-schedule" title={hebrewVariables.CourseSchedule}  >
+                            <Tab style={{fontSize:"16px"}} eventKey="course-schedule" title={hebrewVariables.CourseSchedule}  >
                                 <CourseSchedule />
                             </Tab>
-                            <Tab eventKey="syllabus" title={hebrewVariables.syllabus}>
+                            <Tab style={{fontSize:"16px"}} eventKey="syllabus" title={hebrewVariables.syllabus}>
                                 <Syllabus />
                             </Tab>
                             {
                                 user.role === "Staff" ?
-                                    <Tab eventKey="Student-grades" title={hebrewVariables.studentsGrades} >
+                                    <Tab style={{fontSize:"16px"}} eventKey="Student-grades" title={hebrewVariables.studentsGrades} >
                                         <AdminGradesComponent />
                                     </Tab>
                                     :
-                                    <Tab eventKey="grades" title={hebrewVariables.myGrades} >
+                                    <Tab style={{fontSize:"16px"}} eventKey="grades" title={hebrewVariables.myGrades} >
                                         <StudentGradesComponent />
                                     </Tab>
                             }
                             {
-                                <Tab eventKey="Students" title={hebrewVariables.students} >
+                                <Tab style={{fontSize:"16px"}} eventKey="Students" title={hebrewVariables.students} >
                                     <Students />
                                 </Tab>
                             }
                             {
-                                user.role === "Staff" ? <Tab eventKey="Creat-course" title={hebrewVariables.createCourse} >
+                                user.role === "Staff" ? <Tab style={{fontSize:"16px"}} eventKey="Creat-course" title={hebrewVariables.createCourse} >
                                     <CreatCourse />
                                 </Tab> : ""
                             }
 
                             {
-                                user.role === "Staff" ? <Tab eventKey="staff" title={hebrewVariables.staff} >
+                                user.role === "Staff" ? <Tab style={{fontSize:"16px"}} eventKey="staff" title={hebrewVariables.staff} >
                                     <StaffComponents />
                                 </Tab> : ""
                             }
+                            <Tab eventKey="homework" title={hebrewVariables.homework}>
+                                <Homework />
+                            </Tab>
                         </Tabs>
                     </>
 

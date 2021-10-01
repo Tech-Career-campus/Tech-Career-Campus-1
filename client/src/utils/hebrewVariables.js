@@ -74,9 +74,16 @@ export const hebrewVariables=
     CourseSchedule: "לוז קורס",
     eventsHeadline: "ארועים בטק קריירה",
     eventNamePlaceholder: "שם הארוע",
-    eventMassagePlaceholder: "הקלד כאן",
-    eventNameTitle: "שם הארוע",
-    eventMassagetTitle: "הודעה",
+    eventMessagePlaceholder: "הקלד כאן",
+    eventNameTitle: "שם האירוע",
+    eventMessageTitle: "הודעה",
     responsibleFor:"אחראי על:",
-    job:"תפקיד:"
+    job:"תפקיד:",
+    homework:"משימות",
+    addHomework:"הוסף משימה",
+    createHomework:"צור משימה",
+    subject:"נושא",
+    description:"תיאור",
+    createBy: "נוצר על ידי"
+
 } 

@@ -49,6 +49,7 @@ export const UPDATE_STAFF ="UPDATE_STAFF"
 export const GET_COURSES = "GET_COURSES";
 export const CREATE_COURSE = "CREATE_COURSE";
 export const CREATE_COURSE_ERRORS = "CREATE_COURSE_ERRORS";
+export const DELETE_COURSE = "DELETE_COURSE";
 
 
 
@@ -60,5 +61,14 @@ export const CREATE_EVENT = "CREATE_EVENT"
 export const UPDATE_EVENT = "UPDATE_EVENT"
 export const DELETE_EVENT = "DELETE_EVENT"
 export const GET_EVENTS = "GET_EVENTS"
+
+// Homework 
+
+
+export const GET_HOMEWORK = "GET_HOMEWORK"
+export const CREATE_HOMEWORK = "CREATE_HOMEWORK"
+export const DELETE_HOMEWORK = "DELETE_HOMEWORK"
+export const EDIT_HOMEWORK = "EDIT_HOMEWORK"
+
 
 

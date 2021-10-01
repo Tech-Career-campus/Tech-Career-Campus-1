@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
 import "./forum-comment.css";
 import { commentPost } from '../../../../../Redux/actions/postsActions'
@@ -8,8 +8,7 @@ const ForumPostComponents = ({post}) => {
   const [comments, setComments]= useState(post?.data?.comments)
   const [comment, setComment] = useState("")
 
-  const token = localStorage.getItem("jwtToken");
-  const user = jwt_decode(token);
+    const { user } = useSelector((state) => state.user);
    const dispatch = useDispatch()
    const commentRef = useRef()
   const handleClick = async ()=>{
@@ -28,16 +27,15 @@ const ForumPostComponents = ({post}) => {
        {c.split(":")[1]}
         </li>
       ))}
-      <li ref={commentRef}></li>
+      <li style={{height:'0' ,backgroundColor:'transparent',overflow:'hidden'}} ref={commentRef}/>
       </ul>
       <div className="chat-window">
-       
         <input
           className="chat-window-message"
           name="chat-window-message"
           type="text"
-          autocomplete="off"
-          autofocus
+          autoComplete="off"
+          autoFocus
           placeholder='הקלד כאן...'
           value={comment}
           onChange={(e)=> setComment(e.target.value)}

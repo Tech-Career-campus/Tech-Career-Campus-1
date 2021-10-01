@@ -28,7 +28,7 @@ const dispatch = useDispatch()
       <div className="students-card-container">
         {isRegister ? <RegisterForm SetIsRegister={SetIsRegister} /> : ""}
         <div className="student-card-container">
-          {students.map((student, index) => (
+          {students?.map((student, index) => (
             <StudentCard key={index} student={student} />
           ))}
         </div>

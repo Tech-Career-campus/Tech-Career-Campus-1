@@ -10,23 +10,22 @@ import FormEvent from './FormEventComponent';
 const Events = () => {
     const dispatch = useDispatch();
     const events = useSelector(state => state.events);
-    const { user } = useSelector(state => state.user)
+    const {user} = useSelector(state => state.user)
 
     const [isForm, setForm] = useState(false)
     const [isUpdate, setUpdate] = useState(false)
 
-
     const [eventUpdate, setEventUpdate] = useState({
         eventId: "",
         eventName: "",
-        massage: "",
+        message: "",
     });
 
     useEffect(() => {
         dispatch(getEvents());
     }, [dispatch]);
 
-    const hendleChange1 = (e) => {
+    const handelChange1 = (e) => {
         setEventUpdate(
             {
                 ...eventUpdate,
@@ -59,13 +58,15 @@ const Events = () => {
                 {
                     events?.map((event) => {
                         return (
-                            <div className="EventsNews">
+                            <div className="EventsNews" key={event._id} >
                                 <div key={event._id} >
 
                                     <div className="inputs-massage">
                                         {hebrewVariables.eventNameTitle}: {event.eventName}
                                         <br></br>
-                                        {hebrewVariables.eventMassagetTitle}: {event.massage}
+                                        {hebrewVariables.eventMessageTitle}: {event.message}
+                                        <br></br>
+                                        {hebrewVariables.createBy}: {event.createBy}
                                     </div>
 
                                     <div className="bth-e">
@@ -76,8 +77,8 @@ const Events = () => {
                                                     {
                                                         isUpdate && event._id === eventUpdate.eventId ?
                                                             <div>
-                                                                <input type="text" name="eventName" value={eventUpdate.eventName} onChange={(e) => { hendleChange1(e) }} />
-                                                                <textarea cols="100" rows="0.5" name="massage" value={eventUpdate.massage} onChange={(e) => { hendleChange1(e) }}></textarea>
+                                                                <input type="text" name="eventName" value={eventUpdate.eventName} onChange={(e) => { handelChange1(e) }} />
+                                                                <textarea cols="100" rows="0.5" name="message" value={eventUpdate.message} onChange={(e) => { handelChange1(e) }}></textarea>
                                                                 <input type="button" id="confirmUpdates" value={hebrewVariables.confirmUpdates} onClick={() => { dispatch(updateEvent(eventUpdate)); setUpdate(false) }} />
                                                             </div> : ""
                                                     }

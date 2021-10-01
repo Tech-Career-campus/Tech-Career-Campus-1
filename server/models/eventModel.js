@@ -8,7 +8,7 @@ const eventSchema = new Schema(
       required: true,
     },
 
-    massage: {
+    message: {
       type: String,
       required: true,
     },
@@ -18,7 +18,10 @@ const eventSchema = new Schema(
       default: Date.now,
       index: { expires: '90d' }
     },
-    createBy: { type: Schema.Types.ObjectId, ref: "staff" },
+    createBy: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

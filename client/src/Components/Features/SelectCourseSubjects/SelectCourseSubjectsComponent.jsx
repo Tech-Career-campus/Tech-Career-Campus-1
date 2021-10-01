@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import fetcher from "../../../utils/fetcher";
+import "./selectCourse.css";
 
 const SelectCourseSubjects = ({
   corseType,
@@ -24,7 +25,7 @@ const SelectCourseSubjects = ({
   }, [subject]);
 
   return (
-    <div>
+    <div className='select-course-form'>
       {courseOptions?.map((option) => (
         <>
           <h3>{option.nameSubject}</h3>
@@ -33,7 +34,9 @@ const SelectCourseSubjects = ({
             בחר תתי נושאים
           </button>
           {subjectOpen === option._id ? (
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form
+              onSubmit={(e) => e.preventDefault()}
+            >
               {option?.topics?.map((topic) => (
                 <>
                   <label>

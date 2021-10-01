@@ -35,7 +35,18 @@ app.use("/api/forum", isToken, routeForum);
 app.use("/api", routeLoginRegister);
 app.use("/api/event", isToken, routeEvent);
 app.use("/api/classSchedule", isToken, classScheduleRouting);
-app.use("/api/homework", isToken, routeHomework);
+app.use("/api/homework",isToken, routeHomework);
+
+
+const server = app.listen(PORT, () => {
+  console.log(
+    `${chalk.green("tech_career")} ${chalk.yellow(
+      "live and up on port"
+    )} ${chalk.blue(PORT)}`
+    );
+});
+
+module.exports = server;
 
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
@@ -44,11 +55,3 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../client/build", "index.html"));
   });
 }
-
-app.listen(PORT, () => {
-  console.log(
-    `${chalk.green("tech_career")} ${chalk.yellow(
-      "live and up on port"
-    )} ${chalk.blue(PORT)}`
-    );
-});

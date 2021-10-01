@@ -17,7 +17,7 @@ const StudentCard = ({ student }) => {
     <div className="student-card">
       <div className="student-card-img">
         <img
-          src="https://img.lovepik.com/element/40170/3915.png_860.png"
+          src={studentUpdate.profileImg}
           alt={"Student"}
         />
       </div>
@@ -39,21 +39,28 @@ const StudentCard = ({ student }) => {
             {hebrewVariables.age}: {student.age}
           </p>
           <div className="student-card-body-btn">
-            {user.role === "Staff" ? <> <button
-              className="btn"
-              onClick={() => dispatch(deleteStudent(student._id))}
-            >
-              {hebrewVariables.delete}
-            </button>
-            <button
-              className="btn"
-              onClick={() => {
-                setIsEdit(true);
-                setStudentUpdate({ ...studentUpdate, _id: student._id });
-              }}
-            >
-              {hebrewVariables.edit}
-            </button></> : ""}          
+            {user.role === "Staff" ? (
+              <>
+                {" "}
+                <button
+                  className="btn"
+                  onClick={() => dispatch(deleteStudent(student._id))}
+                >
+                  {hebrewVariables.delete}
+                </button>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    setIsEdit(true);
+                    setStudentUpdate({ ...studentUpdate, _id: student._id });
+                  }}
+                >
+                  {hebrewVariables.edit}
+                </button>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       ) : (
