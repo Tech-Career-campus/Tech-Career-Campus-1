@@ -46,7 +46,6 @@ const reducer = (state = { isLoading: true, posts: [] }, action) => {
         ...state,
         posts: state.posts.filter((post) => post._id !== action.payload),
       };
-      debugger
     default:
       return state;
   }
