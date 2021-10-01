@@ -11,6 +11,7 @@ const AdminGradesComponent = () => {
   const dispatch = useDispatch();
   const { students } = useSelector((state) => state.students);
   const course = useSelector((state) => state.course);
+  console.log(course.students)
   const [openTests, setOpenTests] = useState(false);
   useEffect(
     () => dispatch(getStudents(course._id)),
