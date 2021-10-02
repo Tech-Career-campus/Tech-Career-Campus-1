@@ -108,7 +108,7 @@ const updateClasses = async (req, res) => {
 
 const deleteClasses = async (req, res) => {
   try {
-    isEmptyId(req.body.id)
+    isEmptyId(req.params.id)
     await ScheduleModel.findByIdAndDelete(req.body.id, (err, result) => {
       if (err) throw err;
       nullError(result,res)
