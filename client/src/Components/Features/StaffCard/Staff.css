@@ -1,37 +1,62 @@
-.staff-card{
-    margin: 10px;
+.body-staff .staff-card{
     display: flex;
+    justify-content: center;
+    flex-direction: row;
     flex-wrap: wrap;
-    width: 30vw;
-    height: 30vh ;
-    border-radius: 15px;
-    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
-    background-color: #f4f4f4;
+    margin: 10px;
+   
 }
+
+
+.s-card-body-form{
+    display: flex;
+    justify-content: space-evenly;
+    /* flex-direction: column; */
+    align-items: center;
+    border: 1px solid black;
+    width: 400px;
+    height: 250px;
+}
+.info-profil{
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+    
+    
+}
+
 .staff-card-img{
-    width: 30%;
+    width: 200px;
+    height: 250px;
+    border: 1px solid black;
     height: inherit;
+    
 }
 .staff-card-img  img {
-    border-radius: 100%;
-    width: 100%;
+    border-radius: 8px;
+    width: 200px;
+    height: 250px;
     padding: 10px;
 }
-.staff-card-body{
+
+/* .staff-card-body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 60%;
     height: 100%;
-}
+    border: 1px solid black;
+    
+} */
 .staff-card-body>p{
     font-size: 18px;
 }
 .staff-card-body-btn{
-    width: 100%;
+    width: 200px;
     display: flex;
-    flex-direction: row;
-    justify-content: left;
+    justify-content: space-evenly;
+    border: 1px solid black;
+  
 }
 
 .staff-card-body-btn  .btn{
@@ -43,7 +68,9 @@
     border: none;
     border-radius: 25px;
     width: 60%;
+    
 }
 .staff-card-body-form .btn{
     margin:5px;
+    
 }
