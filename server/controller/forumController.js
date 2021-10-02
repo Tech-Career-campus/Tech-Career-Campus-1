@@ -108,7 +108,7 @@ const deleteMessage = async (req, res) => {
         .json({
           success: true,
           message: "delete message success",
-          data: result
+          result: result
         });
     });
   } catch (err) {

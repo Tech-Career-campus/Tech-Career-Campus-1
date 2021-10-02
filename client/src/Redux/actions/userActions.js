@@ -16,7 +16,6 @@ export const getUser = (loginInfo) => async dispatch => {
             })
                 .then(response => response.json())
                 .then((response) => {
-                    console.log(response.data);
                     if (!response.data) throw response
                     return response
                 })

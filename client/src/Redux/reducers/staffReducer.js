@@ -1,4 +1,11 @@
-import { GET_STAFF_LIST, ADD_STAFF, DELETE_STAFF, STAFF_ERRORS, UPDATE_STAFF } from '../actions/types'
+import {
+  GET_STAFF_LIST,
+  ADD_STAFF,
+  DELETE_STAFF,
+  STAFF_ERRORS,
+  UPDATE_STAFF,
+  UPDATE_STAFF_PASSWORD,
+} from "../actions/types";
 
 const staffRedcuer = (state = { staff: [], errors: {} }, action) => {
     switch (action.type) {
