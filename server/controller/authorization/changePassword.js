@@ -24,7 +24,7 @@ const checkPassword = async (req, res, next) => {
             console.log(currentPassword)
             if(err) throw err;
             const isPasswordCorrect = await bcrypt.compare(currentPassword, result.password);
-            if (!isPasswordCorrect) {
+            if (isPasswordCorrect) {
                 next()
             }
             else {
@@ -55,7 +55,7 @@ const checkPassword = async (req, res, next) => {
 const changePassword = (req, res) => {
 
     try {
-        console.log(req.body._id)
+        // console.log(req.body._id)
         isEmptyId(req.body._id)
         const { newPassword, role } = req.body
         let person;

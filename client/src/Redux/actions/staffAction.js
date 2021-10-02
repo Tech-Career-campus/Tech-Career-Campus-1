@@ -82,12 +82,12 @@ export const updateStaff = (updateStaff) => async dispatch => {
 export const updateStaffPassword = (updateStaff) => async dispatch => {
    
     // const { _id } = { ...updateStaff };
-    // debugger
+    debugger
     await fetcher(`http://localhost:8080/api/staff/changePassword`, {
         method: 'PUT',
         body: JSON.stringify(updateStaff)
     })
-    .then(response =>console.log(response))
+    // .then(response =>console.log(response))
         .then(response => dispatch({
             type: UPDATE_STAFF_PASSWORD,
             payload: response

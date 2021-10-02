@@ -76,7 +76,7 @@ const EditProfile = ({ setOpen,open, user , setEditProfile}) => {
         )}
         <button
         className='btn'
-          onClick={() => {setChangePassword(changePassword ? false : true); dispatch(updateStaffPassword({...user , currentPassword:userUpdate.password, newPassword:userUpdate.newPassword }))}}
+          onClick={() => {setChangePassword(changePassword ? false : true); dispatch(updateStaffPassword({_id:user._id, role:user.role , currentPassword:userUpdate.password, newPassword:userUpdate.newPassword }))}}
         >
           {hebrewVariables.updatePassword}
         </button>
