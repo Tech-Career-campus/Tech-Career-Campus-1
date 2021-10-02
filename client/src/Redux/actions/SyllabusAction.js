@@ -37,7 +37,7 @@ export const updateSubSubject = (newSyllabus) => async dispatch => {
             "Content-Type":"application/json" 
         },
         body: JSON.stringify({ 
-           _id:newSyllabus._id,
+            course_id:newSyllabus._id,
            courseInformationId:newSyllabus.courseInformationId,
            array:newSyllabus.array,
            array_id:newSyllabus.array_id,

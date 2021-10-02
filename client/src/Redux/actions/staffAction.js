@@ -12,22 +12,21 @@ export const getStaff = () => async dispatch => {
 }
 
 export const addStuff = (staff,file) => async dispatch => {
-    const data= new FormData()
-    data.append('profileImg', file)
-    data.append('registeredAs',staff.registeredAs)
-    data.append('firstName',staff.firstName||"")
-    data.append('lastName',staff.lastName||"")
-    data.append('email',staff.email||"")
-    data.append('password',staff.password||"")
-    data.append('age',staff.age||"")
-    data.append('jod',staff.jod||"")
-    data.append('responsible',staff.responsible||"")
-    data.append('phone',staff.phone||"")
-    console.log(staff.age)
+    const staffObj= new FormData()
+    staffObj.append('profileImg', file)
+    staffObj.append('registeredAs',staff.registeredAs)
+    staffObj.append('firstName',staff.firstName||"")
+    staffObj.append('lastName',staff.lastName||"")
+    staffObj.append('email',staff.email||"")
+    staffObj.append('password',staff.password||"")
+    staffObj.append('age',staff.age||"")
+    staffObj.append('jod',staff.jod||"")
+    staffObj.append('responsible',staff.responsible||"")
+    staffObj.append('phone',staff.phone||"")
     try {
         await fetch(`http://localhost:8080/api/register`, {
             method: "POST",
-            body: data,
+            body: staffObj,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
             },

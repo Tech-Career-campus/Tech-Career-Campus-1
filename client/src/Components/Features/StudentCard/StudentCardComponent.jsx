@@ -6,6 +6,8 @@ import {
 } from "../../../Redux/actions/studentsActions";
 import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
+import maleAvatar from '../../../images/male-avatar.jpg'
+import femaleAvatar from '../../../images/female-avatar.jpg'
 import "./studentCard.css";
 const StudentCard = ({ student }) => {
   const dispatch = useDispatch();
@@ -16,10 +18,19 @@ const StudentCard = ({ student }) => {
   return (
     <div className="student-card">
       <div className="student-card-img">
-        <img
-          src={studentUpdate.profileImg}
-          alt={"Student"}
-        />
+        {
+          studentUpdate.gender === "זכר" ?
+            <img
+              src={maleAvatar}
+              alt={"Student"}
+            />
+            :
+            <img
+              src={femaleAvatar}
+              alt={"Student"}
+            />
+        }
+
       </div>
       {!isEdit ? (
         <div className="student-card-body">
@@ -41,7 +52,6 @@ const StudentCard = ({ student }) => {
           <div className="student-card-body-btn">
             {user.role === "Staff" ? (
               <>
-                {" "}
                 <button
                   className="btn"
                   onClick={() => dispatch(deleteStudent(student._id))}

@@ -84,5 +84,9 @@ export const hebrewVariables=
     createHomework:"צור משימה",
     subject:"נושא",
     description:"תיאור",
+    createBy: "נוצר על ידי",
+    selectGender:"זכר/נקבה:",
+    male:"זכר",
+    female:"נקבה"
 
 } 

@@ -1,7 +1,7 @@
 const StudentModel = require("../models/studentModel");
 const CourseModel = require("../models/courseModel");
 const fs =require("fs");
-const { nullError, isEmptyId, nullVariable } = require("../utils/Errors");
+const { nullError, isEmptyId, nullVariable,nullErrorForStudentGrades } = require("../utils/Errors");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -10,13 +10,14 @@ const getStudent = async (req, res) => {
     isEmptyId(req.params.id);
     await StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "get Student success!",
-          data: result
-        });
+      nullError(result, res);
+      // res
+      //   .status(200)
+      //   .json({
+      //     success: true,
+      //     message: "get Student success!",
+      //     data: result
+      //   });
     });
   } catch (err) {
     res
@@ -51,13 +52,8 @@ const getStudentGradeById = async (req, res) => {
     isEmptyId(req.params.id);
     StudentModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "get Student grades by id success!",
-          data: result.tests
-        });
+      nullErrorForStudentGrades(result,res)
+
     });
   } catch (err) {
     res
@@ -79,13 +75,7 @@ const addStudentTestById = async (req, res) => {
       { new: true },
       (err, result) => {
         if (err) throw err;
-        res
-          .status(200)
-          .json({
-            success: true,
-            message: "add test to a student by name was a success",
-            data: result.tests,
-          });
+        nullErrorForStudentGrades(result,res)
       }
     );
   } catch (err) {
@@ -108,13 +98,14 @@ const updateStudentTestById = async (req, res) => {
       { $set: { "tests.$.grade": req.body.grade } }, { new: true },
       (err, result) => {
         if (err) throw err;
-        res
-          .status(200)
-          .json({
-            success: true,
-            message: "updating a student test was a success",
-            data: result.tests,
-          });
+        nullErrorForStudentGrades(result,res)
+        // res
+        //   .status(200)
+        //   .json({
+        //     success: true,
+        //     message: "updating a student test was a success",
+        //     data: result.tests,
+        //   });
       }
     );
   } catch (err) {
@@ -130,21 +121,22 @@ const updateStudentTestById = async (req, res) => {
 
 const deleteStudentTestById = async (req, res) => {
   try {
-    // isEmptyId(req.body.id);
-    // isEmptyId(req.params._id);
+    isEmptyId(req.body.id);
+    isEmptyId(req.params._id);
     await StudentModel.findByIdAndUpdate(
       req.params._id,
       { $pull: { tests: { _id: req.body.id } } },
       { new: true },
       (err, result) => {
         if (err) throw err;
-        res
-          .status(200)
-          .json({
-            success: true,
-            message: "deleting a student test success",
-            data: result.tests,
-          });
+        nullErrorForStudentGrades(result,res)
+        // res
+        //   .status(200)
+        //   .json({
+        //     success: true,
+        //     message: "deleting a student test success",
+        //     data: result.tests,
+        //   });
       }
     );
   } catch (err) {
@@ -159,12 +151,10 @@ const deleteStudentTestById = async (req, res) => {
 };
 
 const updateStudent = async (req, res) => { 
+  console.log(req)
   try {
     isEmptyId(req.params.id);
-    const field = await req.body.field;
-    if (field === "tests") {
-      throw new Error("you cant update arrays only static fields");
-    }
+    
     await StudentModel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
@@ -226,7 +216,8 @@ const deleteStudent = async (req, res) => {
           .status(200)
           .json({
             success: true,
-            message: "delete by id student success!"
+            message: "delete by id student success!",
+            data:result
           });
       }
     );
@@ -275,7 +266,7 @@ const getSyllabusByCourse = async (req, res) => {
         res
           .status(400)
           .json({
-            success: true,
+            success: false,
             message: 'error with population',
             error: err.message
           });
@@ -286,7 +277,7 @@ const getSyllabusByCourse = async (req, res) => {
     res
       .status(500)
       .json({
-        success: true,
+        success: false,
         message: "wrong",
         error: err.message
       })

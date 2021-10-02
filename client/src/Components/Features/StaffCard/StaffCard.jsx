@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./Staff.css";
 import { useDispatch } from "react-redux";
 import { deleteStaff, updateStaff } from "../../../Redux/actions/staffAction";
@@ -10,6 +10,7 @@ import Dialog from '@material-ui/core/Dialog';
 
 
 const StaffCard = ({ staffItem }) => {
+
   const dispatch = useDispatch();
 
   const [isEdit, setIsEdit] = useState(false);
@@ -20,6 +21,7 @@ const StaffCard = ({ staffItem }) => {
 
   const IMAGE_PATH = profileImg?.slice(profileImg.lastIndexOf('\\') + 1, profileImg.length)|| "";
 
+
   return (
     <div className="staff-card">
 
@@ -27,16 +29,17 @@ const StaffCard = ({ staffItem }) => {
         <div className="s-card-body-form">
           <div className="staff-card-img">
           {
-              IMAGE_PATH.length >= 0 ?
+              IMAGE_PATH.length === 0?
                 <img
                   src="https://img.lovepik.com/element/40170/3915.png_860.png"
-                  alt={"Student"}
+                  alt={"staff profile"}
 
                 />
                 :
+                
                 <img
                   src={`/images/${IMAGE_PATH}`}
-                  alt={"Student"}
+                  alt={"staff profile"}
                 />
             }
           </div>
@@ -97,16 +100,17 @@ const StaffCard = ({ staffItem }) => {
       <div className="s-card-body-form">
         <div className="staff-card-img">
         {
-              IMAGE_PATH.length >= 0 ?
+              IMAGE_PATH.length === 0?
                 <img
                   src="https://img.lovepik.com/element/40170/3915.png_860.png"
-                  alt={"Student"}
+                  alt={"staff profile"}
 
                 />
                 :
+                
                 <img
                   src={`/images/${IMAGE_PATH}`}
-                  alt={"Student"}
+                  alt={"staff profile"}
                 />
             }
         </div>

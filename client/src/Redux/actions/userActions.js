@@ -41,16 +41,33 @@ export const getUser = (loginInfo) => async dispatch => {
     }
 }
 
-export const updateUser = (updateData) => async dispatch => {
+export const updateUser = (updateData, file) => async dispatch => {
     const { _id } = { ...updateData };
-    const basicStaff = `http://localhost:8080/api/staff/`
-    const basicStudent = `http://localhost:8080/api/student/updateStudent/`
-    await fetcher(`${updateData.role === 'Staff' ? basicStaff : basicStudent}${_id}`, {
-        method: 'PUT',
-        body: JSON.stringify(updateData)
-    })
-        .then((response) => localStorage.setItem("jwtToken", response.data))
+    const basicStaff = 'http://localhost:8080/api/staff/'
+    const basicStudent = 'http://localhost:8080/api/student/updateStudent/'
 
+    const studentUpdate = new FormData()
+    studentUpdate.append('profileImg', file || updateData.profileImg )
+    studentUpdate.append('_id', updateData._id || "")
+    studentUpdate.append('firstName', updateData.firstName || "")
+    studentUpdate.append('lastName', updateData.lastName || "")
+    studentUpdate.append('email', updateData.email || "")
+    studentUpdate.append('password', updateData.password || "")
+    studentUpdate.append('phone', updateData.phone || "")
+    studentUpdate.append('role', updateData.role || "")
+
+    
+    await fetch(`${updateData.role === 'Staff' ? basicStaff : basicStudent}${_id}`, {
+
+        method: 'PUT',
+        body: studentUpdate,
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+        },
+    })
+        .then((res) => res.json())
+        .then((response) => localStorage.setItem("jwtToken", response.result))
+        
     const token = localStorage.getItem("jwtToken")
     const decoded = jwt_decode(token);
     return dispatch({

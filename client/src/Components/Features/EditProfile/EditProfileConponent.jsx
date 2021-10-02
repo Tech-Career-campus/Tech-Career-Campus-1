@@ -5,12 +5,14 @@ import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import './editProfile.css'
 
-const EditProfile = ({ setOpen,open, user , setEditProfile}) => {
+const EditProfile = ({ setOpen,open, user, setEditProfile}) => {
   const [changePassword, setChangePassword] = useState(false);
   //   const [updateUser, setUpdateUser] = useState({...user, password:"", newPassword:"", confirmPassword:"" })
   const [userUpdate, setUserUpdate] = useState({ ...user });
+  const [file, setFile] = useState(null)
   const dispatch = useDispatch();
 
   useEffect(() => setUserUpdate({ ...user}), [user]);
@@ -57,8 +59,13 @@ const EditProfile = ({ setOpen,open, user , setEditProfile}) => {
           name={"phone"}
           onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
         />
-        <div className={`edit-profile-btn-container ${changePassword?"edit-profile-form":""}`}>
-        
+            <input accept="image/*" name="profileImg" type="file"
+              onChange={e => {
+                const img=e.target.files[0]
+                setFile(img)
+              }} />
+            <div className={`edit-profile-btn-container ${changePassword ? "edit-profile-form" : ""}`}>
+
         {changePassword ? (
           <>
             <label>{hebrewVariables.currentPassword}</label>
@@ -77,7 +84,7 @@ const EditProfile = ({ setOpen,open, user , setEditProfile}) => {
         >
           {hebrewVariables.updatePassword}
         </button>
-        <button className='btn' onClick={() => dispatch(updateUser(userUpdate))}>
+        <button className='btn' onClick={() => dispatch(updateUser(userUpdate,file))}>
           {hebrewVariables.update}
         </button>
 

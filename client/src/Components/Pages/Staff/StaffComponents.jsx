@@ -21,10 +21,7 @@ const StaffComponents = () => {
     const dispatch = useDispatch();
     const staff = useSelector((state) => state.staff.staff);
 
-    useEffect(() => dispatch(getStaff()), [staff]);
-
-  
-
+    useEffect(() => dispatch(getStaff()), []);
 
     return (
         <div className="body-staff">
