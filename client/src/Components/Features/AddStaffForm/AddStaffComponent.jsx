@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { styled } from '@mui/material/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,15 +11,18 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { addStuff } from '../../../Redux/actions/staffAction';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
 import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 
 
 const AddStaffComponent = ({ open, handleClose }) => {
     const [staffUser, setStaffUser] = useState({ registeredAs: "Staff" })
     const [isRegister, setIsRegister] = useState(false);
+    const [file, setFile] = useState(null)
 
     const dispatch = useDispatch();
-    const { errors } = useSelector((state) => state.staff);
+    const errors = useSelector((state) => state.staff.errors);
     const staff = useSelector((state) => state.staff.staff);
 
     const createStaff = (e) => {
@@ -36,7 +40,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
 
     const addStaff = () => {
 
-        dispatch(addStuff(staffUser));
+        dispatch(addStuff(staffUser, file));
         if (checkErrors()) {
 
             handleRegisterWindow()
@@ -47,27 +51,30 @@ const AddStaffComponent = ({ open, handleClose }) => {
         return Object.keys(errors).length === 0;
     }
 
+    const Input = styled('input')({
+        display: 'none',
+    });
 
 
     return (
         <div>
             <Dialog aria-labelledby="form-dialog-title" open={open}  >
-                <DialogTitle id="form-dialog-title"> {hebrewVariables.createStaff}
-                    {
-                        isRegister && checkErrors() ? <>
-                            <Alert severity="success">{`${staff[staff.length - 1]?.firstName} ${staff[staff.length - 1]?.lastName} ${hebrewVariables.registerd}`}</Alert>
-                            <Button color="primary" onClick={() => handleRegisterWindow()}>
-                                סגור
-                            </Button>
-                        </>
-                            :
-                            ""
-                    }
+                <DialogTitle id="form-dialog-title">
+                    {hebrewVariables.createStaff}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         {hebrewVariables.fillDetails}
                     </DialogContentText>
+
+                    <Dialog aria-labelledby="form-dialog-title" open={isRegister && checkErrors()}>
+
+                        <Alert severity="success">{`${staff[staff.length - 1]?.firstName} ${staff[staff.length - 1]?.lastName} ${hebrewVariables.registerd}`}</Alert>
+                        <Button color="primary" onClick={() => handleRegisterWindow()}>
+                            סגור
+                        </Button>
+                    </Dialog>
+
                     <TextField
                         name="firstName"
                         autoFocus
@@ -104,7 +111,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.email}
 
                     />
-                    <strong className="errors">{errors?.email ? errors.email : ""}</strong>
+                    <strong className="errors">{errors?.message ? errors.message : ""}</strong>
                     <TextField
                         name="password"
                         margin="dense"
@@ -163,6 +170,17 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         value={staffUser.responsible}
 
                     />
+
+                    <IconButton color="primary" aria-label="upload picture" component="span">
+                        <Input accept="image/*" id="icon-button-file" name="profileImg" type="file"
+                            onChange={e => {
+                                const File = (e.target.files[0])
+                                setFile(File);
+
+                            }} />
+                        בחר תמונת פרופיל
+                        <AddAPhotoIcon />
+                    </IconButton>
                 </DialogContent>
 
                 <DialogActions>

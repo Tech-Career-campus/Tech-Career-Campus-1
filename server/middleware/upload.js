@@ -5,10 +5,10 @@ const { nextTick } = require('process');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'images')
+        cb(null, './client/public/images')
     },
     filename: (req, file, cb) => {
-        cb(null, `${Date.now()}_${file.originalname}`)
+        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`)
     }
 })
 

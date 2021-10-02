@@ -11,23 +11,30 @@ export const getStaff = () => async dispatch => {
         .catch((err) => console.log(err));
 }
 
-export const addStuff = (staff) => async dispatch => {
-
+export const addStuff = (staff,file) => async dispatch => {
+    const data= new FormData()
+    data.append('profileImg', file)
+    data.append('registeredAs',staff.registeredAs)
+    data.append('firstName',staff.firstName||"")
+    data.append('lastName',staff.lastName||"")
+    data.append('email',staff.email||"")
+    data.append('password',staff.password||"")
+    data.append('age',staff.age||"")
+    data.append('jod',staff.jod||"")
+    data.append('responsible',staff.responsible||"")
+    data.append('phone',staff.phone||"")
+    console.log(staff.age)
     try {
-        await fetcher('http://localhost:8080/api/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                registeredAs: staff.registeredAs,
-                firstName: staff.firstName,
-                lastName: staff.lastName,
-                email: staff.email,
-                phone: staff.phone,
-                password: staff.password,
-                age: staff.age,
-                jod: staff.jod,
-                responsible:staff.responsible
-            }),
+        await fetch(`http://localhost:8080/api/register`, {
+            method: "POST",
+            body: data,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+            },
         })
+
+            .then((res) => res.json())
+
             .then((response) => {
                 if (!response.data) throw response
                 return response
@@ -45,7 +52,7 @@ export const addStuff = (staff) => async dispatch => {
 
 }
 export const deleteStaff = (staffId) => async dispatch => {
-
+    debugger
     try {
         await fetcher('/api/staff', {
             method: 'DELETE',
@@ -66,8 +73,8 @@ export const deleteStaff = (staffId) => async dispatch => {
 }
 
 export const updateStaff = (updateStaff) => async dispatch => {
-    
-    const { id } = { ...updateStaff };
+    debugger
+    const id = updateStaff._id;
     await fetcher(`http://localhost:8080/api/staff/${id}`, {
         method: 'PUT',
         body: JSON.stringify(updateStaff)
