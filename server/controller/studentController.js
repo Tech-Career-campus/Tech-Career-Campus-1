@@ -121,21 +121,22 @@ const updateStudentTestById = async (req, res) => {
 
 const deleteStudentTestById = async (req, res) => {
   try {
-    // isEmptyId(req.body.id);
-    // isEmptyId(req.params._id);
+    isEmptyId(req.body.id);
+    isEmptyId(req.params._id);
     await StudentModel.findByIdAndUpdate(
       req.params._id,
       { $pull: { tests: { _id: req.body.id } } },
       { new: true },
       (err, result) => {
         if (err) throw err;
-        res
-          .status(200)
-          .json({
-            success: true,
-            message: "deleting a student test success",
-            data: result.tests,
-          });
+        nullErrorForStudentGrades(result,res)
+        // res
+        //   .status(200)
+        //   .json({
+        //     success: true,
+        //     message: "deleting a student test success",
+        //     data: result.tests,
+        //   });
       }
     );
   } catch (err) {
@@ -153,6 +154,7 @@ const updateStudent = async (req, res) => {
   try {
     isEmptyId(req.params.id);
     const field = await req.body.field;
+    nullVariable(field)
     if (field === "tests" ) {
       throw new Error("you cant update arrays only static fields");
     }
@@ -269,7 +271,7 @@ const getSyllabusByCourse = async (req, res) => {
         res
           .status(400)
           .json({
-            success: true,
+            success: false,
             message: 'error with population',
             error: err.message
           });
@@ -280,7 +282,7 @@ const getSyllabusByCourse = async (req, res) => {
     res
       .status(500)
       .json({
-        success: true,
+        success: false,
         message: "wrong",
         error: err.message
       })
