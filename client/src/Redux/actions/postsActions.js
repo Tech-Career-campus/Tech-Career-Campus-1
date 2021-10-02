@@ -20,6 +20,7 @@ export const getPost = (id) => async (dispatch) => {
         payload: response,
       });
     })
+    .then((res)=>console.log(res))
     .catch((err) => console.log(err));
   dispatch({ type: STOP_LOADING });
 };
@@ -169,9 +170,10 @@ export const deletePost = (id) => async (dispatch) => {
       
         dispatch({
           type: DELETE,
-          payload:data.id,
+          payload:data.result._id,
         })
-        dispatch({ type: STOP_LOADING });
+        
+       dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log(error);
   }

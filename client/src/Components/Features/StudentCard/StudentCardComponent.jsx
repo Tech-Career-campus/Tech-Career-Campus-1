@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteStudent,
@@ -10,8 +10,10 @@ import "./studentCard.css";
 const StudentCard = ({ student }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   const [studentUpdate, setStudentUpdate] = useState({ ...student });
   const { user } = useSelector((state) => state.user);
+  
 
   return (
     <div className="student-card">
@@ -44,15 +46,17 @@ const StudentCard = ({ student }) => {
                 {" "}
                 <button
                   className="btn"
-                  onClick={() => dispatch(deleteStudent(student._id))}
+                  onClick={()=>{
+                    setIsDelete(isDelete ? false : true);
+                    dispatch(deleteStudent(student))}
+                  } 
                 >
                   {hebrewVariables.delete}
                 </button>
                 <button
                   className="btn"
                   onClick={() => {
-                    setIsEdit(true);
-                    setStudentUpdate({ ...studentUpdate, _id: student._id });
+                    setIsEdit(isEdit ? false : true); setStudentUpdate({...studentUpdate, _id: student._id  })
                   }}
                 >
                   {hebrewVariables.edit}
@@ -101,6 +105,7 @@ const StudentCard = ({ student }) => {
               type={"number"}
               value={studentUpdate.age}
             />
+            
             <button
               className="btn"
               onClick={() => {

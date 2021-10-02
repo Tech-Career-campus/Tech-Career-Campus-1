@@ -12,21 +12,25 @@ const AdminGradesComponent = () => {
   const { students } = useSelector((state) => state.students);
   const course = useSelector((state) => state.course);
   const [openTests, setOpenTests] = useState(false);
-  const [studentSearch, setStudentSearch] = useState("");
+  const [studentMatch, setStudentMatch] = useState([]);
   useEffect(
     () => dispatch(getStudents(course._id)),
     [dispatch, openTests, course]
   );
 
-  const search = () => {
-    console.log(studentSearch)
-    return studentSearch
-  }
-  const change = (e) => {
-    console.log(e.target.value)
-    setStudentSearch(e.target.value)
-  }
-
+//   const searchStudent = (e) =>{
+//     let inputValue = e.target.value
+//     let matches = students?.filter((oneStudent)=>{  
+//     const regex = new RegExp(`^${inputValue}`);
+//     console.log(oneStudent)
+//     if(inputValue.length < 0){
+//     return oneStudent.firstName.match(regex);
+//     }
+    
+//  });
+//  setStudentMatch(matches);
+//  console.log(studentMatch)
+// }
 
   return (
     <div className="admin-grade-contaniner">
@@ -34,8 +38,8 @@ const AdminGradesComponent = () => {
         <PageHeader title={hebrewVariables.studentsGrades} />
         <div className="wrap">
           <div className="search">
-            <input onChange={change} className="search-term" type="text" placeholder="Search 🔍"/>
-            <button onClick={search} className="search-button">
+            <input  className="search-term" type="text" placeholder="Search 🔍"/>
+            <button className="search-button">
               <i className="fa fa-search"></i>
             </button>
           </div>
@@ -59,7 +63,6 @@ const AdminGradesComponent = () => {
           </thead>
           <tbody>
             {students?.map((student) => (
-               student.firstName === studentSearch ? (
                 <tr key={student._id}>
                   <td>{student?.firstName}</td>
                   <td>{student?.lastName}</td>
@@ -72,23 +75,7 @@ const AdminGradesComponent = () => {
                   >
                     <i className="fas fa-user-edit"></i>
                   </td>
-                </tr>
-              ) :
-                (
-                  <tr key={student._id}>
-                    <td>{student?.firstName}</td>
-                    <td>{student?.lastName}</td>
-                    <td>{student?.courseName}</td>
-                    <td
-                      onClick={() => {
-                        setOpenTests(true);
-                        dispatch(getStudent(student));
-                      }}
-                    >
-                      <i className="fas fa-user-edit"></i>
-                    </td>
-                  </tr>
-                )
+                </tr>       
 
             ))}
           </tbody>
