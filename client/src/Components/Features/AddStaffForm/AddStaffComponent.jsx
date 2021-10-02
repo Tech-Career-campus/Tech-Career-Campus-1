@@ -25,7 +25,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
     const errors = useSelector((state) => state.staff.errors);
     const staff = useSelector((state) => state.staff.staff);
 
-    const createStaff = (e) => {
+    const CreateStaff = (e) => {
         setStaffUser({
             ...staffUser,
             [e.target.name]: e.target.value
@@ -41,13 +41,13 @@ const AddStaffComponent = ({ open, handleClose }) => {
     const addStaff = () => {
 
         dispatch(addStuff(staffUser, file));
-        if (checkErrors()) {
+        if (CheckErrors()) {
 
             handleRegisterWindow()
         }
     }
 
-    const checkErrors = () => {
+    const CheckErrors = () => {
         return Object.keys(errors).length === 0;
     }
 
@@ -67,7 +67,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         {hebrewVariables.fillDetails}
                     </DialogContentText>
 
-                    <Dialog aria-labelledby="form-dialog-title" open={isRegister && checkErrors()}>
+                    <Dialog aria-labelledby="form-dialog-title" open={isRegister && CheckErrors()}>
 
                         <Alert severity="success">{`${staff[staff.length - 1]?.firstName} ${staff[staff.length - 1]?.lastName} ${hebrewVariables.registerd}`}</Alert>
                         <Button color="primary" onClick={() => handleRegisterWindow()}>
@@ -83,7 +83,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         label={hebrewVariables.firstName}
                         type="text"
                         fullWidth
-                        onChange={(e) => createStaff(e)}
+                        onChange={(e) => CreateStaff(e)}
                         value={staffUser.firstName}
 
                     />
@@ -95,7 +95,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         label={hebrewVariables.lastName}
                         type="text"
                         fullWidth
-                        onChange={(e) => createStaff(e)}
+                        onChange={(e) => CreateStaff(e)}
                         value={staffUser.lastName}
 
                     />
@@ -107,7 +107,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         label={hebrewVariables.email}
                         type="email"
                         fullWidth
-                        onChange={(e) => createStaff(e)}
+                        onChange={(e) => CreateStaff(e)}
                         value={staffUser.email}
 
                     />
@@ -119,7 +119,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         label={hebrewVariables.password}
                         type="password"
                         fullWidth
-                        onChange={(e) => createStaff(e)}
+                        onChange={(e) => CreateStaff(e)}
                         value={staffUser.password}
 
                     />
@@ -131,7 +131,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         label={hebrewVariables.phone}
                         type="phone"
                         fullWidth
-                        onChange={(e) => createStaff(e)}
+                        onChange={(e) => CreateStaff(e)}
                         value={staffUser.phone}
 
                     />
@@ -143,7 +143,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         label={hebrewVariables.age}
                         type="number"
                         fullWidth
-                        onChange={(e) => createStaff(e)}
+                        onChange={(e) => CreateStaff(e)}
                         value={staffUser.age}
 
                     />
@@ -155,7 +155,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         label={hebrewVariables.job}
                         type="text"
                         fullWidth
-                        onChange={(e) => createStaff(e)}
+                        onChange={(e) => CreateStaff(e)}
                         value={staffUser.jod}
 
                     />
@@ -166,7 +166,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
                         label={hebrewVariables.responsibleFor}
                         type="text"
                         fullWidth
-                        onChange={(e) => createStaff(e)}
+                        onChange={(e) => CreateStaff(e)}
                         value={staffUser.responsible}
 
                     />

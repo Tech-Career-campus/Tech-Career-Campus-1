@@ -14,7 +14,7 @@ const StaffCard = ({ staffItem }) => {
   const dispatch = useDispatch();
 
   const [isEdit, setIsEdit] = useState(false);
-  const [staffUpate, setStaffUpdate] = useState({ ...staffItem });
+  const [staffUpdate, setStaffUpdate] = useState({ ...staffItem });
 
   const { firstName, lastName, phone, email, jod, responsible, profileImg } =
     staffItem;
@@ -54,16 +54,16 @@ const StaffCard = ({ staffItem }) => {
               name="responsible"
               label
               type="text"
-              onChange={(e) => handleChange(e, staffUpate, setStaffUpdate)}
-              value={staffUpate.responsible}
+              onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
+              value={staffUpdate.responsible}
             />
             <lable>{hebrewVariables.job}</lable>
             <input
               name="jod"
               label
               type="text"
-              onChange={(e) => handleChange(e, staffUpate, setStaffUpdate)}
-              value={staffUpate.jod}
+              onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
+              value={staffUpdate.jod}
             />
             <div variant="body2" color="text.secondary">
               <h3>{hebrewVariables.contact}</h3>
@@ -71,8 +71,8 @@ const StaffCard = ({ staffItem }) => {
                 <li>
                   <input
                     type="phone"
-                    value={staffUpate.phone}
-                    onChange={(e) => handleChange(e, staffUpate, setStaffUpdate)}
+                    value={staffUpdate.phone}
+                    onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
                   />
                 </li>
               </ul>
@@ -87,7 +87,7 @@ const StaffCard = ({ staffItem }) => {
 
             <Button
               onClick={() => {
-                dispatch(updateStaff(staffUpate));
+                dispatch(updateStaff(staffUpdate));
               }}
             >
               {hebrewVariables.update}
@@ -144,7 +144,7 @@ const StaffCard = ({ staffItem }) => {
           <Button
             onClick={() => {
               setIsEdit(!isEdit);
-              setStaffUpdate({ ...staffUpate, _id: staffItem._id });
+              setStaffUpdate({ ...staffUpdate, _id: staffItem._id });
             }}
           >
             {hebrewVariables.update}
