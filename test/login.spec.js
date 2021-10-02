@@ -1,11 +1,11 @@
-const server = require("../server/server");
-const login = require("../server/controller/authorization/login");
-let chai = require("chai");
-let chaiHttp = require("chai-http");
-chai.should();
-chai.use(chaiHttp);
-describe("API REST /api/login/", () => {
-  ///////////////////post work//////////
+// const server = require("../server/server");
+// const login = require("../server/controller/authorization/login");
+// let chai = require("chai");
+// let chaiHttp = require("chai-http");
+// chai.should();
+// chai.use(chaiHttp);
+// describe("API REST /api/login/", () => {
+//   ///////////////////post work//////////
 //   it("is post login ", () => {
 //     chai
 //       .request(server)
@@ -24,4 +24,4 @@ describe("API REST /api/login/", () => {
 //         console.log(token);
 //       });
 //   });
-});
+// });
