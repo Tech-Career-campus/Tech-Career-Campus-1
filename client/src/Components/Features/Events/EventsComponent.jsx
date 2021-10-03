@@ -36,8 +36,8 @@ const Events = () => {
 
     return (
         <div className="Body">
-            <div className="titel-event">
-                <div className="updete">
+            <div className="title-event">
+                <div className="update">
                     <p> {hebrewVariables.eventsHeadline} </p>
                 </div>
                 {
@@ -49,7 +49,7 @@ const Events = () => {
                 }
             </div>
 
-            <div className="body-updete">
+            <div className="body-update">
                 {
                     isForm ?
                         <FormEvent user={user} />

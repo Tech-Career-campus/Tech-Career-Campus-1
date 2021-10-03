@@ -19,7 +19,6 @@ import { useSelector } from "react-redux";
 
 
 const ClassScheduleComponent = () => {
-  const course = useSelector((state) => state.course);
 
   const token = localStorage.getItem("jwtToken");
   

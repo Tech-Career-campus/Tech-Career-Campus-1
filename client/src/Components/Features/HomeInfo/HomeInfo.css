@@ -4,7 +4,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     background-color: white;
-    /* border: 1px solid black; */
     width: 100vw;
     height: 1250px;
     margin-top: 20px;
@@ -13,7 +12,6 @@
     display: flex;
     align-items: center;
     padding: 0 40px;
-    /* border: 1px solid black; */
     height: 100px;
     
 }
@@ -25,7 +23,6 @@
 margin-top: 50px;
 box-shadow: 3px 3px 20px -6px rgb(23,41,74);
    border-radius: 8px;
-    /* border: 1px solid black; */
     width: 330px;
     height: 330px;
 }
@@ -45,12 +42,10 @@ padding: 5px;
     justify-content: space-around;
     flex-direction: row;
     flex-wrap: wrap;
- /* border: 1px solid black; */
  width: 100vw;
  margin-top: 30px;
 }
 .body-home-company-cards{
-    /* border: 1px solid black; */
     display: flex;
     justify-content: center;
     align-items: center;

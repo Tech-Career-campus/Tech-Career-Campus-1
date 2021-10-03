@@ -14,7 +14,6 @@ const Navbar = () => {
   const [editProfile, setEditProfile] = useState(false);
   const { user } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
-  const [open2, setOpen2] = useState(false);
 
   const { profileImg } = user
 
@@ -41,7 +40,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link to={"/class-schedule"}>
-                {hebrewVariables.classSchedual}
+                {hebrewVariables.classSchedule}
               </Link>
             </li>
           </ul>

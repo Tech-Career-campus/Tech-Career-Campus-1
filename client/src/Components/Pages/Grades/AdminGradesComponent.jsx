@@ -34,7 +34,7 @@ const AdminGradesComponent = () => {
 }
 
   return (
-    <div className="admin-grade-contaniner">
+    <div className="admin-grade-container">
       <div>
         <PageHeader title={hebrewVariables.studentsGrades} />
         <div className="wrap">

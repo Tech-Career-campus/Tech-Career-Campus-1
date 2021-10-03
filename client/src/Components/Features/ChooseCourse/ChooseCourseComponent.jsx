@@ -18,19 +18,19 @@ const ChooseCourse = () => {
     if (user.role === "Staff") dispatch(getCourses());
   }, [dispatch, user]);
 
-  const [course, setcourse] = useState([]);
-  const [model, setmodel] = useState(false);
+  const [course, setCourse] = useState([]);
+  const [model, setModel] = useState(false);
   const getData = (id, name) => {
-    let tempdata = [id, name]
-    setcourse(item => [1, ...tempdata])
-    return setmodel(true)
+    let tempData = [id, name]
+    setCourse(item => [1, ...tempData])
+    return setModel(true)
   }
   const DeleteModel = (props) => {
     let styleModel = { width: "200px", heigh: "140px", backgroundColor: "white", color: "black", display: "block", border: "1px solid black" }
     return (
       <div style={styleModel}>
         <h3>אתה בטוח שאתה רוצה למחוק את  הקורס {props.courseName} </h3>
-        <Button style={{ "backgroundColor": "red", "color": "white" }} onClick={() => { return setmodel(false) }}>חזור </Button>
+        <Button style={{ "backgroundColor": "red", "color": "white" }} onClick={() => { return setModel(false) }}>חזור </Button>
         <Button style={{ "backgroundColor": "red", "color": "white", "margin": "10px" }} onClick={() => { window.location.reload(); return dispatch(deleteCourse(props._id)) }}>מחק</Button>
       </div>
     )

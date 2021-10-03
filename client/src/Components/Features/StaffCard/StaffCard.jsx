@@ -49,7 +49,7 @@ const StaffCard = ({ staffItem }) => {
             </h1>
           </div>
           <div>
-            <lable>{hebrewVariables.responsibleFor}</lable>
+            <label>{hebrewVariables.responsibleFor}</label>
             <input
               name="responsible"
               label
@@ -57,7 +57,7 @@ const StaffCard = ({ staffItem }) => {
               onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
               value={staffUpdate.responsible}
             />
-            <lable>{hebrewVariables.job}</lable>
+            <label>{hebrewVariables.job}</label>
             <input
               name="jod"
               label
