@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Homework.css";
+import "./homework.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomework } from "../../../Redux/actions/homeworkActions";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
