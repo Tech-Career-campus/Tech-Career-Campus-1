@@ -22,6 +22,7 @@ const StudentCard = ({ student }) => {
 
 
   return (
+<<<<<<< HEAD
     <div className="student-card">
       <div className="student-card-img">
 
@@ -42,8 +43,20 @@ const StudentCard = ({ student }) => {
 
 
       </div>
+=======
+    <div className="big-card">
+       <article className="card-article">
+       <div className="card-box">
+              <img
+                src={studentUpdate.profileImg}
+                alt={"Student"}
+                style={{ width: "1500", height: "1368" }}
+              />
+            </div>
+      
+>>>>>>> cbdddff9bff6f29895c0977805490ca1e4bb8605
       {!isEdit ? (
-        <div className="student-card-body">
+        <div className="article-content">
           <h3>
             {hebrewVariables.fullName}: {student.firstName} {student.lastName}
           </h3>
@@ -63,17 +76,23 @@ const StudentCard = ({ student }) => {
             {user.role === "Staff" ? (
               <>
                 <button
+<<<<<<< HEAD
                   className="btn"
                   onClick={() => {
                     setIsDelete(isDelete ? false : true);
                     dispatch(deleteStudent(student))
                   }
                   }
+=======
+                style={{marginLeft:'5px'}}
+                   className="article-button"
+                  onClick={() => dispatch(deleteStudent(student._id))}
+>>>>>>> cbdddff9bff6f29895c0977805490ca1e4bb8605
                 >
                   {hebrewVariables.delete}
                 </button>
                 <button
-                  className="btn"
+                   className="article-button"
                   onClick={() => {
                     setIsEdit(isEdit ? false : true); setStudentUpdate({ ...studentUpdate, _id: student._id })
                   }}
@@ -86,8 +105,9 @@ const StudentCard = ({ student }) => {
             )}
           </div>
         </div>
+        
       ) : (
-        <div className="student-card-body">
+        <div className="article-content">
           <form className="student-card-body-form">
             <label>{hebrewVariables.firstName}</label>
             <input
@@ -126,7 +146,7 @@ const StudentCard = ({ student }) => {
             />
 
             <button
-              className="btn"
+              className="article-button"
               onClick={() => {
                 setIsEdit(false);
                 dispatch(updateStudent(studentUpdate));
@@ -137,6 +157,7 @@ const StudentCard = ({ student }) => {
           </form>
         </div>
       )}
+          </article>
     </div>
   );
 };
