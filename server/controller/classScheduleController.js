@@ -36,7 +36,6 @@ const updateClasses = (req, res) => {
       } else {
         console.log("Successfully Deleted");
       }
-
     });
   } else if (err) {
     console.log(err);

@@ -19,7 +19,8 @@ import { useSelector } from "react-redux";
 
 
 const ClassScheduleComponent = () => {
-
+  const course = useSelector((state) => state.course);
+  const  [saveChe, setSaveChe] = useState(false)
   const token = localStorage.getItem("jwtToken");
   
   const dataManager = new DataManager({
@@ -29,7 +30,7 @@ const ClassScheduleComponent = () => {
     adaptor: new UrlAdaptor(),
     headers: [{ 'Authorization': `Bearer ${token}`}] 
   })
-
+ 
   loadCldr(
     require("cldr-data/main/he/ca-gregorian.json"),
     require("cldr-data/main/he/numbers.json"),
@@ -61,8 +62,11 @@ const ClassScheduleComponent = () => {
             services={[Day, Week, WorkWeek, Month, Agenda, DragAndDrop, Resize]}
           />
         </ScheduleComponent>
+        <button type="button" onClick={()=>{setSaveChe(saveChe? false:true)}}>עדכן שינוים</button>
       </div>
     </div>
+
+    
   );
 };
 export default ClassScheduleComponent;

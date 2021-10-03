@@ -207,8 +207,6 @@ const deleteStudent = async (req, res) => {
   }
 };
 
-
-
 const getSyllabusByCourse = async (req, res) => {
   try {
     isEmptyId(req.body.id);
