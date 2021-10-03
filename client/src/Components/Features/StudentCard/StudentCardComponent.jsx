@@ -22,39 +22,27 @@ const StudentCard = ({ student }) => {
 
 
   return (
-<<<<<<< HEAD
-    <div className="student-card">
-      <div className="student-card-img">
-
-
-        {
+    <div className="big-card">
+       <article className="card-article">
+       <div className="card-box">
+       {
           IMAGE_PATH.length > 0 ?
             <img
               src={`/images/${IMAGE_PATH}`}
               alt={"Student"}
+              style={{ width: "1500", height: "1368" }}
             />
             :
             <img
               src={studentUpdate.gender === "זכר" ? maleAvatar : femaleAvatar}
               alt={"Student"}
+              style={{ width: "1500", height: "1368" }}
             />
 
         }
 
-
-      </div>
-=======
-    <div className="big-card">
-       <article className="card-article">
-       <div className="card-box">
-              <img
-                src={studentUpdate.profileImg}
-                alt={"Student"}
-                style={{ width: "1500", height: "1368" }}
-              />
             </div>
       
->>>>>>> cbdddff9bff6f29895c0977805490ca1e4bb8605
       {!isEdit ? (
         <div className="article-content">
           <h3>
@@ -76,18 +64,13 @@ const StudentCard = ({ student }) => {
             {user.role === "Staff" ? (
               <>
                 <button
-<<<<<<< HEAD
-                  className="btn"
-                  onClick={() => {
+                style={{marginLeft:'5px'}}
+                   className="article-button"
+                   onClick={() => {
                     setIsDelete(isDelete ? false : true);
                     dispatch(deleteStudent(student))
                   }
                   }
-=======
-                style={{marginLeft:'5px'}}
-                   className="article-button"
-                  onClick={() => dispatch(deleteStudent(student._id))}
->>>>>>> cbdddff9bff6f29895c0977805490ca1e4bb8605
                 >
                   {hebrewVariables.delete}
                 </button>
