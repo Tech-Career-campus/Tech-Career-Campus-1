@@ -24,13 +24,18 @@ const AdminGradesComponent = () => {
     let matches = students?.filter((oneStudent)=>{  
     const regex = new RegExp(`^${inputValue}`);
     console.log(oneStudent)
-    // if(inputValue.length > 0){
     return oneStudent.firstName.match(regex);
-    // }
     
  });
  setStudentMatch(matches);
  console.log(studentMatch)
+}
+let array ;
+if (studentMatch.length > 0) {
+  array = studentMatch
+}
+else{
+  array =students
 }
 
   return (
@@ -63,7 +68,7 @@ const AdminGradesComponent = () => {
             </tr>
           </thead>
           <tbody>
-            {studentMatch?.map((student) => (
+            {array?.map((student) => (
               <tr key={student._id}>
                 <td>{student?.firstName}</td>
                 <td>{student?.lastName}</td>

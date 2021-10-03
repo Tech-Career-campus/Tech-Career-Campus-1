@@ -150,14 +150,14 @@ const AddStaffComponent = ({ open, handleClose }) => {
                     />
                     <strong className="errors">{errors?.age ? errors.age : ""}</strong>
                     <TextField
-                        name="jod"
+                        name="job"
                         margin="dense"
                         id="name"
                         label={hebrewVariables.job}
                         type="text"
                         fullWidth
                         onChange={(e) => CreateStaff(e)}
-                        value={staffUser.jod}
+                        value={staffUser.job}
 
                     />
                     <TextField

@@ -16,7 +16,7 @@ const StaffCard = ({ staffItem }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [staffUpdate, setStaffUpdate] = useState({ ...staffItem });
 
-  const { firstName, lastName, phone, email, jod, responsible, profileImg } =
+  const { firstName, lastName, phone, email, job, responsible, profileImg } =
     staffItem;
 
   const IMAGE_PATH = profileImg?.slice(profileImg.lastIndexOf('\\') + 1, profileImg.length)|| "";
@@ -59,11 +59,11 @@ const StaffCard = ({ staffItem }) => {
             />
             <lable>{hebrewVariables.job}</lable>
             <input
-              name="jod"
+              name="job"
               label
               type="text"
               onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
-              value={staffUpdate.jod}
+              value={staffUpdate.job}
             />
             <div variant="body2" color="text.secondary">
               <h3>{hebrewVariables.contact}</h3>
@@ -121,7 +121,7 @@ const StaffCard = ({ staffItem }) => {
             </h1>
           </div>
           <div>
-            <h3>{jod}</h3>
+            <h3>{job}</h3>
           </div>
           <div variant="body2" color="text.secondary">
             <p>
