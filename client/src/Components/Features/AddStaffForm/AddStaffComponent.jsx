@@ -12,7 +12,7 @@ import { addStuff } from '../../../Redux/actions/staffAction';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import AddAPhotoIcon from '@mui/material/AddAPhoto';
 
 
 
