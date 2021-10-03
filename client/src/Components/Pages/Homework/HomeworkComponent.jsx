@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./Homework.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomework } from "../../../Redux/actions/homeworkActions";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
@@ -29,11 +30,13 @@ const Homework = () => {
   }, [user, course, dispatch]);
 
   return (
-    <>
+    <div className="container-homework">
+      
       <PageHeader title={hebrewVariables.homework} />
-      <div>
+      <div className="header-homework">
         {user.role === "Staff" ? (
-          <button
+          
+          <button className="btn"
             onClick={() => setIsCreateHomework(isCreateHomework ? false : true)}
           >
             {hebrewVariables.createHomework}
@@ -41,6 +44,7 @@ const Homework = () => {
         ) : (
           ""
         )}
+        <div className="homework-create-card"> 
         {isCreateHomework ? (
           <HomeworkFrom
             setIsCreateHomework={setIsCreateHomework}
@@ -52,6 +56,10 @@ const Homework = () => {
         ) : (
           ""
         )}
+       </div>
+       </div>
+        <div className="body-homework-cards">
+          
         {homework?.map((work) => (
           <div key={work._id}>
             {isEditHomework && updateHomework._id === work._id ? (
@@ -74,7 +82,7 @@ const Homework = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
