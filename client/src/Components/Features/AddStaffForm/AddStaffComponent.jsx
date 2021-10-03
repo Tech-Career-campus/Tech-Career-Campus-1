@@ -16,6 +16,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 
 
+
 const AddStaffComponent = ({ open, handleClose }) => {
     const [staffUser, setStaffUser] = useState({ registeredAs: "Staff" })
     const [isRegister, setIsRegister] = useState(false);

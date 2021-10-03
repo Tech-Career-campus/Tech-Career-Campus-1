@@ -13,7 +13,7 @@ import jwt_decode from "jwt-decode";
 
 export const getPost = (id) => async (dispatch) => {
   dispatch({ type: START_LOADING });
-  await fetcher(`https://teach-career-study-app.herokuapp.com/api/forum/${id}`)
+  await fetcher(`http://localhost:8080/api/forum/${id}`)
     .then((response) => {
       dispatch({
         type: FETCH_POST,
@@ -27,7 +27,7 @@ export const getPost = (id) => async (dispatch) => {
 
 export const getPosts = (page) => async (dispatch) => {
   dispatch({ type: START_LOADING });
-  await fetcher(`https://teach-career-study-app.herokuapp.com/api/forum?page=${page}`)
+  await fetcher(`http://localhost:8080/api/forum?page=${page}`)
     .then((response) => {
       dispatch({
         type: FETCH_ALL,
@@ -43,7 +43,7 @@ export const createPostStaff = (post, history) => async (dispatch) => {
   const token = localStorage.getItem("jwtToken");
   const user = jwt_decode(token);
   try {
-    await fetch(`https://teach-career-study-app.herokuapp.com/api/forum/staff`, {
+    await fetch(`http://localhost:8080/api/forum/staff`, {
       method: "POST",
       body: JSON.stringify({
         post,
@@ -73,7 +73,7 @@ export const createPostStudent = (post, history) => async (dispatch) => {
   const token = localStorage.getItem("jwtToken");
   const user = jwt_decode(token);
   try {
-    await fetch(`https://teach-career-study-app.herokuapp.com/api/forum/student`, {
+    await fetch(`http://localhost:8080/api/forum/student`, {
       method: "POST",
       body: JSON.stringify({
         post,
@@ -103,7 +103,7 @@ export const updatePost = (id, post) => async (dispatch) => {
   const token = localStorage.getItem("jwtToken");
   const user = jwt_decode(token);
   try {
-    await fetch(`https://teach-career-study-app.herokuapp.com/api/forum/${id}`, {
+    await fetch(`http://localhost:8080/api/forum/${id}`, {
       method: "PUT",
       body: JSON.stringify({
         post,
@@ -131,7 +131,7 @@ export const commentPost = (id, value) => async (dispatch) => {
   const token = localStorage.getItem("jwtToken");
   const user = jwt_decode(token);
   try {
-    const data = await fetch(`https://teach-career-study-app.herokuapp.com/api/forum/${id}/commentPost`, {
+    const data = await fetch(`http://localhost:8080/api/forum/${id}/commentPost`, {
       method: "POST",
       body: JSON.stringify({
         value,
@@ -159,7 +159,7 @@ export const commentPost = (id, value) => async (dispatch) => {
 export const deletePost = (id) => async (dispatch) => {
   dispatch({ type: START_LOADING });
   try {
-    const data = await fetch(`https://teach-career-study-app.herokuapp.com/api/forum/${id}`, {
+    const data = await fetch(`http://localhost:8080/api/forum/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -172,7 +172,7 @@ export const deletePost = (id) => async (dispatch) => {
           type: DELETE,
           payload:data.result._id,
         })
-
+        
        dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log(error);
