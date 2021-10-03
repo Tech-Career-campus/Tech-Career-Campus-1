@@ -51,7 +51,8 @@ export const updateEvent = (eventUpdate) => async dispatch => {
 }
 
 export const deleteEvent = (deleteId) => async dispatch => {
-    try {
+    if (window.confirm('are you sure?')) {
+        try {
             await fetcher(`http://localhost:8080/api/event/${deleteId}`, {
                 method: 'DELETE',
             })
@@ -60,8 +61,9 @@ export const deleteEvent = (deleteId) => async dispatch => {
                     payload: response.data
                 }))
                 .catch(error => { console.log(error); })
-    }
-    catch (error) {
-        console.log(error);
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 }
