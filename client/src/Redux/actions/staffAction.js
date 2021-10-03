@@ -2,7 +2,7 @@ import { GET_STAFF_LIST, ADD_STAFF, DELETE_STAFF, STAFF_ERRORS, UPDATE_STAFF, UP
 import fetcher from "../../utils/fetcher";
 
 export const getStaff = () => async dispatch => {
-    await fetcher('http://localhost:8080/api/staff')
+    await fetcher('/api/staff')
         .then((response) => dispatch({
             type: GET_STAFF_LIST,
             payload: response.data,
@@ -24,7 +24,7 @@ export const addStuff = (staff, file) => async dispatch => {
     staffObj.append('responsible', staff.responsible || "")
     staffObj.append('phone', staff.phone || "")
     try {
-        await fetch(`http://localhost:8080/api/register`, {
+        await fetch(`/api/register`, {
             method: "POST",
             body: staffObj,
             headers: {
@@ -74,7 +74,7 @@ export const deleteStaff = (staffId) => async dispatch => {
 export const updateStaff = (updateStaff) => async dispatch => {
 
     const { _id } = { ...updateStaff };
-    await fetcher(`http://localhost:8080/api/staff/update/${_id}`, {
+    await fetcher(`/api/staff/update/${_id}`, {
         method: 'PUT',
         body: JSON.stringify(updateStaff)
     })
@@ -90,7 +90,7 @@ export const updateStaffPassword = (updateStaff) => async dispatch => {
     // const { _id } = { ...updateStaff };
     // debugger
     console.log(updateStaff.currentPassword)
-    await fetcher(`http://localhost:8080/api/staff/changePassword`, {
+    await fetcher(`/api/staff/changePassword`, {
         method: 'PUT',
         headers: {
             "Accept": "apllication/json",
