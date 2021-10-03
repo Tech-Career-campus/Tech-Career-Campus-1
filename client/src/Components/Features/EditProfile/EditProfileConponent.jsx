@@ -26,8 +26,8 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
     setcurrntPassword(e.target.value)
   }
 
-  const dispatchNewPassword = ()=>{
-    dispatch(updateStaffPassword({ ...user,currentPassword:userUpdate.currentPassword, newPassword: userUpdate.newPassword }))
+  const dispatchNewPassword = () => {
+    dispatch(updateStaffPassword({ ...user, currentPassword: userUpdate.currentPassword, newPassword: userUpdate.newPassword }))
     setChangePassword(false)
     alert("password change was success")
   }
@@ -80,7 +80,7 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
               {changePassword === true ? (
                 <>
                   <label>{hebrewVariables.currentPassword}</label>
-                  <input name="currentPassword" type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}/>
+                  <input name="currentPassword" type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
 
                   <label>{hebrewVariables.newPassword}</label>
                   <input name="newPassword" value={userUpdate.newPassword} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
@@ -88,7 +88,7 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
                   <input name="confirm" value={userUpdate.confirm} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
                   <button
                     className='btn'
-                    onClick={dispatchNewPassword }
+                    onClick={dispatchNewPassword}
                   >
 
 
@@ -99,9 +99,9 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
                   </button>
                 </>
               ) : (
-                ""
-              )}
-            
+                  ""
+                )}
+
               {changePassword === false ? (<button
                 className='btn'
                 onClick={() => { setChangePassword(true) }}

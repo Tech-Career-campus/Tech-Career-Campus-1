@@ -38,7 +38,7 @@ const ChooseCourse = () => {
       <div style={styleModel}>
         <h3>אתה בטוח שאתה רוצה למחוק את הקורס {props.courseName} </h3>
         <Button
-          style={{ backgroundColor: "red", color: "white" }}
+          style={{ backgroundColor: "rgb(0,67,190)", color: "white" }}
           onClick={() => {
             return setmodel(false);
           }}
@@ -46,7 +46,7 @@ const ChooseCourse = () => {
           חזור{" "}
         </Button>
         <Button
-          style={{ backgroundColor: "red", color: "white", margin: "10px" }}
+          style={{ backgroundColor: "rgb(0,67,190)", color: "white", margin: "10px" }}
           onClick={() => {
             window.location.reload();
             return dispatch(deleteCourse(props._id));
@@ -63,40 +63,40 @@ const ChooseCourse = () => {
         <div id="courseCard" key={course._id} style={{ marginTop: "10px" }}>
           <Card sx={{ minWidth: 265 }}>
             <CardContent>
-              <Typography
+              <span
                 sx={{ fontSize: 14 }}
                 color="text.secondary"
                 gutterBottom
               >
                 {course.name}
-              </Typography>
+              </span>
             </CardContent>
             <CardActions>
               <div className="bth-e">
                 {user.job === "מנהלת פדגוגית" || user.job === "מנהל פדגוגי" ? (
                   <>
-                    <Button
+                    <button className="btn"
                       onClick={() => {
                         getData(course._id, course.name);
                       }}
-                      style={{ backgroundColor: "red", color: "white" }}
+                      style={{ backgroundColor: "rgb(0,67,190)", color: "white" }}
                       size="xxlarg"
                     >
                       מחק קורס
-                    </Button>
+                    </button>
                   </>
                 ) : (
                   ""
                 )}
               </div>
 
-              <Button
-                style={{ backgroundColor: "red", color: "white" }}
+              <button className="btn"
+                style={{ backgroundColor: "rgb(0,67,190)", color: "white" }}
                 size="xxlarg"
                 onClick={() => dispatch(getCourse(course._id))}
               >
                 פתח קורס
-              </Button>
+              </button>
             </CardActions>
           </Card>
         </div>

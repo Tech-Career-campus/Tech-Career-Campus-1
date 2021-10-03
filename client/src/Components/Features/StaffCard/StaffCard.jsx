@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Staff.css";
 import { useDispatch } from "react-redux";
 import { deleteStaff, updateStaff } from "../../../Redux/actions/staffAction";
@@ -19,7 +19,7 @@ const StaffCard = ({ staffItem }) => {
   const { firstName, lastName, phone, email, jod, responsible, profileImg } =
     staffItem;
 
-  const IMAGE_PATH = profileImg?.slice(profileImg.lastIndexOf('\\') + 1, profileImg.length)|| "";
+  const IMAGE_PATH = profileImg?.slice(profileImg.lastIndexOf('\\') + 1, profileImg.length) || "";
 
 
   console.log(IMAGE_PATH)
@@ -38,7 +38,7 @@ const StaffCard = ({ staffItem }) => {
 
                 />
                 :
-                
+
                 <img
                   src={`/images/${IMAGE_PATH}`}
                   alt={"staff profile"}
