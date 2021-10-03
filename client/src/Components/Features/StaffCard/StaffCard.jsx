@@ -1,143 +1,158 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Staff.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteStaff, updateStaff } from "../../../Redux/actions/staffAction";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
-import staffImg from "../../../images/1632247546163.jpg";
 import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
+import Dialog from '@material-ui/core/Dialog';
+
 
 const StaffCard = ({ staffItem }) => {
+
   const dispatch = useDispatch();
 
   const [isEdit, setIsEdit] = useState(false);
-  const [staffUpate, setStaffUpdate] = useState({ ...staffItem });
+  const [staffUpdate, setStaffUpdate] = useState({ ...staffItem });
 
-  const deletestaffHandler = (_id) => {
-    dispatch(deleteStaff(_id));
-  };
-
-  const { firstName, lastName, phone, email, jod, responsible, _id } =
+  const { firstName, lastName, phone, email, jod, responsible, profileImg } =
     staffItem;
+
+  const IMAGE_PATH = profileImg?.slice(profileImg.lastIndexOf('\\') + 1, profileImg.length) || "";
+
 
   return (
     <div className="staff-card">
-      {isEdit ? (
-        <div className="body-staff">
+
+      <Dialog aria-labelledby="form-dialog-title" open={isEdit} >
+        <div className="s-card-body-form">
           <div className="staff-card-img">
-            <img
-              src={staffImg}
-              alt={"staff"}
-            />
+            {
+              IMAGE_PATH.length === 0 ?
+                <img
+                  src="https://img.lovepik.com/element/40170/3915.png_860.png"
+                  alt={"staff profile"}
+
+                />
+                :
+
+                <img
+                  src={`/images/${IMAGE_PATH}`}
+                  alt={"staff profile"}
+                />
+            }
           </div>
           <div >
-          <div className="staff-card-body">
-            <h1>
-              {firstName} {lastName}
-            </h1>
-          </div>
-          <div>
-            <lable>{hebrewVariables.responsibleFor}</lable>
-            <input
-              name="responsible"
-              label
-              type="text"
-              onChange={(e) => handleChange(e, staffUpate, setStaffUpdate)}
-              value={staffUpate.responsible}
-            />
-            <lable>{hebrewVariables.job}</lable>
-            <input
-              name="jod"
-              label
-              type="text"
-              onChange={(e) => handleChange(e, staffUpate, setStaffUpdate)}
-              value={staffUpate.jod}
-            />
-            <div variant="body2" color="text.secondary">
-              <h3>{hebrewVariables.contact}</h3>
-              <ul>
-                <li>
-                  <input
-                    type="phone"
-                    value={staffUpate.phone}
-                    onChange={(e) => handleChange(e, staffUpate, setStaffUpdate)}
-                  />
-                </li>
-              </ul>
+            <div className="staff-card-body">
+              <h1>
+                {firstName} {lastName}
+              </h1>
             </div>
-            </div>
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit);
-              }}
-            >
-              {hebrewVariables.closeBtn}
-            </Button>
-
-            <Button
-              onClick={() => {
-                dispatch(updateStaff(staffUpate));
-              }}
-            >
-              {hebrewVariables.update}
-            </Button>
-          </div>
-        </div>
-
-
-
-        
-      ) : (
-          <div className="s-card-body-form">
-            <div className="staff-card-img">
-              <img
-                src={staffImg}
-                alt={"staff"}
+            <div>
+              <lable>{hebrewVariables.responsibleFor}</lable>
+              <input
+                name="responsible"
+                label
+                type="text"
+                onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
+                value={staffUpdate.responsible}
               />
-              
-            </div>
-            <div className="info-profil">
-              <div >
-                <h1>
-                  {firstName} {lastName}
-                </h1>
-              </div>
-              
-              <div >
-                <h3>{jod}</h3>
-              </div>
-              <div variant="body2" color="text.secondary">
-                <p>
-                  <h4>{hebrewVariables.responsibleFor}</h4>
-                  {responsible}
-                </p>
-              </div>
+              <lable>{hebrewVariables.job}</lable>
+              <input
+                name="jod"
+                label
+                type="text"
+                onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
+                value={staffUpdate.jod}
+              />
               <div variant="body2" color="text.secondary">
                 <h3>{hebrewVariables.contact}</h3>
                 <ul>
-                  <li>{phone}</li>
-                  <li>{email}</li>
+                  <li>
+                    <input
+                      type="phone"
+                      value={staffUpdate.phone}
+                      onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
+                    />
+                  </li>
                 </ul>
               </div>
-              
-            
-            <div className="staff-card-body-btn">
-              <Button>
-                <DeleteIcon onClick={() => deletestaffHandler(staffItem._id)} />
-              </Button>
               <Button
                 onClick={() => {
                   setIsEdit(!isEdit);
-                  setStaffUpdate({ ...staffUpate, _id: staffItem._id });
+                }}
+              >
+                {hebrewVariables.closeBtn}
+              </Button>
+
+              <Button
+                onClick={() => {
+                  dispatch(updateStaff(staffUpdate));
                 }}
               >
                 {hebrewVariables.update}
               </Button>
             </div>
-            </div>
           </div>
-        )}
+        </div>
+      </Dialog>
+
+
+      <div className="s-card-body-form">
+        <div className="staff-card-img">
+          {
+            IMAGE_PATH.length === 0 ?
+              <img
+                src="https://img.lovepik.com/element/40170/3915.png_860.png"
+                alt={"staff profile"}
+
+              />
+              :
+
+              <img
+                src={`/images/${IMAGE_PATH}`}
+                alt={"staff profile"}
+              />
+          }
+        </div>
+        <div>
+          <div>
+            <h1>
+              {firstName} {lastName}
+            </h1>
+          </div>
+          <div>
+            <h3>{jod}</h3>
+          </div>
+          <div variant="body2" color="text.secondary">
+            <p>
+              <h4>{hebrewVariables.responsibleFor}</h4>
+              {responsible}
+            </p>
+          </div>
+          <div variant="body2" color="text.secondary">
+            <h3>{hebrewVariables.contact}</h3>
+            <ul>
+              <li>{phone}</li>
+              <li>{email}</li>
+            </ul>
+          </div>
+        </div>
+        <div className="staff-card-body-btn">
+          <Button>
+            <DeleteIcon onClick={() => dispatch(deleteStaff(staffItem._id))} />
+          </Button>
+          <Button
+            onClick={() => {
+              setIsEdit(!isEdit);
+              setStaffUpdate({ ...staffUpdate, _id: staffItem._id });
+            }}
+          >
+            {hebrewVariables.update}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

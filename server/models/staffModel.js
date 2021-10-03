@@ -32,6 +32,7 @@ const staffSchema = new Schema(
     },
     role: {
       type: String,
+      default:"Staff"
     },
     profileImg: {
       type: String,

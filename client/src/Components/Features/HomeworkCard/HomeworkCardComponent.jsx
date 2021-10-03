@@ -1,4 +1,5 @@
 import moment from "moment";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteHomework } from "../../../Redux/actions/homeworkActions";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
@@ -9,7 +10,8 @@ const HomeworkCard = ({
   isEditHomework,
   setUpdateHomework,
 }) => {
-  
+
+  const [isDelete, setIsDelete] = useState(false);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ const HomeworkCard = ({
           >
             {hebrewVariables.edit}
           </button>
-          <button onClick={() => dispatch(deleteHomework(work._id))}>
+          <button onClick={() =>{setIsDelete(isDelete ? false : true); dispatch(deleteHomework(work._id))}}>
             {hebrewVariables.delete}
           </button>
         </>

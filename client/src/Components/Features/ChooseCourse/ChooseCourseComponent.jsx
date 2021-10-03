@@ -41,14 +41,14 @@ const ChooseCourse = () => {
           style={{ "marginTop": "10px" }} >
           <Card sx={{ minWidth: 265 }} >
             <CardContent>
-              <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              <span sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                 {course.name}
-              </Typography>
+              </span>
             </CardContent>
             <CardActions>
-              <Button onClick={() => { getData(course._id, course.name) }} style={{ "backgroundColor": "red", "color": "white" }} size="xxlarg">מחק קורס</Button>
-              ,<br />
-              <Button  style={{ "backgroundColor": "red", "color": "white" }} size="xxlarg" onClick={() => dispatch(getCourse(course._id))}>פתח קורס</Button>
+              <button className="btn" onClick={() => { getData(course._id, course.name) }} style={{ "backgroundColor": "rgb(0,67,190)", "color": "white" }} size="xxlarg">מחק קורס</button>
+              <br />
+              <button className="btn"  style={{ "backgroundColor": "rgb(0,67,190)", "color": "white" }} size="xxlarg" onClick={() => dispatch(getCourse(course._id))}>פתח קורס</button>
             </CardActions>
           </Card>
         </div>

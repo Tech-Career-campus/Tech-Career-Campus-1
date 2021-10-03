@@ -242,16 +242,18 @@ const searchCourseAutocomplete = async (req, res) => {
 
 const getStudentsByCourse = async (req, res) => {
   try {
+    let students ;
     isEmptyId(req.params.id);
     await CourseModel.findById(req.params.id)
       .populate('students')
       .then(course => {
+        students = course.students.map((student) => student)
         res
           .status(200)
           .json({
             success: true,
             message: 'The student is ',
-            data: course.students.map((student) => student)
+            data: students
           })
       })
       .catch(err => {
@@ -275,6 +277,7 @@ const getStudentsByCourse = async (req, res) => {
       })
   }
 };
+
 
 const deleteCourseById = async (req, res) => {
   try {

@@ -105,11 +105,24 @@
     height: 200px;
     margin-top: 10px;
 }
+.body-home-company-cards .info2 {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px;
+    visibility: hidden;
+    opacity: 0;
+}
+    
 .body-home-company-cards:hover{
     cursor: pointer;
+   
 }
-.body-home-company-cards:hover .info{
-    height: 220px;
-    bottom: 240px;
+.body-home-company-cards:hover .info2{
     background: black;
+    opacity: 8;
+}
+.body-home-company-cards:hover p{
+    opacity: 1;
+    visibility: visible;    
+
 }

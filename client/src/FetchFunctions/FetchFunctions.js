@@ -7,8 +7,8 @@ export const defaultHeaders = {
     "Content-Type": "application/json"
 }
 
-export const fetchNewApi = () => {
-    return fetch(`${api}${api_key}`)
+export const fetchNewApi = async () => {
+    return await fetch(`${api}${api_key}`)
         .then((res) => res.json())
         .then((response) => response)
         .catch(err => {
@@ -16,13 +16,13 @@ export const fetchNewApi = () => {
         });
 }
 
-export const fetchSyllabus = () => {
+export const fetchSyllabus = async () => {
     const token = localStorage.getItem("jwtToken");
     const defaultHeaders = {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
     }
-    return fetch('http://localhost:8080/api/course', { headers: defaultHeaders})
+    return await fetch('http://localhost:8080/api/course', { headers: defaultHeaders})
         .then((res) => res.json())
         .then((response) => response)
         .catch(err => {

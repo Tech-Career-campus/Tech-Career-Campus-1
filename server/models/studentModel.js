@@ -41,6 +41,9 @@ const studentSchema = new Schema(
         IdNumber: {
           type: String,
         },
+        gender:{
+          type:String
+        },
         tests: {
           type: [
             {
