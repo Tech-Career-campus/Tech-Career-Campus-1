@@ -54,8 +54,7 @@
  justify-content: center;
  flex-direction: column;
  align-items: center;
- 
-
+ height: 67vh;
 }
 
 .Body .body-updete .form-event{
@@ -185,7 +184,6 @@
     width: 220px;
     height: 50px;
     
-    
 }
 
 .EventsNews .bth-e button{
@@ -207,6 +205,4 @@
     font-size: 15px;
     width: 50px;
     height: 30px;
-    
-
 }
