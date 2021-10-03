@@ -8,6 +8,8 @@ import {
 import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
 import homeworkValidator from "./homeworkValidator";
+import './homeworkForm.css'
+
 
 const HomeworkFrom = ({
   state,

@@ -2,8 +2,6 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStaff } from '../../../Redux/actions/staffAction';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import AddStaffComponent from '../../Features/AddStaffForm/AddStaffComponent';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
 import StaffCard from '../../Features/StaffCard/StaffCard';

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Staff.css";
 import { useDispatch } from "react-redux";
 import { deleteStaff, updateStaff } from "../../../Redux/actions/staffAction";
-import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
