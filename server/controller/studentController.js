@@ -130,13 +130,7 @@ const deleteStudentTestById = async (req, res) => {
 const updateStudent = async (req, res) => { 
   try {
     isEmptyId(req.params.id);
-    const field = req.body.field;
-    if (field === "tests" ) {
-      throw new Error("you cant update arrays only static fields");
-    }
-    else if(field === null){
-      throw new Error("you need to choose a field");
-    }
+    
     await StudentModel.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },

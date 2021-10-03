@@ -26,7 +26,7 @@ const rel = "mongodb+srv://Tech-Career:5f4dlTe1Y4cXQ5Pj@tech-career.w0ebs.mongod
     }else{
       console.log(dbConnection);
       mongoose
-      .connect(dbConnection, options)
+      .connect(dbConnection_test, options)
       .then(() => {
         console.log(chalk.green("mongoDB connected"));
       })
