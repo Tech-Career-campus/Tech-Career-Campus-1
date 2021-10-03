@@ -26,6 +26,12 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
   const currntpassword = (e) => {
     setcurrntPassword(e.target.value)
   }
+
+  const dispatchNewPassword = ()=>{
+    dispatch(updateStaffPassword({ ...user,currentPassword:userUpdate.currentPassword, newPassword: userUpdate.newPassword }))
+    setChangePassword(false)
+    alert("password change was success")
+  }
   return (
 
     <div className="edit-profile">
@@ -75,18 +81,15 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
               {changePassword === true ? (
                 <>
                   <label>{hebrewVariables.currentPassword}</label>
-                  {/* של יצחק ב */}
                   <input name="currentPassword" type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}/>
 
-                  {/* של יצחק ק */}
-                  {/* <input name="password" type="text" onChange={(e) => currntpassword(e)} /> */}
                   <label>{hebrewVariables.newPassword}</label>
                   <input name="newPassword" value={userUpdate.newPassword} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
                   <label>{hebrewVariables.confirmPassword}</label>
                   <input name="confirm" value={userUpdate.confirm} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
                   <button
                     className='btn'
-                    onClick={() => { dispatch(updateStaffPassword({ ...user,currentPassword:userUpdate.currentPassword, newPassword: userUpdate.newPassword })) }}
+                    onClick={dispatchNewPassword }
                   >
 
 
@@ -99,12 +102,7 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
               ) : (
                 ""
               )}
-              {/* <button
-        className='btn'
-          onClick={() => {setChangePassword(changePassword ? false : true); dispatch(updateStaffPassword({...user , currentPassword:userUpdate.password, newPassword:userUpdate.newPassword }))}}
-        >
-          {hebrewVariables.updatePassword} 
-        </button> */}
+            
               {changePassword === false ? (<button
                 className='btn'
                 onClick={() => { setChangePassword(true) }}
