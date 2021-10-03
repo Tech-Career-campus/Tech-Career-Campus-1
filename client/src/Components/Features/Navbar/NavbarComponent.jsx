@@ -16,6 +16,11 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
 
+  const { profileImg } = user
+
+  const IMAGE_PATH = profileImg?.slice(profileImg.lastIndexOf('\\') + 1, profileImg.length) || "";
+
+
   return (
     <>
       <div className="navbar-main">
@@ -47,21 +52,21 @@ const Navbar = () => {
             <h4>
               היי, {user.firstName} {user.lastName}
             </h4>
-            <img
-              src="https://img.lovepik.com/element/40170/3915.png_860.png"
-              alt={"Student"}
-            />
+            {
+              IMAGE_PATH.length === 0 ?
+                <img
+                  src="https://img.lovepik.com/element/40170/3915.png_860.png"
+                  alt={"Student"}
 
-            {editProfile ? (
-              <EditProfile
-                open={open}
-                setOpen={setOpen}
-                user={user}
-                setEditProfile={setEditProfile}
-              />
-            ) : (
-              ""
-            )}
+                />
+                :
+                <img
+                  src={`/images/${IMAGE_PATH}`}
+                  alt={"Student"}
+                />
+            }
+
+            {editProfile ? <EditProfile open={open} setOpen={setOpen} user={user} setEditProfile={setEditProfile} /> : ""}
           </div>
           <button
             className="btn"

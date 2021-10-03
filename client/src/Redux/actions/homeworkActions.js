@@ -27,7 +27,7 @@ export const deleteHomework = (id) => async dispatch => {
     })
         .then(response => dispatch({
             type: DELETE_HOMEWORK,
-            payload: response.data
+            payload: response.data._id
         }))
         .catch(error => console.log(error))
 }
