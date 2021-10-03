@@ -36,4 +36,21 @@ describe("API REST /api/classSchedule", async (done) => {
 //         done();
 //       });
 //   });
+
+//   it("is get all of class schedule  ", (done) => {
+//  const id ="613f94a0bc4467548c72134e"
+//     chai
+//       .request(server)
+//       .get("/api/course/getCourseById/:id/"+id)
+//       .set("Authorization", token)
+//  
+//       .end((err, res) => {
+//         const data = res.body;
+//         console.log(data);
+//         // res.should.have.status(200);
+//         // data.should.be.a("array");
+
+//         done();
+//       });
+//   });
 });
