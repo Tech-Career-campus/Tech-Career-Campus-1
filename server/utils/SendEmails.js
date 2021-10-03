@@ -21,6 +21,8 @@ const SendEmails = (req, res) => {
       user: EMAIL_ADDRESS,
       pass: EMAIL_API,
     },
+    tls: {
+      rejectUnauthorized: false}
   });
 
   const options = {
