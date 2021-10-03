@@ -12,7 +12,7 @@ import { addStuff } from '../../../Redux/actions/staffAction';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
-import AddAPhotoIcon from '@mui/material/AddAPhoto';
+import AddAPhoto from '@material-ui/icons/AddAPhoto';
 
 
 
@@ -180,7 +180,7 @@ const AddStaffComponent = ({ open, handleClose }) => {
 
                             }} />
                         בחר תמונת פרופיל
-                        <AddAPhotoIcon />
+                        < AddAPhoto />
                     </IconButton>
                 </DialogContent>
 
