@@ -65,7 +65,7 @@ const StaffCard = ({ staffItem }) => {
               <p className="article-desc">
                 <h3>{hebrewVariables.contact}</h3>
                 <ul>
-                <lable>{hebrewVariables.responsibleFor}</lable>
+                <label>{hebrewVariables.responsibleFor}</label>
                 <br />
             <input
               name="responsible"
