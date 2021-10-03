@@ -13,6 +13,7 @@ const AdminGradesComponent = () => {
   const course = useSelector((state) => state.course);
   const [openTests, setOpenTests] = useState(false);
   const [studentMatch, setStudentMatch] = useState([]);
+  const [input, setInput] = useState([]);
   useEffect(
     () => dispatch(getStudents(course._id)),
     [dispatch, openTests, course]
@@ -22,10 +23,10 @@ const AdminGradesComponent = () => {
     let inputValue = e.target.value
     let matches = students?.filter((oneStudent)=>{  
     const regex = new RegExp(`^${inputValue}`);
-    // console.log(oneStudent)
-    if(inputValue.length < 0){
+    console.log(oneStudent)
+    // if(inputValue.length > 0){
     return oneStudent.firstName.match(regex);
-    }
+    // }
     
  });
  setStudentMatch(matches);
@@ -38,8 +39,8 @@ const AdminGradesComponent = () => {
         <PageHeader title={hebrewVariables.studentsGrades} />
         <div className="wrap">
           <div className="search">
-            <input onChange={searchStudent} className="search-term" type="text" placeholder="Search 🔍"/>
-            <button className="search-button">
+            <input className="search-term" type="text" value={studentMatch.firsName} onChange={searchStudent} placeholder="Search 🔍"/>
+            <button className="search-button" value={studentMatch.firsName} onClick={searchStudent}>
               <i className="fa fa-search"></i>
             </button>
           </div>
@@ -62,21 +63,20 @@ const AdminGradesComponent = () => {
             </tr>
           </thead>
           <tbody>
-            {students?.map((student) => (
-                <tr key={student._id}>
-                  <td>{student?.firstName}</td>
-                  <td>{student?.lastName}</td>
-                  <td>{student?.courseName}</td>
-                  <td
-                    onClick={() => {
-                      setOpenTests(true);
-                      dispatch(getStudent(student));
-                    }}
-                  >
-                    <i className="fas fa-user-edit"></i>
-                  </td>
-                </tr>       
-
+            {studentMatch?.map((student) => (
+              <tr key={student._id}>
+                <td>{student?.firstName}</td>
+                <td>{student?.lastName}</td>
+                <td>{student?.courseName}</td>
+                <td
+                  onClick={() => {
+                    setOpenTests(true);
+                    dispatch(getStudent(student));
+                  }}
+                >
+                  <i className="fas fa-user-edit"></i>
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
