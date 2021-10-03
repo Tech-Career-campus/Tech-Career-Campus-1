@@ -18,19 +18,19 @@ const AdminGradesComponent = () => {
     [dispatch, openTests, course]
   );
 
-//   const searchStudent = (e) =>{
-//     let inputValue = e.target.value
-//     let matches = students?.filter((oneStudent)=>{  
-//     const regex = new RegExp(`^${inputValue}`);
-//     console.log(oneStudent)
-//     if(inputValue.length < 0){
-//     return oneStudent.firstName.match(regex);
-//     }
+  const searchStudent = (e) =>{
+    let inputValue = e.target.value
+    let matches = students?.filter((oneStudent)=>{  
+    const regex = new RegExp(`^${inputValue}`);
+    // console.log(oneStudent)
+    if(inputValue.length < 0){
+    return oneStudent.firstName.match(regex);
+    }
     
-//  });
-//  setStudentMatch(matches);
-//  console.log(studentMatch)
-// }
+ });
+ setStudentMatch(matches);
+ console.log(studentMatch)
+}
 
   return (
     <div className="admin-grade-contaniner">
@@ -38,7 +38,7 @@ const AdminGradesComponent = () => {
         <PageHeader title={hebrewVariables.studentsGrades} />
         <div className="wrap">
           <div className="search">
-            <input  className="search-term" type="text" placeholder="Search 🔍"/>
+            <input onChange={searchStudent} className="search-term" type="text" placeholder="Search 🔍"/>
             <button className="search-button">
               <i className="fa fa-search"></i>
             </button>

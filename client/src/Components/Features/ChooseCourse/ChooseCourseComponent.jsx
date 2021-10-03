@@ -8,6 +8,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import CreatCourse from '../../Pages/CreatCourse/CreatCourseComponent';
 
 const ChooseCourse = () => {
   const dispatch = useDispatch();
@@ -34,8 +35,18 @@ const ChooseCourse = () => {
       </div>
     )
   }
+
+  //   {
+  //     user.role === "Staff" ? <Tab style={{fontSize:"16px"}} eventKey="Creat-course" title={hebrewVariables.createCourse} >
+  //         <CreatCourse />
+  //     </Tab> : ""
+  // }
+  const [creatCourse, setCreatCourse] = useState(false)
   return (
     <div id="container">
+     {creatCourse === false ?  "" : <CreatCourse />  }
+      {creatCourse === true ?  "" : <Button style={{ "backgroundColor": "red", "color": "white","height":"30px" }} size="xxlarg" onClick={()=>{setCreatCourse(true)}}>יצ ירת קורס </Button>  }
+      {creatCourse === false ?  "" : <Button style={{ "backgroundColor": "red", "color": "white","height":"30px" }} size="xxlarg" onClick={()=>{setCreatCourse(false)}}> סגור</Button>  }
       {courses?.map((course) => (
         <div id="courseCard" key={course._id}
           style={{ "marginTop": "10px" }} >
@@ -48,7 +59,7 @@ const ChooseCourse = () => {
             <CardActions>
               <Button onClick={() => { getData(course._id, course.name) }} style={{ "backgroundColor": "red", "color": "white" }} size="xxlarg">מחק קורס</Button>
               ,<br />
-              <Button  style={{ "backgroundColor": "red", "color": "white" }} size="xxlarg" onClick={() => dispatch(getCourse(course._id))}>פתח קורס</Button>
+              <Button style={{ "backgroundColor": "red", "color": "white" }} size="xxlarg" onClick={() => dispatch(getCourse(course._id))}>פתח קורס</Button>
             </CardActions>
           </Card>
         </div>

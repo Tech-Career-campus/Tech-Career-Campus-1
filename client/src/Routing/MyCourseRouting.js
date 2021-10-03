@@ -7,7 +7,7 @@ import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import { useDispatch, useSelector } from 'react-redux';
 import Students from '../Components/Pages/Sudents/StudentsComponent';
-import CreatCourse from '../Components/Pages/CreatCourse/CreatCourseComponent';
+// import CreatCourse from '../Components/Pages/CreatCourse/CreatCourseComponent';
 import StaffComponents from '../Components/Pages/Staff/StaffComponents';
 import ChooseCourse from '../Components/Features/ChooseCourse/ChooseCourseComponent'
 import { getCourse } from '../Redux/actions/courseActions';
@@ -28,6 +28,7 @@ const MyCourseRouting = () => {
     return (
         <>
             {
+
                 !course._id ? <ChooseCourse /> :
                     <>
                         <h2 style={{fontSize:"30px",padding:"10px"}}>{course?.name}</h2>
@@ -41,6 +42,7 @@ const MyCourseRouting = () => {
                                     }
 
                                 </select> : ""}
+                                
                         <Tabs
                         style={{fontSize:"16px"}}
                             defaultActiveKey="course-schedule"
@@ -48,11 +50,6 @@ const MyCourseRouting = () => {
                             id="noanim-tab-example"
                             className="mb-3"
                         >
-                            {/* nice to have
-
-                <Tab eventKey="daily-schedule" title="לוז יומי">
-                    <DailySchedule />
-                </Tab> */}
 
                             <Tab style={{fontSize:"16px"}} eventKey="course-schedule" title={hebrewVariables.CourseSchedule}  >
                                 <CourseSchedule />
@@ -75,11 +72,11 @@ const MyCourseRouting = () => {
                                     <Students />
                                 </Tab>
                             }
-                            {
+                            {/* {
                                 user.role === "Staff" ? <Tab style={{fontSize:"16px"}} eventKey="Creat-course" title={hebrewVariables.createCourse} >
                                     <CreatCourse />
                                 </Tab> : ""
-                            }
+                            } */}
 
                             {
                                 user.role === "Staff" ? <Tab style={{fontSize:"16px"}} eventKey="staff" title={hebrewVariables.staff} >
