@@ -17,6 +17,7 @@
     "bootstrap": "^5.1.0",
     "cldr-data": "^36.0.0",
     "generate-password": "^1.6.1",
+    "material-icons": "^1.7.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.5",
