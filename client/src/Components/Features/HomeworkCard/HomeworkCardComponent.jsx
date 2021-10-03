@@ -17,8 +17,8 @@ const HomeworkCard = ({
   const dispatch = useDispatch();
 
   return (
-    <div className="big-card">
-      <div className="">
+    <div className="body-card-work">
+      <div className="info-cardwork">
 
       <h2>{work.subject}</h2>
       <h4>{work.description}</h4>

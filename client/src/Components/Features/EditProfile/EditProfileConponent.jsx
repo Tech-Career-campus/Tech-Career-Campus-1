@@ -5,7 +5,6 @@ import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import AddAPhoto from '@material-ui/icons/AddAPhoto';
 import './editProfile.css'
 import {
   updateStaffPassword,

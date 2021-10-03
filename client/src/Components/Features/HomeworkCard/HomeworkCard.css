@@ -1,20 +1,28 @@
 .body-card-work{ 
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    box-shadow: 2px 2px 4px -2px black;
     border-radius: 6px;
     background-color: white;
-    width: 200px;
+    width: 350px;
     height: 200px;
-    margin: 2%;
+    margin: 16px;
+    
     
 }
 .info-cardwork{
     width: 100%;
-    height: 100px;
+    height: 150px;
+     /* border: 1px solid black; */
+    padding: 6px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 .info-cardwork h2{
     font-size: 25px;
+    
 
 }
 .info-cardwork h4{
@@ -25,6 +33,9 @@
     font-size: 12px;
 
 }
-.btn-card{
-    border: 1px solid black;
+ .btn-card{
+    /* border: 1px solid black; */
+    width: 350px;
+    
+    
 }

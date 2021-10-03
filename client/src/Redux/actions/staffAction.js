@@ -20,7 +20,7 @@ export const addStuff = (staff, file) => async dispatch => {
     staffObj.append('email', staff.email || "")
     staffObj.append('password', staff.password || "")
     staffObj.append('age', staff.age || "")
-    staffObj.append('jod', staff.jod || "")
+    staffObj.append('job', staff.job || "")
     staffObj.append('responsible', staff.responsible || "")
     staffObj.append('phone', staff.phone || "")
     try {
@@ -73,8 +73,8 @@ export const deleteStaff = (staffId) => async dispatch => {
 
 export const updateStaff = (updateStaff) => async dispatch => {
 
-    const { id } = { ...updateStaff };
-    await fetcher(`http://localhost:8080/api/staff/update/${id}`, {
+    const { _id } = { ...updateStaff };
+    await fetcher(`http://localhost:8080/api/staff/update/${_id}`, {
         method: 'PUT',
         body: JSON.stringify(updateStaff)
     })
