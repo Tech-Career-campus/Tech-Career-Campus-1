@@ -5,7 +5,6 @@ import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import './editProfile.css'
 import {
   updateStaffPassword,
@@ -13,8 +12,6 @@ import {
 
 const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
   const [changePassword, setChangePassword] = useState(false);
-  const [currntPassword, setcurrntPassword] = useState("");
-  //   const [updateUser, setUpdateUser] = useState({...user, password:"", newPassword:"", confirmPassword:"" })
   const [userUpdate, setUserUpdate] = useState({ ...user });
   const [file, setFile] = useState(null)
   const dispatch = useDispatch();
@@ -22,13 +19,9 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
   useEffect(() => setUserUpdate({ ...user }), [user]);
 
   const handleClose = () => setOpen(false);
-  // const handleClose = () => setOpen(false);
-  const currntpassword = (e) => {
-    setcurrntPassword(e.target.value)
-  }
 
-  const dispatchNewPassword = ()=>{
-    dispatch(updateStaffPassword({ ...user,currentPassword:userUpdate.currentPassword, newPassword: userUpdate.newPassword }))
+  const dispatchNewPassword = () => {
+    dispatch(updateStaffPassword({ ...user, currentPassword: userUpdate.currentPassword, newPassword: userUpdate.newPassword }))
     setChangePassword(false)
     alert("password change was success")
   }
@@ -81,7 +74,7 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
               {changePassword === true ? (
                 <>
                   <label>{hebrewVariables.currentPassword}</label>
-                  <input name="currentPassword" type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}/>
+                  <input name="currentPassword" type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
 
                   <label>{hebrewVariables.newPassword}</label>
                   <input name="newPassword" value={userUpdate.newPassword} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
@@ -89,7 +82,7 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
                   <input name="confirm" value={userUpdate.confirm} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
                   <button
                     className='btn'
-                    onClick={dispatchNewPassword }
+                    onClick={dispatchNewPassword}
                   >
 
 
@@ -100,9 +93,9 @@ const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
                   </button>
                 </>
               ) : (
-                ""
-              )}
-            
+                  ""
+                )}
+
               {changePassword === false ? (<button
                 className='btn'
                 onClick={() => { setChangePassword(true) }}

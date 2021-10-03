@@ -1,0 +1,38 @@
+.container-homework{
+    width: 100vw;
+    height: 100vh;
+    
+    
+}
+.body-homework-card{
+    display: flex;
+    border: 1px solid black;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.body .homework-cards{
+    border: 1px solid black;
+    display: flex;
+    
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+.header-homework{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+   
+    align-items: center;
+}
+
+.homework-create-card{
+    width: 60%;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
