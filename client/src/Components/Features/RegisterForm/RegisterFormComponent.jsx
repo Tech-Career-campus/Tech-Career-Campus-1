@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createStudent } from "../../../Redux/actions/studentsActions";
 import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
+import maleAvatar from '../../../images/male-avatar.jpg'
+import femaleAvatar from '../../../images/female-avatar.jpg'
 import "./registerForm.css";
 
 let generator = require("generate-password");
@@ -26,7 +28,6 @@ const RegisterForm = ({ SetIsRegister }) => {
   });
 
   const [isSend, setIsSend] = useState(false);
- 
 
   return (
     <>
@@ -68,6 +69,23 @@ const RegisterForm = ({ SetIsRegister }) => {
           />
           <p> {errors?.phone ? errors.phone : ""} </p>
 
+          <lable>{hebrewVariables.selectGender}</lable>
+          <input
+            type="radio"
+            onChange={(e) =>
+              handleChange(e, newStudent, setNewStudent)
+            }
+            name="gender"
+            value="זכר"
+          />
+           <input
+            type="radio"
+            onChange={(e) =>
+              handleChange(e, newStudent, setNewStudent)
+            }
+            name="gender"
+            value="נקבה"
+          />
 
           <label>{hebrewVariables.age}</label>
           <input
@@ -84,7 +102,8 @@ const RegisterForm = ({ SetIsRegister }) => {
             type={"text"}
             value={newStudent.password}
           />
-          <button onClick={() => dispatch(createStudent(newStudent))}>
+          <button
+            onClick={() => dispatch(createStudent(newStudent))}>
             {hebrewVariables.add}
           </button>
         </form>

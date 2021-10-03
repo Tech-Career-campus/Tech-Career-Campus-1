@@ -70,7 +70,7 @@ const postNewEvent = async (req, res) => {
 const deleteEventPost = async (req, res) => {
   try {
     isEmptyId(req.params.id)
-    await eventModel.findByIdAndRemove(req.params.id, (err, result) => {
+    await eventModel.findByIdAndDelete(req.params.id, (err, result) => {
       if (err) throw err;
       nullError(result, res);
 

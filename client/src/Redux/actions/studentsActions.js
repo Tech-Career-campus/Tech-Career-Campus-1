@@ -1,5 +1,6 @@
 import fetcher from '../../utils/fetcher';
 import { CREATE_STUDENT, CREATE_STUDENT_ERRORS, DELETE_STUDENT, GET_STUDENTS, UPDATE_STUDENT } from './types'
+
 export const getStudents = (courseId) => async dispatch => {
     await fetcher(`http://localhost:8080/api/course/students/${courseId}`)
         .then((response) => dispatch({
@@ -7,6 +8,7 @@ export const getStudents = (courseId) => async dispatch => {
             payload: response.data,
         }))
         .catch((err) => console.log(err));
+        
 }
 export const createStudent = (newStudent) => async dispatch => {
     try {
@@ -30,10 +32,10 @@ export const createStudent = (newStudent) => async dispatch => {
 }
 
 
-export const deleteStudent = (studentId) => async dispatch => {
-    await fetcher("http://localhost:8080/api/student/deleteStudent", {
+export const deleteStudent = (student) => async dispatch => {
+    await fetcher(`http://localhost:8080/api/student/deleteStudent/${student._id}`, {
         method: 'DELETE',
-        body: JSON.stringify({ _id: studentId })
+        body: JSON.stringify({courseId:student.courseId}),
     }).then(response => dispatch({
         type: DELETE_STUDENT,
         payload: response.data
@@ -43,6 +45,7 @@ export const deleteStudent = (studentId) => async dispatch => {
 
 export const updateStudent = (studentUpdate) => async dispatch => {
     const { _id } = { ...studentUpdate };
+    debugger
     await fetcher(`http://localhost:8080/api/student/updateStudent/${_id}`, {
         method: 'PUT',
         body: JSON.stringify(studentUpdate)

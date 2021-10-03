@@ -43,6 +43,7 @@ export const ADD_STAFF="ADD_STAFF"
 export const DELETE_STAFF="DELETE_STAFF"
 export const STAFF_ERRORS="STAFF_ERRORS"
 export const UPDATE_STAFF ="UPDATE_STAFF"
+export const UPDATE_STAFF_PASSWORD = "UPDATE_STAFF_PASSWORD"
 // Course
 
 // Courses

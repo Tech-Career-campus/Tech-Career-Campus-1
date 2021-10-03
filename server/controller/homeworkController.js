@@ -75,7 +75,7 @@ const updateHomeworkById = async (req, res) => {
 const deleteHomeworkById = async (req, res) => {
   isEmptyId(req.params.id);
   try {
-    const homework = await HomeworkModel.findByIdAndDelete(req.params.id, (err, result) => {
+    const homework = await HomeworkModel.findById(req.params.id, (err, result) => {
       if (err) throw err;
     });
     nullVariable(homework)
@@ -84,12 +84,13 @@ const deleteHomeworkById = async (req, res) => {
       { $pull: { homeworks: homework._id } },
       (err, result) => {
         if (err) throw err;
-        homework.remove({});
+        homework.remove();
         res
         .status(200)
         .json({
            success:true,
            massage: "delete by id homework success!",
+           data:homework
         });
       }
     );
