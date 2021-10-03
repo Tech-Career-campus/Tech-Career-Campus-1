@@ -73,8 +73,8 @@ const StaffCard = ({ staffItem }) => {
                   name="responsible"
                   label
                   type="text"
-                  onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
-                  value={responsible}
+                  onChange={(e) =>{handleChange(e, staffUpdate, setStaffUpdate); console.log(staffUpdate)}}
+                  value={staffUpdate.responsible}
                 />{" "}
                 <br />
                 <label>{hebrewVariables.job}</label>
@@ -84,7 +84,7 @@ const StaffCard = ({ staffItem }) => {
                   label
                   type="text"
                   onChange={(e) => handleChange(e, staffUpdate, setStaffUpdate)}
-                  value={jod}
+                  value={staffUpdate.jod}
                 />
                 <div>
                   <h3>{hebrewVariables.contact}</h3>
@@ -92,10 +92,11 @@ const StaffCard = ({ staffItem }) => {
                     <li>
                       <input
                         type="phone"
-                        value={phone}
+                        name="phone"
                         onChange={(e) =>
                           handleChange(e, staffUpdate, setStaffUpdate)
                         }
+                        value={staffUpdate.phone}
                       />
                     </li>
                   </ul>
@@ -107,6 +108,7 @@ const StaffCard = ({ staffItem }) => {
               className="article-button"
               onClick={() => {
                 dispatch(updateStaff(staffUpdate));
+                setIsEdit(!isEdit)
               }}
             >
               {hebrewVariables.update}

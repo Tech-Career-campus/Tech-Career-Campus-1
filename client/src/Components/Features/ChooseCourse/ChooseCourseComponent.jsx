@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCourse, deleteCourse } from "../../../Redux/actions/courseActions";
 import { getCourses } from "../../../Redux/actions/coursesActions";
-import "./ChooseCourseComponent.css";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import './ChooseCourseComponent.css'
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import CreatCourse from '../../Pages/CreatCourse/CreatCourseComponent';
 
 const ChooseCourse = () => {
   const dispatch = useDispatch();
@@ -55,10 +56,14 @@ const ChooseCourse = () => {
           מחק
         </Button>
       </div>
-    );
-  };
+    )
+  }
+  const [creatCourse, setCreatCourse] = useState(false)
   return (
     <div id="container">
+     {creatCourse === false ?  "" : <CreatCourse />  }
+      {creatCourse === true ?  "" : <Button style={{ "backgroundColor": "red", "color": "white","height":"30px" }} size="xxlarg" onClick={()=>{setCreatCourse(true)}}>יצ ירת קורס </Button>  }
+      {creatCourse === false ?  "" : <Button style={{ "backgroundColor": "red", "color": "white","height":"30px" }} size="xxlarg" onClick={()=>{setCreatCourse(false)}}> סגור</Button>  }
       {courses?.map((course) => (
         <div id="courseCard" key={course._id} style={{ marginTop: "10px" }}>
           <Card sx={{ minWidth: 265 }}>
