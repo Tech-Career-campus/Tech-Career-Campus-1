@@ -22,25 +22,21 @@
     width: 30vw;
     height:30vh;
     object-fit: cover;
-    /* border: 60px solid black; */
 }
 .news-ticker-div a{
     cursor: pointer;
     color: #000;
-    /* border: 1px solid black; */
 }
 .card-news{  
     height: 650px;
     width:fit-content;
   
 }
-.card-news-titel{
-    /* border: 1px solid black; */
+.card-news-title{
     width: 600px;
     height: 90px;
 }
 .card-news-span{
-    /* border: 1px solid black; */
     width: 600px;
     height: 180px;
     
