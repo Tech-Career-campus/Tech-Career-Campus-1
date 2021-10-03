@@ -14,7 +14,7 @@ const register = async (req, res) => {
       .json({
         success: false,
         message: "there is error with validation",
-        error: errors 
+        errors: errors 
       });
     }
 
@@ -36,7 +36,7 @@ const register = async (req, res) => {
           if (err) throw err;
           req.body.password = hash;
 
-          const { firstName, lastName, age, email, phone, role, IdNumber,responsible,jod } = req.body;
+          const { firstName, lastName, age, email, phone, role, IdNumber,responsible,job } = req.body;
           const newStaff = new StaffModel({
             firstName: firstName,
             lastName: lastName,
@@ -48,7 +48,7 @@ const register = async (req, res) => {
             profileImg: req.file ? req.file.path : "",
             IdNumber: IdNumber? IdNumber: "",
             responsible: responsible? responsible:"",
-            jod: jod? jod:"",
+            job: job? job:"",
 
           });
           try {
@@ -115,7 +115,7 @@ const register = async (req, res) => {
               });
           }
 
-          const { firstName, lastName, age, email, courseName, phone, role, IdNumber } = req.body;
+          const { firstName, lastName, age, email, courseName, phone, role, IdNumber,gender } = req.body;
           const newStudent = new StudentModel({
             firstName: firstName,
             lastName: lastName,
@@ -127,7 +127,8 @@ const register = async (req, res) => {
             courseId: course._id,
             role: role !== 'Staff'?role:'Student',
             profileImg: req.file ? req.file.path : "",
-            IdNumber: IdNumber? IdNumber: ""
+            IdNumber: IdNumber? IdNumber: "",
+            gender:gender
           });
           try {
             await newStudent.save();

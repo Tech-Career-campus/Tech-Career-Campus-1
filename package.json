@@ -7,7 +7,7 @@
     "setup": "npm install && cd client&& npm install ",
     "test": "set TEST_ENV=test&& mocha --reporter spec --recursive --exit  || true",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "cd client && npm run start",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"

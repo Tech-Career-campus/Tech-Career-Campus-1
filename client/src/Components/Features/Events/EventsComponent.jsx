@@ -3,18 +3,18 @@ import "./Events.css";
 import { useState } from 'react';
 import { getEvents, updateEvent, deleteEvent } from '../../../Redux/actions/eventsActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaPlus } from 'react-icons/fa';
+// import { FaPlus } from 'react-icons/fa';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { hebrewVariables } from '../../../utils/hebrewVariables';
 import FormEvent from './FormEventComponent';
 
 const Events = () => {
     const dispatch = useDispatch();
-    const {events} = useSelector(state => state.events);
-    const { user } = useSelector(state => state.user)
+    const events = useSelector(state => state.events);
+    const {user} = useSelector(state => state.user)
 
     const [isForm, setForm] = useState(false)
     const [isUpdate, setUpdate] = useState(false)
-
 
     const [eventUpdate, setEventUpdate] = useState({
         eventId: "",
@@ -44,7 +44,7 @@ const Events = () => {
                 {
                     user.role === "Staff" ?
                         <div className="bth-add">
-                            <button onClick={() => { setForm(isForm ? false : true); }}> <FaPlus /> </button>
+                            <button onClick={() => { setForm(isForm ? false : true); }}> <ControlPointIcon /> </button>
                         </div>
                         : ""
                 }
@@ -66,6 +66,8 @@ const Events = () => {
                                         {hebrewVariables.eventNameTitle}: {event.eventName}
                                         <br></br>
                                         {hebrewVariables.eventMessageTitle}: {event.message}
+                                        <br></br>
+                                        {hebrewVariables.createBy}: {event.createBy}
                                     </div>
 
                                     <div className="bth-e">

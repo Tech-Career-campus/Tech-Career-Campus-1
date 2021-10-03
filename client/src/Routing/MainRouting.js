@@ -8,15 +8,17 @@ import MyCourse from '../Components/Pages/MyCourse/MyCourseComponent';
 import ClassSchedule from '../Components/Pages/ClassSchedule/ClassScheduleComponent';
 import Home from '../Components/Pages/Home/HomeComponent';
 import PostDetails from '../Components/Pages/Forum/ForumComponents/PostDetails/PostDetails';
+import PageNotFound from '../Components/Pages/404-Page/PageNotFound';
 
-const MainRouting = () =>{
-    return(
+const MainRouting = () => {
+    return (
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/forum/:id" component={PostDetails} />
             <Route path="/forum" component={Forum} />
             <Route path="/my-course" component={MyCourse} />
             <Route path="/class-schedule" component={ClassSchedule} />
+            <Route component={PageNotFound} />
         </Switch>
     )
 }

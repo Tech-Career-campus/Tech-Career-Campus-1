@@ -43,12 +43,14 @@ export const ADD_STAFF="ADD_STAFF"
 export const DELETE_STAFF="DELETE_STAFF"
 export const STAFF_ERRORS="STAFF_ERRORS"
 export const UPDATE_STAFF ="UPDATE_STAFF"
+export const UPDATE_STAFF_PASSWORD = "UPDATE_STAFF_PASSWORD"
 // Course
 
 // Courses
 export const GET_COURSES = "GET_COURSES";
 export const CREATE_COURSE = "CREATE_COURSE";
 export const CREATE_COURSE_ERRORS = "CREATE_COURSE_ERRORS";
+export const DELETE_COURSE = "DELETE_COURSE";
 
 
 

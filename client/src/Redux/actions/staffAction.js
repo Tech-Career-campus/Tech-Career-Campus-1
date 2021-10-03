@@ -1,4 +1,4 @@
-import { GET_STAFF_LIST, ADD_STAFF, DELETE_STAFF, STAFF_ERRORS, UPDATE_STAFF } from "./types";
+import { GET_STAFF_LIST, ADD_STAFF, DELETE_STAFF, STAFF_ERRORS, UPDATE_STAFF, UPDATE_STAFF_PASSWORD } from "./types";
 import fetcher from "../../utils/fetcher";
 
 export const getStaff = () => async dispatch => {
@@ -11,23 +11,29 @@ export const getStaff = () => async dispatch => {
         .catch((err) => console.log(err));
 }
 
-export const addStuff = (staff) => async dispatch => {
-
+export const addStuff = (staff, file) => async dispatch => {
+    const staffObj = new FormData()
+    staffObj.append('profileImg', file)
+    staffObj.append('registeredAs', staff.registeredAs)
+    staffObj.append('firstName', staff.firstName || "")
+    staffObj.append('lastName', staff.lastName || "")
+    staffObj.append('email', staff.email || "")
+    staffObj.append('password', staff.password || "")
+    staffObj.append('age', staff.age || "")
+    staffObj.append('job', staff.job || "")
+    staffObj.append('responsible', staff.responsible || "")
+    staffObj.append('phone', staff.phone || "")
     try {
-        await fetcher('http://localhost:8080/api/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                registeredAs: staff.registeredAs,
-                firstName: staff.firstName,
-                lastName: staff.lastName,
-                email: staff.email,
-                phone: staff.phone,
-                password: staff.password,
-                age: staff.age,
-                jod: staff.jod,
-                responsible:staff.responsible
-            }),
+        await fetch(`http://localhost:8080/api/register`, {
+            method: "POST",
+            body: staffObj,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
+            },
         })
+
+            .then((res) => res.json())
+
             .then((response) => {
                 if (!response.data) throw response
                 return response
@@ -45,7 +51,7 @@ export const addStuff = (staff) => async dispatch => {
 
 }
 export const deleteStaff = (staffId) => async dispatch => {
-
+    debugger
     try {
         await fetcher('/api/staff', {
             method: 'DELETE',
@@ -66,15 +72,45 @@ export const deleteStaff = (staffId) => async dispatch => {
 }
 
 export const updateStaff = (updateStaff) => async dispatch => {
-    
-    const { id } = { ...updateStaff };
-    await fetcher(`http://localhost:8080/api/staff/${id}`, {
+
+    const { _id } = { ...updateStaff };
+    await fetcher(`http://localhost:8080/api/staff/update/${_id}`, {
         method: 'PUT',
         body: JSON.stringify(updateStaff)
     })
         .then(response => dispatch({
             type: UPDATE_STAFF,
             payload: response.data
+        }))
+        .catch(error => console.log(error))
+}
+
+export const updateStaffPassword = (updateStaff) => async dispatch => {
+
+    // const { _id } = { ...updateStaff };
+    // debugger
+    console.log(updateStaff.currentPassword)
+    await fetcher(`http://localhost:8080/api/staff/changePassword`, {
+        method: 'PUT',
+        headers: {
+            "Accept": "apllication/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            id: updateStaff._id,
+            title: updateStaff.role,
+            currentPassword: updateStaff.currentPassword,
+            newPassword: updateStaff.newPassword,
+            firstName: updateStaff.firstName,
+            lastName: updateStaff.lastName,
+            email: updateStaff.email,
+            password: updateStaff.password
+        })
+    })
+        .then(response => console.log(response))
+        .then(response => dispatch({
+            type: UPDATE_STAFF_PASSWORD,
+            payload: response
         }))
         .catch(error => console.log(error))
 }

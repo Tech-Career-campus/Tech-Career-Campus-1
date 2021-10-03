@@ -6,21 +6,35 @@ import { hebrewVariables } from "../../../utils/hebrewVariables";
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import './editProfile.css'
+import {
+  updateStaffPassword,
+} from "../../../Redux/actions/staffAction";
 
-const EditProfile = ({ setOpen,open, user , setEditProfile}) => {
+const EditProfile = ({ setOpen, open, user, setEditProfile }) => {
   const [changePassword, setChangePassword] = useState(false);
+  const [currntPassword, setcurrntPassword] = useState("");
   //   const [updateUser, setUpdateUser] = useState({...user, password:"", newPassword:"", confirmPassword:"" })
   const [userUpdate, setUserUpdate] = useState({ ...user });
+  const [file, setFile] = useState(null)
   const dispatch = useDispatch();
 
-  useEffect(() => setUserUpdate({ ...user}), [user]);
+  useEffect(() => setUserUpdate({ ...user }), [user]);
 
   const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
+  const currntpassword = (e) => {
+    setcurrntPassword(e.target.value)
+  }
 
+  const dispatchNewPassword = ()=>{
+    dispatch(updateStaffPassword({ ...user,currentPassword:userUpdate.currentPassword, newPassword: userUpdate.newPassword }))
+    setChangePassword(false)
+    alert("password change was success")
+  }
   return (
-    
+
     <div className="edit-profile">
-        <Modal
+      <Modal
         keepMounted
         open={open}
         onClose={handleClose}
@@ -28,66 +42,83 @@ const EditProfile = ({ setOpen,open, user , setEditProfile}) => {
         aria-describedby="keep-mounted-modal-description"
       >
         <Box className="edit-profile-box">
-      <form className='edit-profile-form' onSubmit={(e) => e.preventDefault()}>
-        <label> {hebrewVariables.firstName}</label>
-        <input
-          value={userUpdate.firstName}
-          type="text"
-          name={"firstName"}
-          onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
-        />
-        <label>{hebrewVariables.lastName}</label>
-        <input
-          value={userUpdate.lastName}
-          type="text"
-          name={"lastName"}
-          onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
-        />
-        <label>{hebrewVariables.email} </label>
-        <input
-          value={userUpdate.email}
-          type="email"
-          name={"email"}
-          onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
-        />
-        <label>{hebrewVariables.phone} </label>
-        <input
-          value={userUpdate.phone}
-          type="tel"
-          name={"phone"}
-          onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
-        />
-        <div className={`edit-profile-btn-container ${changePassword?"edit-profile-form":""}`}>
-        
-        {changePassword ? (
-          <>
-            <label>{hebrewVariables.currentPassword}</label>
-            <input type="password" />
-            <label>{hebrewVariables.newPassword}</label>
-            <input value={userUpdate.newPassword} type="password" />
-            <label>{hebrewVariables.confirmPassword}</label>
-            <input value={userUpdate.confirm} type="password" />
-          </>
-        ) : (
-          ""
-        )}
-        <button
-        className='btn'
-          onClick={() => setChangePassword(changePassword ? false : true)}
-        >
-          {hebrewVariables.updatePassword}
-        </button>
-        <button className='btn' onClick={() => dispatch(updateUser(userUpdate))}>
-          {hebrewVariables.update}
-        </button>
+          <form className='edit-profile-form' onSubmit={(e) => e.preventDefault()}>
+            <label> {hebrewVariables.firstName}</label>
+            <input
+              value={userUpdate.firstName}
+              type="text"
+              name={"firstName"}
+              onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
+            />
+            <label>{hebrewVariables.lastName}</label>
+            <input
+              value={userUpdate.lastName}
+              type="text"
+              name={"lastName"}
+              onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
+            />
+            <label>{hebrewVariables.email} </label>
+            <input
+              value={userUpdate.email}
+              type="email"
+              name={"email"}
+              onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
+            />
+            <label>{hebrewVariables.phone} </label>
+            <input
+              value={userUpdate.phone}
+              type="tel"
+              name={"phone"}
+              onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}
+            />
+            <input accept="image/*" name="profileImg" type="file"
+              onChange={e => {
+                const img = e.target.files[0]
+                setFile(img)
+              }} />
+            <div className={`edit-profile-btn-container ${changePassword ? "edit-profile-form" : ""}`}>
+              {changePassword === true ? (
+                <>
+                  <label>{hebrewVariables.currentPassword}</label>
+                  <input name="currentPassword" type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)}/>
 
-        </div>
-       
-      </form>
-      <button style={{width:"100%"}} className='btn' onClick={() => setEditProfile(false)}>
-        {hebrewVariables.closeBtn}
-      </button>
-      </Box>
+                  <label>{hebrewVariables.newPassword}</label>
+                  <input name="newPassword" value={userUpdate.newPassword} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
+                  <label>{hebrewVariables.confirmPassword}</label>
+                  <input name="confirm" value={userUpdate.confirm} type="text" onChange={(e) => handleChange(e, userUpdate, setUserUpdate)} />
+                  <button
+                    className='btn'
+                    onClick={dispatchNewPassword }
+                  >
+
+
+                    {hebrewVariables.updatePassword}
+                  </button>
+                  <button className='btn' onClick={() => setChangePassword(false)}>
+                    ביטול
+                  </button>
+                </>
+              ) : (
+                ""
+              )}
+            
+              {changePassword === false ? (<button
+                className='btn'
+                onClick={() => { setChangePassword(true) }}
+              >
+                {hebrewVariables.updatePassword}
+              </button>) : ("")}
+              <button className='btn' onClick={() => dispatch(updateUser(userUpdate, file))}>
+                {hebrewVariables.update}
+              </button>
+
+            </div>
+
+          </form>
+          <button style={{ width: "100%" }} className='btn' onClick={() => setEditProfile(false)}>
+            {hebrewVariables.closeBtn}
+          </button>
+        </Box>
       </Modal>
     </div>
   );

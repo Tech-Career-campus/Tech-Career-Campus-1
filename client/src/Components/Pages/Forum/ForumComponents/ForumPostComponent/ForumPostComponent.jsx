@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { ButtonBase } from "@material-ui/core";
@@ -12,6 +12,7 @@ import { hebrewVariables } from "../../../../../utils/hebrewVariables";
 
 const ForumPostComponent = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
+  const [isDelete, setIsDelete] = useState(false);
   const { user } = useSelector((state) => state.user);
   const history = useHistory();
 
@@ -38,7 +39,7 @@ const ForumPostComponent = ({ post, setCurrentId }) => {
             className="post-btn"
             style={{ color: "black" }}
             size="small"
-            onClick={() => setCurrentId(post._id)}
+            onClick={() =>  setCurrentId(post._id)}
           >
             <MoreHorizIcon fontSize="medium" />
           </button>
@@ -49,8 +50,8 @@ const ForumPostComponent = ({ post, setCurrentId }) => {
         {user?.email === post?.email && (
           <button
             size="small"
-            className="btn post-btn"
-            onClick={() => dispatch(deletePost(post._id))}
+            className="btn"
+            onClick={() =>{setIsDelete(isDelete ? false : true);dispatch(deletePost(post._id))}}
           >
             <DeleteIcon fontSize="small" />
             {hebrewVariables.delete}

@@ -1,18 +1,19 @@
 .App{
   background-color: #E5E9F0;
   width: 100vw;
-  height: fit-content;
+  min-height: 60vh;
   font-family: 'Assistant', sans-serif;
 }
 
 .btn{
-  background-color: #17294A;
+  background-color: #0043be;
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
     rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, #17294A 0px 0px 0px 1px,
     rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
     rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
   color: #fff;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight:550;
   cursor: pointer;
 }
 .btn:hover{
@@ -22,12 +23,13 @@
     rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
     rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
   color: #17294A;
-  font-weight: 600;
+  font-weight: 550;
   cursor: pointer;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
  ::-webkit-scrollbar-track {
   border-radius: 10px;

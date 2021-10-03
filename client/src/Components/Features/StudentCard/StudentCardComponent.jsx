@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteStudent,
@@ -6,23 +6,45 @@ import {
 } from "../../../Redux/actions/studentsActions";
 import handleChange from "../../../utils/handleChange";
 import { hebrewVariables } from "../../../utils/hebrewVariables";
+import maleAvatar from '../../../images/male-avatar.jpg'
+import femaleAvatar from '../../../images/female-avatar.jpg'
 import "./studentCard.css";
 const StudentCard = ({ student }) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   const [studentUpdate, setStudentUpdate] = useState({ ...student });
   const { user } = useSelector((state) => state.user);
+  const { profileImg } = studentUpdate
+
+  const IMAGE_PATH = profileImg?.slice(profileImg.lastIndexOf('\\') + 1, profileImg.length) || "";
+
+
 
   return (
-    <div className="student-card">
-      <div className="student-card-img">
-        <img
-          src={studentUpdate.profileImg}
-          alt={"Student"}
-        />
-      </div>
+    <div className="big-card">
+       <article className="card-article">
+       <div className="card-box">
+       {
+          IMAGE_PATH.length > 0 ?
+            <img
+              src={`/images/${IMAGE_PATH}`}
+              alt={"Student"}
+              style={{ width: "1500", height: "1368" }}
+            />
+            :
+            <img
+              src={studentUpdate.gender === "זכר" ? maleAvatar : femaleAvatar}
+              alt={"Student"}
+              style={{ width: "1500", height: "1368" }}
+            />
+
+        }
+
+            </div>
+      
       {!isEdit ? (
-        <div className="student-card-body">
+        <div className="article-content">
           <h3>
             {hebrewVariables.fullName}: {student.firstName} {student.lastName}
           </h3>
@@ -41,18 +63,21 @@ const StudentCard = ({ student }) => {
           <div className="student-card-body-btn">
             {user.role === "Staff" ? (
               <>
-                {" "}
                 <button
-                  className="btn"
-                  onClick={() => dispatch(deleteStudent(student._id))}
+                style={{marginLeft:'5px'}}
+                   className="article-button"
+                   onClick={() => {
+                    setIsDelete(isDelete ? false : true);
+                    dispatch(deleteStudent(student))
+                  }
+                  }
                 >
                   {hebrewVariables.delete}
                 </button>
                 <button
-                  className="btn"
+                   className="article-button"
                   onClick={() => {
-                    setIsEdit(true);
-                    setStudentUpdate({ ...studentUpdate, _id: student._id });
+                    setIsEdit(isEdit ? false : true); setStudentUpdate({ ...studentUpdate, _id: student._id })
                   }}
                 >
                   {hebrewVariables.edit}
@@ -63,8 +88,9 @@ const StudentCard = ({ student }) => {
             )}
           </div>
         </div>
+        
       ) : (
-        <div className="student-card-body">
+        <div className="article-content">
           <form className="student-card-body-form">
             <label>{hebrewVariables.firstName}</label>
             <input
@@ -101,8 +127,9 @@ const StudentCard = ({ student }) => {
               type={"number"}
               value={studentUpdate.age}
             />
+
             <button
-              className="btn"
+              className="article-button"
               onClick={() => {
                 setIsEdit(false);
                 dispatch(updateStudent(studentUpdate));
@@ -113,6 +140,7 @@ const StudentCard = ({ student }) => {
           </form>
         </div>
       )}
+          </article>
     </div>
   );
 };
