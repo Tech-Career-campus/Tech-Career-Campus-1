@@ -14,15 +14,18 @@ const StudentCard = ({ student }) => {
   const { user } = useSelector((state) => state.user);
 
   return (
-    <div className="student-card">
-      <div className="student-card-img">
-        <img
-          src={studentUpdate.profileImg}
-          alt={"Student"}
-        />
-      </div>
+    <div className="big-card">
+       <article className="card-article">
+       <div className="card-box">
+              <img
+                src={studentUpdate.profileImg}
+                alt={"Student"}
+                style={{ width: "1500", height: "1368" }}
+              />
+            </div>
+      
       {!isEdit ? (
-        <div className="student-card-body">
+        <div className="article-content">
           <h3>
             {hebrewVariables.fullName}: {student.firstName} {student.lastName}
           </h3>
@@ -43,13 +46,14 @@ const StudentCard = ({ student }) => {
               <>
                 {" "}
                 <button
-                  className="btn"
+                style={{marginLeft:'5px'}}
+                   className="article-button"
                   onClick={() => dispatch(deleteStudent(student._id))}
                 >
                   {hebrewVariables.delete}
                 </button>
                 <button
-                  className="btn"
+                   className="article-button"
                   onClick={() => {
                     setIsEdit(true);
                     setStudentUpdate({ ...studentUpdate, _id: student._id });
@@ -63,8 +67,9 @@ const StudentCard = ({ student }) => {
             )}
           </div>
         </div>
+        
       ) : (
-        <div className="student-card-body">
+        <div className="article-content">
           <form className="student-card-body-form">
             <label>{hebrewVariables.firstName}</label>
             <input
@@ -102,7 +107,7 @@ const StudentCard = ({ student }) => {
               value={studentUpdate.age}
             />
             <button
-              className="btn"
+              className="article-button"
               onClick={() => {
                 setIsEdit(false);
                 dispatch(updateStudent(studentUpdate));
@@ -113,6 +118,7 @@ const StudentCard = ({ student }) => {
           </form>
         </div>
       )}
+          </article>
     </div>
   );
 };
