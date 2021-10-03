@@ -10,7 +10,8 @@
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "cd client && npm run start",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "client-heroku":"npm install && npm run build",
+    "heroku-postbuild": "npm install && cd client && npm run client-heroku"
   },
   "author": "",
   "license": "ISC",
